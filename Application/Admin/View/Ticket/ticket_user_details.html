@@ -1,0 +1,78 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb">
+                    <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                        {$ctitle}
+                    </a>
+                    <a href="#" class="current">券订单</a>
+                    <a href="#" class="current">详情</a>
+                </div>
+
+            </div>
+            <div class="container-fluid">
+                <div>
+                    <h3>券信息</h3>
+                    <ul class="unstyled">
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>券号：</dt>
+                                <dd>{$array1.ticket_number}</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>券名：</dt>
+                                <dd>{$array1.ticket_name}</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>会员名：</dt>
+                                <dd>{$array2.user_name}</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>券状态：</dt>
+                                <dd>
+                                    <switch name="array1.status">
+                                        <case value="1">未使用</case>
+                                        <case value="2">已使用</case>
+                                        <case value="3">已过期</case>
+                                    </switch>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>订单信息</h3>
+                    <ul class="unstyled">
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>订单号：</dt>
+                                <dd>{$array3.out_trade_no}</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>下单时间：</dt>
+                                <dd>{$array3.createtime}</dd>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl class="dl-horizontal">
+                                <dt>车款信息：</dt>
+                                <dd>{$array3.carstyle}</dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

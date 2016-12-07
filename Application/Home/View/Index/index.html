@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta property="qc:admins" content="241322664267753050516375"/>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="baidu-site-verification" content="DDAIyumZvw"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>南京底价购车_汽车价格_汽车团购_汽车用品_汽车保养_购车惠</title>
+    <meta name="keywords" content="南京汽车，南京汽车底价，汽车团购，汽车用品，汽车最低价格，汽车保养，购车惠"/>
+    <meta name="description" content="购车惠是一家汽车4S店实时在线报底价的平台，提供汽车底价购买服务，保证上架车型所售底价均是正规4S店报价，且价格低于市场价格。购车惠提供全程购车服务，让客户买车更加方便快捷。"/>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}index.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+
+</head>
+<body>
+
+<a href="/index.php/subject/double_eleven" id="J_topAdv" style="display:block;width:100%;height:80px;background: url(/Public/Home/images/Subject/double11/images/double_tit_ele.gif) center center no-repeat" target="_blank" title="双十一狂欢，限量抢1元上牌费">
+
+</a>
+
+<div id="site_nav">
+    <div id="sn_bd">
+        <div class="sn_container">
+
+            <if condition="$userinfo.id neq null">
+                <div class="sign_in" id="J_signIn">
+                    <div class="user">
+                        <span class="user_name" data-name="{$userinfo.user_name}">
+                            <if condition="$userinfo.user_name neq  null">
+                                {$userinfo.user_name}
+                                <else/>
+                                {$userinfo.nick}
+                            </if>
+                        </span>
+                        <div class="arrow">
+                        </div>
+                    </div>
+                    <ul class="user_msg">
+                        <li><a href="{:MEMBER_URL}n_uc_index" target="_blank">个人中心</a></li>
+                        <!--  <li><a href="{:MEMBER_URL}uc_member_query">我的询价</a></li>
+                          <li><a href="{:MEMBER_URL}uc_member_msg">消息通知<span class="icon_num_yellow">{$userinfo.msg}</span></a></li>-->
+                        <li><a href="{:LOGIN_URL}loginout?callback={$callBackUrl}" class="sign_out" target="_blank">退出</a></li>
+                    </ul>
+                </div>
+
+                <else/>
+                <ul class="sn_quick_menu">
+                    <li class="menu_item"><a href="{:LOGIN_URL}reg?callback={$callBackUrl}" target="_blank">注册</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item"><a href="{:LOGIN_URL}login?callback={$callBackUrl}" target="_blank">登录</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item" style="display: none;"><a href="{:LOGIN_URL}login_test?callback={$callBackUrl}">登录测试4S</a></li>
+                </ul>
+            </if>
+
+
+        </div>
+    </div>
+</div>
+<div id="header">
+    <div class="headerLayout">
+        <div class="headerCon">
+            <h1 id="gchLogo">
+                <div id="J_FpLogo">
+                    <a href="{:U('Index/index')}" target="_self"> <img id="J_FpDoodle" class="fp-doodle" src="{$Think.const.IMG_URL}logo187X78.png" alt="购车惠"></a>
+                </div>
+            </h1>
+            <div class="local_city">
+                    <span class="lc_name" id="J_switchCity">
+                        <if condition="$city_name">{$city_name}<elseif condition="$province_name"/>{$province_name}<elseif condition="$con"/>全国<else/> 选择城市</if>
+                        <i></i>
+                    </span>
+                <textarea class="storedata hide">
+					<div class="choose-site lay_cont" id="J_citiesBox">
+                        <div class="site-list" id="div_citylist">
+                            <dl>
+                                <dt>全国：</dt>
+                                <dd>
+                                    <a href="{:U('Index/index?con=quanguo')}" target="_blank">全国</a>
+                                </dd>
+                            </dl>
+                            <volist name="province" id="vol">
+                                <dl>
+                                    <dt>{$vol.province_name}：</dt>
+                                    <dd>
+                                        <a href="{:U('Index/index?province='.$vol['id'])}" target="_blank">{$vol.province_name}</a>
+                                        <volist name="vol['city']" id="sub">
+                                            <a href="{:U('Index/index?city='.$sub['id'])}" target="_blank">{$sub.city_name}</a>
+                                        </volist>
+                                    </dd>
+                                </dl>
+                            </volist>
+                        </div>
+                    </div>
+					</textarea>
+            </div>
+            <div class="header_extra">
+                <div class="header_banner">
+                    <div id="J_FpEventBanner" class="fp-event-banner  hidden G_fr" style="display: block;">
+                        <ul class="hot_query clearfix">
+                            <li><strong>热门搜索：</strong></li>
+                            <volist name="search_res" id="vol">
+                                <li><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}" target="_blank">{$vol.search_key}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div id="gchSearch" class="gch_search">
+                    <form action="{:U('Car/product_search')}" class="gchSearch_form" method="GET">
+                        <div class="gchSearch_input clearfix">
+                            <label for="mq" style="visibility: visible; display: none;">搜索 买车</label>
+                            <div class="s_combobox">
+                                <div class="s_combobox_input_wrap">
+                                    <input type="text" name="select" id="mq" class="s-combobox-input G_Tahoma" value="" aria-label="请输入搜索文字" placeholder="输入品牌或车型" onfocus=" if (value == '') {value = '';}this.style.color = '#333';" onblur=" if (value == '') {value = '';this.style.color = '#999';} "/>
+                                </div>
+                            </div>
+                            <button type="submit">搜索<s></s></button>
+                        </div>
+                    </form>
+
+                    <div class="hot-search G_Tahoma">
+                        <dl>
+                            <dt>热门搜索：</dt>
+                            <volist name="search_res" id="vol">
+                                <dd><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}" target="_blank">{$vol.search_key}</a></dd>
+                            </volist>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navwrap">
+    <div class="main_container nav">
+        <div class="all_categories_wrap">
+            <a href="javascript:;" id="J_CateBtn" class="G_f16 title hover" target="_blank">所有分类<i class="icon-new icon-new-menu"></i></a>
+            <div class="all_categories_bg" id="J_CateBg"></div>
+            <div class="all_categories show" id="J_CateCon">
+                <div class="wrap">
+                    <div class="car_itemwrap j_itemWrap">
+                        <div class="car_item">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">品牌选车</h3>
+                                    <div class="recommend_list clearfix">
+                                        <a href="/index.php/car/product_search/brand/016cdf45e1b0ce598cd20201e2f339ec" data-msg="广汽本田" class="recommend" target="_blank">广汽本田</a>
+                                        <a href="/index.php/car/product_search/brand/5" data-msg="奥迪" class="recommend" target="_blank">奥迪</a>
+                                        <a href="/index.php/car/product_search/brand/52" data-msg="宝马" class="recommend" target="_blank">宝马</a>
+                                        <a href="/index.php/car/product_search/brand/61" data-msg="奔驰" class="recommend" target="_blank">奔驰</a>
+                                        <a href="/index.php/car/product_search/brand/973" data-msg="日产" class="recommend" target="_blank">日产</a>
+                                        <a href="/index.php/car/product_search/brand/66" data-msg="别克" class="recommend" target="_blank">别克</a>
+                                        <a href="/index.php/car/product_search/brand/6991" data-msg="东风标致" class="recommend" target="_blank">东风标致</a>
+                                        <a href="/index.php/car/product_search/brand/911febcfabe18d76d9f4058041b1d481" data-msg="东风本田" class="recommend" target="_blank">东风本田</a>
+                                        <a href="/index.php/car/product_search/brand/6924" data-msg="一汽大众" class="recommend" target="_blank">一汽大众</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hide box_brand" id="j_car_brand">
+                                <div class="carlist">
+                                    <volist name="brand_allAL" id="vol">
+                                        <dl class="letter_begin">
+                                            <dt class="letter ftx09">{$vol.brand_alif}</dt>
+                                            <dd>
+                                                <volist name="vol['list']" id="sub">
+                                                    <a class="item ftx02" href="{:U('Car/product_search',array('brand'=>$sub['brand_id']))}" target="_blank">{$sub.brand_name}</a>
+                                                </volist>
+                                            </dd>
+                                        </dl>
+                                    </volist>
+                                    </li>
+                                </div>
+                                <div class="carlist">
+                                    <volist name="brand_allMZ" id="vol">
+                                        <dl class="letter_begin">
+                                            <dt class="letter ftx09">{$vol.brand_alif}</dt>
+                                            <dd>
+                                                <volist name="vol['list']" id="sub">
+                                                    <a class="item ftx02" href="{:U('Car/product_search',array('brand'=>$sub['brand_id']))}" target="_blank">{$sub.brand_name}</a>
+                                                </volist>
+                                            </dd>
+                                        </dl>
+                                    </volist>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car_itemwrap">
+                        <div class="car_item">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">车型选车</h3>
+                                    <div class="recommend_list clearfix">
+                                        <volist name="car_type" id="vol">
+                                            <a href="{:U('Car/product_search',array('car_type'=>$vol['id']))}" data-msg="{$vol.car_type_name}" class="recommend" target="_blank">{$vol.car_type_name}</a>
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car_itemwrap">
+                        <div class="car_item" style="border: none">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">价格选车</h3>
+                                    <ul class="recommend_list">
+                                        <a href="{:U('Car/product_search',array('minprice'=>'0','maxprice'=>8))}" data-msg="8万以下" class="recommend" target="_blank">8万以下</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'8','maxprice'=>10))}" class="recommend" target="_blank">8-10万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'10','maxprice'=>15))}" data-msg="10-15万" class="recommend" target="_blank">10-15万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'15','maxprice'=>20))}" class="recommend" target="_blank">15-20万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'20','maxprice'=>30))}" class="recommend" target="_blank">20-30万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'30','maxprice'=>50))}" class="recommend" target="_blank">30-50万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'50','maxprice'=>80))}" class="recommend" target="_blank">50-80万</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'80','maxprice'=>10000))}" class="recommend" target="_blank">80万以上</a>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home_main_nav">
+            <ul>
+                <li><a href="{:U('Car/product_search')}" target="_blank">优惠买车</a></li>
+                <li><a href="{:U('Car/product')}" target="_blank">底价车</a></li>
+                <li><a href="{:U('Car/special_price_car')}" target="_blank">活动特卖 <i class="icon-new icon-new-hot"></i></a></li>
+                <li><a href="http://shop.gouchehui.com" target="_blank">汽车配饰</a></li>
+                <li class="lh">
+                    <a href="{:U('Carlife/carknowledge')}" target="_blank">车生活 <i class="nav-sign"></i></a>
+                    <div class="navigation-sub">
+                        <div class="navigation-sub-a">
+                            <a href="{:U('Carlife/carshow')}" target="_blank">车主秀</a>
+                            <a href="{:U('Carlife/carknowledge')}" target="_blank">车知识</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="{:U('Guide/process')}" target="_blank">购车指南</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav-bott"></div>
+</div>
+<div class="banner_wrap" id="J_BannerSlider">
+    <div class="banner">
+        <div class="banner-btn">
+            <a href="javascript:;" class="prevBtn" target="_blank"> <i></i>
+            </a>
+            <a href="javascript:;" class="nextBtn" target="_blank"> <i></i>
+            </a>
+        </div>
+        <div class="banner-img">
+            <ul>
+                <volist name="banner" id="vol">
+                    <a style="background:url({:OSS}{$vol.imgurl}) no-repeat center top;" href="{$vol.adurl}" target="_blank" data-img-address="{:OSS}{$vol.imgurl}" title="{$vol.ad_name}"></a>
+                </volist>
+            </ul>
+        </div>
+        <div class="hd">
+            <ul>
+                <volist name="banner" id="vol">
+                    <li></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="cont main_container">
+    <!-- 车主秀 begin -->
+    <div class="car-show prev-next-btns" id="J_CarShow">
+        <a href="#" class="btn prev-btn prev"><i class="icon-new icon-new-left-arrow"></i></a>
+        <div class="car-show-box">
+            <ul class="clearfix">
+                <volist name="bbs_info" id="vo">
+                    <li>
+                        <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" target="_blank">
+
+                            <div class="productImg-wrap">
+                                <div class="productImg">
+                                    <img src="{$vo.image}" alt="{$vo.brand_name}{$vo.car_model_name}">
+                                </div>
+                            </div>
+                            <div class="hd">
+                                <p class="tit">
+                                    <span class="brand-name">{$vo.brand_name}{$vo.car_model_name}</span>
+                                    <if condition="$vo.final_price neq 0">
+                                        <span class="price">落地价：<span class="s"><span class="G_f18">{$vo.final_price}</span>万</span></span>
+                                    </if>
+                                </p>
+                                <p>
+                                    {$vo.title}
+                                </p>
+                            </div>
+
+                            <span class="icon-new icon-new-csbg">车主秀</span>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <a href="#" class="btn next-btn next"><i class="icon-new icon-new-right-arrow"></i></a>
+    </div>
+    <!-- 车主秀 end -->
+    <div class="floor f1 car-contrast" id="J_CarContrast">
+        <div class="title">
+            <div class="left G_f22 ftx07">
+                车价对比
+                <span class="G_f16 ftx06 en">Price Comparison</span>
+            </div>
+
+            <div class="btn-box">
+                <a href="#" class="prev"><i class="icon-new icon-new-left-arrow2"></i></a><a href="#" class="next"><i class="icon-new icon-new-right-arrow2"></i></a>
+            </div>
+
+        </div>
+        <div class="bd">
+            <ul>
+                <volist name="dijiache_8" id="vol" offset="0" length="4">
+                    <li>
+                        <a href="{:U('Car/details_unquotes?car_price_id='.$vol['index_id'])}" target="_blank">
+
+                            <div class="con">
+                                <h3 class="G_f18">{$vol.brand_name} {$vol.model_name}</h3>
+                                <p class="des G_f18">{$vol.car_name}</p>
+                                <div class="line"><!-- line --></div>
+                                <p class="gch-price">购车惠底价： <span class="G_f24 G_c1">{$vol.low_price}</span> 万起</p>
+                                <p>官方指导价： <span class="G_f24 G_c2">{$vol.auth_price}</span> 万</p>
+                                <div class="sheng G_f20"><span class="icon-sheng">省</span>{$vol.discount} 万</div>
+                            </div>
+
+                            <div class="pic"><img src="{:OSS}{$vol.imgurl}" alt="" width="320" height="170"/></div>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+
+    <div class="floor f2">
+
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07">
+                底价车
+                <span class="G_f16 ftx06 en">Upset Car</span>
+                <div class="lowprice fl">免费看底价</div>
+            </div>
+            <a href="{:U('Car/product')}" class="G_f14 ftx06 G_fr" target="_blank">更多底价 <i class="icon-new icon-new-right-arrow3"></i></a>
+        </div>
+
+        <div class="floorbox">
+            <div class="carbox_wrap">
+                <ul class="carbox_ul clearfix">
+                    <volist name="dijiache_6" id="vol" offset="0" length="8">
+                        <li class="item">
+                            <div class="caritem_wrap">
+                                <a href="{:U('Car/details_unquotes?car_price_id='.$vol['index_id'])}" class="caritem" target="_blank">
+                                    <span class="brand"><img src="{$vol.logo}" alt="{$vol.brand_name}"></span>
+                                    <div class="carimg">
+                                        <img src="{:OSS}{$vol.car_model_imageurl}" alt="{$vol.brand_name} {$vol.model_name}"/>
+                                    </div>
+                                    <h3 class="car-brand">{$vol.brand_name} {$vol.model_name}</h3>
+                                    <div class="gch-price"><span>购车惠底价：<span class="G_c1 G_f20">{$vol.low_price} 万</span></span> <span class="sheng G_fr"><i>省</i><span class="G_f18">{$vol.discount}</span> 万</span></div>
+                                    <p class="gf-price">官方指导价：<s>{$vol.min}~{$vol.max} 万</s></p>
+                                </a>
+                            </div>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="floor f3 hot-car" id="J_SalesActivities">
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07 txt">
+                热卖推荐
+                <span class="G_f16 ftx06 en">Sales Activities</span>
+            </div>
+            <div class="hot-car-type-hd">
+                <ul class="hot-car-type clearfix">
+                    <li>SUV</li>
+                    <li>紧凑型</li>
+                    <li>小型车</li>
+                    <li>中型车</li>
+                    <li>MPV</li>
+                </ul>
+            </div>
+
+            <a href="/index.php/car/product_search" class="G_f14 ftx06 G_fr" target="_blank">更多车型 <i class="icon-new icon-new-right-arrow3"></i></a>
+        </div>
+
+        <div class="floorbox">
+            <div class="recommendbox_wrap clearfix">
+                <div class="leftbox prev-next-btns j_hotRemCar">
+                    <div class="icon-new icon-new-tag"><span>销 量<br/>冠 军</span></div>
+                    <a href="#" class="btn prev-btn"><i class="icon-new icon-new-left-arrow"></i></a>
+                    <div class="inner-hd">
+                        <ul>
+                            <volist name="sale" id="vol">
+                                <li>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="inner-bd">
+                        <ul>
+                            <volist name="sale" id="vol">
+                                <li class="item">
+                                    <h3>{$vol.brand_name} {$vol.car_model_name}</h3>
+                                    <p class="atten">有 <span class="number">{$vol.attention_count}</span>人正在关注</p>
+                                    <div class="btn-box">
+                                        <a href="{$vol.url}" class="link-btn" target="_blank">了解详情</a>
+                                    </div>
+                                    <div class="pic">
+                                        <img src="{$vol.car_model_imageurl}" alt=""/>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn next-btn"><i class="icon-new icon-new-right-arrow"></i></a>
+                </div>
+                <div class="rightbox">
+                    <div class="hot-car-type-bd">
+                        <ul class="clearfix">
+                            <volist name="suv" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.car_model_name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.car_model_imageurl}" alt="{$vol.car_model_name}"/>
+                                        </div>
+                                        <h3 class="carBrand G_f18 ftx07">{$vol.brand_name} {$vol.car_model_name}</h3>
+                                        <p class="foucsPeo G_f14 ftx02">
+                                            已有
+                                            <span class="focucenum ftx08">{$vol.car_xj_count}</span>
+                                            人询价
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="compact" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.car_model_name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.car_model_imageurl}" alt="{$vol.car_model_name}"/>
+                                        </div>
+                                        <h3 class="carBrand G_f18 ftx07">{$vol.brand_name} {$vol.car_model_name}</h3>
+                                        <p class="foucsPeo G_f14 ftx02">
+                                            已有
+                                            <span class="focucenum ftx08">{$vol.car_xj_count}</span>
+                                            人询价
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="small" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.car_model_name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.car_model_imageurl}" alt="{$vol.car_model_name}"/>
+                                        </div>
+                                        <h3 class="carBrand G_f18 ftx07">{$vol.brand_name} {$vol.car_model_name}</h3>
+                                        <p class="foucsPeo G_f14 ftx02">
+                                            已有
+                                            <span class="focucenum ftx08">{$vol.car_xj_count}</span>
+                                            人询价
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="center" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.car_model_name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.car_model_imageurl}" alt="{$vol.car_model_name}"/>
+                                        </div>
+                                        <h3 class="carBrand G_f18 ftx07">{$vol.brand_name} {$vol.car_model_name}</h3>
+                                        <p class="foucsPeo G_f14 ftx02">
+                                            已有
+                                            <span class="focucenum ftx08">{$vol.car_xj_count}</span>
+                                            人询价
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="mpv" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.car_model_name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.car_model_imageurl}" alt="{$vol.car_model_name}"/>
+                                        </div>
+                                        <h3 class="carBrand G_f18 ftx07">{$vol.brand_name} {$vol.car_model_name}</h3>
+                                        <p class="foucsPeo G_f14 ftx02">
+                                            已有
+                                            <span class="focucenum ftx08">{$vol.car_xj_count}</span>
+                                            人询价
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="floor f3 hot-car" id="J_MallAcc">
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07 txt">
+                商城配饰
+                <span class="G_f16 ftx06 en">Mall Accessories</span>
+            </div>
+            <div class="hot-car-type-hd">
+                <ul class="hot-car-type clearfix">
+                    <li>内饰</li>
+                    <li>外饰</li>
+                    <li>改装</li>
+                    <li>电子产品</li>
+                    <li>养护产品</li>
+                    <li>美容产品</li>
+                </ul>
+            </div>
+
+            <a href="http://shop.gouchehui.com" class="G_f14 ftx06 G_fr" target="_blank">更多配饰 <i class="icon-new icon-new-right-arrow3"></i></a>
+        </div>
+
+        <div class="floorbox">
+            <div class="recommendbox_wrap clearfix">
+                <div class="leftbox car-use-leftbox prev-next-btns j_hotRemCar">
+                    <div class="icon-new icon-new-tag"><span>单 品<br/>推 荐</span></div>
+                    <a href="#" class="btn prev-btn"><i class="icon-new icon-new-left-arrow"></i></a>
+                    <div class="inner-hd">
+                        <ul>
+                            <volist name="sale" id="vol">
+                                <li>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="inner-bd">
+                        <ul>
+                            <volist name="nwGoodsList" id="vol">
+                                <li class="item">
+                                    <h3>{$vol.name}</h3>
+                                    <!--<p class="atten">已有 <span class="number">{$vol.attention_count}</span>人购买</p>-->
+                                    <div class="btn-box">
+                                        <a href="{$vol.url}" class="link-btn" target="_blank">了解详情</a>
+                                    </div>
+                                    <div class="pic">
+                                        <img src="{$vol.goods_img}" alt=""/>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn next-btn"><i class="icon-new icon-new-right-arrow"></i></a>
+                </div>
+                <div class="rightbox">
+                    <div class="hot-car-type-bd">
+                        <!-- 内饰 begin -->
+                        <ul class="clearfix">
+                            <volist name="nsGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <!-- 内饰 end -->
+                        <!-- 外饰 begin -->
+                        <ul class="clearfix">
+                            <volist name="wsGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <!-- 外饰 end -->
+                        <!-- 改装 begin -->
+                        <ul class="clearfix">
+                            <volist name="gzGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+
+                        </ul>
+                        <!-- 改装 end -->
+                        <ul class="clearfix">
+                            <volist name="dzGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="yhGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="clearfix">
+                            <volist name="mrGoodsList" id="vol" offset="1" length="8">
+                                <li class="caritem">
+                                    <a href="{$vol.url}" title="{$vol.name}" class="car_wrap" target="_blank">
+                                        <div class="carimg">
+                                            <img src="{$vol.goods_img}" alt="{$vol.name}"/>
+                                        </div>
+                                        <p class="car-use-pro">{$vol.name}</p>
+                                        <p class="car-pri-box G_fl">
+                                            ￥
+                                            <span class="car-use-price">{$vol.shop_price}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <if condition="count($special_price_car) gt 0">
+
+        <div class="floor sale-car">
+            <div class="title clearfix">
+
+                <div class="G_fl G_f22 ftx07">
+                    活动特卖
+                    <span class="G_f16 ftx06 en">Sales Activities</span>
+                </div>
+                <a href="/index.php/car/special_price_car" class="G_f14 ftx06 G_fr" target="_blank">更多特卖 <i class="icon-new icon-new-right-arrow3"></i></a>
+            </div>
+            <div class="sale-car-list prev-next-btns" id="J_SaleLists">
+                <a href="#" class="btn prev-btn prev" target="_blank"><i class="icon-new icon-new-left-arrow"></i></a>
+
+                <div class="hd">
+                    <ul>
+                        <volist name="special_price_car" id="vo">
+                            <li></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <ul>
+                        <volist name="special_price_car" id="vo">
+                            <li>
+                                <div class="icon-new icon-new-bg G_f18">直降<span class="G_f24">{$vo.discount}</span>万</div>
+                                <div class="pic G_fl">
+                                    <div class="count-down"><i class="icon-new icon-new-clock"></i>剩<span class="j_countDownTime"></span></div>
+                                    <img src="{$vo.car_image}" alt="" width="780" height="347"/>
+                                </div>
+                                <div class="con">
+                                    <div class="sold-out">
+                                        <i class="icon-new icon-new-soldout"></i>
+                                    </div>
+                                    <h3 class="tit G_f18">{$vo.brand_name}{$vo.car_model_name}{$vo.car_name}</h3>
+                                    <div class="gch-price G_f18"><span class="s G_f16">购车惠特价 ：<span class="G_f24">{$vo.special_price}</span>万</span><span class="G_fr hide">共12辆</span></div>
+                                    <p class="gf-price G_f16">官方指导价：<s>{$vo.price}万</s></p>
+                                    <p class="surplus-nums G_f24">仅剩 <span class="G_f36">{$vo.number}</span>辆</p>
+                                    <div class="G_tc">
+                                        <a href="{$vo.url}" class="G_btn_a btn_34px">立即订购</a>
+                                    </div>
+                                    <div class="ft">
+                                        <p>活动时间：<span class="j_startTime">{$vo.start_date}</span>——<span class="j_endTime">{$vo.end_date}</span></p>
+                                        <!--<p>活动厂商：{$vo.name_4s}</p>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                <a href="#" class="btn next-btn next"><i class="icon-new icon-new-right-arrow"></i></a>
+            </div>
+        </div>
+    </if>
+    <div class="floor floor-carlife">
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07">
+                车生活
+                <span class="G_f16 ftx06 en">Car Life</span>
+            </div>
+        </div>
+        <div class="carlife-bd clearfix">
+            <div class="carlife-czx item">
+                <h3 class="sub-tit">车主秀</h3>
+                <div class="carxiu j_carLife">
+                    <div class="hd">
+                        <ul class="clearfix">
+                            <li class="on">新车秀</li>
+                            <li>装饰秀</li>
+                            <li>改装秀</li>
+                            <li>自驾秀</li>
+                        </ul>
+                    </div>
+                    <div class="bd">
+                        <ul>
+                            <volist name="bbs_user_info5" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul>
+                            <volist name="bbs_user_info6" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul>
+                            <volist name="bbs_user_info9" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul>
+                            <volist name="bbs_user_info7" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="carlife-czs item">
+                <h3 class="sub-tit">车知识</h3>
+                <div class="carxiu j_carLife">
+                    <div class="hd">
+                        <ul class="clearfix">
+                            <li class="on">车美容</li>
+                            <li>车装饰</li>
+                            <li>车维修</li>
+                        </ul>
+                    </div>
+                    <div class="bd">
+                        <ul>
+                            <volist name="bbs_act_info3" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul>
+                            <volist name="bbs_act_info4" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul>
+                            <volist name="bbs_act_info8" id="vo">
+                                <li>
+                                    <span class="time">{$vo.createtime}</span>
+                                    <a href="{:U('Carlife/carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floor f6">
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07">
+                热门品牌
+                <span class="G_f16 ftx06 en">Top Brands</span>
+            </div>
+        </div>
+        <div class="floorbox">
+            <div class="brandlistwrap">
+                <ul class="brandlist" id="J_BrandList">
+                    <script id="tplLi" type="text/html">
+                        {{each list as value index}}
+                        <li class="brandbox">
+                            <a href="{{value.url}}" target="_blank">
+                                <img src="{{value.logo}}" alt="{{value.brand_name}}"/>
+                                <p class="brand G_f14 ftx02">{{value.brand_name}}</p>
+                                <div class="linker">
+                                    <span>点击进入</span>
+                                </div>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </script>
+                </ul>
+
+                <!--<a href="#" id="J_ChangeALot" class="G_fl btn-change">-->
+                <!--<i class="icon-new icon-new-change"></i>-->
+                <!--<p class="brand G_f14">换一批</p>-->
+                <!--</a>-->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="floor f5">
+        <div class="title clearfix">
+
+            <div class="G_fl G_f22 ftx07">
+                服务流程
+                <span class="G_f16 ftx06 en">Service Process</span>
+            </div>
+        </div>
+        <div class="floorbox">
+            <div class="serviceProcess">
+                <img src="{$Think.const.IMG_URL}index/service.jpg" alt="挑选爱车"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+<script src="{$Think.const.js_URL}index.js"></script>
+
+{~W('Cate/footer')}
+</body>
+</html>

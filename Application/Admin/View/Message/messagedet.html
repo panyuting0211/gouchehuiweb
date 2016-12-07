@@ -1,0 +1,122 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+  <div id="content-header">
+    <div id="breadcrumb">
+      <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+        内容
+      </a>
+      <a href="#" class="current">留言详情</a>
+    </div>
+    <h1>留言详情</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+
+        <form action="__CONTROLLER__/editMessage" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                    	<div class="control-group">
+                            <label class="control-label" for="tip">品牌：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="brand">{$info.brand_name}</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">车型：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="model">{$info.model_name}</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">提问会员：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="user">{$info.createuser}</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">问题类型：</label>
+                            <div class="controls" style="margin-top:6px;">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="type">
+                                <select name="question_type" id="">
+                                    <option value="1"<if condition="$info['question_type'] eq 1">selected</if>>商品资讯</option>  
+                                    <option value="2"<if condition="$info['question_type'] eq 2">selected</if>>支付相关</option>
+                                    <option value="3"<if condition="$info['question_type'] eq 3">selected</if>>发票问题</option>
+                                    <option value="4"<if condition="$info['question_type'] eq 4">selected</if>>其它问题</option>
+                                  </switch>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">问题内容：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="question">{$info.question}</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">提问时间：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <p name="q_time">{$info.createtime}</p>
+
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">是否显示：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                            
+                            <label class="radio inline">
+                                <input name="status" type="radio" value="1" <if condition="$info['status'] eq 1">checked</if>>显示</label>
+                            <label class="radio inline">
+                                <input name="status" type="radio" value="0" <if condition="$info['status'] eq 2">checked</if>>不显示</label>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="name">回复状态：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <p name="q_status"><if condition="$info['reply_status'] eq 0">未回复
+                                    <else />已回复
+                                </if></p>
+
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">回复内容：</label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <input name="id" type="hidden" value="{$info.id}">
+                                <textarea class="form-control" id="tip" name="reply" rows="7">{$info.reply}</textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip"></label>
+
+                            <div class="controls" style="margin-top:6px;">
+                                <button type="submit" class="btn button_sou" id="" url="">保存</button>
+                                
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+<!--           <div class="form-actions">
+            <button type="submit" class="btn btn-primary">确定</button>
+            <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+          </div> -->
+        </form>
+        <!-- Button to trigger modal --> </div>
+    </div>
+  </div>
+</block>

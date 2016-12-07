@@ -1,0 +1,88 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                城市管理
+            </a>
+            <a href="#" class="current">城市站点</a>
+            <a href="#" class="current">添加站点</a>
+        </div>
+        <h1>添加站点</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="addprovince_handdle" class="form-horizontal" method="post">
+        <fieldset>            
+        <div class="control-group">
+        <label class="control-label" for="webname">区域：</label>
+          <div class="controls">
+            <select name="area" id="area">
+                    <option value="0">选择区域</option>
+                    <option value="华东">华东</option>
+                    <option value="华北">华北</option>
+                    <option value="华中">华中</option>
+                    <option value="华南">华南</option>
+                    <option value="西南">西南</option>
+                    <option value="西北">西北</option>
+                    <option value="东北">东北</option>
+            </select>            
+          </div>
+        </div>
+        <div class="control-group">
+        <label class="control-label" for="webname">省份：</label>
+          <div class="controls">
+            <select name="province" id="province">
+                    <option value="0">选择省份</option>
+            </select>            
+          </div>
+        </div>
+           
+      <div class="control-group">
+        <label class="control-label" for="name">状态：</label>
+        <div class="controls">
+        <select name="status">
+            <option value="1">启用</option>
+            <option value="0">未启用&nbsp;</option>
+        </select>
+             <p class="help-block"></p> 
+        </div>
+      </div>                            
+        </fieldset>     
+        <div class="form-actions">
+            <button type="submit"  id="submit" class="btn btn-primary">确定</button>      
+        </div>  
+        </form>
+                <!-- Button to trigger modal --> </div>
+        </div>
+    </div>
+<script src="{$Think.const.ADMIN_JS_URL}region_select.js"></script>
+<script type="text/javascript">
+  new PCAS('location_p', 'location_c', '江苏省', '');
+</script>
+<script type="text/javascript">
+    $(function(){
+      $("#area").change(function(){
+        // alert('1');
+        var $obj=$('#area').find('option:selected');
+        $("#province").empty();
+        $("#province").append("<option value=''>请选择省份</option>");
+        $.post( "__MODULE__/Ajax/ajax_city",
+                {area : $obj.val()},
+                function(data,textStatus){
+                    // alert(data);
+                  $.each(data,function(key,val){
+                    $("#province").append("<option value='"+val+"'>"+val+"</option>");
+                  });
+
+                },
+                "json");
+      });
+    });
+
+</script>
+</block>

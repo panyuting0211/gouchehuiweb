@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ucenter.css">
+    <link rel="shortcut icon" type="{$Think.const.IMG_URL}x-icon" href="/favicon.ico" />
+    <script src="{$Think.const.JS_URL}lib/jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.js_URL}app.js"></script>
+    <script src="{$Think.const.JS_URL}app/layer.js"></script>
+    <script src="{$Think.const.JS_URL}app/tpl.js"></script>
+    <script src="{$Think.const.JS_URL}app/info.js"></script>
+</head>
+<body>
+<div class="RL_header">
+    <div class="main_container clearfix">
+        <h1 class="RL_logo">
+            <a href="http://www.gouchehui.com" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+        </h1>
+        <div class="RL_gradient_line G_fl"></div>
+        <h2 class="RL_ftitle G_fl G_f22">
+            会员中心
+        </h2>
+        <div class="RL_returnHome G_fr">
+            <a href="http://www.gouchehui.com" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+        </div>
+    </div>
+</div>
+<div class="uc_container">
+    <div class="GB_frame">
+        <div class="UC_main_l">
+            <div class="uc_leftnav_group">
+                <div class="uc_leftmod_myinfo">
+                    <div class="Skin_bg" id="J_LeftUserInfo">
+
+                    </div>
+                </div>
+
+                <ul class="UC_nav">
+                    <!--普通会员-->
+                    <li class="<if condition="(ACTION_NAME eq n_uc_index)">cur</if>">
+                    <a href="{:U('n_uc_index')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-home"></i>个人主页</a>
+                    </li>
+                    <li class="<if condition="(ACTION_NAME eq n_uc_myorder)  OR (ACTION_NAME eq n_uc_myinquiry) OR (ACTION_NAME eq n_uc_credits) OR (ACTION_NAME eq n_uc_shop_order_list) OR (ACTION_NAME eq n_uc_myorder_details)">cur</if>"><a href="{:U('n_uc_myorder')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-order"></i>我的订单</a></li>
+                    <li class="<if condition="(ACTION_NAME eq n_uc_post)">cur<elseif  condition="(ACTION_NAME eq n_uc_post_list)" />cur</if>"><a href="{:U('n_uc_post')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-eye"></i>帖子动态</a></li>
+                    <li class="<if condition="(ACTION_NAME eq n_uc_dynamic_statistics)">cur</if>"><a href="{:U('n_uc_dynamic_statistics')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-news"></i>消息通知</a></li>
+                    <!--<li class="<if condition="(ACTION_NAME eq n_uc_index)">cur</if>"><a href="uc_member_modefypass.html">车友会</a><i></i></li>-->
+                    <!--<li class="<if condition="(ACTION_NAME eq n_uc_index)">cur</if>"><a href="uc_attention.html">车币商城</a><i></i></li>-->
+                    <li class="<if condition="(ACTION_NAME eq n_uc_garage)">cur</if>"><a href="{:U('n_uc_garage')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-cheku"></i>我的车库</a></li>
+                    <div>
+                        <button class="assetcenter" id="assetcenter">资产中心</button>
+                        <ul id="j_assetCenter">
+                            <li class="<if condition="(ACTION_NAME eq n_uc_car_currency_rule_wrapper)">cur<elseif  condition="(ACTION_NAME eq n_uc_car_currency_rule_wrapper_mx)" />cur</if>"><a href="{:U('n_uc_car_currency_rule_wrapper')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-carcoin"></i>获取车币</a></li>
+                            <li class="<if condition="(ACTION_NAME eq n_uc_get_points)">cur<elseif  condition="(ACTION_NAME eq n_uc_get_points_mx)" />cur</if>"><a href="{:U('n_uc_get_points')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-integral"></i>获取积分</a></li>
+                            <li class="<if condition="(ACTION_NAME eq n_uc_juan)">cur</if>"><a href="{:U('n_uc_juan')}"><i class="ui_icon_18 icon-new-uc icon-new-uc-coupon"></i> 优惠券</a></li>
+                        </ul>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
+        <script id="tplLeftUserInfo" type="text/html">
+            <div class="uc_person_info">
+                <div class="facePic">
+                    <div class="productImg">
+                        <a href="{:U('n_uc_base_info_pic')}">
+                            <img src="{{head_url}}">
+                        </a>
+                    </div>
+                </div>
+                <div class="GB_innerwrap">
+                    <div class="nameBox"><span class="name">{{if user_name == ''}}购车惠会员{{else}}{{user_name}}{{/if}}</span><span class="lv">V<i>{{if grade == ''}}0{{else}}{{grade}}{{/if}}</i></span></div>
+                    <div class="G_tc jifen">
+                        <a href="n_uc_car_currency_rule_wrapper.html">车币<span class="s">{{if total_coin == ''}}0{{else}}{{total_coin}}{{/if}}</span>个</a>
+                        <a href="n_uc_get_points.html">积分<span class="s">{{if total_jifen == ''}}0{{else}}{{total_jifen}}{{/if}}</span></a>
+                    </div>
+                    <!--<ul class="messageBox">-->
+                        <!-- -->
+                        <!--<li><a href="{:U('n_uc_base_info')}" title="账号设置">账号设置</a></li>-->
+                        <!--<li><a href="{:U('n_uc_dynamic_statistics')}" title="消息">消息<span class="icon_num_yellow">{{messagecount}}</span></a></li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+        </script>
+        <block name="body"></block>
+    </div>
+</div>
+<div class="footerWrap">
+	<div class="footerTop">
+		<div class="footer-list G_fl">
+			<dl>
+				<dt>订单服务</dt>
+				<dd><a href="/index.php/Guide/process" title="购车指南">购车指南</a></dd>
+				<dd><a href="/index.php/Guide/problem_price" title="常见问题">常见问题</a></dd>
+				<dd><a href="/index.php/Guide/notice" title="购车需知">购车需知</a></dd>
+			</dl>
+			<dl>
+				<dt>关于我们</dt>
+				<dd><a href="/index.php/Guide/introduce" title="公司简介">公司简介</a></dd>
+				<dd><a href="/index.php/Guide/feedback" title="在线反馈">在线反馈</a></dd>
+				<dd><a href="/index.php/Guide/concern" title="关注我们">关注我们</a></dd>
+			</dl>
+			<dl>
+				<dt>关注我们</dt>
+				<dd><a href="/index.php/Guide/contact" title="客服电话">客服电话</a></dd>
+				<dd><a href="/index.php/Guide/contact" title="商务合作">商务合作</a></dd>
+				<dd><a href="/index.php/Guide/contact" title="联系邮箱">联系邮箱</a></dd>
+			</dl>
+		</div>
+		<div class="footer-ewm G_fl">
+			<ul>
+				<li>
+					<img src="{$Think.const.IMG_URL}wechat_servse.png"/>
+					<span>微信服务号</span>
+				</li>
+				<li>
+					<img src="{$Think.const.IMG_URL}app_down.png"/>
+					<span>app下载</span>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-tel G_fr">
+			<p class="p1">400-138-0808</p>
+			<p>周一至周五  （节假日除外）</p>
+			<p>9:00-17:30（仅收市话费）</p>
+		</div>
+	</div>
+	<div class="footerBot">
+		<p>CopyRight @2015-2016 gouchehui.com All rights reserved 版权所有南京易橙汇网络科技有限公司</p>
+		<p>备案号:苏ICP备13031090号-3</p>
+		<!--<div class="footerBot-pic">
+			<img src="{$Think.const.IMG_URL}footerBot_01.png"/>
+			<img src="{$Think.const.IMG_URL}footerBot_02.png"/>
+		</div>-->
+	</div>
+    <div style="display:none">
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        <script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8ee160ab7cf066c5b5eadcdb24bb415a' type='text/javascript'%3E%3C/script%3E")); </script>
+        <script src="http://s95.cnzz.com/z_stat.php?id=1258873107&web_id=1258873107" language="JavaScript"></script>
+
+    </div>
+</div>
+</body>
+</html>

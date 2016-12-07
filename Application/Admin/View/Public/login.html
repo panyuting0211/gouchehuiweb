@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>登录页</title>
+    <link href="{$Think.const.ADMIN_CSS_URL}login.css" type="text/css" rel="stylesheet" />
+
+    <script src="{$Think.const.ADMIN_JS_URL}jquery-1.7.2.min.js"></script>
+</head>
+
+<body id="beijing">
+<div class="denglu">
+    <div class="denglu_1"></div>
+    <h1 class="denglu_2"><span>购车惠管理平台</span></h1>
+    <form>
+        <div class="form">
+            <div class="denglu_user"><i class="icon-user"></i>
+            	<input type="text" name="admin_name" id="admin_name" class="login-text " value="" maxlength="32" tabindex="1" autocomplete="off"/>
+            	
+            </div>
+            <div class="denglu_user2"><i class="icon-user"></i>
+            	<input type="password" name="pwd" id="pwd" class="login-text " value="" maxlength="32" tabindex="1" autocomplete="off"/>
+            	
+            </div>
+            <div class="denglu_user3"><i class="icon-user"></i>
+            	<input type="text"  id="captcha" name="captcha" class="login-text2 " value="" maxlength="32" tabindex="1" />
+            	<span id="number" class="error"></span>
+            </div>
+
+            <div class="denglu_user">
+            	<img id='img1' src="{:U('public/verifyImg')}" onClick='this.src=this.src+"?"' />
+            </div>
+            <div class="denglu_user4">
+            	<input type="submit" name="submit" id="ajax_login" class="login-text3 " value="登录" maxlength="" tabindex="1" />
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+<script>
+$(function(){
+    $('form').submit(function(){
+        var user_name=$('#admin_name').val();
+        var password =$('#pwd').val();
+        var captcha  =$('#captcha').val();
+        $.post("__CONTROLLER__/ajax_login",
+            {user_name:user_name,password:password,captcha:captcha},
+            function(data,textStatus){
+                if(data==1){
+                    $('#number').empty();
+                    $('#number').show().html("登录成功跳转中！");
+                    window.location.href="/admin.php/index/index.html";
+                }else{
+                    // $('#number').empty();
+                    $('#number').show().html("*"+data);
+                    $('#img1').attr('src',$('#img1').attr('src')+'?');
+                }
+            }
+        );
+        return false;
+    });
+})
+	
+
+
+</script>

@@ -1,0 +1,57 @@
+<extend name="Public/base"/>
+
+<block name="body">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">编辑广告</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="{:U('Advers/edit_ad_haddle')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>广告名：</label>
+                            <div class="controls">
+                                <input id="webname" name="ad_name" type="text" value="{$info['ad_name']}">
+                            </div>
+                        </div>
+                        <input type='hidden' name='id' value="{$info.id}" />;
+                        <div class="control-group">
+                             <label class="control-label" for="name">广告链接：</label>
+                             <div class="controls">
+                                 <input id="webname" name="adurl" type="text" value="{$info['adurl']}">
+                             </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">排序：</label>
+                            <div class="controls">
+                                <input name="alif" type="text" value="{$info.alif}" /> 
+                            </div>
+                        </div>     
+
+                        <div class="control-group">
+                            <label class="control-label" for="title">广告图：</label>
+                            <div class="controls">
+                                <input name="imgurl" type="file" >
+                            </div>
+                        </div>
+
+                       
+                        <img style="margin-left:180px" src="{:OSS}{$info['imgurl']}">
+                        
+                         
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">提交</button>
+                        
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+</block>

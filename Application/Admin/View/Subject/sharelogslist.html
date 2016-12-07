@@ -1,0 +1,117 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--  <form class="form-search" method="post">  -->
+                    <div class="span9">
+                        <div class="form-search">
+                            <label>用户名：</label><input type="text" id="user_name" name="user_name">
+                            <label>是否成功推荐购车：</label><select name="is_tuijian" id="is_tuijian" >
+                            <option value="">请选择</option>
+                            <option value="1">是</option>
+                            <option value="2">否</option>
+                        </select>
+                            <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i
+                                    class="icon-search"></i> 搜索
+                            </button>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+
+                <hr/>
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>手机号</th>
+                                <th>已购车款</th>
+                                <th>好友关注总数</th>
+                                <th>好友注册总数</th>
+                                <th>扫码好友购车总数</th>
+                                <th>扫码好友详情</th>
+                                <th>晒单详情</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var user_name = $('#user_name').val();
+            var buy_car_num=$('#is_tuijian').find('option:selected').val();
+            $.post("__MODULE__/Ajax/share_logs_ajax",
+                    {user_name: user_name,buy_car_num:buy_car_num, p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            var td1 = "<td>" + val.user_name + "</td>";
+                            var td2 = "<td>" + val.tel + "</td>";
+                            var td3 = "<td>" + val.name_exp_4 + "</td>";
+                            var td4 = "<td>" + val.activity_attention_num + "</td>";
+                            var td5 = "<td>" + val.activity_register_num + "</td>";
+                            var td6 = "<td>" + val.buy_car_num + "</td>";
+                            var td11 = "<td class='center'>" +
+                                    "<a class='btn btn-primary' href='__CONTROLLER__/friendDetail/id/" + val.id + "'>查看</a>" +
+                                    "</td>";
+                            var td12 = "<td class='center'>" +
+                                    "<a class='btn btn-primary' href='__CONTROLLER__/shareLogsDetail/id/" + val.id + "'>查看</a>" +
+                                    "</td>";
+                            $('tbody').append("<tr>" + td1 + td2 + td3 + td4 + td5 + td6 + td11 + td12 + "</tr>");
+                        });
+
+                    },
+                    "json");
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+
+
+</block>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>底价车_底价购车_购车惠</title>
+	<meta name="keywords" content="底价车，底价购车，汽车底价" />
+    <meta name="description" content="购车惠底价购车平台推荐底价车款。购车惠是一家汽车4S店实时在线报底价的平台，是国内首家提供汽车底价购买服务平台，保证上架车型所售底价均是正规4S店报价，且价格低于市场价格。购车惠提供全程购车服务，让客户买车更加方便快捷。" />
+
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZZ_front.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+<a href="/index.php/subject/double_eleven" id="J_topAdv" style="display:block;width:100%;height:80px;background: url(/Public/Home/images/Subject/double11/images/double_tit_ele.gif) center center no-repeat" target="_blank" title="双十一狂欢，限量抢1元上牌费"></a>
+{~W('Cate/header')}
+<div class="wrap">
+	<div class="main_container">
+		<div class="floor f1 car-contrast" id="J_CarContrast">
+			<div class="title">
+				<div class="left G_f22 ftx07 fl">
+					最新车价
+				</div>
+				<div class="new-message fl">
+					<a href="#">
+						<i></i>
+						<span class="add"> 奥迪A1 2014款更新了低价</span>
+						<span class="time">1分钟前</span>
+					</a>
+				</div>
+
+				<div class="btn-box">
+					<a href="#" class="prev"><i class="icon-new icon-new-left-arrow2"></i></a><a href="#" class="next"><i class="icon-new icon-new-right-arrow2"></i></a>
+				</div>
+
+			</div>
+
+			<div class="bd">
+				<ul>
+					<volist name="list" id="vol" offset="0" length="4">
+						<li>
+							<a href="{$vol.url}" target="_blank">
+
+								<div class="con">
+									<h3 class="G_f18">{$vol.brand_name} {$vol.car_model_name}</h3>
+									<p class="des G_f18">{$vol.car_name}</p>
+									<div class="line"><!-- line --></div>
+									<p class="mb20 mt20">品牌： {$vol.brand_name}</p>
+									<p class="mb20">车型： {$vol.car_model_name}</p>
+									<p class="mb20">颜色： {$vol.exterior_color_name}</p>
+									<div class="new-box"><span >立即查看</span></div>
+								</div>
+
+								<div class="lowprice-car"><img src="{:OSS}{$vol.imgurl}" alt="" width="606" height="310" /></div>
+							</a>
+						</li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+
+	<div class="car_fiter mt30">
+	<h2>挑选底价车</h2>
+	<div class="special_car_fiter">
+	<dl class="bcf_brand clearfix">
+		<dt>品牌：</dt>
+		<dd>
+		<div id="J_selectFirstL" class="clearfix">
+                            <a href="javascript:;" data-nh="1" class="active" target="_blank">全部</a>
+                            <volist name="brand_alif" id="vol">
+	                            <a href="javascript:;" target="_blank">{$vol.brand_alif}</a>
+                            </volist>
+                        </div>
+		<ul class="brand-name j_bcBrand"></ul>
+		<volist name="brand_alif" id="vol">
+ 			<ul class="brand-name hide j_bcBrand">
+ 				<volist name="vol['list']" id="sub">
+	 				<li>
+	 					<a href="###"  data-bid="{$sub.brand_id}">{$sub.brand_name}</a>
+	 				</li>
+ 				</volist>
+ 			</ul>
+ 		</volist>
+		</dd>
+	</dl>
+	<div class="line"></div>
+	<dl class="bcf_price clearfix">
+		<dt>车型：</dt>
+		<dd id="J_bcType">
+		<a href="#" data-nh="1" class="active">全部</a>
+		</dd>
+	</dl>
+		<div class="line"></div>
+		<dl class="scf_price clearfix">
+			<dt>价格：</dt>
+			<dd id="J_priceRange">
+				<a href="#" data-nh="1" class="active">全部</a>
+				<a href="#" data-minp="0" data-maxp="8">8万以下</a>
+				<a href="#" data-minp="8" data-maxp="10">8-10万</a>
+				<a href="#" data-minp="10" data-maxp="15">10-15万</a>
+				<a href="#" data-minp="15" data-maxp="20">15-20万</a>
+				<a href="#" data-minp="20" data-maxp="30">20-30万</a>
+				<a href="#" data-minp="30" data-maxp="50">30-50万</a>
+				<a href="#" data-minp="50" data-maxp="80">50-80万</a>
+				<a href="#" data-minp="80" data-maxp="10000">80万以上</a>
+				<div  id="J_CustomPriceBox" class="G_fl custom_price"><input type="text" name="price1" class="J_jiagekuang_txt" id="J_StartPrice" value="">
+					-
+					<input type="text" class="J_jiagekuang_txt" name="price2" id="J_EndPrice" value="">
+					万
+					<button class="G_btn_a" id="J_CustomPriceSubmit">确定</button></div>
+			</dd>
+		</dl>
+	<dl class="selected_condition clearfix" id="J_selectedCondition" style="display: none;">
+                <dt>已选：</dt>
+                <dd>
+                    <div class="select-cars-term">
+                        <ul>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+                        </ul>
+
+                    </div>
+                </dd>
+            </dl>
+	</div>
+	</div>
+
+		<div class="filter-box G_mt20">
+			<div class="filt-service-box">
+				<div class="filt-service clearfix" id="J_FiltService">
+					<div class="G_fl">
+						<a href="#" rel="nofollow" class="active" data-type="discount" data-val="DESC" title="优惠幅度从大到小">优惠幅度 <i class="icon-new icon-new-arrow icon-new-arrow-d"></i></a>
+						<a href="#" rel="nofollow" class="" data-type="low_price" data-val="ASC" title="底价从小到大">底价 <i class="icon-new icon-new-arrow icon-new-arrow-u"></i></a>
+					</div>
+					<div class="filt-pager">
+						<div class="filt-pager-all">共： <span class="s j_allNum">13</span> 条数据</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	<div class="carbox_wrap">
+	<ul class="clearfix carbox_ul" id="J_bCarL">
+	</ul>
+	</div>
+		<div class="G_pager" id="J_Pager">
+
+		</div>
+	</div>
+</div>
+<script id="tplLi" type="text/html">
+	{{each list as value index}}
+
+	<li class="item">
+		<div class="caritem_wrap">
+			<a href="{{value.url}}" class="caritem" target="_blank">
+				<span class="brand"><img src="{{value.logo}}" alt="{{value.brand_name}}{{value.model_name}}{{value.car_name}}"></span>
+				<div class="carimg">
+					<img src="{{value.exterior_img}}" alt="{{value.brand_name}}{{value.model_name}}{{value.car_name}}">
+
+				</div>
+				<h3 class="car-brand">{{value.brand_name}}{{value.model_name}}</h3>
+				<h4 class="car-name">{{value.car_name}}</h4>
+				<div class="gch-price"><span>购车惠底价：<span class="G_c1 G_f20">{{value.low_price}} 万</span></span> <span class="sheng G_fr"><i>省</i><span class="G_f18">{{value.discount}}</span> 万</span></div>
+				<p class="gf-price">官方指导价：<s>{{value.auth_price}} 万元</s></p>
+			</a>
+		</div>
+	</li>
+	{{/each}}
+
+</script>
+	<script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<script type="text/javascript" src="{$Think.const.js_URL}filter_bc.js"></script>
+	<script type="text/javascript">
+
+	$.bcfilter.init({
+            pageSize:20,
+            currentmasterBrandId: "",
+			currentmasterBrandName:"",
+            cityId:  0,
+            minPrice: -1,
+            maxPrice: 10000,
+            carLevel:0
+        });
+	$(function(){
+		$('#J_CarContrast').slide({mainCell:".bd ul", autoPage:true, effect:"left", scroll:2, vis:2});
+	});
+	
+</script>
+{~W('Cate/footer')}
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>在线反馈</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}manual.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="{$Think.const.ADMIN_CSS_URL}font-awesome/css/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}metisMenu.min.css"/>
+</head>
+<body>
+{~W('Cate/header')}
+<include file="Guide/manual_nav" />
+		<div class="manual-con manual-h">
+			<h3>当前位置：<a href="/index.php/index/index" title="购车惠">购车惠</a> > 购车指南 > 联系我们 > <span>在线反馈</span></h3>
+			<div class="manual-feedback">
+				<p>如果您在使用购车惠过程中遇到了问题，或者您希望给购车惠提出一些意见或建议，非常欢迎在这里提交给我们。您的支持将是我们前进的动力。</p>
+				<form action="/index.php/guide/feedback" method="post">
+					<div class="feedback-form">
+						<ul>
+							<li>
+								<span class="inp-lab">您的常用姓名：</span>
+								<input type="text" name="username" id="J_feedbackName" value="" class="inp-box" />
+							</li>
+							<li>
+								<span class="inp-lab"><i>*</i>您的Email：</span>
+								<input type="text" name="email" id="J_feedbackEmail" value="" class="inp-box" />
+							</li>
+							<li>
+								<span class="inp-lab">手机号：</span>
+								<input type="text" name="tel" id="J_feedbackTel" value="" class="inp-box" />
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<span class="inp-lab">问题类型：</span>
+								<select name="type" class="inp-sel" id="J_feedbackOpt">
+									<option value="">选择问题</option>
+									<option value="商品咨询">商品咨询</option>
+									<option value="支付相关">支付相关</option>
+									<option value="发票问题">发票问题</option>
+									<option value="其他问题">其他问题</option>
+								</select>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<span class="inp-lab"><i>*</i>反馈内容：</span>
+								<textarea name="view" rows="" cols="" class="inp-text" id="J_feedbackText"></textarea>
+							</li>
+						</ul>
+						<dl>
+							<dt class="inp-lab"></dt>
+							<dd class="alertboxwrap"></dd>
+						</dl>
+						<button class="inp-but J_sumbit">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{~W('Cate/footer')}
+</body>
+</html>

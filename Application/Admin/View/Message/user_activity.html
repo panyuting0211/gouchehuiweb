@@ -1,0 +1,413 @@
+<extend name="Public/base"/>
+<block name="body">
+    <script src="http://www.gouchehui.com/Public/Home/js/app/jquery.cxselect.js" type="text/javascript"
+            charset="utf-8"></script>
+    <style type="text/css">
+        #userlove select {
+            margin: -2px 100px 0 0;
+        }
+
+        #userlove .text_input_2 {
+            margin-right: 100px;
+            width: 180px;
+        }
+
+        #userlove .last-row {
+            margin: 8px 0 20px;
+        }
+
+        #userlove .row-fluid {
+            margin-bottom: 15px;
+        }
+
+        #userlove .dcright {
+            float: right;
+        }
+
+        #user_lists {
+            margin-top: 40px;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+            <p id='ajax_delete_id'
+               style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid" id="userlove">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="text_input22">
+                            <!--新换的页面头部-->
+                            <div class="row-fluid">
+                                来源入口：
+                                <select name="" class="span2" id="page_entry">
+                                    <option value="">全部</option>
+                                    <volist name="activity" id="vo">
+                                        <option value="{$vo.activity_number}">{$vo.activity_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+
+                            <div class="row-fluid last-row">
+                                <div class="span6">
+                                    开始时间：
+                                    <input type="text" class="text_input_2" id='begin_time' name="begin_time"
+                                           value="{$starttime|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                                    结束时间：
+                                    <input type="text" class="text_input_2" id="end_time" name="end_time"
+                                           value="{$endtime|date=" Y-m-d",###}" onclick="WdatePicker()">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="user_btn1">筛选</button>
+
+                            </div>
+
+                            <div class="content" id="userl_lists">
+                                <div class="widget-content nopadding newslist">
+                                    <h4>总计：<span class="userdata badge"></span>个 </h4>
+                                    <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                        <thead>
+                                        <tr>
+                                            <th>用户名</th>
+                                            <th>手机号</th>
+                                            <th>品牌</th>
+                                            <th>车型</th>
+                                            <th>车款</th>
+                                            <th>外观</th>
+                                            <th>内饰</th>
+                                            <th>活动价</th>
+                                            <th>报名方式</th>
+                                            <th>备注</th>
+                                            <th>时间</th>
+                                            <th>跟踪状态</th>
+                                            <th>会员角色</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pager">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#userl_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+
+        $("#user_btn1").on("click", function () {
+            getPage(1);
+        });
+
+        function getPage(page) {
+            $("#userl_lists h4").css('display', 'none');
+            $("#userl_lists thead").css('display', 'none');
+            $('#userl_lists tbody').empty();
+            $("#userl_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var page_entry = $("#page_entry").val();
+            var begin_time = $('#begin_time').val();
+            var end_time = $('#end_time').val();
+
+            $.post("/admin.php/Ajax/ajax_user_activity",
+                    {
+                        begin_time: begin_time,
+                        end_time: end_time,
+                        activity: page_entry,
+                        p: page
+                    },
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#userl_lists > .onload').remove();
+                        $("#userl_lists h4").css('display', '');
+                        $("#userl_lists thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#userl_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            var    $inMethod = '',
+                                    $status_track = '',
+                                    $userStatus = '';
+                            if (parseInt(val.flag, 10) === 1) {
+                                $inMethod = '立即报名';
+                            } else if (parseInt(val.flag, 10) === 2) {
+                                if(val.activity_number=='biekeyinglang')
+                                {
+                                    $inMethod = '立即报名';
+                                }else{
+                                    $inMethod = '特价车';
+                                }
+
+                            }else if(parseInt(val.flag, 10) === 3){
+                                $inMethod = '立即购买';
+                            }else if(parseInt(val.flag, 10) === 4){
+                                $inMethod = '马上抢';
+                            }
+
+                            if (parseInt(val.status_track, 10) === 1) {
+                                $status_track = '<font color="red">未跟踪</font>';
+                            } else if (parseInt(val.status_track, 10) === 2) {
+                                $status_track = '<font color="green">已跟踪</font>';
+                            }
+
+                            if(parseInt(val.cus_character, 10) === 1){
+                                $userStatus = '<a title="用户" data-val = "' + val.id + '" href="#"  class="j_userBtn btn btn-success"><i class="icon-user"></i> 用户</a>';
+                            }else if(parseInt(val.cus_character, 10) === 2){
+                                $userStatus = '<a title="内部" data-val = "' + val.id + '" href="#"  class="j_userBtn btn btn-warning">内部</a>';
+                            }else{
+                                $userStatus = '<a title="判别" data-val = "' + val.id + '" href="#"  class="j_panbieBtn btn btn-info">判别</a>';
+                            }
+                            if (val.exterior_color_name==null) val.exterior_color_name='(无)';
+                            if (val.interior_color_name==null) val.interior_color_name='(无)';
+                            if (val.remarks==null) val.remarks='(无)';
+                            $('tbody').append(
+                                    '<tr data-id="'+ val.id  +'">' +
+                                    "<td>" + val.user_name + "</td>" +
+                                    "<td>" + val.tel + "</td>" +
+                                    "<td>" + val.brand_name + "</td>" +
+                                    "<td>" + val.car_model_name + "</td>" +
+                                    "<td>" + val.car_name + "</td>" +
+                                    "<td>" + val.exterior_color_name + "</td>" +
+                                    "<td>" + val.interior_color_name + "</td>" +
+                                    "<td>" + val.activity_price + "</td>" +
+                                    "<td>" + $inMethod + "</td>" +
+                                    "<td>" + val.remarks + "</td>" +
+                                    "<td>" + val.createtime + "</td>" +
+                                    "<td>" + $status_track + "</td>" +
+                                    '<td>'+ $userStatus +'</td>' +
+                                    "</tr>");
+                        });
+
+
+                        $('#userl_lists tbody').find('.j_userBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            var $this = $(this),
+                                    $tr = $this.closest('tr'),
+                                    id = $tr.data('id');
+
+                            $.post( "/admin.php/Ajax/cus_list_activity",
+                                    {id: id},
+                                    function(db){
+                                        var  $payStatus = "", recordListStr = "";
+                                        if(parseInt(db.status, 10) === 0){
+                                            $payStatus = '<font color="red">未支付</font>';
+                                        }else if(parseInt(db.status, 10) === 1){
+                                            $payStatus = '<font color="green">已支付</font>';
+                                        }else{
+                                            $payStatus = '<font color="green">已支付</font>';
+                                        }
+                                        if(db && db.pay_cus.length > 0){
+                                            $.each(db.pay_cus, function(i, record){
+                                                var index = i + 1;
+                                                recordListStr += '<tr><td>'+ index  +'</td><td>'+ record.createtime +'</td><td>'+ record.cus_remark +'</td></tr>';
+                                            });
+                                        }
+                                        $con = '<div class="well">' +
+                                                '<div class="">' +
+                                                '<b>会员名：</b>' +
+                                                '<span>'+
+                                                db.cus_name
+                                                +'</span>' +
+                                                '</div>' +
+                                                '<div class="">' +
+                                                '<b>活动车款：</b>' +
+                                                '<span>'+
+                                                db.brand_name + db.car_model_name + db.car_name
+                                                +'</span>' +
+                                                '</div>' +
+                                                '</div>'+
+                                                '<table class="table table-striped">' +
+                                                '<thead> ' +
+                                                '<tr> <th style="text-align: left;">序号</th> <th style="text-align: left;">客服回访时间</th> <th style="text-align: left;">客服回访记录</th></tr>' +
+                                                '</thead>' +
+                                                '<tbody>' +
+                                                recordListStr +
+                                                '</tbody></table>' +
+                                                '<form class="form-horizontal" action="" method="post">' +
+                                                '<input type="hidden" name="id" value="'+
+                                                id +
+                                                '">' +
+                                                '<div class="control-group">' +
+                                                '<label class="control-label" for="cus_remark">备注：</label>' +
+                                                '<div class="controls"> <textarea name="cus_remark" rows="4" cols="" id="cus_remark"></textarea> </div>' +
+                                                '</div></form>';
+
+                                        var $infoListBox = $.confirm({
+                                            columnClass: 'col-md-1 col-md-offset-1',
+                                            title: '客服回访详细记录!',
+                                            content: $con,
+                                            confirmButton: '新增',
+                                            cancelButton: false,
+                                            confirmButtonClass: 'btn-info',
+                                            closeIcon: true
+                                        });
+
+                                        $infoListBox.confirm = function() {
+                                            var postDb = {},
+                                                    $cusRemark = $infoListBox.$content.find('[name=cus_remark]');
+                                            postDb.cus_remark = $cusRemark.val();
+                                            postDb.id = id;
+                                            if(postDb.cus_remark == ''){
+                                                $cusRemark.after('<span style="color: #f00;">* 备注不能为空</span>');
+                                                return false;
+                                            }
+                                            $.post( "/admin.php/Message/cus_action_add",
+                                                    postDb,
+                                                    function(db){
+                                                        $.dialog({
+                                                            title: '状态提示！',
+                                                            content: db.msg
+                                                        });
+                                                    });
+                                        };
+
+                                    },
+                                    "json");
+                        });
+
+                        $('#userl_lists tbody').find('.j_panbieBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            var $this = $(this),
+                                    $tr = $this.closest('tr'),
+                                    defName = $tr.find('td:eq(1)').text(),
+                                    id = $tr.data('id');
+
+                            var $con = '<form class="form-horizontal" action="" method="post"> ' +
+                                    '<input type="hidden" name="id" value="'+ id +'">' +
+                                    '<div class="control-group"> ' +
+                                    '<label class="control-label" for="cus_character">角色：</label> ' +
+                                    '<div class="controls"> ' +
+                                    '<select name="cus_character" id="cus_character"> ' +
+                                    '<option value="0">选择询价会员角色</option> ' +
+                                    '<option value="1">用户</option> ' +
+                                    '<option value="2">内部</option> ' +
+                                    '</select> ' +
+                                    '</div> ' +
+                                    '</div> ' +
+                                    '<div class="control-group"> ' +
+                                    '<label class="control-label" for="cus_name">姓名：</label> ' +
+                                    '<div class="controls"> ' +
+                                    '<input type="text" name="cus_name" value="'+ defName  +'" id="cus_name" placeholder="输入您的姓名"> ' +
+                                    '</div> ' +
+                                    '</div> ' +
+                                    '<div class="control-group"> ' +
+                                    '<label class="control-label" for="cus_remark">备注：</label> ' +
+                                    '<div class="controls"> ' +
+                                    '<textarea name="cus_remark" rows="4" cols="" id="cus_remark"></textarea> ' +
+                                    '</div> ' +
+                                    '</div> ' +
+                                    '<div class="control-group"> ' +
+                                    '<div class="controls"> ' +
+                                    '<span class="help-inline">（以上均为必填）</span> ' +
+                                    '</div> ' +
+                                    '</div> ' +
+                                    '</form>';
+
+                            var $addNewInfoBox = $.confirm({
+                                title: '客服回访!',
+                                content: $con,
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true
+                            });
+                            $addNewInfoBox.confirm = function(){
+                                var postDb = {}, $cusRemark = $addNewInfoBox.$content.find('[name=cus_remark]');
+                                postDb.cus_character = $addNewInfoBox.$content.find('[name=cus_character]').val();
+                                postDb.cus_name = $addNewInfoBox.$content.find('[name=cus_name]').val();
+                                postDb.cus_remark = $cusRemark.val();
+                                postDb.id = $addNewInfoBox.$content.find('[name=id]').val();
+
+                                if(postDb.cus_remark == ''){
+                                    if($cusRemark.closest('.controls').find('.error').length){
+                                        $cusRemark.closest('.controls').find('.error').show();
+                                    }else{
+                                        $cusRemark.after('<span class="error">* 备注不能为空</span>');
+                                    }
+                                    return false;
+                                }
+
+                                if(parseInt(postDb.cus_character, 10) === 0){
+                                    if($addNewInfoBox.$content.find('[name=cus_character]').closest('.controls').find('.error').length){
+                                        $addNewInfoBox.$content.find('[name=cus_character]').closest('.controls').find('.error').show();
+                                    }else{
+                                        $addNewInfoBox.$content.find('[name=cus_character]').after('<span class="error">* 请选择角色</span>');
+                                    }
+                                    return false;
+                                }
+
+                                $.post( "/admin.php/Message/cus_action",
+                                        postDb,
+                                        function(db){
+                                            if(db && db.status == 1){
+                                                location.reload();
+                                            }else{
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: data.msg
+                                                });
+                                            }
+                                        },
+                                        "json");
+                            }
+
+                        });
+                    },
+                    "json");
+
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+</block>

@@ -1,0 +1,92 @@
+<extend name="n_uc_base" />
+
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.JS_URL}app/jquery.datetimepicker.css">
+    
+        <!-- main-content begin -->
+        <div class="uc_main GB_main_r">
+            <div class="uc_main_wrapper">
+                <ul class="uc_sub_nav clearfix">
+                    <li class="cur"><a href="n_uc_post.html" title="">优惠券</a></li>
+                </ul>
+                <div class="voucher-wrap">
+                    <div class="voucher-box">
+                        <div class="voucher-list" id="J_DiscountCoupon">
+                            <div class="list-wrap clearfix">
+                                <ul class="j_list">
+                                </ul>
+                            </div>
+                        	
+                        	<!--分页-->
+                        	<div class="G_pager j_pager"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="voucher-instructions">
+                    <h2 class="spec-p-rule">购车惠优惠券规则</h2>
+                    <p>什么是优惠券？</p>
+                    <p>优惠券是购车惠赠与用户购买车款时所付定金时使用，基于用户的一种奖励政策。目前优惠券的几个来源渠道有：询价、活动、平台赠送等；支付定金时使用，且使用优惠券部
+                        分不开具发票。以下是购车惠商城优惠券详细说明：</p>
+                    <p> 1、优惠券只限在购车惠平台使用（目前只支持PC端，手机浏览器端、微信端、APP端在维护中，请耐心等待）</p>
+                    <p>2、优惠券可通过询底价、活动券、注册券获得；</p>
+                    <p>3、用户可在支付定金环节使用优惠券；</p>
+                    <p>4、一个订单只限使用一张优惠券；</p>
+                    <p>5、优惠券仅在有效期内使用；</p>
+                    <p>6、用户在支付订单时，可使用有效的优惠券等值金额来抵扣定金金额。</p>
+                    <p>7、用户取消定金订单，优惠券若仍在有效期内则系统自动退回个人中心账户，下次购车时可继续使用；</p>
+                    <p>8、请妥善保管购车惠账户，如因账户遗失或被盗用等导致优惠券失效，购车惠不承担任何责任；</p>
+                </div>
+            </div>
+        </div>
+        <!-- main-content end -->
+    </div>
+</div>
+
+<script id="tplItem" type="text/html">
+    {{each list as value index}}
+    	{{if value.status == 1}}
+    	<li class="not-used">
+    	{{else if value.status == 2 || value.status == 4}}
+        <li class="used">
+        {{else if value.status == 3}}
+        <li class="overdue">
+        {{else if value.status == 5}}
+        <li class="expiring">
+        {{/if}}
+        
+        <p class="money"><span>￥</span>{{value.money}}</p>
+        <p class="purpose"><span class="pur-name">用途：</span><span>抵扣定金</span></p>
+        <p class="time"><span>{{value.starttime}}--</span><span>{{value.endtime}}</span></p>
+        <p class="num"><span class="num-name">券号：</span><span>{{value.ticket_number}}</span></p>
+        <p class="source"> <span class="sou-name">来源：</span><span>{{value.ticket_name}}</span></p>
+        
+        {{if value.status == 1}}
+    	<div class="click-use">
+            <span class="status">未使用</span>
+        </div>
+    	{{else if value.status == 2 || value.status == 4}}
+    	
+        {{else if value.status == 3}}
+        
+        {{else if value.status == 5}}
+        <div class="click-use">
+            <span class="status">未使用</span>
+        </div>
+        {{/if}}
+        
+        </li>
+    {{/each}}
+</script>
+
+<script>
+    $(function(){
+        $('#J_DiscountCoupon').AjaxListerContainer({
+            pageSize: 12,
+            loader: '<div class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</div>',
+            ajaxUrl: '/member.php/MemberGeneral/ticket',
+            nuller:'<div class="null_list"><p>呦~ 您暂无任何优惠券哦！</p><p>推荐您去：<a href="/index.php/car/product_search" target="_blank" title="询价您喜欢的车，即可得到优惠券哦！">车型选择</a>页面看看~</p></div>'
+        });
+    });
+</script>
+
+</block>

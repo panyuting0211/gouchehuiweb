@@ -1,0 +1,268 @@
+<script type="text/javascript">
+
+    var USER = {};
+    USER.ID = "<?php if(isset($_SESSION['user_id']))
+    echo $_SESSION['user_id']; ?>";
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<div id="site_nav">
+    <div id="sn_bd">
+        <div class="sn_container">
+
+            <if condition="$userinfo.id neq null">
+                <div class="sign_in" id="J_signIn">
+                    <div class="user">
+                        <span class="user_name" data-name="{$userinfo.user_name}">
+                            <if condition="$userinfo.user_name neq  null">
+                                {$userinfo.user_name}
+                                <else />
+                                {$userinfo.nick}
+                            </if>
+                        </span>
+                        <div class="arrow">
+                        </div>
+                    </div>
+                    <ul class="user_msg">
+                        <li><a href="{:MEMBER_URL}n_uc_index">个人中心</a></li>
+                      <!--  <li><a href="{:MEMBER_URL}uc_member_query">我的询价</a></li>
+                        <li><a href="{:MEMBER_URL}uc_member_msg">消息通知<span class="icon_num_yellow">{$userinfo.msg}</span></a></li>-->
+                        <li><a href="{:LOGIN_URL}loginout?callback={$callBackUrl}" class="sign_out">退出</a></li>
+                    </ul>
+                </div>
+
+                <else />
+                <ul class="sn_quick_menu">
+                    <li class="menu_item"><a href="{:LOGIN_URL}reg?callback={$callBackUrl}">注册</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item"><a href="{:LOGIN_URL}login?callback={$callBackUrl}">登录</a></li>
+                </ul>
+            </if>
+
+
+        </div>
+    </div>
+</div>
+<div id="header">
+    <div class="headerLayout">
+        <div class="headerCon">
+            <h1 id="gchLogo">
+                <div id="J_FpLogo">
+                    <a href="{:U('Index/index')}" target="_self"> <img id="J_FpDoodle" class="fp-doodle" src="{$Think.const.IMG_URL}logo187X78.png" alt="购车惠"></a>
+                </div>
+            </h1>
+            <div class="local_city">
+                    <span class="lc_name" id="J_switchCity">
+                        <if condition="$city_name">{$city_name}<elseif condition="$province_name"/>{$province_name}<elseif condition="$con"/>全国<else /> 选择城市</if>
+                        <i></i>
+                    </span>
+					<textarea class="storedata hide">
+					<div class="choose-site lay_cont" id="J_citiesBox">
+                        <div class="site-list" id="div_citylist">
+                            <dl>
+                                <dt>全国：</dt>
+                                <dd>
+                                    <a href="{:U('Index/index?con=quanguo')}">全国</a>
+                                </dd>
+                            </dl>
+                            <volist name="province" id="vol">
+                                <dl>
+                                    <dt>{$vol.province_name}：</dt>
+                                    <dd>
+                                        <a href="{:U('Index/index?province='.$vol['id'])}">{$vol.province_name}</a>
+                                        <volist name="vol['city']" id="sub">
+                                            <a href="{:U('Index/index?city='.$sub['id'])}">{$sub.city_name}</a>
+                                        </volist>
+                                    </dd>
+                                </dl>
+                            </volist>
+                        </div>
+                    </div>
+					</textarea>
+            </div>
+            <div class="header_extra">
+                <div class="header_banner">
+                    <div id="J_FpEventBanner" class="fp-event-banner  hidden G_fr" style="display: block;">
+                        <ul class="hot_query clearfix">
+                            <li><strong>热门搜索：</strong></li>
+                            <volist name="search_res" id="vol">
+                                <li><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}">{$vol.search_key}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div id="gchSearch" class="gch_search">
+                    <form action="{:U('Car/product_search')}" class="gchSearch_form" method="GET">
+                        <div class="gchSearch_input clearfix">
+                            <label for="mq" style="visibility: visible; display: none;">搜索 买车</label>
+                            <div class="s_combobox">
+                                <div class="s_combobox_input_wrap">
+                                    <input type="text" name="select"  id="mq" class="s-combobox-input G_Tahoma" value="" aria-label="请输入搜索文字" placeholder="输入品牌或车型" onfocus=" if (value == '') {value = '';}this.style.color = '#333';" onblur=" if (value == '') {value = '';this.style.color = '#999';} ">
+                                </div>
+                            </div>
+                            <button type="submit">搜索<s></s></button>
+                        </div>
+                    </form>
+
+                    <div class="hot-search G_Tahoma">
+                        <dl>
+                            <dt>热门搜索：</dt>
+                            <volist name="search_res" id="vol">
+                                <dd><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}">{$vol.search_key}</a></dd>
+                            </volist>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navwrap">
+    <div class="main_container nav">
+        <div class="all_categories_wrap">
+            <a href="javascript:;"  id="J_CateBtn" class="G_f18 title hover">所有分类<i class="icon-new icon-new-menu"></i></a>
+            <div class="all_categories_bg" style="display: none;" id="J_CateBg"></div>
+            <div class="all_categories show" style="display: none;" id="J_CateCon">
+                <div class="wrap">
+                    <div class="car_itemwrap">
+                        <div class="car_item">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">品牌选车</h3>
+                                    <div class="recommend_list clearfix">
+                                        <volist name="brand" id="vol">
+                                            <a href="{:U('Car/product_search',array('brand'=>$vol['brand_id']))}" data-msg="{$vol.brand_name}" class="recommend">{$vol.brand_name}</a>
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hide box_brand" id="j_car_brand">
+                                <div class="carlist">
+                                    <volist name="brand_allAL" id="vol">
+                                        <dl class="letter_begin">
+                                            <dt class="letter ftx09">{$vol.brand_alif}</dt>
+                                            <dd>
+                                                <volist name="vol['list']" id="sub">
+                                                    <a class="item ftx02" href="{:U('Car/product_search',array('brand'=>$sub['brand_id']))}">{$sub.brand_name}</a>
+                                                </volist>
+                                            </dd>
+                                        </dl>
+                                    </volist>
+                                    </li>
+                                </div>
+                                <div class="carlist">
+                                    <volist name="brand_allMZ" id="vol">
+                                        <dl class="letter_begin">
+                                            <dt class="letter ftx09">{$vol.brand_alif}</dt>
+                                            <dd>
+                                                <volist name="vol['list']" id="sub">
+                                                    <a class="item ftx02" href="{:U('Car/product_search',array('brand'=>$sub['brand_id']))}">{$sub.brand_name}</a>
+                                                </volist>
+                                            </dd>
+                                        </dl>
+                                    </volist>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car_itemwrap">
+                        <div class="car_item">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">车型选车</h3>
+                                    <div class="recommend_list clearfix">
+                                        <volist name="car_type" id="vol" offset="0" length="2">
+                                            <a href="{:U('Car/product_search',array('car_type'=>$vol['id']))}" data-msg="{$vol.car_type_name}" class="recommend">{$vol.car_type_name}</a>&nbsp;
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hide box_model" id="j_car_model">
+                                <ul class="car_model_wrap">
+                                    <!--无车图 =-->
+                                    <volist name="car_type" id="vol">
+                                        <li>
+                                            <a href="{:U('Car/product_search',array('car_type'=>$vol['id']))}" class="car_model">
+                                                <div class="imgbox">
+                                                    <img src="{:OSS}{$vol.logo}" alt="{$vol.car_type_name}">
+                                                </div>
+                                                <span>{$vol.car_type_name}</span>
+                                            </a>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car_itemwrap">
+                        <div class="car_item" style="border: none">
+                            <div class="gallery">
+                                <div class="left">
+                                    <h3 class="cartitle">价格选车</h3>
+                                    <ul class="recommend_list">
+                                        <a href="{:U('Car/product_search',array('minprice'=>'0','maxprice'=>8))}" data-msg="8万以下" class="recommend">8万以下</a>
+                                        <a href="{:U('Car/product_search',array('minprice'=>'10','maxprice'=>15))}" data-msg="10-15万" class="recommend">10-15万</a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hide box_price" id="j_car_price">
+                                <ul class="car_price">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'0','maxprice'=>8))}" class="item">8万以下</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'8','maxprice'=>10))}" class="item">8-10万</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'10','maxprice'=>15))}" class="item">10-15万</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'15','maxprice'=>20))}" class="item">15-20万</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'20','maxprice'=>30))}" class="item">20-30万</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'30','maxprice'=>50))}" class="item">30-50万</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'50','maxprice'=>80))}" class="item">50-80万</a></td>
+                                            <td><a href="{:U('Car/product_search',array('minprice'=>'80','maxprice'=>10000))}" class="item">80万以上</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home_main_nav G_f18">
+            <a href="{:U('Index/index')}" class="hover">首页</a>
+            <a href="{:U('Car/product_search')}">车型选车</a>
+            <a href="{:U('Car/product')}">底价车</a>
+            <a href="{:U('Car/special_price_car')}">特价车</a>
+            <a href="{:U('Guide/process')}">购车指南</a>
+            <a href="http://shop.gouchehui.com">商城</a>
+        </div>
+    </div>
+</div>
+<div class="banner_wrap">
+    <div class="banner">
+        <div class="banner-btn">
+            <a href="javascript:;" class="prevBtn"> <i></i>
+            </a>
+            <a href="javascript:;" class="nextBtn"> <i></i>
+            </a>
+        </div>
+        <ul class="banner-img">
+            <volist name="banner" id="vol">
+                <a style="background:url({:OSS}{$vol.imgurl}) no-repeat center top;" href="{$vol.adurl}" target="_blank" data-img-address="{:OSS}{$vol.imgurl}" title="{$vol.ad_name}"></a>
+            </volist>
+        </ul>
+        <ul class="banner-circle"></ul>
+    </div>
+
+</div>

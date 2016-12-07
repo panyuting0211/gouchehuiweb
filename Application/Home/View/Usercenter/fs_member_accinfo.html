@@ -1,0 +1,105 @@
+<extend name="UC_base" />
+<block name="body">
+	<div id="uc_main">
+		<form action="__SELF__" method="post" enctype="multipart/form-data">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">账号资料</h2>
+				<div class="UC_main_r_id">
+					<div class="UC_member_infowrap">
+						<div class="list">
+							<dl>
+								<dt>用户名：</dt>
+								<dd>
+									{$user_info.user_name}
+								</dd>
+							</dl>
+							<dl>
+								<if condition="$user_info.nick eq null">
+									<dt>昵称：</dt>
+									<dd>
+										<input type="text" name="nick"  class="txt">
+									</dd>
+									<else />
+									<dt>昵称：</dt>
+									<dd class="nick" id="j_nickbox">
+                                        <input type="text" value="" name="nick">
+                                        <span>{$user_info.nick}</span>
+									</dd>
+								</if>
+							</dl>
+							<dl>
+                                <dt>积分：</dt>
+                                <dd>
+                                    <span>{$user_info.total_jifen}</span>
+                                    <a href="{:U('FS_score_details')}">积分详情</a>
+                                    <a href="{:U('FS_scorerela')}">(查看积分规则和作用？)</a>
+                                </dd>
+							</dl>
+							<dl>
+								<dt>公司名称：</dt>
+								<dd>
+									{$user_info.name_4s}
+								</dd>
+							</dl>
+							<dl>
+								<dt>公司地址：</dt>
+								<dd>{$user_info.addr}
+								</dd>
+							</dl>
+							<dl>
+								<dt>主营品牌：</dt>
+								<dd>{$user_info.brand_name}
+								</dd>
+							</dl>
+							<dl>
+								<dt>我的邀请码：</dt>
+								<dd>{$user_info.my_num}
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+								</dt>
+								<dd><input type="submit" class="submit" value="保存"></dd>
+							</dl>
+						</div>
+						<input type="hidden" name="user_id" value="{$user_info.id}">
+						<div class="filebox">
+							<div class="imgbox">
+								<img src="{:OSS}{$user_info.head_url}" alt="">
+							</div>
+							<!--<a href="javascript:;">修改头像</a>-->
+							<a class="ui_button_primary" href="javascript:;" id="set-uploadhead-btn"><u><i></i>修改头像</u>
+								<input type="file" hidefocus="true" name="headimg">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+    <script>
+        $(document).ready(function(){
+            var _input_txt = $("#j_nickbox input[type=text]");
+            var _input_sub = $("form input[type=submit]");
+            var _span = $("#j_nickbox span");
+            _input_txt.hide();
+            $("#j_nickbox").on("click",function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                _span.hide();
+                _input_txt.show();
+                _input_txt.val(_span.text());
+                _input_sub.val("修改");
+            });
+            $(document).click(function(){
+                _span.text(_input_txt.val()).show();
+                _input_txt.hide();
+                _input_txt.attr("value",_span.text());
+                _input_sub.val("保存");
+                if(_input_txt.val()== ""){
+                    _input_txt = _span.text();
+                }
+            })
+        });
+    </script>
+</block>

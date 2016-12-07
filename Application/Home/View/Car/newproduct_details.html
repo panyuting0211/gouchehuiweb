@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}details.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{$info.brand_name}_{$info.car_model_name}_{$info.car_name}_底价购车_购车惠</title>
+    <meta content="" name="description" />
+    <script type="text/javascript">
+    var x_arr = {$newstr};
+    var y_guan = ['120','140','110','130','150','170','160'];
+    var y_dijia = ['15','90','80','100','110','130','100'];
+    </script>
+
+</head>
+<body>
+{~W('Cate/header')}
+    <div class="C_page">
+        <div class="main_container">
+            <!--用户位置 开始-->
+            <div class="US_position G_f16 ftx02">
+                位置：
+                <a href="{:U('Index/index')}">购车惠</a><i>></i>
+                <a href="{:U('Car/product_search')}">车型选车</a><i>></i>
+                <span>{$info.brand_name} {$info.car_model_name}</span>
+            </div>
+            <!--用户位置 结束-->
+
+            <!--详情开始-->
+            <div class="car_details_box clearfix">
+                <!--汽车轮播图-->
+                <div class="carouselbox" id="J_detailPic">
+                    <div class="imgbox">
+                        <volist name="car_color_image" id="vol" offset="0" length="1">
+                            <span class="productImg"><img class="j_bigPic" src="{:OSS}{$vol.imgurl}" alt="{$info.car_name}-{$vol.color_name}" alt="{$info.car_name}-{$vol.color_name}"/></span>
+                            
+                        </volist>
+                    </div>
+                    <!--<div class="thumbnailbox j_smallPic">
+                        <a class="prev"></a>
+                        <div class="bd">
+                            <ul>
+                                <volist name="car_color_image" id="vol">
+                                    <li title="{$info.car_name}-{$vol.color_name}" data-id="{$vol.exterior_color_id}" <if  condition="$i eq 1">class="active"</if>><img src="{:OSS}{$vol.imgurl}" alt="{$info.car_name}-{$vol.color_name}" /><i></i></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <a class="next"></a>
+                    </div>-->
+                    <div class="shareBox detail-share-box">
+
+                        <a href="#" class="a-btn j_shareBtn">
+                            <i class="ui_icon ui_icon_share"></i>
+                            <span>分享</span>
+                        </a>
+                        <div class="detail-share-content j_shareBox">
+                            <i class="ui_icon ui_icon_16 ui_icon_detail arrow"></i>
+                            <div class="bdsharebuttonbox" data-tag="share">
+                                <a class="bds_tsina" data-cmd="tsina"></a>
+                                <a class="bds_weixin" data-cmd="weixin"></a>
+                            </div>
+                        </div>
+                        <if condition="isset($attention['id']) and $attention['id'] neq null">
+                            <a href="#" class="a-btn j_attention selected" data-attention="{id:100, likeid:20}">
+                                <i class="ui_icon ui_icon_atten"></i>
+                                <span class="s">已关注</span>
+                                <!--，可在<span class="s">会员中心</span> &gt; <span class="s">我的关注</span> 第一时间查看该车相关最新动态-->
+                            </a>
+                            <else />
+                            <a href="#" class="a-btn j_attention" data-attention="{id:100, likeid:20}">
+                                <i class="ui_icon ui_icon_atten"></i>
+                                <span>点击关注</span>
+                            </a>
+                        </if>
+
+                    </div>
+                </div>
+                <!--汽车轮播图 结束-->
+                <!--汽车信息 开始-->
+                <div class="carinfobox">
+
+                    <div class="carinfo_wrap G_f14 ftx02" id="J_carDetail" data-mid="{$info.car_model_id}"  data-id="{$info.id}" data-displacement="{$info.displacement}">
+                        <div class="item name">
+                            <select name="car_id" class="car_type">
+                                <volist name="car_list" id="vol">
+                                    <option data-link="{:U('Car/product_details?id='.$vol['id'])}" value="{$vol.id}" <if condition="$info['car_id'] eq $vol['car_id']">selected</if> >{$vol.car_name}</option>
+                                </volist>
+                            </select>
+                            </div>
+
+                                <dl class="item">
+                                <dt class="title">官方指导价</dt>
+                                <dd class="official_price">
+                                    <if condition="$info['auth_price'] neq null">
+                                        {$info['auth_price']}元
+                                        <else />
+                                        价格正在上传中...
+                                   </if>
+                                </dd>
+                                </dl>
+                        <dl class="item">
+                            <dt class="title">颜色配置</dt>
+                            <dd>
+                                依厂家统一配置为准
+                            </dd>
+                        </dl>
+                            <div class="line"></div>
+                            <dl class="item color j_carColor j_excolor" data-type="excolor">
+                                <dt>外观颜色</dt>
+                                <dd>
+                                    <volist name="exterior_color_list" id="vol">
+                                        <a href="javascript:;" title="{$vol.color_name}" data-color="{$vol.id}" style="background-color:{$vol.color_value}" <if condition="$vol['id'] eq $info['exterior_color_id']" >class="active"</if>><i></i></a>
+                                    </volist>
+                                </dd>
+                            </dl>
+                            <dl class="item color j_carColor j_incolor" data-type="incolor">
+                                <dt>内饰颜色</dt>
+                                <dd>
+                                    <volist name="interior_color" id="vol">
+                                        <if condition="is_array($vol['color_value'])">
+                                            <a href="javascript:;" title="{$vol.color_name}" data-color="{$vol.id}"  <if condition="$vol['id'] eq $info['interior_color_id']" >class="active"</if>><i></i>
+                                            <volist name="vol['color_value']" id="sub"> 
+                                                <span class="one-half" style="background-color:{$sub};"></span>
+                                            </volist>
+                                            </a>
+                                            <else />
+                                            <a href="javascript:;" title="{$vol.color_name}" data-color="{$vol.id}" style="background-color:{$vol.color_value}" <if condition="$vol['id'] eq $info['interior_color_id']" >class="active"</if>><i></i>
+                                            </a>
+                                        </if>
+                                        
+
+                                    </volist>
+                                </dd>
+                            </dl>
+
+                            <dl class="item">
+                                <dt class="title">底&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</dt>
+                                <dd>
+                                <div class="citylistbox j_cities">
+                                    <if condition="isset($find_pro['id']) and $find_pro['id'] neq null">                                        
+                                        <span data-type="mrcity" class="j_city" data-cid="{$find_pro.province_id}">
+                                        {$find_pro.province_name}底价                                        
+                                        </span>
+                                        <elseif condition="$find_city['id'] neq null" />
+                                            <span data-type="mrcity" class="j_city" data-cid="{$find_city.city_id}">
+                                            {$find_city.city_name}底价
+                                            </span>
+                                        <elseif condition="$find_con['id'] neq null" />
+                                            <span data-type="mrcity" class="j_city" data-cid="{$find_con.city_id}">
+                                            全国底价
+                                            </span>    
+                                        <else />
+                                        <span data-type="mrcity" data-cid="<if condition="'$Think.session.province'">{$Think.session.province}<else/>{$Think.session.city}</if>" style="color:red;">{$name}暂无底价</span>
+                                    </if>
+                                    
+                                    <a href="javascript:;" class="G_btn_b j_selectArea">选择更多</a>                                
+                                </div>                              
+                                </dd>                                
+                            </dl>
+                            <dl class="item cost" <if condition="$find_price eq null ">style="display:none;"</if>>
+                                <dt>询&nbsp;&nbsp;价&nbsp;&nbsp;费</dt>
+                                <if condition="isset($find_pro['id'])  and $find_pro['id'] neq null">                                        
+                                        <dd><em class="price" id="J_inquiryFee">99.00</em><em class="yen">元</em>
+                                        <elseif condition="$find_city['id'] neq null" />
+                                         <dd><em class="price" id="J_inquiryFee">99.00</em><em class="yen">元</em>   
+                                        <elseif condition="$find_con['id'] neq null" />
+                                         <dd><em class="price" id="J_inquiryFee">99.00</em><em class="yen">元</em>
+                                         <else />
+                                        <dd><em class="price" id="J_inquiryFee">0.00</em><em class="yen">元</em>
+                                </if>
+                                <a href="{:U('Guide/question')}" class="aLinker"><i class="ui_icon ui_icon_16 ui_icon_wb_exc_16"></i>询价费相关问题?</a></dd> 
+                            </dl>
+
+                            <dl class="item upCardCity">
+                                <dt class="title">上&nbsp;&nbsp;牌&nbsp;&nbsp;地</dt>
+                                <dd>
+                                <a href="javascript:;" class="card_city" data-ucid="0" data-ucname="不限" id="J_cardCity"><span>不限</span><i></i></a>
+                                <div class="cardCityCon hide" id="J_cardCityCon">
+                                <div class="curCardCity">
+                                    <a href="javascript:;" title="不限" data-ucid="0" data-ucname="不限" class="active">不限</a>（选择<span class="inp_err">"不限"</span>表示您对上牌地无要求）
+                                </div>
+                                <div class="line"></div>
+                                <div class="allCardCity">
+                                    
+                                </div>
+                                </div>
+                                
+                                <a href="{:U('Guide/question')}" class="aLinker"><i class="ui_icon ui_icon_16 ui_icon_wb_exc_16"></i>上牌地相关问题?</a>
+                                </dd>
+                            </dl>
+
+                            <div class="line"></div>
+                        <div class="carattentionbox G_f14 ftx02">
+
+
+                                <a href="" class="car_btn G_f20 active j_inquiryBtn" id="J_InquiryBtn"><if condition="$find_price eq null ">免费看底价<else />询价</if></a>
+                            <a href="javascript:;" class="car_btn G_f20 desabled">底价买车</a>
+                        </div>
+                    </div>
+                </div>
+                <!--汽车信息 结束-->
+        </div>
+            <!--详情结束-->
+            <!--车的各种信息开始-->
+
+            <div class="carbox main_container" id="J_detail_pos">
+                <!--中部导航栏 start-->
+                <div class="center_nav G_f20 ftx02 j_switchNav">
+                    <ul class="center_nav_tab j_switchNav_tab">
+                        <li data-name="typepic" class="active">车型图片</li>
+                        <li data-name="priceted">价格走势</li>
+                        <li data-name="buyProcess">购车流程</li>
+                        <li data-name="buyInfo">购车需知</li>
+                        <li data-name="askIssue">问题咨询</li>
+                    </ul>
+                </div>
+                <!--中部导航栏 end-->
+
+                <div class="detail-box">
+                <div class="detail-box-bd">    
+                <!--车型图片 strat-->
+
+                <div class="car_model_pic_box detail-info-item" id="J_typepic">
+                    <div class="title G_f22 ">
+                        <p class="ftx07">车型图片</p>
+                    </div>
+                    <div class="car-images" id="J_CarImg">
+    <div class="car-images-bd" id="J_carImg-bd">
+      <div class="bd">
+
+      <!-- 外观 -->
+      <div class="car-item-slider J_carItemSlider">
+        <div class="car-item-slider-nav J_carItemSlider-nav">
+          <a href="javascript:;" class="btn btn-up"></a>
+          <div class="bd-con"> 
+            <ul id="j-lunbotux2">
+                <volist name="car_color_image_0" id="vol">
+                  <li>
+                    <img src="{:OSS}{$vol.imgurl}" width="176" height="117" alt="{$info.brand_name} {$info.car_model_name}外观"/>
+                  </li>
+                </volist>
+            </ul>
+          </div>
+          <a href="javascript:;" class="btn btn-down"></a>
+        </div>
+        <div class="car-item-slider-con J_carItemSlider-bd">
+          <ul id="j-lunbotud2">
+            <volist name="car_color_image_0" id="vol">
+                <li><img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}外观"></li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+      <!--/ 外观 -->
+
+      <!-- 内饰 -->
+<div class="car-item-slider J_carItemSlider">
+        <div class="car-item-slider-nav J_carItemSlider-nav">
+          <a href="javascript:;" class="btn btn-up"></a>
+          <div class="bd-con"> 
+            <ul id="j-lunbotux2">
+                <volist name="car_color_image_1" id="vol">
+                  <li>
+                    <img src="{:OSS}{$vol.imgurl}" width="176" height="117" alt="{$info.brand_name} {$info.car_model_name}内饰"/>
+                  </li>
+                </volist>
+            </ul>
+          </div>
+          <a href="javascript:;" class="btn btn-down"></a>
+        </div>
+        <div class="car-item-slider-con J_carItemSlider-bd">
+          <ul id="j-lunbotud2">
+            <volist name="car_color_image_1" id="vol">
+                <li><img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}内饰"></li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+      <!--/ 内饰 -->
+
+      <!-- 空间 -->
+<div class="car-item-slider J_carItemSlider">
+        <div class="car-item-slider-nav J_carItemSlider-nav">
+          <a href="javascript:;" class="btn btn-up"></a>
+          <div class="bd-con"> 
+            <ul id="j-lunbotux2">
+                <volist name="car_color_image_2" id="vol">
+                  <li>
+                    <img src="{:OSS}{$vol.imgurl}" width="176" height="117" alt="{$info.brand_name} {$info.car_model_name}空间"/>
+                  </li>
+                </volist>
+            </ul>
+          </div>
+          <a href="javascript:;" class="btn btn-down"></a>
+        </div>
+        <div class="car-item-slider-con J_carItemSlider-bd">
+          <ul id="j-lunbotud2">
+            <volist name="car_color_image_2" id="vol">
+                <li><img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}空间"></li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+      <!--/ 空间 -->
+
+      <!-- 细节 -->
+<div class="car-item-slider J_carItemSlider">
+        <div class="car-item-slider-nav J_carItemSlider-nav">
+          <a href="javascript:;" class="btn btn-up"></a>
+          <div class="bd-con"> 
+            <ul id="j-lunbotux2">
+                <volist name="car_color_image_3" id="vol">
+                  <li>
+                    <img src="{:OSS}{$vol.imgurl}" width="176" height="117" alt="{$info.brand_name} {$info.car_model_name}细节"/>
+                  </li>
+                </volist>
+            </ul>
+          </div>
+          <a href="javascript:;" class="btn btn-down"></a>
+        </div>
+        <div class="car-item-slider-con J_carItemSlider-bd">
+          <ul id="j-lunbotud2">
+            <volist name="car_color_image_3" id="vol">
+                <li><img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}细节"></li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+      <!--/ 细节 --> </div>
+  </div>
+
+  <ul id="J_carImg-nav" class="car-images-nav">
+  <li>外观</li>
+  <li>内饰</li>
+  <li>空间</li>
+  <li>细节</li>
+</ul>
+</div>
+                </div>
+                <!--车型图片 end-->
+
+                <!--价格趋势 start-->
+
+                <div class="price_trendsbox detail-info-item"  id="J_priceted">
+                    <div class="title G_f22 ">
+                        <p class="ftx07">价格趋势</p>
+                    </div>
+                    <div class="price_trends">
+                        <div class="legend">
+                            <ul>
+                                <li>
+                                    <div class="linebox color_y">
+                                        <i></i>
+                                        <em></em>
+                                        <i></i>
+                                    </div>
+                                    <span>市场价</span></li>
+                                <li>
+                                    <div class="linebox color_b">
+                                        <i></i>
+                                        <em></em>
+                                        <i></i>
+                                    </div>
+                                    <span>最低价</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <canvas id="myChart" style="width:100%; height: 400px"></canvas>
+                    </div>
+                </div>
+                <!--价格趋势 end-->
+
+                <!--购车流程 start-->
+                <div class="processbox detail-info-item"  id="J_buyProcess">
+                    <div class="title G_f22 ">
+                        <p class="ftx07">购车流程</p>
+                    </div>
+                    <div class="process ftx02">
+                        <img src="{$Think.const.IMG_URL}Process%20(1).jpg" alt="购车惠购车流程"/>
+                        <ul>
+                            <li>
+                                <h3>选车</h3>
+                                <p>选好喜欢车型&nbsp;&nbsp;看准颜色配置<br>
+                                    鼠标点击之间&nbsp;&nbsp;底价尽在眼帘</p>
+                            </li>
+                            <li>
+                                <h3>询价</h3>
+                                <p>底价只需99元&nbsp;&nbsp;砍价心中有数<br>
+                                    省事省心省钱&nbsp;&nbsp;价格不准退钱</p>
+                            </li>
+                            <li>
+                                <h3>定车</h3>
+                                <p>商家车价坚挺&nbsp;&nbsp;回来下单确定<br>
+                                    定金抵扣车价&nbsp;&nbsp;余款4S店付清</p>
+                            </li>
+                        </ul>
+                        <img src="{$Think.const.IMG_URL}Process%20(2).jpg" alt="购车惠购车流程"/>
+                        <ul>
+                            <li>
+                                <h3>看车</h3>
+                                <p>确定提车日期&nbsp;&nbsp;全程陪同服务<br>
+                                    4S店现场看车&nbsp;&nbsp;满意刷卡付钱</p>
+                            </li>
+                            <li>
+                                <h3>验车</h3>
+                                <p>专业验车顾问&nbsp;&nbsp;现场详细指导<br>
+                                    帮您识别车况&nbsp;&nbsp;把握车辆品质</p>
+                            </li>
+                            <li>
+                                <h3>提车</h3>
+                                <p>资深顾问协办&nbsp;&nbsp;重点事项提醒<br>
+                                    装潢养护建议&nbsp;&nbsp;售后协助维权</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--购车流程 end-->
+
+                <!--购车需知 start-->
+                <div class="tipsbox detail-info-item"  id="J_buyInfo">
+                    <div class="title G_f22 ">
+                        <p class="ftx07">购车需知</p>
+                    </div>
+                    <div class="tipsbox_inner">
+                        <div class="examplebox">
+                            <img src="{$Think.const.IMG_URL}car-tips-img.jpg" alt="购车流程"/>
+                        </div>
+                        <ul class="regulation_box G_f16 ftx02">
+                            <li><span>1</span>您须确认自身具备相应车辆购买资格。</li>
+                            <li><span>2</span>你在支付询价费获得底价之后，询价费和定金将在您购车成功时抵扣您的车款费用。</li>
+                            <li><span>3</span>您在完成车款的选择并成功在线支付购车定金后，购车惠客服将致电联系您以确认下单成功，该定金为车辆出售方授权购车惠代车辆出售方收取；</li>
+                            <li><span>4</span>下单成功仅代表您具备享有优惠购车的初步资格，并不作为最终购得车辆的凭证。</li>
+                            <li><span>5</span>下单后因平台原因和售车方原因无法购买车辆的，定金将全额返还。如因您个人原因导致购买失败，定金则不返还。</li>
+                            <li><span>6</span>车辆出售方在购车惠展现的车辆价格仅限我方平台有效。</li>
+                        </ul>
+                    </div>
+                </div>
+                <!--购车需知 end-->
+
+                <!--问题咨询 start -->
+                <div class="advisorybox detail-info-item" id="J_askIssue">
+                    <div class="title G_f22 ">
+                        <p class="ftx07">问题咨询</p>
+                    </div>
+                    <div class="question G_f16 ftx02">
+                        <div class="tips">
+                            友情提示：如果您对于询价或购车等存在任何问题，可以选择直接拨打免费客服热线：400-138-0808（周一至周五，9：00-17：30 ），也可选择将您的问题留言，我们有专职人员进行回复。
+                        </div>
+                        <div class="questionbox" id="J_detailQuestion" data-carid="1" data-brandid="{$info.brand_id}" data-modelid="{$info.car_model_id}">
+                            <div class="question_cont">
+                                <div class="btnbox">
+                                    <ul>
+                                        <li  data-id="1">
+                                            <div class="outer bg_yellow">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>商品咨询</span>
+                                        </li>
+                                        <li data-id="2">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>支付相关</span>
+                                        </li>
+                                        <li data-id="3">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>发票问题</span>
+                                        </li>
+                                        <li data-id="4">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>其他问题</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="txtbox"><textarea class="j_inpArea">精准的的描述有利于我们更好地回复问题，切勿提交违法，违禁词汇，广告以及其他与购车无关内容，否则购车惠将依法追究相关法律责任
+                                </textarea>
+                                <div class="inpWordLmt j_inpWordLmt"><span class="curWordsNum"></span>/<span class="allWordsNum"></span></div></div>
+                            </div>
+                            <div class="question_subbox">
+                                <input type="submit" class="btn_22px G_f22 G_btn_a j_saveBtn" value="提交"/>
+                            </div>
+                        </div>
+                        <div class="question_listbox" id="J_commentContainer" data-carid="1">
+                            <div class="ques_title">
+                                <h2 class="G_f22">问题列表</h2>
+                                <div class="selectbox">
+                                    <select name="question_type" class="j_commentFilter">
+                                        <option value="0" selected> 所有问题({$all_count})</option>
+                                        <volist name="question_type" id="vol">
+                                            
+                                                <option value="{$vol.question_type}">
+                                                <switch name="vol['question_type']">                                              
+                                                        <case value="1">商品咨询({$vol.count})</case>
+                                                        <case value="2">支付相关({$vol.count})</case>
+                                                        <case value="3">发票问题({$vol.count})</case>
+                                                        <case value="4">其他问题({$vol.count})</case>    
+                                                </switch>                 
+                                                </option>
+                                        </volist>
+                                    </select>
+                                </div>
+                                <p class="G_f14 ">购车指南：<a href="{:U('Guide/process')}" class="ftx01">常见问题</a></p>
+                            </div>
+                            <div class="commentCon j_commentCon">
+                                
+                                <script id="J_commentConTpl" type="text/html">
+                                    <ul>
+                                        {{each list as value index}}
+                                        <li>
+                                            <div class="userinfobox">
+                                                <div class="userface">
+                                                    <img src="{{value.head_url}}" alt="{{value.user_name}}"/>
+                                                </div>
+                                                <span class="ftx07">{{value.user_name}}</span>
+                                            </div>
+                                            <div class="questioninfo G_f14">
+                                                <div class="theme ">问题类型：{{type}}</div>
+                                                <div class="q">
+                                                    <i></i>
+                                                    <p>{{value.question}}</p> <span>{{value.createtime}}</span>
+                                                </div>
+                                                <dl class="a">
+                                                    <dt>购车惠回复：</dt>
+                                                    <dd>
+                                                        <div class="content">{{value.reply}}</div>
+                                                        <span class="date-answer">{{value.reply_time}}</span></dd>
+                                                </dl>
+                                            </div>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </script>
+
+                            </div>
+                            <div class="pager j_commentPager"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--问题咨询 end -->
+            </div>
+            </div>
+            </div>
+            <!--车的各种信息 end-->
+
+
+        </div>
+    </div>
+<script>
+
+    window._bd_share_config = {
+        common : {
+            bdText : '我在购车惠底价购置了{$info.brand_name} {$info.car_model_name}，真的好便宜哦！~你也来看看 。',
+            bdDesc : '购车惠是新型网络购车平台，各大汽车品牌全是最低的价钱。',
+            bdUrl : window.location.href,
+            bdPic : '<volist name="car_color_image" id="vol" offset="0" length="1"> {:OSS}{$vol.imgurl}</volist>'
+        },
+        share : [{
+            "tag" : "share",
+            "bdSize" : 32
+        }]
+    }
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+    <script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.js_URL}app.js"></script>
+    <script src="{$Think.const.js_URL}xss.min.js"></script>
+    <script src="{$Think.const.js_URL}details.js"></script>
+    <script src="{$Think.const.js_URL}Chart.min.js"></script>
+
+{~W('Cate/footer')} 
+</body>
+</html>

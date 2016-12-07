@@ -1,0 +1,106 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">配置优惠券</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="__SELF__" id="commentForm" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="ticket_name">券名称：</label>
+                            <div class="controls">
+                                <input  name="ticket_name" id="ticket_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="money">面值：</label>
+                            <div class="controls">
+                                <input  name="money" id="money" type="text">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">券使用有效期：</label>
+                            <div class="controls">
+                                <label class="radio inline"><input type="radio" name="validity" value="30" checked>30天</label>&nbsp;&nbsp;
+                                <label class="radio inline"><input type="radio" name="validity" value="45">45天</label>&nbsp;&nbsp;
+                                <label class="radio inline"><input type="radio" name="validity" value="60">60天</label>&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">张数：</label>
+                            <div class="controls">
+                                <label class="radio inline"><input type="radio" name="amount" value="0" checked>不限</label>&nbsp;&nbsp;
+                                <label class="radio inline "><input type="radio" name="amount" value="" class="j_customNum" id="customize">自定义</label>&nbsp;&nbsp;
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="ticket_prefix">券号前缀：</label>
+                            <div class="controls">
+                                <input name="ticket_prefix" id="ticket_prefix" type="text" / required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="remark">备注：</label>
+                            <div class="controls">
+                                <textarea rows="3" id="remark" name="remark" required></textarea>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">确定</button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.validate.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}messages_zh.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.j_customNum').on('click', function(e){
+                var $this = $(this);
+                if($this.closest('.controls').find('.j_customNumInp').length > 0){
+                    return false;
+                }
+                $this.closest('.controls').append('<input type="text" class="j_customNumInp" style="width:100px;">');
+                $this.closest('.controls').find('.j_customNumInp').on('keyup', function(e){
+                    $this.val($(this).val());
+                });
+            });
+        });
+    </script>
+    <script>
+        $().ready(function() {
+            $("#commentForm").validate(
+                    {
+                        rules: {
+                            money: {
+                                required: true,
+                                number: true
+                            }
+                        },
+                        messages: {
+                            money: {
+                                required: "这是必填字段",
+                                number: "请填写正确的数字"
+                            }
+                        }
+                    }
+            );
+        });
+    </script>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+</block>

@@ -1,0 +1,127 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a> </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--  <form class="form-search" method="post">  -->
+                    <div class="form-search">
+                        <div class="span3">
+                            <label>关键字：</label>
+                            <input type="text" name="keyword" id="keyword">
+                        </div>
+                        <div class="span3">
+                            <label>券状态：</label>
+                            <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="" checked>全部</label>&nbsp;&nbsp;
+                            <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="2">已使用</label>&nbsp;&nbsp;
+                            <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="1">未使用</label>&nbsp;&nbsp;
+                            <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="3">已过期</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="span2">
+                            <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i class="icon-search"></i> 搜索</button>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+
+                <hr />
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>券号</th>
+                                <th>会员名</th>
+                                <th>券名</th>
+                                <th>券状态</th>
+                                <th style="width:20%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#ajax_lists").delegate(".pager a", "click", function(){
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display','none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var status       = $("input[name='status']:checked").val();
+            var keyword       = $("#keyword").val();
+
+            $.post( "__MODULE__/Ajax/ticket_user_ajax",
+                    {status:status,keyword:keyword,p:page},
+                    function(data,textStatus){
+                        if(data.count==null){
+                            $(".userdata").text("0");
+                        }else{
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display','');
+                        var pagelist=data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info=data[1];
+                        $.each(info,function(key,val){
+                            var td1="<td>"+val.ticket_number+"</td>";
+                            var td2="<td>"+val.user_name+"</td>";
+                            var td3="<td>"+val.ticket_name+"</td>";
+                            var td4 = "";
+                            switch(parseInt(val.status, 10))
+                            {
+                                case 1:
+                                    td4 = "<td><font color='green'>未使用</font></td>";
+                                    break;
+                                case 2:
+                                    td4 = "<td><font color='red'>已使用</font></td>";
+                                    break;
+                                case 3:
+                                    td4 = "<td><font color='red'>已过期</font></td>";
+                                    break;
+                                case 4:
+                                    td4 = "<td><font color='red'>已占用</font></td>";
+                                    break;
+                            }
+                            var td5="<td class='center'>"+
+                                    "<a class='btn btn-primary' href='__CONTROLLER__/ticket_user_details/id/"+val.id+"'>券详情</a>"+
+                                    "</td>";
+                            $('tbody').append("<tr>"+td1+td2+td3+td4+td5+"</tr>");
+                        });
+
+                    },
+                    "json");
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+
+
+</block>

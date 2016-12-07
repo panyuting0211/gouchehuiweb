@@ -1,0 +1,93 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+             <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a> <a href="__CONTROLLER__/carlist" class="current">所有车款</a><div class="carmanage_right"><a href="__CONTROLLER__/carlist" style="color:#006dcc;">返回上一页</a></div> </div>
+        </div>
+        <h1>编辑车款</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('editcar')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">品牌：</label>
+                            <div class="controls">
+                               <select name="brand_id" id="pinpai">                    
+                               <option value="{$info.brand_id}">{$info.brand_name}</option>                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="webname">车型：</label>
+                            <div class="controls">
+                              <select name="model_id" id="chexing">                               
+                               <option value="{$info.car_model_id}">{$info.car_model_name}</option>                              
+                                </select>
+                            </div>
+                        </div>
+                           
+
+                        <div class="control-group">
+                            <label class="control-label" for="car_name">车款：</label>
+                            <div class="controls">
+                                <input id="webname" name="car_name" type="text" value="{$info.car_name}"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="car_name">车款状态：</label>
+                            <div class="controls">
+                                <input value="1" name="status" type="radio" <if condition='$info.car_status eq 1'>checked</if>><span style="font-size:13px;margin-right:20px;">在售</span>
+                                <input value="0" name="status" type="radio" <if condition='$info.car_status eq 0'>checked</if>><span style="font-size:13px;">停售</span>
+                            </div>
+                        </div>
+						<div class="control-group">
+                            <label class="control-label" for="displacement">排量：</label>
+                            <div class="controls">
+                                <input id="webname" name="displacement" type="text" value="{$info.displacement}"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="car_name">官方指导价：</label>
+                            <div class="controls">
+                                <input id="webname" name="auth_price" type="text" style="width:100px"  value="{$info.auth_price}" />
+                                <span style='font-size:13px'>单价：元</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="order">排序：</label>
+                            <div class="controls">
+                                <input id="webname" name="order" type="text" value="{$info.order}"></div>
+                        </div>
+
+                        <!--<div class="control-group">
+                            <label class="control-label" for="tip">车款描述：</label>
+
+                            <div class="controls">
+                                <textarea class="form-control" id="tip" name="description" rows="7">{$info.description}</textarea>
+                            </div>
+                        </div>-->
+                        
+                   
+                        <input type="hidden" name="car_id" value="{$info.id}">
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">修改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+<script type="text/javascript"> 
+$(function(){
+     $("#pinpai").attr("disabled", 'false');
+    $("#chexing").attr("disabled", 'false');
+ 
+});
+</script>
+
+</block>

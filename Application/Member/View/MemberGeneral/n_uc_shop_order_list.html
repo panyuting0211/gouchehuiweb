@@ -1,0 +1,307 @@
+<extend name="n_uc_base" />
+<block name="body">
+	<style type="text/css">
+		.uc_shop_order_list  .ts-list1{
+		    width: 120px;
+		}
+		.uc_shop_order_list  .ts-list4{
+		    width: 130px;
+		}
+		.uc_shop_order_list  .ts-list5{
+		    width: 70px;
+		}
+		.uc_shop_order_list  .ts-list8{
+		    width: 60px;
+		}
+	</style>
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">我的订单</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="{:U('n_uc_myorder')}" title="">购车订单</a></li>
+                <li><a href="{:U('n_uc_myinquiry')}" title="">询价订单</a></li>
+                <!--<li><a href="{:U('n_uc_credits')}" title="">车币订单</a></li>-->
+                <li class="cur"><a href="{:U('n_uc_shop_order_list')}" title="">商城订单</a></li>
+                <li><a href="{:U('n_uc_active_list')}" title="">活动订单</a></li>
+            </ul>
+            
+			<div class="uc_shop_order_list ohd" id="J_ShopOrderMain">
+                <div class="table">
+                    <table class="grid_bundle table_fontsize table-shoplist grid_bundle_table" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col class="ts-list1">
+                            <col>
+                            <col>
+                            <col class="ts-list4">
+                            <col class="ts-list5">
+                            <col class="ts-list5">
+                            <col class="ts-list5">
+                            <col class="ts-list8">
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>商城订单号</th>
+                            <th colspan="2" class="col_line">
+                            	<ul>
+                            		<li>商品名称</li>
+                            		<li class="l2">订单金额</li>
+                            	</ul>
+                            	<div class="table_line"></div>
+                            </th>
+                            <th>下单时间</th>
+                            <th>订单状态</th>
+                            <th>支付状态</th>
+                            <th>配送状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="j_list" id="J_ShopOrderList">
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+            	<div class="G_pager j_pager"></div>
+            </div>
+			
+			
+			
+                <!--<div class="uc_shop_order_list ohd">
+                    <div class="table">
+                        <table class="grid_bundle table_fontsize table-shoplist" style="margin-bottom:20px;">
+                            <colgroup>
+                                <col class="s-num">
+                                <col class="s-name">
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr class="col_name">
+                                <th>商城订单号</th>
+                                <th>商品名称</th>
+                                <th>价格/元</th>
+                                <th>优惠/元</th>
+                                <th>优惠/元</th>
+                                <th>订单状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="" id="J_ShopOrderList">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>-->
+            </div>
+
+    </div>
+    <!--<script id="tplShopTr" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td>{{value.order_sn}}</td>
+            <td class="goods-box" colspan="4">
+                <table>
+                    <tbody>
+                    {{include 'tplShopGoodTr' value}}
+                    </tbody>
+                </table>
+            </td>
+            <td>已支付</td>
+            <td><a href="n_uc_shop_order_detail.html">商品详情</a> </td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/html" id="tplShopGoodTr">
+        <ul>
+            {{each goods as value i}}
+            <tr>
+                <td>{{value.goods_name}}</td>
+                <td>{{value.goods_price}}</td>
+                <td>{{value.market_price}}</td>
+                <td>{{value.goods_name}}</td>
+                <td>{{value.goods_name}}</td>
+            </tr>
+            {{/each}}
+        </ul>
+    </script>-->
+    
+    <script id="tplShopTr" type="text/html">
+        {{each list as value index}}
+        <tr data-order="{{value.order_id}}">
+            <td class="tborder"><a href="{{value.url}}" class="seemore see_line">{{value.order_sn}}</a></td>
+            <td class="goods-box" colspan="2">
+            	<div class="table_line"></div>
+                {{include 'tplShopGoodTr' value}}
+            </td>
+            <td>{{value.add_time}}</td>
+            <td class="J_orderStatus">
+            	<!--判断订单状态-->
+		        {{if value.order_status == 0}}
+		        <span>未确认</span>
+		        {{else if value.order_status == 1}}
+		        <span>已确认</span>
+		        {{else if value.order_status == 2}}
+		        <span>已取消</span>
+		        {{else if value.order_status == 3}}
+		        <span>无效</span>
+		        {{else if value.order_status == 4}}
+		        <span>退货</span>
+		        {{else if value.order_status == 5}}
+		        <span>已分单</span>
+		        {{/if}}
+            </td>
+            <td class="J_payStatus">
+            	<!--判断订单支付状态-->
+		        {{if value.pay_status == 0}}
+		        <span>未付款</span>
+		        {{else if value.pay_status == 1}}
+		        <span>付款中</span>
+		        {{else if value.pay_status == 2}}
+		        <span>已付款</span>
+		        {{/if}}
+            </td>
+            <td class="J_shippingStatus">
+            	<!--判断订单配送状态-->
+		        {{if value.shipping_status == 0}}
+		        <span>未发货</span>
+		        {{else if value.shipping_status == 1}}
+		        <span>已发货</span>
+		        {{else if value.shipping_status == 2}}
+		        <span>已收货</span>
+		        {{else if value.shipping_status == 3}}
+		        <span>备货中</span>
+		        {{else if value.shipping_status == 5}}
+		        <span>配货中</span>
+		        {{/if}}
+            </td>
+            <td class="J_doChange">
+            	<!--对订单操作-->
+            	<!--{{if value.order_status == 2}}
+		        <span class="seemore seedo">已取消</span>
+		        {{else if value.order_status == 1 || value.order_status == 5 && value.pay_status == 2 && value.shipping_status == 2}}
+		        <span class="seemore seedo">已完成</span>
+            	{{else if value.order_status == 0 && value.pay_status == 2 && value.shipping_status == 2}}
+            	<a class="seemore see_line" href='javascript:;' onclick='sure_order(this)'>确认收货</a>
+            	{{else if value.order_status != 1 && value.order_status != 2 && value.pay_status == 0}}
+            	<a class="seemore see_line" href='javascript:;' onclick='delete_order(this)'>取消订单</a>
+            	{{else}}
+            	<a href="{{value.url}}" class="seemore see_line">查看订单</a>
+            	{{/if}}-->
+            	{{if value.order_status == 2}}
+		        <span class="seemore seedo">已取消</span>
+		        {{else if value.order_status == 0 && value.pay_status == 0 && value.shipping_status == 0}}
+            	<a class="seemore see_line" href='javascript:;' onclick='delete_order(this)'>取消订单</a>
+            	{{else if (value.order_status == 0 || value.order_status == 1 || value.order_status == 5) && value.pay_status == 2 && value.shipping_status == 1}}
+            	<a class="seemore see_line" href='javascript:;' onclick='sure_order(this)'>确认收货</a>
+            	{{else if (value.order_status == 1 || value.order_status == 5) && value.pay_status == 2 && value.shipping_status == 2}}
+		        <span class="seemore seedo">已完成</span>
+            	{{else}}
+            	<a href="{{value.url}}" class="seemore see_line">查看订单</a>
+            	{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/html" id="tplShopGoodTr">
+    	{{each goods as value i}}
+        <ul class="tpl-ul">
+            <li>{{value.goods_name}}</li>
+            <li class="l2"><span>¥</span>{{value.goods_price*value.goods_number}}元</li>
+        </ul>
+        {{/each}}
+    </script>
+    <script>
+//      $(function(){
+//          var $orderList = $('#J_ShopOrderList'),
+//              $loader = $('<div style="width:954px;" class="uc_loading"><i></i>数据加载中...</div>');
+//          $.ajax({
+//              type: "post",
+//              url: '/member.php/MemberGeneral/shoplist',
+//              beforeSend: function () {
+//                  $orderList.html($loader);
+//              },
+//              success: function(db){
+//                  if(db.list.length > 0){
+//                      var html = template('tplShopTr', db);
+//                      $orderList.html(html);
+//                  }else{
+//                      $orderList.html('<td class="null_list G_f14" colspan="6">您暂无任何商城订单！快去 <a href="http://shop.gouchehui.com" target="_blank">购买</a> 你喜欢的商品吧！</td>');
+//                  }
+//              },
+//              complete: function () {
+//                  $loader.remove();
+//              },
+//              error: function() {
+//                  this.errormsg()
+//              }
+//          });
+//          
+//      });
+		
+		$(function(){
+	        $('#J_ShopOrderMain').AjaxListerContainer({
+	            pageSize: 6,
+	            tpler:'tplShopTr',
+	            loader: '<tr><td colspan="8" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+	            ajaxUrl: '/member.php/MemberGeneral/shoplist',
+	            nuller:'<tr><td class="null_list G_f14" colspan="8">您暂无任何商城订单！快去 <a href="http://shop.gouchehui.com" target="_blank">购买</a> 你喜欢的商品吧！</td></tr>'
+	        });
+	    });
+        
+//      取消订单
+        function delete_order(aa){
+            var order_id = $(aa).closest("tr").attr("data-order");
+            console.log(order_id);
+            //询问框
+			layer.confirm('确定要取消订单吗？', {
+			  btn: ['确定','取消'] 
+			}, function(){
+				$.post("/member.php/MemberGeneral/shopcancel",
+                        {order_id:order_id},
+                        function(data,textStatus){
+                            if(data){
+//                              $(aa).closest("tr").remove();
+                                layer.msg('订单成功取消', {icon: 1});
+                                $(aa).closest(".J_doChange").siblings(".J_orderStatus").find("span").text("已取消");
+                                $(aa).closest(".J_doChange").html("<span class='seemore seedo'>已取消</span>");
+                            }else{
+                                layer.msg('订单取消失败', {icon: 2});
+                            }
+                        }
+                );
+			}, function(){
+			  layer.msg('订单取消失败', {icon: 2});
+			});  
+        };
+
+//      确认订单
+        function sure_order(aa){
+            var order_id = $(aa).closest("tr").attr("data-order");
+            console.log(order_id);
+            //询问框
+			layer.confirm('你是否已经收到货？', {
+			  btn: ['是','否'] 
+			}, function(){
+				$.post("/member.php/MemberGeneral/shopreceipt",
+                        {order_id:order_id},
+                        function(data,textStatus){
+                            if(data){
+                                layer.msg('您已确认收货', {icon: 1});
+                                $(aa).closest(".J_doChange").siblings(".J_orderStatus").find("span").text("已确认");
+                                $(aa).closest(".J_doChange").siblings(".J_shippingStatus").find("span").text("已收货");
+                                $(aa).closest(".J_doChange").html("<span class='seemore seedo'>已完成</span>");
+                            }else{
+                                layer.msg('您取消了收货确认', {icon: 2});
+                            }
+                        }
+                );
+			}, function(){
+			  layer.msg('您取消了收货确认', {icon: 2});
+			});  
+        };
+        
+    </script>
+</block>

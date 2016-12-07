@@ -1,0 +1,92 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a> <a href="__CONTROLLER__/carlist" class="current">所有车款</a><div class="carmanage_right"><a href="__CONTROLLER__/carlist" style="color:#006dcc;">返回上一页</a></div> </div>
+                <h1>内饰颜色</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <form action="{:U('Carmanage/interior_colorupHandle')}" class="form-horizontal" method="post">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">品牌：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.brand_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">车型：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.car_model_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">车款：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.car_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">内饰颜色：</label>
+                                    <div class="controls">
+                                        <input id="webname" name="interior_color_name" type="text">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">颜色值：</label>
+                                    <div class="controls">
+                                        <input id="webname" name="interior_color_value" type="text" placeholder="混合色值以空格分开">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="car_id" value="{$car_info.id}">
+                            </fieldset>
+                            <div class="form-actions">
+                                <button type="submit"  id="submit" class="btn btn-primary">添加</button>
+                            </div>
+                            <div class="widget-yu-btn widget-right-search">
+                                <div class="search">
+
+                                </div>
+
+                                <div class="text_input22">
+                                    <div id="content-header">  <h1>已添加颜色</h1> </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                        <div class="control_surface">
+                            <ul class="control_surfacepic">
+                                <volist name="interior_color_info" id="vo">
+                                    <div class="control_surdiv" style="width:250px;">
+                                        <div class="control_surfont">{$vo.color_name}</div>
+                                        <volist name="vo['color_value']" id="vo2">
+                                            <div style="background:{$vo2};float:left;width:40px;" class="control_surcolor innercolor0"></div>
+                                        </volist>
+                                        <div style="clear:both"></div>
+                                        <div style="position:relative;top:-40px;font-size:17px;">
+                                            
+                                               <a title="删除" href="javascript:;" onclick="{ if(confirm('您确定要删除吗？')) {window.location.href='__CONTROLLER__/delete_interior/id/{$vo.id}'}}"> 删除</a> 
+                                        </div>
+                                    </div>
+
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+</block>

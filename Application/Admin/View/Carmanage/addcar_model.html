@@ -1,0 +1,70 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">所有车款</a>
+        </div>
+        <h1>添加车型</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('addcar_model')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">品牌：</label>
+                            <div class="controls">
+                                <select name="brand_id">
+                                <option value="">请选择品牌</option>
+                                    <volist name="infobrand" id="vo">
+                                    <option value="{$vo.id}" <if condition="$vo.id eq $brand_id">selected</if>>{$vo.brand_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="webname">车型：</label>
+                            <div class="controls">
+                                <input id="webname" name="car_model_name" type="text"></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="car_name">车型状态：</label>
+                            <div class="controls">
+                                <input value="1" name="status" type="radio" checked><span style="font-size:13px;margin-right:20px;">在售</span>
+                                <input value="0" name="status" type="radio"><span style="font-size:13px;">停售</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">车型分类：</label>
+                            <div class="controls">
+                                <select name="car_type_id">
+                                   <option value="">请选择车类型</option>
+                                    <volist name="infocartype" id="vo">
+                                        <option value="{$vo.id}">{$vo.car_type_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="imgurl">车型图：</label>
+                            <div class="controls">
+                                <input type="file" name="imgurl"  id="file_0" value="" ></div>
+                            <p>(建议上传图片尺寸：600*400px)</p>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</block>

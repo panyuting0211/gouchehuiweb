@@ -1,0 +1,230 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--  <form class="form-search" method="post">  -->
+                    <div class="span9">
+                        <div class="form-search">
+                            <label>活动名称：</label>
+                            <select name="activity_id" id="activity_id">
+                                <option value="">请选择活动</option>
+                                <volist name="act" id="vo">
+                                    <option value="{$vo.id}">{$vo.activity_name}</option>
+                                </volist>
+                            </select>
+                            <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i
+                                    class="icon-search"></i> 搜索
+                            </button>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                    <div class="span3">
+                        <a href="{:U('activity_car_add')}" class="btn btn-primary" data-type="add" id="J_AddBrandBtn"><i
+                                class="icon-plus"></i> 添加活动车款</a>
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>活动名称</th>
+                                <th>分组名称</th>
+                                <th>分组标识</th>
+                                <th>品牌</th>
+                                <th>车型</th>
+                                <th>车款</th>
+                                <th>外观颜色</th>
+                                <th>内饰颜色</th>
+                                <th>购买人数</th>
+                                <th>车款类型</th>
+                                <th>排序</th>
+                                <th>状态</th>
+                                <th style="width:200px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var activity_id = $('#activity_id').find('option:selected').val();
+
+            $.post("__MODULE__/Ajax/activity_car_ajax",
+                    {activity_id: activity_id, p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            var type = "", status = "";
+                            if (parseInt(val.type, 10) === 1) {
+                                type = "立即购买";
+                            } else if (parseInt(val.type, 10) === 2) {
+                                type = "马上抢";
+                            } else if (parseInt(val.type, 10) === 3) {
+                                type = "直降";
+                            } else if (parseInt(val.type, 10) === 4) {
+                                type = "打折";
+                            } else {
+                                type = "立即报名";
+                            }
+                            var td12="";
+                            if (parseInt(val.status, 10) === 1) {
+                               td12= "<td class=\"j_status\"><font color='red'><font>关闭</font></td>";
+                                status = "<a class='j_openBtn btn btn-info' data-status='2' data-des='开启' href='#' value='" + val.id + "'>开启</a>" ;
+                            } else {
+                                td12= "<td class=\"j_status\"><font color='green'><font>开启</font></td>";
+                                status = "<a class='j_openBtn btn btn-warning' data-status='1' data-des='关闭' href='#' value='" + val.id + "'>关闭</a>" ;
+                            }
+                            var td1 = "<td>" + val.activity_name + "</td>";
+                            var td2 = "<td>" + val.group_name + "</td>";
+                            var td3 = "<td>" + val.group_id + "</td>";
+                            var td4 = "<td>" + val.brand_name + "</td>";
+                            var td5 = "<td>" + val.car_model_name + "</td>";
+                            var td6 = "<td>" + val.car_name + "</td>";
+                            var td7 = "<td>" + val.exterior_color_name + "</td>";
+                            var td8 = "<td>" + val.interior_color_name + "</td>";
+                            var td9 = "<td>" + val.buyer_count + "</td>";
+                            var td10 = "<td>" + type + "</td>";
+                            var td11 = "<td>" + val.sort + "</td>";
+                            var td13 = "<td class='center'>" +
+                                    status +
+                                    "<a class='btn btn-info' href='__CONTROLLER__/activity_car_save/id/" + val.id + "'>编辑</a>" +
+                                    "<a class='j_delBtn btn btn-danger' href='#' value='" + val.id + "'>删除</a>" +
+                                    "</td>";
+                            $('tbody').append("<tr>" + td1 + td2 + td3 + td4 + td5 + td6 + td7 + td8 + td9 + td10 + td11 + td12 + td13+"</tr>");
+                        });
+
+                        $('#ajax_lists tbody').find('.j_delBtn').on('click', function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value");
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要删除该条信息？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function () {
+                                    $.post("/admin.php/Subject/activity_car_delete",
+                                            {id: id},
+                                            function (db) {
+                                                if (db.status == 1) {
+                                                    $tr.remove();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+                        });
+
+                        $('#ajax_lists tbody').find('.j_openBtn').on('click', function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            var $this = $(this),
+                                    $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value"),
+                                    status = $(this).data("status"),
+                                    des = $(this).data("des");
+
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要'+des+'该条信息？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function () {
+                                    $.post("/admin.php/Subject/activity_car_open",
+                                            {id: id, status:status},
+                                            function (db) {
+                                                if(db.status == 1){
+                                                    $.dialog({
+                                                        title: '状态提示！',
+                                                        content: db.msg,
+                                                        autoClose: 'dialog|2000',
+                                                    });
+                                                    if(status == 1){
+                                                        $this.data('status', 2);
+                                                        $this.data('des', "开启");
+                                                        $this.text('开启');
+                                                        $this.removeClass('btn-warning').addClass('btn-info');
+                                                        $tr.find('.j_status').html("<font color=\"red\">关闭</font>");
+                                                    }else{
+                                                        $this.data('status', 1);
+                                                        $this.data('des', "关闭");
+                                                        $this.text('关闭');
+                                                        $this.removeClass('btn-info').addClass('btn-warning');
+                                                        $tr.find('.j_status').html("<font color=\"green\">开启</font>");
+                                                    }
+                                                }
+                                            });
+                                }
+                            });
+                        });
+
+                    },
+                    "json");
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+
+
+</block>

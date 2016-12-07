@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>订单</title>
+</head>
+<body>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+    	<div class="order-title G_f16">成功支付询价费</div>
+    	<div class="order-bd">
+    		<!--<div class="order-stit G_f14">预付定金</div>-->
+    		<!-- tips -->
+	        <div class="flowstep-tip step-2">
+	            <!--<i class="icon-top-arrow"></i>-->
+	            <p class="G_f20 G_fb">
+	                <i class="icon-tips icon-tips-ok"></i>您已通过{$info.pay_way}成功支付<span class="s">¥{$info.money}</span>到购车惠
+	            </p>
+	            <div class="flowstep-tip-gift">
+	            	<div class="gift1">
+            			<div class="order-list-info">
+            				<dl>
+            					<dt class="G_f18">￥<span class="G_f30">{$tick.money}</span></dt>
+            					<dd class="G_f12">{$tick.startdate}-{$tick.enddate}</dd>
+            				</dl>
+            			</div>
+	            	</div>
+	            	<div class="gift2 G_f14">获得{$tick.ticket_name}1张<a href="/member.php/MemberGeneral/n_uc_juan.html">查看</a></div>
+	            </div>
+	            <p class="order-p1 G_f16"><span id="J_time">10</span>秒后，进入订单详情页面...<a href="{$info.order_url}" id="J_url">立即进入</a></p>
+	            <!--<p class="G_tc G_f18">请进入订单页面完善身份证资料信息，<a href="{$info.next}">查看订单</a>。</p>-->
+	        </div>
+	        <!-- tips end -->
+	        <!--<div class="order-line"> </div>
+	        <div class="order-stit G_f14">了解更多信息</div>
+	        <div class="ewm-box">
+	            <span>
+	            	<img src="/Public/Home/images/order_app_ewm.png" alt=""/>
+	            	<i class="G_f18">即刻下载购车惠APP<br />手机获取报价更及时</i>
+	            </span>
+	            <span>
+	            	<img src="/Public/Home/images/order_weixin_ewm.png" alt=""/>
+	            	<i class="G_f18">关注购车惠公众账号<br />了解更多底价信息</i>
+	            </span>
+	        </div>-->
+    	</div>
+    </div>
+</div>
+{~W('Cate/footer')}
+
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+<!--页面跳转js-->
+<script type="text/javascript">
+	function run(){
+		var s = document.getElementById("J_time"),
+			surl = $("#J_url").attr("href");
+//			console.log(surl);
+		if(s.innerHTML == 0){
+			window.location.href= surl;
+			return false;
+		}
+		s.innerHTML = s.innerHTML * 1 - 1;
+		}
+	window.setInterval("run();", 1000);
+	javascript:window.history.forward(1);
+</script>
+</body>
+</html>

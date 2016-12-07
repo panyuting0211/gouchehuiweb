@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>密码找回 - 购车惠</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+	<div class="RL_header">
+		<div class="main_container clearfix">
+			<h1 class="RL_logo">
+				<a href="{:U('Index/index')}" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+			</h1>
+			<div class="RL_gradient_line G_fl"></div>
+			<h2 class="RL_ftitle G_fl G_f22">
+				重设密码
+			</h2>
+			<div class="RL_returnHome G_fr">
+				<a href="{:U('Index/index')}" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+			</div>
+		</div>
+	</div>
+	<div class="main_container">
+		<div class="find_pw_frame">
+			<ul class="step step_arrow nav_pills clearfix">
+				<li class="cur"><a><i class="icon_num_white">1</i>填写账号</a></li>
+				<li class="cur"><a><i class="icon_num_white">2</i>验证身份</a></li>
+				<li class="cur"><a><i class="icon_num_white">3</i>重置密码</a></li>
+				<li><a><i class="icon_num_white">4</i>重置密码成功</a></li>
+			</ul>
+		<form action="{:U('resetPwdHandle')}" method="post" id="form1">
+			<div class="find_Pwd_Form">
+				<input name="user_name" type="hidden" value="{$user_name}">
+				<div class="ui_input_text clearfix">
+					<span class="label">新密码：</span>
+					<div class="item_info G_fl">
+						<input type="password"  name="password" id="password" class="login_name" placeholder="输入新密码" autofocus="" autocomplete="off" value="">
+						<div class="input-tip" id="password-tip">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+						<div id="password-state" class="password-state hide">
+                                <div class="input-tip-inner">
+                                    <span class="reg_mes mes_pass_in"></span>
+                                </div>
+                            </div>
+					</div>
+					
+				</div>
+				<div class="ui_input_text clearfix">
+					<span class="label">确认新密码：</span>
+					<div class="item_info G_fl">
+						<input type="password"  name="repassword" id="repassword" class="login_name" placeholder="再输一遍新密码" autofocus="" autocomplete="off" value="">
+						<div class="input-tip" id="repassword-tip">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+					</div>
+					
+				</div>
+				<div class="ui_input_btn G_mt60">
+					<input type="submit" class="submit_btn G_btn_a btn_54px" id="J_Submit" value="提交" name="commit">
+				</div>
+			</div>
+		</form>	
+		</div>
+	</div>	
+	<script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+	<script type="text/javascript" src="{$Think.const.js_URL}resetpw.js"></script>
+</body>
+</html>

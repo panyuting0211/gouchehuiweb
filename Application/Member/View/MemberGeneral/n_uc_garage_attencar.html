@@ -1,0 +1,77 @@
+<extend name="n_uc_base" />
+<block name="body">
+        <!-- main-content begin -->
+        <div class="uc_main GB_main_r">
+            <div class="uc_main_wrapper">
+                <h2 class="uc_middle_title">车库</h2>
+                <ul class="uc_sub_nav clearfix">
+                    <li><a href="n_uc_garage.html" title="">我的爱车</a></li>
+                    <li><a href="n_uc_garage_planbuy.html" title="">计划购车</a></li>
+                    <li class="cur"><a href="n_uc_garage_attencar.html" title="">关注的车</a></li>
+                </ul>
+                <div class="uc_garage_wrapper uc_g_atten">
+                    <div id="J_GarAttenCarList"></div>
+                    
+                        <div class="uc_g_opera_box">
+                            <div class="uc_opera_tips">
+                                <p>您可以关注 9 款车，方便随时获取该车型的相关服务。</p>
+                                <p>还可添加<span class="num j_remainingNum">9</span>辆   （<span class="Skin_txt2">*</span>星号为必填项）</p>
+                            </div>
+                           <form action="" id="J_AddMyCarForm">
+                        <div class="uc_formlist" id="J_AddMyCar">
+                            <ul id="J_carSelector" class="uc_carSelector">
+                                <li>
+                                    <span class="hd"><em>*</em>我的爱车:</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择品牌" data-first-value="" data-url="/member.php/MemberGeneral/brand" name="brand" id="" class="brand uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <span class="hd"></span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择车型" data-url="/member.php/MemberGeneral/car_model" data-first-value="" name="model" id="" class="model uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+                                    </div>
+
+                                </li>
+                            
+                            </ul>
+
+                            <ul>  
+
+                                <li><span class="hd"></span><div class="inp_box"><input type="submit" class="G_btn_a btn_30px" value="提交"></div></li>
+                            </ul>
+                        </div>
+                        </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- main-content end -->
+<script id="tplGarAttenCarList" type="text/html">
+{{each list as value index}}
+<div class="car_box"  data-id="{{value.id}}">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.image}}" alt="{{value.car_brand}}{{value.car_model}}">
+                                        </span>
+                                    </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18 j_tit" data-cmid="{{value.car_model_id}}" title="{{value.car_brand}}{{value.car_model}}">{{value.car_brand}}{{value.car_model}}</h5>
+                                <p><a target="_blank" href="/index.php/car/product_search?brand={{value.car_brand_id}}">全部车型&gt;&gt;</a></p>
+                                <p class="btn_s2"><a href="javascript:void(0);" class="G_btn_a btn_32px j_addBuyCar">添加到计划购车</a></p>
+                            </div>
+                            <a href="javascript:void(0);" class="ui_icon uc_funcicon_del j_delBtn"></a>
+                        </div>
+
+        {{/each}}
+</script>
+<script src="{$Think.const.JS_URL}app/jquery.datetimepicker.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+<script src="{$Think.const.JS_URL}garage_atten.js"></script>
+</block>

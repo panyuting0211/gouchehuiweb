@@ -1,0 +1,172 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+    </style>
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+
+            <div id="content-header">
+                <div id="breadcrumb"><a href="javascript:;" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="" class="current">{$atitle}</a></div>
+                <!-- <h1>{$atitle}</h1> -->
+            </div>
+            <p id='ajax_delete_id' style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12" id="Yu-db-backup">
+                        <div class="text_input22">
+                            日期: <input type="text" class="text_input_2" name="begin_time" value="{$starttime}" onClick="WdatePicker()" id="begin_time">
+                            至: <input type="text" class="text_input_2" name="end_time" value="{$endtime}" onClick="WdatePicker()" id="end_time">
+                            用户名：<input type="text" name="username" class="text_input_1" value="{$username}" style="width:150px;" id="username">
+                            <input type="submit" class="btn button_sou" id="commit" onclick="getPage(1)" value="搜索">
+                        </div>
+
+                        <div class="widget-yu-btn">
+                            <div class="widget-yu-btn widget-right-search">
+                                <div class="search">
+                                </div>
+                            </div>
+                            <div class="content" id="ajax_lists">
+                                <div class="widget-content nopadding">
+                                    <h4>总计：<span class="userdata badge"></span>个 </h4>
+                                    <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                        <thead>
+                                        <tr>
+                                            <th>提问会员</th>
+                                            <th>提问内容</th>
+                                            <th>图片</th>
+                                            <th>提问时间</th>
+                                            <th>回复数</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pager">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        /*var url_ajax = "__CONTROLLER__/carprice_ajax2";*/
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            var begin_time = $('#begin_time').val();
+            var end_time = $('#end_time').val();
+            var username = $('#username').val();
+
+            $.post("__MODULE__/Ajax/appMessage_ajax",
+                    {begin_time: begin_time, end_time: end_time, username: username, p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1], _tr = "";
+
+                        $.each(info, function (key, val) {
+                            var _tdImg = "";
+                            if (val.nick == null)       val.nick = '';
+                            if (val.imgurl.length) {
+                                $.each(val.imgurl, function (i, o) {
+                                    _tdImg += "<img src=\"{:OSS}" + o.imgurl + "\" style='width:100px;'>";
+                                });
+                            }
+                            _tr = "<tr><td>" + val.username + "</td><td>" + val.context + "</td><td>" + _tdImg + "</td><td>" + val.createtime + "</td><td>" + val.count + "</td><td><a class='btn btn-info' href='__CONTROLLER__/appReply/id/" + val.id + "'>详情</a><a class='btn btn-danger' title='删除' value='" + val.id + "' href='javascript:;' onclick='ajax_delete(this)'>删除</a></td></tr>";
+                            $('tbody').append(_tr);
+                        });
+                    },
+                    "json");
+        }
+
+        function ajax_delete(aa) {
+            var id = $(aa).attr("value");
+            if (confirm('确定要删除吗？')) {
+                $.post("__CONTROLLER__/app_delete_ajax",
+                        {id: id},
+                        function (data, textStatus) {
+                            if (data) {
+                                $(aa).parent().parent().remove();
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除成功');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            } else {
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除失败');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            }
+                        }
+                );
+            }
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+</block>

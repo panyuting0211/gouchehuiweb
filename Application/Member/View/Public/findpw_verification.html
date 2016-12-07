@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>找回密码  - 购车惠</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}login.css"/>
+</head>
+<body>
+<!--login header-->
+<div class="headwrap">
+	<div class="header">
+		<h1 class="RL_logo G_fl G_f20">
+			<a href="/index.php/Index/index.html" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>找回密码 
+		</h1>
+		<div class="RL_returnHome G_fr">
+			<ul class="header-link">
+				<li><a href="{:U('Public/reg')}" title="注册">注册</a><b>|</b></li>
+				<li><a href="{:U('Public/login')}" title="登录">登录</a><b>|</b></li>
+				<li><a href="/index.php/Index/index.html" title="购车惠首页">购车惠首页</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--login content-->
+<div class="content findPwd">
+	<div class="find-con">
+		<!--找回密码状态-->
+		<div class="pwd-state">
+			<ul>
+				<li class="doing">
+					<dl>
+						<dt>1</dt>
+						<dd>身份验证</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>2</dt>
+						<dd>重置登录密码</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>3</dt>
+						<dd>完成</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--找回密码操作-->
+		<div class="pwd-action">
+			<form action="{:U('codeCheck')}" method="POST">
+				<!--<input name="user_name" type="hidden" value="{$user_name}">-->
+				<div class="ui_input_text pwd-action-tel clearfix">
+					<span class="pwd-splab">账号：</span>
+					<div class="item_info G_fl">
+						<input type="text"  name="user_name" id="user_name" class="login_name pwd-inp-text" placeholder="手机号" autofocus="" autocomplete="off">
+						<!--<if condition="$uname neq null">value="{$uname}"</if>-->
+						<div class="tips G_f12"><span class='G_prompt'><i class='icon_warn'></i>请填写您的账号</span></div>
+					</div>
+
+				</div>
+				<div class="ui_input_text pwd-action-tel clearfix">
+					<span class="pwd-splab">验证码：</span>
+					<div class="item_info G_fl">
+						<input type="text"  name="code" placeholder="输入验证码" class="pwd-inp-text pwd-inp-yz pwd-margin G_fl" autofocus="" autocomplete="off" value="">
+						<a href="javascript:;" id="J_CreateMobileCode" class="pwd-send G_fl G_f14"> 获取验证码 </a>
+						<div class="tips G_f14"></div>
+					</div>					
+				</div>
+				<div class="pwd-action-tel">
+					<input type="submit" class="submit_btn pwd-inp-next G_f18" value="下一步" name="mobileCommit">
+				</div>
+			</form>	
+		</div>
+	</div>
+</div>
+
+<include file="Public/log_footer" />
+
+<script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var status = false;
+			var qianzui = '/member.php';
+			var $tel = $('#user_name');
+			function intervalTime(num) {
+				var num = parseInt(num);
+				var i = 0;
+				$("#J_CreateMobileCode").addClass("G_btn_disabled");
+				$("#J_CreateMobileCode").html("<span></span>秒重新发送");
+				$("#J_CreateMobileCode span").text(num);
+				var inter = setInterval(function() {
+					if (i < num) {
+						i++;
+						$('#J_CreateMobileCode span').text(num - i);
+					} else {
+						clearInterval(inter);
+						$("#J_CreateMobileCode").removeClass("G_btn_disabled");
+						$("#J_CreateMobileCode").html("重新发送").bind("click", sendCode);
+					}
+				}, 1000);
+			}
+			function sendCode(e) {
+				var $tip = $(e.target).parent().find('.tips');
+				if (status) {
+					$("#J_CreateMobileCode").unbind("click");
+					var postData = {
+						tel: $tel.val()
+					}
+					$.post(qianzui + '/Public/note', postData, function(json) {
+						if (json.status == 0) {
+							intervalTime(60);
+						}else if(json.status == 205405){
+							var msg = '<span class="G_wrong"><i class="icon_warn"></i>号码异常/同一号码发送次数过于频繁</span>';
+							$tip.show();
+							$tip.html(msg);
+						}
+					});
+				}
+			}
+
+			function checkTel(ele){
+				if (!ele.length) {
+					return true;
+				}
+
+				var $tip = ele.parent().find('.tips>span');
+				$tip.html("<i class='icon_warn'></i>检查中...");
+				var $val = ele.val();
+				$.ajax({
+					type:'POST',
+					data:'tel='+$val,
+					dataType:'json',
+					error:function(){
+						alert('系统发生错误,请稍候刷新重试!');
+					},
+					success:function(data){
+						if(data.status == -1){
+							$tip.attr('class', 'G_succ').html('<i class="icon_warn"></i>账号可以使用');
+							status = true;
+						}else if(data.status == -2){
+							$tip.attr('class', 'G_wrong').html('<i class="icon_warn"></i>' + data.info);
+							status = false;
+						}else{
+							$tip.attr('class', 'G_wrong').html('<i class="icon_warn"></i>该用户未注册，不能找回密码。您可以<a style="color: #2e9900;" href="/member.php/Public/register.html">立即注册</a>');
+							status = false;
+						}
+					},
+					url:"{:U('Public/userNameCheck')}"
+				});
+			}
+			$("#J_CreateMobileCode").on("click", sendCode);
+			$tel.blur(function(){
+				checkTel($(this));
+			});
+
+		});
+	</script>
+</body>
+</html>

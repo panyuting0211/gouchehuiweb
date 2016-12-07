@@ -1,0 +1,87 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content-header">
+        <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 内容</a> <a style="font-weight:700;font-size:14px;">></a><a
+                href="#" class="current">留言回复</a></div>
+        <h1>留言回复</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="{:U('Message/MessageReplyHandle')}" class="form-horizontal" method="post"
+                      enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">问题类型：</label>
+
+                            <div class="controls">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="type">
+                                  <switch name="info['question_type']">
+                                  	<case value="1">商品资讯</case>
+                                  	<case value="2">支付相关</case>
+                                  	<case value="3">发票问题</case>
+                                  	<case value="4">其它问题</case>
+                                  </switch>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">问题描述：</label>
+
+                            <div class="controls">
+                                <div id="tipm_ptop_bot" class=" tipm_tclose_out" name="question">{$info.question}</div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="name">是否显示：</label>
+
+                            <div class="controls">
+                            	<input name="status" type="radio" value="0" <if condition="$info['status'] eq 0">checked</if>>不显示<input name="status" type="radio" value="1" <if condition="$info['status'] eq 1">checked</if>>显示
+
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">发布时间：</label>
+
+                            <div class="controls">
+                                <p name="q_time">{$info.createtime}</p>
+
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">回复状态：</label>
+
+                            <div class="controls">
+                                <p name="q_status"><if condition="$info['reply_status'] eq 0">未回复
+                                    <else />已回复
+                                </if></p>
+
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="tip">回复内容：</label>
+
+                            <div class="controls">
+                                <input name="id" type="hidden" value="{$info.id}">
+                                <textarea class="form-control" id="tip" name="reply" rows="7">{$info.reply}</textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">确定</button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+    </div>
+</block>

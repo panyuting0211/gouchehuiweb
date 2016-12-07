@@ -1,0 +1,320 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a> </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <form class="form-search">
+                            搜索关键字
+                            <input type="text" class="input-large" placeholder="姓名/品牌" id="brandval">
+                            <button type="submit" class="btn btn-primary j_searchBtn"><i class="icon-search"></i> 搜索</button>
+                        </form>
+                    </div>
+                    <div class="span8">
+                        <a href="#" class="btn btn-primary" data-type="add"  id="J_AddBrandBtn"><i class="icon-plus"></i> 添加</a>
+                        <!-- Modal -->
+                        <div id="addBrand" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">添加新品牌管理</h3>
+                            </div>
+
+                        </div>
+
+                        <a href="{:U('Excel/expBrandManager')}" class="btn btn-success"><i class="icon-download-alt"></i> 导出</a>
+                    </div>
+                </div>
+                <hr />
+                <div class="row-fluid" id="brandlist">
+                    <h4>总共 <span class="badge badge-inverse j_listNums">10</span> 条</h4>
+                    <div class="loading-container j_loadingContainer">
+
+                    </div>
+                    <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                        <thead>
+                        <tr>
+                            <th>公关人员姓名</th>
+                            <th>联系方式</th>
+                            <th>品牌</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="J_BrandManagerList">
+
+
+                        </tbody>
+                    </table>
+                    <div class="pager">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script id="TplBrandManagerList" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td>{{value.manager}}</td>
+            <td>{{value.tel}}</td>
+            <td>{{value.brand_name}}</td>
+            <td>
+                <a href="/admin.php/Pay/brand_manager_save?id={{value.brand_name}}" class="btn btn-primary"><i class="icon-edit"></i> 修改</a>
+                <a href="/admin.php/Pay/brand_manager_delete?id={{value.brand_name}}" class="btn btn-danger"><i class="icon-trash"></i> 删除</a>
+            </td>
+        </tr>
+        {{/each}}
+
+    </script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}tableExport/tableExport.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}tableExport/jquery.base64.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}tableExport/jquery.table2excel.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}tpl/tpl.js"></script>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+
+    <script  type="text/javascript">
+        $(function(){
+
+            function brandEdit(){
+                var $this = $(this),
+                        $tr = $this.closest('tr'),
+                        btnType = $this.data('type'),
+                        defManager = "",
+                        defTel = "",
+                        postDb = {},
+                        addBtn = '',
+                        defBrandId = 0;
+
+                var postUrl = "";
+                if(btnType == 'add'){
+                    postUrl = '/admin.php/Pay/brand_manager_add';
+                    addBtn = '<button class="btn btn-primary j_addNewBrand"><i class="icon-plus"></i></button> ';
+                }else{
+                    postDb.id = $tr.data('id');
+                    defManager = $tr.find('td:eq(0)').text();
+                    defTel = $tr.find('td:eq(1)').text();
+                    defBrandId = $tr.data('bid');
+                    postUrl = '/admin.php/Pay/brand_manager_save';
+                }
+
+                var $con = '<div class="control-group">' +
+                        '<label class="control-label" for="inputEmail">姓名：</label> ' +
+                        '<div class="controls"> ' +
+                        '<input type="text" name="manager" id="inputEmail" placeholder="公关人员姓名" value="'+ defManager +'"> ' +
+                        '</div> ' +
+                        '</div> ' +
+                        '<div class="control-group"> ' +
+                        '<label class="control-label" for="inputContact">联系方式：</label> ' +
+                        '<div class="controls"> ' +
+                        '<input type="text" name="tel" id="inputContact" placeholder="联系方式"  value="'+ defTel +'"> ' +
+                        '</div> ' +
+                        '</div> ' +
+                        '<div class="control-group"> ' +
+                        '<label class="control-label">品牌：</label> ' +
+                        '<div class="controls"> ' +
+                        '<select name="brand[]" class="j_inputBrand" style="margin-bottom: 10px;"> ' +
+                        '</select> ' + addBtn
+                         +
+                        '</div> ' +
+                        '</div> ';
+
+                $.post( "/admin.php/Ajax/brand", {
+                        },
+                        function(data,textStatus){
+                            var opt = '<option value="0">请选择品牌</option>',
+                                    curStyle = '';
+                            $.each(data, function(i, brandVal){
+                                if(defBrandId == brandVal.id){
+                                    curStyle = 'selected = "true"';
+                                }else{
+                                    curStyle = '';
+                                }
+                                opt += '<option '+ curStyle +' value="'+ brandVal.id +'">'+ brandVal.brand_name  +'</option>'
+                            });
+                            $addNewBrandBox.$content.find('.j_inputBrand').html(opt);
+                        },
+                        "json");
+
+                var $addNewBrandBox = $.confirm({
+                    title: '新添品牌维护!',
+                    content: $con,
+                    confirmButton: '确定',
+                    cancelButton: '取消',
+                    confirmButtonClass: 'btn-info',
+                    cancelButtonClass: 'btn-danger',
+                    closeIcon: true
+                });
+                $addNewBrandBox.confirm = function(){
+                    postDb.manager = $addNewBrandBox.$content.find('[name=manager]').val();
+                    postDb.tel = $addNewBrandBox.$content.find('[name=tel]').val();
+                    postDb.brand_id = [];
+                    $.each($addNewBrandBox.$content.find('.j_inputBrand'), function(i, v){
+                        postDb.brand_id[i] = $(v).val();
+                    });
+
+                    $.ajax({
+                        url: postUrl,  //请求的URL
+                        type : 'POST',  //请求方式，get或post
+                        data : postDb,  //请求所传参数，json格式
+                        dataType:'json',//返回的数据格式
+                        success: function(data){
+                            if(data.status == 1){
+                                window.location.reload();
+                            }else{
+                                $.dialog({
+                                    title: '状态提示！',
+                                    content: data.info
+                                });
+                            }
+
+                        }
+                    });
+                }
+
+                $addNewBrandBox.$content.find('.j_addNewBrand').on('click', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var $this = $(this),
+                            $controls = $this.closest('.controls'),
+                            $selecter = $controls.find('select'),
+                            $selClone = $selecter.eq(0).clone();
+                    $controls.append($selClone);
+                });
+            }
+
+            $('#J_AddBrandBtn').on('click', brandEdit);
+
+            var searchWord = "", page = 1;
+
+            function getPage(pageNum, searchWord){
+                var $container = $('#J_BrandManagerList'),
+                        $loadingContainer = $('.j_loadingContainer'),
+                        $pager = $('.pager'),
+                        $allPageContainer = $('.j_listNums'),
+                        $pageContainer = $('.pager'),
+                        defaultRecordNumber = 3; //当前页最多显示多少条
+                $loader = $('<div class="onload"><i class="i-loader"></i>数据加载中....</div>');
+                $loadingContainer.append($loader);
+                var  listAjaxTimeout = $.ajax({
+                    url:"/admin.php/Ajax/brand_manager",  //请求的URL
+                    timeout : 8000, //超时时间设置，单位毫秒
+                    type : 'POST',  //请求方式，get或post
+                    data : {p: pageNum, keyword: searchWord},  //请求所传参数，json格式
+                    dataType:'json',//返回的数据格式
+                    success: function(data){
+                        var tpl = "";
+                        var pages = Math.ceil(data.count / defaultRecordNumber);//这里data里面有数据总量
+                        $.each(data.list, function(i, brandDb){
+                            tpl += '<tr data-id="'+ brandDb.id +'" data-bid="'+ brandDb.brand_id +'">' +
+                                    '<td>'+ brandDb.manager +'</td> ' +
+                                    '<td>'+ brandDb.tel +'</td> ' +
+                                    '<td>'+ brandDb.brand_name +'</td> ' +
+                                    '<td> ' +
+                                    '<button class="btn btn-primary j_brandEidt" data-type="edit"><i class="icon-edit"></i> 修改</button> ' +
+                                    '<button class="btn btn-danger j_brandDel"><i class="icon-trash"></i> 删除</button> ' +
+                                    '</td> ' +
+                                    '</tr>';
+                        });
+
+                        $loadingContainer.hide();
+                        $container.html(tpl);
+                        $('.j_exportBtn').on('click', function(e){
+                            $container.tableExport({type: 'excel', escape: 'false'});
+                            $container.table2excel({
+                                name: "Excel Document Name",
+                                // Excel文件的名称
+                                filename: "myExcelTable"
+                            });
+                        });
+                        $container.find('.j_brandEidt').on('click', brandEdit);
+
+                        $container.find('.j_brandDel').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            var $this = $(this),
+                                    $tr = $this.closest('tr'),
+                                    managerId = $tr.data('id');
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要删除该条信息？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    var delAjaxTimeout = $.ajax({
+                                        url: "/admin.php/pay/brand_manager_delete",  //请求的URL
+                                        timeout: 8000, //超时时间设置，单位毫秒
+                                        type: 'POST',  //请求方式，get或post
+                                        data: {id: managerId},  //请求所传参数，json格式
+                                        dataType: 'json',//返回的数据格式
+                                        success: function(db){
+                                            if(db.status == 1){
+                                                $tr.remove();
+                                            }
+                                            $.dialog({
+                                                title: '状态提示！',
+                                                content: db.msg,
+                                                autoClose: 'dialog|2000',
+                                            });
+                                        },
+                                        complete : function(XMLHttpRequest,status){
+                                            if(status == 'timeout'){
+                                                delAjaxTimeout.abort();
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: '请求超时，请重新操作！',
+                                                    autoClose: 'dialog|2000',
+                                                });
+
+                                            }
+                                        }
+                                    });
+                                }, cancel: function(){
+
+                                }
+                            });
+
+                        });
+
+                        $allPageContainer.html(data.count);
+                        $pager.html(data.pagelist);
+
+                    },
+                    complete : function(XMLHttpRequest,status){
+                        if(status == 'timeout'){
+                            listAjaxTimeout.abort();
+                            $.dialog({title: '状态提示', autoClose: 'dialog|2000', contant: "请求超时，请重新操作！"});
+                        }
+                    }
+                });
+            }
+
+            getPage(page, searchWord);
+
+            $(".pager").on("click", "a", function(){
+                var page = $(this).attr("data-page");
+                getPage(page, searchWord);
+            });
+
+            $('.j_searchBtn').on('click', function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                var $searchBox = $('.input-large');
+                searchWord = $searchBox.val();
+                getPage(page, searchWord);
+            });
+
+
+        });
+
+    </script>
+
+</block>

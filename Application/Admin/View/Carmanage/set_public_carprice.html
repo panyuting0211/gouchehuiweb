@@ -1,0 +1,139 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>汽车管理</a> <a href="#" class="current">所有车款</a><div class="carmanage_right"><a href="javascript:;" style="color:#006dcc;" onclick="history.go(-1);">返回上一页</a></div> </div>    
+    <h1>公开底价设置</h1> 
+  </div>
+  <div class="container-fluid">
+  <div class="row-fluid">
+  <div class="span12">
+<div class="widget-yu-btn widget-right-search" style="margin-top:-20px;">  
+      <form action="" method="post">
+        <div class="text_input22">    
+        <select name="brand_id" id="pinpai" style="width:150px;">
+            <option value="">选择品牌</option>
+            <volist name="brand_info" id="vo">
+                <option value="{$vo.id}">{$vo.brand_name}</option>
+            </volist>                  
+        </select>
+        <select name="model_id" id="chexing" style="width:150px;">
+            <option value="">选择车型</option>                   
+             </select>
+        <select name="car_id" id="chekuang" style="width:300px;">
+            <option value="">选择车款</option>                   
+             </select>
+           <select name="exterior_color_id" id="exterior_color" style="width:150px;">
+            <option value="">外观颜色</option>                   
+             </select>
+        <select name="interior_color_id" id="interior_color" style="width:150px;">
+            <option value="">内饰颜色</option>                   
+             </select>         
+        <button type="submit" class="btn button_sou3" id="" url="" style="margin-top:-10px;">添加 </button>                 
+        </div>  
+      </form>
+      <div>
+          <select name="brand_name" id="brand" style="width:150px;">
+            <option value="">选择品牌</option>
+              <volist name="brand_info_2" id="vo">
+                <option value="{$vo.brand_id}">{$vo.brand_name}</option>
+              </volist>   
+          </select>
+
+          <select name="car_model_name" style="width:150px;" id="model">
+            <option value="">选择车型</option>
+          </select>
+          
+          <select name="car_name" style="width:300px;" id="car">
+            <option value="">选择车款</option>
+          </select>
+
+          <select name="exterior_color_name" style="width:150px;" id="exterior">
+            <option value="">外观颜色</option>
+          </select>
+
+          <select name="interior_color_name" style="width:150px;" id="interior">
+            <option value="">内饰颜色</option>
+          </select>
+          <select name="index_status" style="width:150px;" id="index_status">
+            <option value="">首页是否展示</option>
+            <option value="1">展示</option>
+            <option value="0">不展示</option>
+          </select>
+          <button class="btn button_sou" id="commit" onclick="getPage(1)"/>筛选</button>
+		      <button class="btn button_sou" onclick="delAllIndexPrice()"/>批量取消</button>
+      </div>
+ 
+</div>
+        <div class="content" id="ajax_lists">
+          <div class="widget-content nopadding" style="margin-top:-20px;">
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead>
+                <tr>     
+                  <th>品牌</th>                                                   
+                  <th>车型</th>
+                  <th>车款</th>                                            
+                  <th>外观颜色</th>
+                  <th>内饰颜色</th>
+                  <th>首页展示</th>
+                    <th>客户端</th>
+                  <th>是否有报价</th>         
+                  <th>操作</th>     
+                </tr>
+              </thead>
+                
+              <tbody>
+               
+              </tbody>
+            </table>
+          </div>  
+          <div class="pager">
+       
+          </div>              
+        </div> 
+      </div>    
+      </form>
+      
+  </div>
+  </div>
+  </div>
+  </div>
+<style type="text/css">
+  
+.pager{text-align:center;}
+.pager a{padding:3px 8px;margin-left:3px;line-height:20px;background:#f9f9f9;border:1px solid #DBDBDB;text-decoration: none}
+.pager a:hover,
+.pager a.current{background-color:#7CD5B1;color:#fff;border:1px solid #7CD5B1;cursor:pointer;}
+</style>
+
+<script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}set_public_price.js"></script>
+<script type="text/javascript">
+      /*
+        * 批量取消公开底价车
+        * */
+        function delAllIndexPrice(){
+            var brand    =$('#brand').find('option:selected').val();
+            var model    =$('#model').find('option:selected').val();
+            var car      =$('#car').find('option:selected').val();
+            var exterior =$('#exterior').find('option:selected').val();
+            var interior =$('#interior').find('option:selected').val();
+            if(model ==''){
+              alert('请选择车型！');return false;
+            }
+
+            if(confirm('确定将此记录删除?')){
+                $.post( "__MODULE__/Ajax/delAllIndexPrice",
+                        {brand:brand,model:model,car:car,exterior:exterior,interior:interior},
+                        function(data){
+                            if(data.status != 1){
+                                alert(data.msg);return  false;
+                            }else{
+                                alert(data.msg);
+                            }
+                        },
+              "json");
+            }
+        }
+</script>
+</block>

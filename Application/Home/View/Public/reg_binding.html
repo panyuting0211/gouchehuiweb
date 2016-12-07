@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第三方登录绑定 - 购车惠</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<div class="RL_header">
+	<div class="main_container clearfix">
+		<h1 class="RL_logo">
+			<a href="/" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+		</h1>
+		<div class="RL_gradient_line G_fl"></div>
+		<h2 class="RL_ftitle G_fl G_f22">
+			请完成安全验证
+		</h2>
+		<div class="RL_returnHome G_fr">
+			<a href="/" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+		</div>
+	</div>
+</div>
+<div class="main_container registerbox">
+	<div class="reg_bd reg_bd_other ui-validation-content">
+		<div class="ui-valid-title">
+			<i class="ui_icon ui_icon_32 ui_icon_wb_exc_32"></i>
+			<p class="ui-text">为了您的账户安全，请先绑定手机号！</p>
+		</div>
+		<div id="modelform" class="formbox info_add_box ">
+			<div class="formelem show">
+				<form id="J_bindingForm" method="post" action="{:U('dobind')}">
+					<ul>
+						<li> <label class="label_title">手机号：</label>
+							<div class="ui-item inputbox validateitem">
+								<input type="text" class="ui-input normalText j_mobile" data-type="mobile" name="mobile"> <span class="tips display_u"></span> </div>
+						</li>
+						<li class="phonecheck_box hide"> <label class="label_title">手机验证码：</label> <div class="ui-item inputbox validateitem"> <input type="text" class="ui-input code normalText js_keyup" data-type="code" name="code" maxlength="6"><a href="javascript:;" id="J_CreateMobileCode" class="G_btn_b btn_34px">获取验证码</a></div> </li>
+						<li> <label class="label_title">密码：</label>
+							<div class="ui-item inputbox validateitem">
+								<input type="password" class="ui-input normalText j_password" data-type="password" name="password"> <span class="tips display_u"></span> </div>
+						</li>
+					</ul>
+					<div class="subbox clearfix">
+						<input type="submit" class="G_btn_a btn_34px j_submit" value="下一步">
+					</div>
+					<input type="hidden" name="qq_open_id" value="{$data.qq_open_id}">
+					<input type="hidden" name="wx_open_id" value="{$data.wx_open_id}">
+					<input type="hidden" name="nick" value="{$data.nick}">
+
+				</form></div> </div> </div>
+</div>
+
+<script type="text/javascript" src="{$Think.const.js_URL}/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+<script type="text/javascript" src="{$Think.const.js_URL}binding.js"></script>
+</body>
+</html>

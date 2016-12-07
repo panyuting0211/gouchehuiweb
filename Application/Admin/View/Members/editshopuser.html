@@ -1,0 +1,196 @@
+<extend name="Public/base"/>
+
+<block name="body">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">4s店会员</a><a href="#" class="current">编辑</a> <div class="carmanage_right"><a href="__CONTROLLER__/shopUser/p/{$page}" style="color:#006dcc;">返回上一页</a></div> </div>
+    <h1>{$atitle}</h1>
+  </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="{:U('Members/editShopUserHandle')}" class="form-horizontal" method="post">
+                    <fieldset>
+                   	   <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>账号：</label>
+                            <div class="controls">
+                                <input id="webname" name="username" type="text" value="{$info.user_name}" readonly>
+                                <p class="help-block">6-22字母或数字</p>
+                            </div>
+                        </div>
+                       <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>密码：</label>
+                            <div class="controls">
+                                <input id="webname" name="password" type="password" value="{$info.password}">
+                                <p class="help-block">用户密码不能少于6位</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>状态：</label>
+                            <div class="controls">
+                            <label class="radio inline">
+                                <input type="radio" name="status" value="1" <if condition="$info['status'] eq 1">checked</if>  >开启</label> 
+                                <label class="radio inline">
+                                <input type="radio" name="status" value="0" <if condition="$info['status'] eq 0">checked</if> >关闭</label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>公司名称：</label>
+                            <div class="controls">
+                                <input name="name_4s" type="text" value="{$info.name_4s}">
+                                <!--  <p class="help-block">公司名称</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>公司地址：</label>
+                            <div class="controls">
+                            	<select style="width:100px;" name="province" id="province">
+                            		<option>选择省份</option>
+                            		<volist name="province" id="vol">
+                            			<option value="{$vol.id}" <if condition="$vol['id'] eq $info['province_id']">selected</if>>{$vol.province_name}</option>
+                            		</volist>                                 
+                                </select>
+                            	<select style="width:100px;" name="city_id" id="city">
+	                            	<volist name="city_all" id="vol">	
+	                            		<option value='{$vol.id}' <if condition="$vol['id'] eq $info['city_id']">selected</if>>{$vol.city_name}</option>
+	                            	</volist>                                                                
+                                </select>
+                                &nbsp;&nbsp;<input name="addr" type="text" value="{$info.addr}" style="width:100px;" >
+                                <!--  <p class="help-block">公司详细地址</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>主营品牌：</label>
+                            <div class="controls">
+                                <select name="brand_4s" id="brand">
+                            	<option value=''>选择品牌</option>
+                            	<volist name="brand" id="vol">
+                            		<option value='{$vol.id}' <if condition="$vol['id'] eq $info['brand_4s']">selected</if>>{$vol.brand_name}</option>
+                            	</volist>                                                                   
+                                </select>
+                                <!--  <p class="help-block">主营品牌</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>副营品牌：</label>
+                            <div class="controls">
+                                <if condition="$brand4S">
+                                    <volist name="brand4S" id="vol">
+                                        <a onclick="delBrand('{$vol.id}')">{$vol.brand_name}</a>&nbsp;|
+                                    </volist>
+                                </if>
+                                <select name="brand_user_4s" id="brand_4S">
+                                    <option value=''>选择品牌</option>
+                                    <volist name="brand" id="vol">
+                                        <option value='{$vol.id}'>{$vol.brand_name}</option>
+                                    </volist>
+                                </select>
+                                <a class="btn btn-primary" onclick="addBrand4S();">添加</a>(点击品牌可以删除添加的品牌)
+                                <!--  <p class="help-block">主营品牌</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>联系人：</label>
+                            <div class="controls">
+                                <input name="contacts" type="text" value="{$info.contacts}">
+                                 <!-- <p class="help-block">联系人</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>联系电话：</label>
+                            <div class="controls">
+                                <input name="tel" type="text" value="{$info.tel}">
+                                 <!-- <p class="help-block">联系电话</p> -->
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>邀请码：</label>
+                            <div class="controls">
+                                <input name="" type="text" value="{$info.my_num}" readonly>
+                                 <!-- <p class="help-block">邀请码不可修改</p> -->
+                            </div>
+                        </div>
+                        
+                        <input name="id" type="hidden" value="{$info.id}">
+                        <input name="page" type="hidden" value="{$page}">
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">确定</button>
+                       <!-- <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>-->
+                        <a class="btn btn-primary" href="__CONTROLLER__/shopUser/page/{$page}.html">返回</a>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+    <!--<script type="text/javascript">-->
+        <!--Think.setValue("pid", 0);-->
+        <!--Think.setValue("hide", 0);-->
+        <!--Think.setValue("is_dev", 0);-->
+    <!--</script>-->
+
+    </div>
+    <script type="text/javascript">
+    $(function(){
+    	//获得城市ID
+    	$("#province").change(function(){
+    	    var $obj=$('#province').find('option:selected');
+    	    $("#city").empty();
+    	    $("#city").append("<option value=''>选择城市</option>");
+
+    	    $.post( "__MODULE__/Ajax/city",
+    	            {province_id : $obj.val()},
+    	            function(data,textStatus){
+    	                   $.each(data,function(key,val){
+    	                   $("#city").append("<option value='"+val.id+"'>"+val.city_name+"</option>");
+    	                 });
+
+    	            },
+    	            "json");
+    	    })
+    	
+    })
+        /*
+        * 添加4S店扩展品牌
+        * */
+        function addBrand4S(){
+            var $brand =$('#brand').find('option:selected');
+            var $brand4S =$('#brand_4S').find('option:selected');
+            var $userid = "{$info.id}";
+            if( $brand4S.val() ==''|| $brand4S.val() == $brand.val()){
+                alert('请选择需要经营的品牌并且不能和主营品牌重复');return false;
+            }
+            $.post( "__MODULE__/Ajax/addBrand4S",
+                    {brandid : $brand4S.val(),userid:$userid},
+                    function(data){
+                        if(data.status != 1){
+                            alert(data.msg);return  false;
+                        }else{
+                            alert(data.msg);
+                        }
+                    },
+                    "json");
+        }
+        /*
+        * 删除4S店扩展品牌
+        * */
+        function delBrand(id){
+                var $id = id;
+                if($id){
+                    if(confirm('确定将此记录删除?')){
+                        $.post( "__MODULE__/Ajax/delUserBrand",
+                                {id : $id},
+                                function(data){
+                                    if(data.status != 1){
+                                        alert(data.msg);return  false;
+                                    }else{
+                                        alert(data.msg);
+                                    }
+                                },
+                                "json");
+                    }
+                }
+            }
+    </script>
+</block>

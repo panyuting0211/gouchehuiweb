@@ -1,0 +1,74 @@
+<extend name="UC_base" />
+<block name="body">
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">我的询价</h2>
+            <div class="UC_main_r_content">
+                <div class="member_remind G_f20 ftx_02">
+                    特别提醒：底价有效期为<span class="ftx_04">2</span>天
+                </div>
+                <table class="grid_bundle grid_9">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr class="col_name">
+                        <th>商品</th>
+                        <th>商品名称</th>
+                        <th>外观颜色</th>
+                        <th>内饰颜色</th>
+                        <th>底价</th>
+                        <th>询价费</th>
+                        <th>询价日期</th>
+                        <th>到期时间</th>
+                        <th>询价状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bd ftx02 G_f14">
+                    <volist name="orderlist" id="vo">
+                    <tr>
+                        <td>
+                            <div class="car_pic">
+                                <a href="{:U('Car/car_price_pay?pid='.$vo['id'])}" ><img src="{:OSS}{$vo.imgurl}" alt="{$vo.carstyle}"/></a>
+                            </div>
+                        </td>
+                        <td><a href="{:U('Car/car_price_pay?pid='.$vo['id'])}">{$vo.carstyle}</a></td>
+                        <td>{$vo.exterior_color_name}</td>
+                        <td>{$vo.interior_color_name}</td>
+                        <td>
+                           <volist name="pay_area_info" id="vv">
+                           <if condition="$vv.pay_id eq $vo.id ">
+                            <div class="upset">
+                                <p>{$vv.area_name}底价：</p>
+                                <p>{$vv.pay_low_price}</p>
+                            </div>
+                            </if>
+                            </volist>
+                        </td>
+                        <td>{$vo.money}</td>
+                        <td><div class="ask_money_time">{$vo.updatetime|date='Y-m-d H:i:s',###}</div></td>
+                        <td><div class="deadtime">{$vo.validity|date='Y-m-d H:i:s',###}</div></td>
+                        <if condition="time() lt $vo['validity']">
+                        <td><div class="status"></div>有效</td>
+                            <else/>
+                            <td><div class="status">已过期</div></td>
+                        </if>
+                    </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="viciao">{$pagelist}</div>
+            </div>
+
+        </div>
+    </div>
+
+</block>

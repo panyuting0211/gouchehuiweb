@@ -1,0 +1,91 @@
+<extend name="Public/base"/>
+
+<block name="body">
+ <div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a><a href="#" class="current">特价车</a> <div class="carmanage_right"><a href="javascript:;" style="color:#006dcc;" onclick="history.go(-1)">返回上一页</a></div> </div>
+    <h1>礼包</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+ <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+        <div class="control-group">
+        <label class="control-label" for="webname">所属品牌：</label>
+        <div class="controls">
+          <select name="brand_id">
+            <option value="">选择品牌</option>
+            <volist name="brand" id="vol">
+              <option value="{$vol.id}">{$vol.brand_name}</option>
+            </volist>
+          </select> 
+        </div>
+      </div> 
+      <div class="control-group">
+        <label class="control-label" for="webname">价格区间：</label>
+        <div class="controls">
+          <input style="width:216px" name="min_price" type="text"> —— <input style="width:217px" name="max_price" type="text"> 
+        </div>
+      </div>  
+      <div class="control-group">
+        <label class="control-label" for="webname">礼包价值：</label>
+        <div class="controls">
+          <input id="webname" name="price" type="text">        
+        </div>
+      </div>  
+      <div class="control-group">
+        <label class="control-label" for="imgurl">礼包图：</label>
+        <div class="controls">
+        <input type="file" name="imgurl"  id="file_0" value="" ></div>
+      </div> 
+        <div class="control-group">
+  <label class="control-label" for="tip">礼包说明：</label>
+
+  <div class="controls">
+    <textarea class="form-control" id="tip" name="description" rows="7"></textarea>
+  </div>
+  </div>
+                
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">添加</button>                      
+                    </div>
+                </form>
+                <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+         <div class="widget-content nopadding" >
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead>
+                <tr>
+                <th>所属品牌</th>    
+                  <th>价格区间</th>            
+                  <th>礼包价值</th>
+                  <th>礼包图</th>                                        
+                  <th>礼包说明</th>
+                  <th>操作</th>                         
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="info" id="vo">
+                <tr>
+                <td style="height:115px;line-height:115px;">{$vo.brand_name}</td>     
+                  <td style="height:115px;line-height:115px;">{$vo.min_price}&nbsp;至&nbsp;{$vo.max_price}</td>            
+                  <td style="height:115px;line-height:115px;">{$vo.price}</td>
+                  <td><img src="{$Think.const.OSS}{$vo.imgurl}" alt="" style="width:314px; height:98px;"></td>
+                  <td style="height:115px;line-height:115px;">{$vo.description}</td>
+                  <td style="height:115px;line-height:115px;">
+                  <a title="删除" href="javascript:;" onclick="{ if(confirm('您确定要删除吗？')) {window.location.href='__CONTROLLER__/del_gift/id/{$vo.id}'}}"> 删除</a>
+                  </td>
+                </tr> 
+                </volist> 
+              </tbody>             
+             
+            </table>
+          </div>                                        
+</div>
+</div>
+  </div>
+
+
+</div>
+</block>

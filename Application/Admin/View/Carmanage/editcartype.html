@@ -1,0 +1,48 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">车型分类</a>
+        </div>
+        <h1>编辑分类</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('editcartype')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">分类名称：</label>
+                            <div class="controls">
+                                <input id="webname" name="car_type_name" type="text" value="{$info.car_type_name}"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="title">修改图片：</label>
+                            <div class="controls">
+                                <input   type="file" name="logo"  id="file_0" value="" >                        
+                            </div>
+
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="title">图片：</label>
+                            <div class="controls">
+                                <img src="{$Think.const.OSS}{$info.logo}" height="150" width="120" />                  
+                            </div>
+
+
+                        </div>
+                      <input type="hidden" name="id" value="{$info.id}">
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</block>

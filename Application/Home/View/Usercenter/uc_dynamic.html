@@ -1,0 +1,33 @@
+<extend name="UC_base" />
+<block name="body">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZB_member.css"/>
+		<div id="uc_main">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">我的关注-查看动态 <a href="{:U(UC_attention)}"><i></i>返回上一页</a></h2>
+				<div class="UC_main_r_content">
+					<table class="grid_bundle table_fontsize">
+						<colgroup>
+						 <col>
+						 <col>					
+						</colgroup>
+						<thead>
+						  <tr class="col_name">
+						  <th>动态内容</th>
+						  <th>接收时间</th>						
+						  </tr>
+						</thead>
+						<tbody class="bd">
+						<volist name="attention_push_info" id="vo">
+							<tr>
+								<td>{$vo.content}</td>
+								<td>{$vo.createtime}</td>							
+							</tr>	
+                        </volist>		
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</block>

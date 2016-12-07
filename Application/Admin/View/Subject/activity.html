@@ -1,0 +1,201 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a> </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span9">
+                        <div class="row-fluid">
+                            <!--  <form class="form-search" method="post">  -->
+                            <div class="form-search">
+                                <div class="span3">
+                                    <label>关键字：</label>
+                                    <input type="text" name="keyword" id="keyword">
+                                </div>
+                                <div class="span3">
+                                    <label>券状态：</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="" checked>全部</label>&nbsp;&nbsp;
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="1">未开启</label>&nbsp;&nbsp;
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="2">已开启</label>&nbsp;&nbsp;
+                                </div>
+                                <div class="span2">
+                                    <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i class="icon-search"></i> 搜索</button>
+                                </div>
+                            </div>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <a href="{:U('activity_add')}" class="btn btn-primary" data-type="add"  id="J_AddBrandBtn"><i class="icon-plus"></i> 添加活动</a>
+                    </div>
+
+                </div>
+
+
+                <hr />
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>活动ID</th>
+                                <th>活动标识</th>
+                                <th>活动名称</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>状态</th>
+                                <th style="width:20%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#ajax_lists").delegate(".pager a", "click", function(){
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display','none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var status       = $("input[name='status']:checked").val();
+            var keyword       = $("#keyword").val();
+
+            $.post( "__MODULE__/Ajax/activity_ajax",
+                    {status:status,keyword:keyword,p:page},
+                    function(data,textStatus){
+                        if(data.count==null){
+                            $(".userdata").text("0");
+                        }else{
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display','');
+                        var pagelist=data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info=data[1];
+                        $.each(info,function(key,val){
+                            var td1="<td>"+val.id+"</td>";
+                            var td2="<td>"+val.activity_number+"</td>";
+                            var td3="<td>"+val.activity_name+"</td>";
+                            var td4="<td>"+val.starttime+"</td>";
+                            var td5="<td>"+val.endtime+"</td>";
+                            var td6 = "",btn1='';
+                            switch(parseInt(val.status, 10))
+                            {
+                                case 1:
+                                    td6 = "<td><font color='green'>未开启</font></td>";
+                                    btn1 = "<a class='j_openBtn btn btn-warning' value='" + val.id + "' data-status='2' href='#'>开启</a>";
+                                    break;
+                                case 2:
+                                    td6 = "<td><font color='red'>已开启</font></td>";
+                                    btn1 = "<a class='j_openBtn btn btn-warning' value='" + val.id + "' data-status='1' href='#'>关闭</a>";
+                                    break;
+                            }
+                            var td7="<td class='center'>"+
+                                    "<a class='j_delBtn btn btn-success' href='#' value='" + val.id + "'>删除</a>"+
+                                    btn1+
+                                    "</td>";
+                            $('tbody').append("<tr>"+td1+td2+td3+td4+td5+td6+td7+"</tr>");
+                        });
+
+                        $('#ajax_lists tbody').find('.j_delBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value");
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要删除该条信息？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    $.post("/admin.php/Subject/activity_delete",
+                                            {id:id},
+                                            function(db){
+                                                if(db.status == 1){
+                                                    $tr.remove();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+                        });
+
+                        $('#ajax_lists tbody').find('.j_openBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value");
+                                   status=$(this).data('status');
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要操作该活动吗？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    $.post("/admin.php/Subject/activity_open",
+                                            {id:id,status:status},
+                                            function(db){
+                                                if(db.status == 1){
+                                                   location.reload();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+                        });
+
+                    },
+                    "json");
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+
+
+</block>

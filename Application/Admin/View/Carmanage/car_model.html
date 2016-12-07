@@ -1,0 +1,138 @@
+<extend name="Public/base"/>
+<block name="body">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">所有车款</a>
+        </div>
+    </div>
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/allcar'"><a data-toggle="tab" href="#tab1">品牌</a></li>
+                            <li class="active nav_tabs_li"><a data-toggle="tab" href="#tab2">车型</a></li>
+                            <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/carlist'" style="width:33.4%;"><a data-toggle="tab" href="#tab3">车款</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div class="widget-yu-btn widget-right-search" style="margin-bottom:5px">
+                            <div class="search" style="position:relative;left:-10px;">
+                                <button class="btn button_sou" onclick="location.href='{:U('addcar_model')}'">+添加车型</button>
+                            </div>
+                            <form action="{:U('car_model')}" method="post">
+                                <div class="text_input22">
+                                    <select name="select_brand_id" style="width:150px;" id="pinpai">
+                                        <option value="">选择品牌</option>
+                                        <volist name="infobrand" id="vo">
+                                            <option value="{$vo.id}"
+                                            <if condition="$vo.id eq $select_brand_id"> selected="selected"</if>
+                                            >{$vo.brand_name}</option>
+                                        </volist>
+                                    </select>
+                                    <select name="select_model_id" style="width:150px;" id="chexing">
+                                        <option value="">选择车型</option>
+                                        <if condition="$in_model_info neq null">
+                                            <volist name="in_model_info" id="vo">
+                                                <option value="{$vo.id}"
+                                                <if condition="$vo.id eq $select_model_id"> selected="selected"</if>
+                                                >{$vo.car_model_name}</option>
+                                            </volist>
+                                        </if>
+                                    </select>
+                                    <select name="status" style="width:150px;">
+                                        <option value="">全部</option>
+                                        <option value="1"
+                                        <if condition="$select_status eq 1"> selected</if>
+                                        >在售</option>
+                                        <option value="0"
+                                        <if condition="$select_status eq '0'"> selected</if>
+                                        >停售</option>
+                                    </select>
+                                    <button type="submit" class="btn button_sou">筛选</button>
+                                </div>
+                            </form>
+                        </div>
+                        <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>品牌</th>
+                                    <th>车型</th>
+                                    <th>状态</th>
+                                    <th>车型分类</th>
+                                    <th style="width:450px;">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                <volist name="infomodel" id="vo">
+                                    <tr>
+                                        <td>{$vo.brand_name}</td>
+                                        <td>{$vo.car_model_name}</td>
+                                        <td>
+                                            <if condition="$vo.status eq 1">
+                                                <font color="green">在售</font>
+                                                <else/>
+                                                <font color="red">停售</font>
+                                            </if>
+                                        </td>
+                                        <td>{$vo.car_type_name}</td>
+                                        <td style="width:320px;">
+                                            <a class="btn btn-info" title="编辑" href="__CONTROLLER__/editcar_model/modelid/{$vo.id}">编辑</a>
+                                            <a class="btn btn-info" title="车款" href="__CONTROLLER__/carlist/brand_id/{$vo.brand_id}/model_id/{$vo.id}">车款</a>
+                                            <a class="btn btn-info" title="添加车款" href="__CONTROLLER__/addcar/brand_id/{$vo.brand_id}/model_id/{$vo.id}">添加车款</a>
+                                            <a class="btn btn-info" title="关注" href="__CONTROLLER__/model_focus/brand_id/{$vo.brand_id}/model_id/{$vo.id}">关注</a>
+                                            <a class="btn btn-info" title="动态" href="__CONTROLLER__/model_dongtai/brand_id/{$vo.brand_id}/model_id/{$vo.id}">动态</a>
+                                            <a class="btn btn-danger" title="删除" href="javascript:;" onclick="{ if(confirm('您确定要删除吗？')) {window.location.href='__CONTROLLER__/deletecar_model/modelid/{$vo.id}'}}"> 删除</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="viciao">
+        <ul>{$pagelist}</ul>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#pinpai").change(function () {
+                var $obj = $('#pinpai').find('option:selected');
+                $("#chexing").empty();
+                $("#chexing").append("<option value=''>请选择车型</option>");
+
+                $.post("__MODULE__/Ajax/addModelHandle",
+                        {brand_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data, function (key, val) {
+
+                                $("#chexing").append("<option value='" + val.id + "'>" + val.car_model_name + "</option>");
+
+                            });
+
+                        },
+                        "json");
+            });
+
+
+        });
+    </script>
+
+
+</block>

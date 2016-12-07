@@ -1,0 +1,504 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <!-- 未支付 begin -->
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+        <h2 class="uc_middle_title">我的订单</h2>
+        <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="{:U('n_uc_myorder')}" title="">购车订单</a></li>
+                <li><a href="{:U('n_uc_myinquiry')}" title="">询价订单</a></li>
+                <!--<li><a href="{:U('n_uc_credits')}" title="">车币订单</a></li>-->
+                <li><a href="{:U('n_uc_shop_order_list')}" title="">商城订单</a></li>
+            </ul>
+        <div class="uc_main_wrapper">
+            <div class="flowstep">
+                <ol class="detail-stepbar flowstep-5">
+                    <li class="step-first">
+                            <div class="step-done">
+                            <div class="step-name">填写并提交订单信息</div>
+                            <div class="step-no"></div>
+                            <div class="step-time">
+                                <div class="step-time-wraper">{$info.createtime}</div>
+                            </div>
+                            </div>
+                    </li>
+                    <li> 
+                        <switch name="info.status" >
+                        <case value="1|3|5"><div class="step-cur"></case>
+                        <case value="0|2"><div class="step-fail"></case>
+                        <default /><div class="step-done">
+                        </switch>
+                            <div class="step-name">预付定金到购车惠</div>
+                            <div class="step-no">2</div>
+                            <div class="step-time">
+                                <div class="step-time-wraper"><notempty name="info.updatetime">{$info.updatetime|date="Y-m-d H:i:s",###}</notempty></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <switch name="info.status" >
+                        <case value="4|6"><div class="step-cur"></case>
+                        <case value="7|8"><div class="step-done"></case>
+                        <default /><div>
+                        </switch>
+                            <div class="step-name">4s店出库中</div>
+                            <div class="step-no">3</div>
+                            <div class="step-time">
+                                <div class="step-time-wraper"><notempty name="info.updatetime_3">{$info.updatetime_3|date="Y-m-d H:i:s",###}</notempty></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <if condition="$info.status eq 7">
+                        <div class="step-cur">
+                        <elseif condition="$info.status eq 8" />
+                        <div class="step-done">
+                        <else/>
+                        <div>
+                        </if>
+                            <div class="step-name">到店看车付款提车</div>
+                            <div class="step-no">4</div>
+                            <div class="step-time">
+                                <div class="step-time-wraper"><notempty name="info.updatetime_4">{$info.updatetime_4|date="Y-m-d H:i:s",###}</notempty></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step-last">
+                        <if condition="$info.status eq 8">
+                        <div class="step-done">
+                        <else/>
+                        <div>
+                        </if>
+                            <div class="step-name">订单完成</div>
+                            <div class="step-no">5</div>
+                            <div class="step-time">
+                                <div class="step-time-wraper"><notempty name="info.updatetime_5">{$info.updatetime_5|date="Y-m-d H:i:s",###}</notempty></div>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+
+            </div>
+            <switch name="info.status">
+                <case value="0">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips"></i>
+                            您的订单暂未支付，继续买车请 <a href="http://www.gouchehui.com/index.php/Order/order_info?pay_id={$info.id}">立即支付</a>
+                        </p>
+                    </div>
+                </case>
+                <case value="1">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>
+                            请完善下面的身份证资料信息！
+                        </p>
+                        <p class="G_f16">服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="2">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-fail"></i>
+                            尊敬的用户您好，您的订单已失效！
+                        </p>
+                        <p class="G_f16">了解更多关于此订单信息，请联系购车惠公关人员，咨询服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="3">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips"></i>
+                            您已填完身份证资料信息，目前在审核中...
+                        </p>
+                        <p class="G_f16">服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="4">
+                    <div class="flowstep-tip step-3">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>
+                            您已填完身份证资料信息，已通过审核！
+                        </p>
+                        <p class="G_f16">
+                            由{$info.name}（{$info.manager_tel}）联系4S店中，请稍等...
+                        </p>
+                        <p class="G_f16">服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="5">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-fail"></i>
+                            身份证审核失败，请重新上传身份证信息！
+                        </p>
+                        <p class="G_f16">
+                            由{$info.name}（{$info.manager_tel}）联系4S店中，请稍等...
+                        </p>
+                        <p class="G_f16">服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="6">
+                    <div class="flowstep-tip step-3">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>
+                            4s店目前已在备货中，请稍等...
+                        </p>
+                        <p class="G_f16">了解更多关于此订单信息，请联系购车惠公关人员，咨询服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="7">
+                    <div class="flowstep-tip step-4">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>
+                            尊敬的用户您好，您的车已经出库，您预约的提车时间为：{$info.buy_time}
+                        </p>
+                        <p class="G_f16 G_fb">届时将由购车惠公关人员与您联系，并陪同您去4s店看车提车。</p>
+                        <p class="G_f16">了解更多关于此订单信息，请联系购车惠公关人员，咨询服务热线：<a href="javascript:;">400-138-0808</a></p>
+                    </div>
+                </case>
+                <case value="8">
+                    <div class="flowstep-tip step-5">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>
+                            尊敬的用户您好，您的订单已完成<!-- 。您可以将您的购车经历分享到
+                            <a href="#" class="shareWx j_shareWx">微信朋友圈</a>，可以获取50车币哦！ -->
+                        </p>
+                    </div>
+                </case>
+            </switch>
+            <div class="uc_order_info">
+                <div class="order_title_bar">
+                    <div class="order_title"><span>订单信息</span></div>
+                </div>
+                <div class="order_content">
+                    <table>
+                        <colgroup>
+                        <col width="260">
+                        <col width="110">
+                        <!-- 宝贝 -->
+                        <col class="col1">
+                        <!-- 交易状态 -->
+                        <col class="col2">
+                        <!-- 单价（元） -->
+                        <col class="col3">
+                        <!-- 数量 -->
+                        <col class="col4">
+                        <!-- 优惠 -->
+                        <col class="col5">
+                        <!-- 合计（元） -->
+                        <col class="col6">
+                        <!-- 运费（元） -->
+                        <!-- 买/卖家信息 -->
+                        </colgroup>
+                        <tbody class="base-info">
+                            <tr>
+                            <td>
+                                <span class="label">订单编号：</span>
+                                <span class="order-num">{$info.out_trade_no}</span>
+                            </td>
+                        </tr>
+                         </tbody>
+                         <tbody class="goods-order">
+                            <tr class="sep-row">
+                            <td colspan="8"></td>
+                            </tr>
+                            <tr class="order-hd"> 
+                            <th class="item">商品名称</th>
+                            <th class="excolor">外观颜色</th>
+                            <th class="incolor">内饰颜色</th>
+                            <th class="price">底价(元)</th>
+                            <th class="upcitycard">上牌地</th>
+                            <th class="deposit">定金(元)</th>
+                            <th class="status">订单状态</th>
+                            </tr> 
+                            <tr class="order-item">
+                             <td class="item">
+                             <div class="pic-info">
+                                <span class="pic"><img alt="{$info.carstyle}" src="{$info.exterior_img}"></span>
+                             </div>
+                             <div class="txt-info">
+                             <div class="desc">
+                             <span class="name">
+                                {$info.carstyle}
+                               </span>
+                              </div>
+                              </div>
+                             </td>
+                             <td class="excolor">
+                                   {$info.exterior_color_name}
+                               </td>
+                            <td class="incolor">
+                              {$info.interior_color_name}
+                            </td>
+
+                             <td class="price">{$info.low_price}<span class="city">({$info.low_price_city_name})</span></td>
+                             <td class="upcitycard">{$info.card_place}</td>
+                            <td class="deposit">
+                                {$info.money}
+                              </td>
+                              <td class="status">
+                                <switch name="info['status']" >
+                                    <case value="0" > <span class="pay-status cancel"><i></i>未支付</span></case>
+                                    <case value="1"> <span class="pay-status cancel"><i></i>已支付（未完善资料）</span></case>
+                                    <case value="2"> <span class="pay-status cancel"><i></i>订单已失效</span></case>
+                                    <case value="3"> <span class="pay-status cancel"><i></i>资料审核中</span></case>
+                                    <case value="4"> <span class="pay-status cancel"><i></i>资料审核通过</span></case>
+                                    <case value="5"> <span class="pay-status cancel"><i></i>资料未通过审核</span></case>
+                                    <case value="6"> <span class="pay-status cancel"><i></i>出库中</span></case>
+                                    <case value="7"> <span class="pay-status cancel"><i></i>提车中</span></case>
+                                    <case value="8"> <span class="pay-status paid"><i></i>已完成</span></case>
+                                </switch>
+                              </td>
+                              </tr>
+                            </tbody>
+
+                         </table>
+                    <if condition="$tick.money neq ''">
+                	<div class="invoicebox clearfix" id="J_OrderCouponListBox" style="display: block;">
+				        <div class="discou">
+				        	<h4>您使用的优惠券为：</h4>
+				        	<ul id="J_OrderCouponList">
+				                <li>
+				                    <dl>
+				                        <dt class="G_f18">￥<span class="G_f30 j_moneyBox">{$tick.money}</span></dt>
+				                        <dd class="G_f12">{$tick.starttime}-{$tick.endtime}</dd>
+				                    </dl>
+				                </li>
+				            </ul>
+				        </div>
+				    </div>
+                    </if>
+                </div>
+            </div>
+            <div class="uc_order_info">
+                <div class="order_title_bar">
+                    <div class="order_title"><span>订车人信息</span></div>
+                </div>
+                <div class="uc_g_opera_box order_content">
+                    <div class="uc_formlist" id="J_AddMyCar">
+                            <ul id="J_carSelector" class="uc_carSelector">
+                                <li style="">
+                                    <span class="hd">订单人姓名：</span>
+                                    <div class="inp_box">
+                                    {$info.buyer_name}
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">联系方式：</span>
+                                    <div class="inp_box">
+                                    {$info.buyer_tel}
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">付款方式：</span>
+                                    <div class="inp_box">
+                                    {$info.buy_way}
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">提车时间：</span>
+                                    <div class="inp_box">
+                                    {$info.buy_time}
+                                    </div>
+
+                                </li>
+  
+                                <li style="">
+                                    <span class="hd">购买方式：</span>
+                                    <div class="inp_box">
+                                        {$info.car_mode}
+                                    </div>
+                                </li>
+
+                                <switch name="info.status">
+                                    <case value="3">    
+                                            <li class="upcard">
+                                                <span class="hd">身份证图片：</span>
+                                                <div class="inp_box">
+                                                    <div class="uploadbox">
+                                                        <div class="box j_tipsWrapper">
+                                                            <div class="filebox">
+                                                                <div class="imgbox">
+                                                                    <img src="{:OSS}{$info.id_imgurl1}" alt="身份证正面">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="tips j_cardpic_front"></div></div>
+                                                        <div class="box j_tipsWrapper">
+                                                            <div class="filebox">
+                                                                <div class="imgbox">
+                                                                    <img src="{:OSS}{$info.id_imgurl2}" alt="身份证反面">
+                                                                </div>
+                                                            </div>
+                                                            <div class="tips j_cardpic_back"></div></div>
+                                                    </div>
+                                                </div>       
+                                            </li>
+                                        </ul>
+                                        <div class="info-tips G_f20">身份证上传成功，审核中。。。</div>
+                                    </case>
+                                    <case value="0|2"></case>
+                                    <case value="1|5">
+                                    <form action="{:U('n_uc_myorder_update')}" method="POST" enctype="multipart/form-data">
+                                        <li class="upcard">
+                                            <span class="hd">上传图片：</span>
+                                            <div class="inp_box">
+                                                <div class="uploadbox">
+                                                    <div class="box j_tipsWrapper">
+                                                        <div class="filebox">
+                                                            <div class="imgbox">
+                                                                <img src="/Public/Home/images/idcard_03.jpg" alt="身份证正面">
+
+                                                            </div>
+                                                            <a class="ui_button_primary" href="javascript:;" id="J_uploadPositiveBtn"><u><i></i>上传身份证正面</u>
+                                                                <input type="file" hidefocus="true" class="j_validateInp" name="cardpic_front">
+                                                            </a>
+                                                        </div>
+                                                        <div class="example">
+                                                            <span>示例：</span>
+                                                            <img src="/Public/Home/images/id_example_03.jpg" alt="">
+                                                        </div>
+                                                        <div class="tips j_cardpic_front"></div></div>
+                                                    <div class="box j_tipsWrapper">
+                                                        <div class="filebox">
+                                                            <div class="imgbox" id="J_cardZm">
+                                                                <img src="/Public/Home/images/idcard2_06.jpg" alt="身份证反面">
+                                                            </div>
+                                                            <a class="ui_button_primary" href="javascript:;" id="J_uploadInverse Btn"><u><i></i>上传身份证反面</u>
+
+                                                                <input type="file" hidefocus="true" class="j_validateInp" name="cardpic_back">
+                                                            </a>
+
+                                                        </div>
+                                                        <div class="example">
+                                                            <span>示例：</span>
+                                                            <img src="/Public/Home/images/idexample2_06.jpg" alt="">
+                                                        </div>
+                                                        <div class="tips j_cardpic_back"></div></div>
+                                                </div>
+
+                                            </div>       
+                                        </li>
+                                        </ul>
+                                        <div class="btn-box">
+                                            <input type="submit" class="G_btn_a btn_42px G_f20 G_fr" value="提交"/>
+                                        </div>
+                                        <input name="pay_id" type="hidden" value="{$info.id}" />
+                                    </form>    
+                                    </case>
+                                    <default />
+                                            <li class="upcard">
+                                                <span class="hd">身份证图片：</span>
+                                                <div class="inp_box">
+                                                    <div class="uploadbox">
+                                                        <div class="box j_tipsWrapper">
+                                                            <div class="filebox">
+                                                                <div class="imgbox">
+                                                                    <img src="{:OSS}{$info.id_imgurl1}" alt="身份证正面">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="tips j_cardpic_front"></div></div>
+                                                        <div class="box j_tipsWrapper">
+                                                            <div class="filebox">
+                                                                <div class="imgbox" id="J_cardZm">
+                                                                    <img src="{:OSS}{$info.id_imgurl2}" alt="身份证反面">
+                                                                </div>
+                                                            </div>
+                                                            <div class="tips j_cardpic_back"></div></div>
+                                                    </div>
+                                                </div>       
+                                            </li>
+                                        </ul>
+                                </switch>
+                        </div>
+                </div>
+                
+            </div>
+    </div>
+        </div>
+    </div>
+    <!-- 未支付 end -->
+    <script>
+        (function($){
+            function previewImage(file)
+            {
+                var MAXWIDTH  = 260;
+                var MAXHEIGHT = 180;
+                var imgBox = $(file).closest('.filebox').find('.imgbox');
+
+                if (file.files && file.files[0])
+                {
+                    imgBox.html('<img class="imghead">');
+                    var img = imgBox.find('.imghead').get(0);
+
+                    img.onload = function(){
+                        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                        img.width  =  rect.width;
+                        img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                        img.style.marginTop = rect.top+'px';
+                    }
+                    var reader = new FileReader();
+                    reader.onload = function(evt){img.src = evt.target.result;}
+                    reader.readAsDataURL(file.files[0]);
+                }
+                else
+                {
+                    var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+                    file.select();
+                    var src = document.selection.createRange().text;
+                    div.innerHTML = '<img id=imghead>';
+                    var img = document.getElementById('imghead');
+                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+                    div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+                }
+            }
+            function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+                var param = {top:0, left:0, width:width, height:height};
+                if( width>maxWidth || height>maxHeight )
+                {
+                    rateWidth = width / maxWidth;
+                    rateHeight = height / maxHeight;
+
+                    if( rateWidth > rateHeight )
+                    {
+                        param.width =  maxWidth;
+                        param.height = Math.round(height / rateWidth);
+                    }else
+                    {
+                        param.width = Math.round(width / rateHeight);
+                        param.height = maxHeight;
+                    }
+                }
+
+                param.left = Math.round((maxWidth - param.width) / 2);
+                param.top = Math.round((maxHeight - param.height) / 2);
+                return param;
+            }
+            $('input[name="cardpic_front"]').change(function(){
+                previewImage($(this).get(0));
+            });
+            $('input[name="cardpic_back"]').change(function(){
+                previewImage($(this).get(0));
+            });
+        })(jQuery);
+    </script>
+
+</block>

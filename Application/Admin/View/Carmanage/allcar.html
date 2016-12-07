@@ -1,0 +1,134 @@
+<extend name="Public/base"/>
+<block name="body">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">所有车款</a>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active nav_tabs_li"><a data-toggle="tab" href="#tab1">品牌</a></li>
+                        <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/car_model'"><a data-toggle="tab" href="#tab2">车型</a></li>
+                        <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/carlist'" style="width:33.4%;"><a data-toggle="tab" href="#tab3">车款</a></li>
+                    </ul>
+                </div>
+                <div class="widget-content tab-content">
+                    <div class="widget-yu-btn widget-right-search" style="margin-bottom:5px;">
+                        <div class="search">
+                            <input type="submit" class="btn button_sou" id="" value="+添加大品牌" onclick="location.href='{:U('addBigBrand')}'">
+                            <input type="submit" class="btn button_sou" id="" value="+添加品牌" onclick="location.href='{:U('addcar_brand')}'">
+                        </div>
+                        <!-- <form action="{:U('allcar')}" method="get"> -->
+                        <div class="text_input22">
+                            <input id="keyvalue" name="select_brand_name" placeholder="输入品牌" type="text">
+                            <input type="submit" class="btn button_sou" onclick="getPage(1)" value="搜索">
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                    <div class="content" id="ajax_lists">
+                        <div class="widget-content nopadding">
+                            <h4>总计：<span class="userdata badge"></span>个 </h4>
+                            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>品牌</th>
+                                    <th>LOGO</th>
+                                    <th style="width:300px;">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var url_ajax = "__MODULE__/Ajax/allcar_ajax";
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            var keyvalue = $('#keyvalue').val();
+            $.post("/admin.php/Ajax/allcar_ajax",
+                    {keyvalue: keyvalue, p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            $('tbody').append("<tr>" +
+                                    "<td>" + val.brand_name + "</td>" +
+                                    "<td><img src='{$Think.const.OSS}" + val.logo + "' style='width:100px;'></td>" +
+                                    "<td><a class='btn btn-info' href='__CONTROLLER__/editcar_brand/brandid/" + val.id + "'>编辑</a>" +
+                                    "<a class='btn btn-info' href='__CONTROLLER__/car_model/select_brand_id/" + val.id + "'>车型</a>" +
+                                    "<a class='btn btn-info' href='__CONTROLLER__/addcar_model/brand_id/" + val.id + "'>添加车型</a>" +
+                                    "<a class='btn btn-danger' title='删除' href='javascript:;' onclick='{ if(confirm(\"您确定要删除吗？\")) {window.location.href=\"__CONTROLLER__/deletecar_brand/id/" + val.id + "\"}}'> 删除</a>" +
+                                    "</td>" +
+                                    "</tr>");
+                        });
+
+                    },
+                    "json");
+        }
+
+    </script>
+
+</block>

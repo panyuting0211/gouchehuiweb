@@ -1,0 +1,136 @@
+.slo-banner,.slo-banner img,.slo-body,.slo-sec{
+	width: 100%;
+	overflow: hidden;
+}
+.se1{
+	height: 352px;
+	background: url(../images/Subject/slo_sec1.jpg) center center no-repeat;
+}
+.se2{
+	height: 312px;
+	background: url(../images/Subject/slo_sec2.jpg) center center no-repeat;
+}
+.se3{
+	height: 317px;
+	background: url(../images/Subject/slo_sec3.jpg) center center no-repeat;
+}
+.se4{
+	height: 248px;
+	background: url(../images/Subject/slo_sec4.jpg) center center no-repeat;
+}
+.se5{
+	height: 414px;
+	background: url(../images/Subject/slo_sec5.jpg) center center no-repeat;
+}
+.se6{
+	height: 351px;
+	background: url(../images/Subject/slo_sec6.jpg) center center no-repeat;
+}
+.se7{
+	height: 408px;
+	background: url(../images/Subject/slo_sec7.jpg) center center no-repeat;
+}
+.slo-sec h3{
+	line-height: 60px;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: #ffec40;
+}
+.se1 h3{
+	margin-top: 54px;
+}
+.se2 h3,.se5 h3{
+	margin-top: 20px;
+}
+.se3 h3{
+	margin-top: 25px;
+}
+.se4 h3{
+	margin-top: 22px;
+}
+.se6 h3,.se7 h3{
+	margin-top: 27px;
+}
+.se1dl,.se2ul,.se3ul,.se4ul,.se6ul{
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.se1dl dt{
+	width: 214px;
+	height: 190px;
+	float: right;
+	display: inline-block;
+	margin-right: 90px;
+}
+.se1dl dd{
+	line-height: 36px;
+	color: #282567;
+	font-size: 20px;
+	text-indent: 2em;
+}
+.se1dl dd.dd1{
+	margin-top: 20px;
+}
+.se2ul li{
+	width: 340px;
+	text-align: center;
+	float: left;
+	font-size: 24px;
+	color: #282567;
+	margin-top: 50px;
+}
+.se2ul li.se2ull3{
+	width: 320px;
+}
+.se2ul li dd,.se3ul li dt{
+	font-weight: bold;
+}
+.se3ul li{
+	width: 200px;
+	float: left;
+	text-align: center;
+	font-size: 20px;
+	margin-top: 110px;
+}
+.se4ul{
+	margin-top: 28px;
+}
+.se4ul li{
+	width: 460px;
+	float: left;
+	padding-left: 40px;
+	font-size: 20px;
+	color: #282567;
+	margin-bottom: 7px;
+}
+.se4ul li dt{
+	float: left;
+	font-weight: bold;
+}
+.se5 p{
+	width: 1000px;
+	margin: 0 auto;
+	font-size: 20px;
+	color: #282567;
+	line-height: 36px;
+	text-indent: 2em;
+}
+.se5 p.se5p,.se6ul{
+	margin-top: 16px;
+}
+.se6ul li{
+	font-size: 20px;
+	color: #282567;
+	line-height: 36px;
+	overflow: hidden;
+}
+.se6ul li dt{
+	width: 25px;
+	float: left;
+}
+.se6ul li dd{
+	width: 975px;
+	float: right;
+}

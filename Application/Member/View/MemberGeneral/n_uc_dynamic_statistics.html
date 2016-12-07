@@ -1,0 +1,39 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title"><a href="n_uc_base.html"> 个人中心首页</a> > 新消息</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="n_uc_dynamic_statistics.html" title="">消息统计</a></li>
+                <li><a href="n_uc_dynamic_sys.html" title="">系统消息</a></li>
+            </ul>
+            <div class="uc_dynamic_statistics ohd">
+                <div class="msg_statistics">
+                    <div class="tit">消息统计<span><i class="num">0</i>条消息，系统会自动清理3个月前的消息</span></div>
+                    <div class="items">
+                        <a href="###" class="item dynamic">
+                            <div class="num">0</div>
+                            <div class="txt">动态</div>
+                        </a>
+                        <a href="####" class="item club">
+                            <div class="num">0</div>
+                            <div class="txt">车友会</div>
+                        </a>
+                        <a href="n_uc_myorder.html" class="item order">
+                            <div class="num">0</div>
+                            <div class="txt">订单</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(function(){
+        $.post("/member.php/MemberGeneral/orderMesCount", function(db){
+            $('.order').find('.num').html(db);
+        });
+        
+    });
+    </script>
+</block>

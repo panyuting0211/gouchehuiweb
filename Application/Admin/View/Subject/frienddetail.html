@@ -1,0 +1,79 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+                <hr/>
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <div class="loading-container j_loadingContainer">
+                            <h3>好友扫码详情</h3>
+                            <hr>
+                            <h4>已关注</h4>
+                                <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                                    <thead>
+                                    <tr>
+                                        <th>微信昵称</th>
+                                        <th>购车状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="attention" id="vol">
+                                            <tr>
+                                                <td>{$vol.nickname}</td>
+                                                <td>已关注</td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            <hr>
+                            <h4>已注册</h4>
+                            <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>购车状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="reg" id="vol">
+                                    <tr>
+                                        <td>{$vol.tel}</td>
+                                        <td>已注册</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <h4>已购车</h4>
+                            <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>购车车款</th>
+                                    <th>购车状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="buy" id="vol">
+                                    <tr>
+                                        <td>{$vol.tel}</td>
+                                        <td>{$vol.carstyle}</td>
+                                        <td>已购买</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,98 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">  
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+<div class="sort">
+		<form action="/admin.php?s=/Menu/sort.html" method="post">			
+<!-- 			<div class="form-actions">
+    		<h4><img src="{$Think.const.ADMIN_IMG_URL}/sanjiao.png" />安全提示:建议您将gouchehui目录设置为755(linux)或只读(windows),[<a href="/admin.php?s=/Menu/index/pid/0.html">点击查看教程</a> ]</h4>
+    	</div> -->
+		<div class="shouye_gly">
+    	<table class="table_tb" cellspacing="0" cellpadding="0">
+		<tr class="table_tr">				
+		<td><img src="{$Think.const.ADMIN_IMG_URL}/ren.jpg" />管理员信息</td>
+		</tr>
+		</table>
+		<div class="shouye_gly2">
+		<table cellspacing="0" cellpadding="0" border="0" class="table_width2">
+		<tr>
+		<td class="table_td2">您好，{$Think.session.admin_name}</td>
+		<td class="table_td3"></td>
+		<td class="table_td4">所属角色</td>	
+		<td class="table_td5">{$Think.session.role_name}</td>
+		<td class="table_td3"></td>		
+		<td class="table_td6">上次登录时间</td> 
+		<td class="table_td7">  {$Think.session.last_login_time|date="Y-m-d H:i:s",###}</td>
+		<td class="table_td3"></td>	
+		<td class="table_td8">上次登录IP</td>  
+		<td class="table_td9"> {$Think.session.last_login_ip}</td>
+		</tr>
+		</table>    
+		</div>	
+    	</div>
+		<div class="shouye_xtxx">
+		<div class="shouye_xtxx1">
+		<table cellspacing="0" cellpadding="0" class="table_width" border="0">
+		<tr class="table_tr3">
+		<td colspan="2"><img src="{$Think.const.ADMIN_IMG_URL}/xitong.jpg" />系统信息</td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">购车惠版本</td><td class="table_td">V2.0</td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">服务器操作系统</td><td class="table_td"><php> $os = explode(" ", php_uname()); echo $os[0];</php></td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">ThinkPHP版本及PHP版本</td><td class="table_td"><php>echo 'ThinkPHP '.THINK_VERSION;echo '/PHP v'.phpversion();</php></td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">MYSQL</td><td class="table_td">{$mysql_version}</td>
+		</tr>
+		<tr>
+		<td class="table_td">上传文件</td><td class="table_td"><php>echo ini_get('upload_max_filesize');</php></td>
+		</tr>		
+		</table>
+		</div>
+		<div class="shouye_xtxx2">
+		<table cellspacing="0" cellpadding="0" class="table_width" border="0">
+		<tr class="table_tr3">
+		<td colspan="2"><img src="{$Think.const.ADMIN_IMG_URL}/xitong2.jpg" />开发团队</td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">总策划</td><td class="table_td">朱壮志</td>
+		</tr>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">产品设计</td><td class="table_td">宋小伟</td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">web端开发</td><td class="table_td">潘玉婷 孙磊 晋圣成 任红灯 张智 周波 陈画</td>
+		</tr>
+		<tr class="table_tr2">
+		<td class="table_td">手机端开发</td><td class="table_td">张宏 袁守平 董颖婷</td>
+		</tr>
+		<!-- <tr class="table_tr2">
+		<td class="table_td">界面团队</td><td class="table_td">陈画</td>
+		</tr> -->
+		<tr>
+		<td class="table_td">官方网址</td><td class="table_td"><a href="http://www.gouchehui.com" target="_blank">www.gouchehui.com</a></td>
+		</tr>		
+		</table></div>
+		   </div>
+		</form>
+	</div>
+			</div>
+			</div>
+			</div>
+</div>
+
+</div>
+</block>

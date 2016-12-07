@@ -1,0 +1,107 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 会员管理</a> <a href="#" class="current">4S店会员</a> <div class="carmanage_right"><a href="__CONTROLLER__/shopUser/p/{$page}" style="color:#006dcc;">返回上一页</a></div></div>
+    <h1>报价</h1>
+ </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+<div class="widget-yu-btn">           
+     <div class="widget-yu-btn widget-right-search">  
+     <form action="" method="post">
+                                                                          
+              <select name="model_id" style="width:150px;">
+                    <option value="">选择车型</option>
+                    <volist name="model_info" id="vo">
+                        <option value="{$vo.car_model_id}">{$vo.car_model_name}</option>
+                    </volist>
+              </select>
+              <select name="car_id" style="width:150px;">
+                    <option value="">选择车款</option>
+                    <volist name="car_info" id="vo">
+                        <option value="{$vo.car_id}">{$vo.car_name}</option>
+                    </volist>
+              </select>
+              <select name="exterior" style="width:150px;">
+                    <option value="">外观颜色</option>
+                    <volist name="exterior_info" id="vo">
+                        <option value="{$vo.exterior_color_name}">{$vo.exterior_color_name}</option>
+                    </volist>
+              </select>
+              <select name="interior" style="width:150px;">
+                    <option value="">内饰颜色</option>
+                    <volist name="interior_info" id="vo">
+                        <option value="{$vo.interior_color_name}">{$vo.interior_color_name}</option>
+                    </volist>
+              </select>
+              <input type="hidden" name="id" value="{$user_id}">  
+              
+              <button type="submit"  class="btn button_sou" id="submit1" url="" >筛选</button> 
+
+
+     </form>                
+    </div>
+
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead
+
+                <tr>                                 
+                  <th>车型</th>                
+                  <th>车款</th>
+                  <th>外观颜色</th>
+                  <th>内饰颜色</th>
+                  <th>报价</th>
+                  <th>底价</th>
+                  <th>优惠</th>                
+                  <th>库存</th>
+                  <th>在途</th>
+                  <th>销售区域</th>
+                  <th>操作</th>                 
+                </tr>
+              </thead>
+              <tbody>
+              <volist name="info" id="vo">
+                <tr>                                
+                  <td>{$vo.car_model_name}</td>                 
+                  <td>{$vo.car_name}</td>               
+                  <td>{$vo.exterior_color_name}</td>
+                  <td>{$vo.interior_color_name}</td>
+                  <td>{$vo.price}</td>                 
+                  <td>{$vo.low_price}</td>    
+                  <td>{$vo.discount}</td>               
+                  <td>{$vo.stock}</td>                          
+                  <td>{$vo.onway}</td>
+                  <td>{$vo.city_name}</td>                   
+                  <td class="center">                           
+                      <a title="历史报价" href="__CONTROLLER__/history_price/id/{$vo.id}">历史报价</a>                          
+                  </td>
+                </tr>   
+              </volist>           
+              </tbody>
+              
+            </table>
+          </div>
+              
+    <div class="viciao">
+          {$pagelist}        
+        </div>
+
+      </div>
+                              
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+</block>

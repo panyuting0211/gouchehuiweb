@@ -1,0 +1,32 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">所有车款</a>
+        </div>
+        <h1>添加大品牌</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('addBigBrand')}" class="form-horizontal" method="post">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="big_brand_name">品牌：</label>
+                            <div class="controls">
+                                <input id="webname" name="big_brand_name" type="text"></div>
+                        </div>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit"  id="submit" class="btn btn-primary">添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</block>

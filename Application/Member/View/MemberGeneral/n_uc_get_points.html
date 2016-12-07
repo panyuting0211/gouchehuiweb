@@ -1,0 +1,86 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">资产中心  >  积分</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="n_uc_get_points.html" title="">获取积分方式</a></li>
+                <li><a href="n_uc_get_points_mx.html" title="">积分明细</a></li>
+            </ul>
+            <div class="uc_get_points_wrapper ohd">
+                <div class="tips">
+                    <div class="hd" id="J_pointer">
+
+                    </div>
+                    <div class="bd">
+                        <p><i class="orange-line"></i>现已将购车惠商城积分与购车惠平台积分打通。您的购车惠商城积分就是购车惠平台积分。未来，个人积分可以兑换商品。</p>
+                        <p><i class="orange-line"></i>目前积分最主要的获取方式是在购车惠商城购买商品成功后所赠送的积分</p>
+                    </div>
+                </div>
+                <div class="table">
+                    <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>等级</th>
+                            <th>积分区间</th>
+                        </tr>
+                        </thead>
+                        <tbody class="">
+                        <tr>
+                            <td>V1</td>
+                            <td>【0 - 200】</td>
+                        </tr>
+                        <tr>
+                            <td>V2</td>
+                            <td>【201 - 500】</td>
+                        </tr>
+                        <tr>
+                            <td>V3</td>
+                            <td>【501 - 800】</td>
+                        </tr>
+                        <tr>
+                            <td>V4</td>
+                            <td>【801 - 1000】</td>
+                        </tr>
+                        <tr>
+                            <td>V5</td>
+                            <td>【1001 - 2000】</td>
+                        </tr>
+                        <tr>
+                            <td>V6 </td>
+                            <td>【2001 - 5000】</td>
+                        </tr>
+                        <tr>
+                            <td>V7</td>
+                            <td>【5001 - 8000】</td>
+                        </tr>
+                        <tr>
+                            <td>V8</td>
+                            <td>【8001 - 10000】</td>
+                        </tr>
+                        <tr>
+                            <td>V9</td>
+                            <td>【10001 - 15000】</td>
+                        </tr>
+                        <tr>
+                            <td>V10</td>
+                            <td>【15001 - 20000】</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{$Think.const.JS_URL}app.js"></script>
+    <script>
+        $.post("/member.php/MemberGeneral/member_accinfo", function(db){
+            $("#J_pointer").html('<p>用户'+db.user_name+'你好，您的当前积分是 <i>'+ db.total_jifen +'</i> ，等级为 <i>V'+ db.grade +'</i></p>');
+        });
+    </script>
+
+</block>

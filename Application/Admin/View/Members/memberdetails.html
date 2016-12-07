@@ -1,0 +1,78 @@
+<extend name="Public/base"/>
+<block name="body">
+<style type="text/css">
+  .num {padding:0px 10px 0 10px;color:#4e4e4e;}
+  .next{color:#4e4e4e;}
+  .prev{color:#4e4e4e;}
+  .num:hover,.next:hover,.prev:hover{color:green;}
+
+</style>
+ <div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 会员管理</a> <a href="#" class="current">普通会员</a> </div>
+    <h1>会员详情</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+ <form action="{:U('Advers/adveraddHandle')}" class="form-horizontal" method="post">
+  <fieldset> 
+                     <div class="control-group">
+            <label class="control-label" for="webname">会员类型：</label>
+            <div class="controls" style="margin-top:5px;">
+                普通会员        
+            </div>
+        </div>  
+                      <div class="control-group">
+            <label class="control-label" for="webname">账号名称：</label>
+            <div class="controls" style="margin-top:5px;">
+                {$info.user_name}         
+            </div>
+        </div>  
+            <div class="control-group">
+            <label class="control-label-images" for="webname">头像：</label>
+            <div class="controls_images" style="margin-top:5px;">
+                <img src="{$info.head_url}" />
+            </div>
+        </div>             
+            <div class="control-group">
+            <label class="control-label" for="webname">昵称：</label>
+            <div class="controls" style="margin-top:5px;">
+                {$info.nick}   
+            </div>
+        </div>  
+            <div class="control-group">
+            <label class="control-label" for="webname">手机号：</label>
+        <div class="controls" style="margin-top:5px;">
+                {$info.tel}        
+            </div>
+        </div> 
+                <div class="control-group">
+            <label class="control-label" for="webname">邮箱：</label>
+        <div class="controls" style="margin-top:5px;">
+                {$info.email}      
+            </div>
+        </div>         
+    <div class="control-group">
+            <label class="control-label" for="webname">邀请码：</label>
+        <div class="controls" style="margin-top:5px;">
+                {$info.my_num}         
+            </div>
+        </div>         
+    <div class="control-group">
+            <label class="control-label" for="webname">已绑邀请码：</label>
+        <div class="controls" style="margin-top:5px;">
+                {$info.binding_num}      
+            </div>
+        </div>              
+                    </fieldset>
+                    </form>
+
+                              
+</div>
+</div>
+  </div>
+
+
+</div>
+</block>

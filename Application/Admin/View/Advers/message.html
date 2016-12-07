@@ -1,0 +1,130 @@
+<extend name="Public/base"/>
+<block name="body">
+	<style type="text/css">
+		#shortMes .shortMes-h3{
+			padding: 0 10px;
+			margin-top: 20px;
+			height: 35px;
+			line-height: 35px;
+			border-bottom: 1px solid #ccc;
+		}
+		#shortMes .row-fluid [class*="span"]{
+			margin-left: 0;
+		}
+		#shortMes ul{
+			margin-top: 20px;
+		}
+		#shortMes input[type=checkbox]{
+			margin: -2px 8px 0 0;
+		}
+		.shortMesSuc,.shortMesSuc{
+			font-size: 14px;
+			margin-top: 10px;
+		}
+	</style>  
+		<div id="content">
+			<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+				<button class="close fixed" style="margin-top: 4px;">×</button>
+				<div class="alert-content">返回内容！</div>
+			</div>
+			
+			<div id="content-wrap">
+				<div id="content-header">
+			        <div id="breadcrumb">
+			           <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>广告管理</a>
+			           <a href="#" title="Go to Home" class="tip-bottom">短信发送</a>
+			        </div>
+			    </div>
+			    
+			    <div class="container-fluid" id="shortMes">
+			    	<h3 class="shortMes-h3">
+			    		<label name="name" value="">
+							<input name="" value="14"  type="checkbox"/><span>全选</span>
+						</label>
+			    	</h3>
+			    	<ul class="row-fluid">
+			    		
+			    	</ul>
+			    	<p>
+					  <button class="btn btn-primary" type="button">点击发送</button>
+					</p>
+			    </div>
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+			$(function(){
+				$(".shortMes-h3 label input").click(function(){
+					var liinput=$(this).parents("h3").siblings("ul").find("li input[type=checkbox]");
+					if($(this).is(":checked")){
+						liinput.attr("checked",true);
+						$(this).next("span").text("全不选");
+					}else{
+						$(this).attr("checked",false)
+						liinput.attr("checked",false);
+						$(this).next("span").text("全选");
+					}
+				})
+			})
+			
+			getMes();
+	
+			function getMes(){
+				$("#shortMes h3").css('display','none');
+				$("#shortMes ul").css('display','none');
+				$("#shortMes p").css('display','none');
+				$("#shortMes ul").empty();
+				$("#shortMes ul").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+				
+				var user_name=$('#shortMes ul li').find('input').val();
+				
+				$.post(
+					"/admin.php/ajax/sms_member",
+					{user_id:user_name},
+					function(data,textStatus){
+						$('#shortMes ul').empty();
+						$('#shortMes ul > .onload').remove();
+						$("#shortMes h3").css('display','');
+						$("#shortMes ul").css('display','');
+						$("#shortMes p").css('display','');
+						
+						var info=data.tel;
+                        $.each(info,function(key,val){
+                            $('#shortMes ul').append("<li class='span2'><label><input type='checkbox' value=\'" + val + "\' />"+val+"</label></li>")
+                        });
+					},
+					"json"
+				);
+			}
+			
+		    
+//		    为点击发送绑定一个事件
+		  $("#shortMes p button").on("click",function(){
+		  	
+		  	var arr = new Array();
+		  	var tel = $("#shortMes ul li").find('input:checked');
+		  	$.each(tel, function (i, v) {
+		  		arr[i] = $(v).val();
+		  	});
+		  	
+		  	$.post(
+					"/admin.php/advers/note",
+					{tel:arr},
+					function(data,textStatus){
+						if(data.tel && data.tel.length > 0){
+							var failTels = "发送失败的手机号码：";
+							$.each(data.tel, function(i, v) {
+								var v=v+'    ';
+								failTels += v;
+							});
+							alert(failTels);
+						}else{
+							alert(data.msg);
+						}
+					},
+					"json"
+				);
+		  })
+		  
+	</script>
+</block>

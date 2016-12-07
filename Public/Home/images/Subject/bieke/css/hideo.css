@@ -1,0 +1,97 @@
+*:focus {outline: none;}
+.content img{
+    vertical-align:bottom; display:block;width:100%;
+}
+.sign-up-box{
+    width: 480px;
+    height: 380px;
+    background: url(../images/signup-box.png);
+    z-index: 20;
+    position: absolute;
+    left: 50%;
+    top: 32%;
+    margin-top: 175px;
+    margin-left: 130px;
+}
+.sign-up-box .name{
+    margin-top: 81px;
+    margin-left: 110px;
+    height:45px;
+    position:relative;
+}
+.sign-up-box .name input{
+    font-size:16px;
+    width: 293px;
+    height: 40px;
+    padding-left:10px;
+}
+.sign-up-box .tel{
+    width:107px;
+    height:32px;
+}
+.sign-up-box .tel-box{
+    height:80px;
+    position:relative;
+}
+.sign-up-box .tel-box .tel{
+    font-size:14px;
+    height: 32px;
+    position:absolute;
+    left:110px;
+    top:24px;
+    padding-left:10px;
+}
+.sign-up-box .tel-box button{
+    display:block;
+    width:78px;
+    height:26px;
+    line-height:26px;
+    color:#fff;
+    background:#f00;
+    position:absolute;
+    left:236px;
+    top:30px;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+.sign-up-box .tel-box button:hover{
+    background-color:#000;
+    color:#fff;
+}
+.sign-up-box .tel-box .enter-codes{
+    font-size:14px;
+    width:78px;
+    height:26px;
+    padding-left:10px;
+    position:absolute;
+    left:320px;
+    top:27px;
+    color:#000;
+    border:1px solid #393939;
+}
+.sign-up-box .choice{
+    position:relative;
+    height:62px;
+}
+.sign-up-box form select{
+    width: 304px;
+    height: 43px;
+    position: absolute;
+    left: 112px;
+    top: 1px;
+    font-size: 15px;
+    padding-left: 10px;
+}
+.sign-up-box .j_buyNow{
+    display:block;
+    width: 198px;
+    height: 37px;
+    margin-left:136px;
+}
+.sign-up-box .tips{
+    color:#f00;
+   text-align:center;
+    margin-top:10px;
+}

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Areas>
+  
+  <Area ID="1" AreaName="华东">华东</Area>
+  <Area ID="2" AreaName="华北">华北</Area>
+  <Area ID="3" AreaName="华中">华中</Area>
+  <Area ID="4" AreaName="华南">华南</Area>
+  <Area ID="5" AreaName="西南">西南</Area>
+  <Area ID="6" AreaName="西北">西北</Area>
+  <Area ID="7" AreaName="东北">东北</Area>
+  
+</Areas>

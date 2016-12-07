@@ -1,0 +1,107 @@
+<extend name="n_uc_base"/>
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">我的订单</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="{:U('n_uc_myorder')}" title="">购车订单</a></li>
+                <li class="cur"><a href="{:U('n_uc_myinquiry')}" title="">询价订单</a></li>
+                <!--<li><a href="{:U('n_uc_credits')}" title="">车币订单</a></li>-->
+                <li><a href="{:U('n_uc_shop_order_list')}" title="">商城订单</a></li>
+                <li><a href="{:U('n_uc_active_list')}" title="">活动订单</a></li>
+            </ul>
+
+            <div class="uc_myinquiry ohd" id="J_OrderListMain">
+                <div class="tips">
+                    <p>特别提醒：低价有效期为2天</p>
+                </div>
+                <div class="table">
+                    <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col class="">
+                            <col class="">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col class="">
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>商品图片</th>
+                            <th>商品名称</th>
+                            <th>外观颜色</th>
+                            <th>内饰颜色</th>
+                            <th>底价</th>
+                            <th>询价费</th>
+                            <th>询价开始日期</th>
+                            <th>询价结束日期</th>
+                            <th>询价状态</th>
+                        </tr>
+                        </thead>
+                        <tbody class="j_list">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="G_pager j_pager"></div>
+            </div>
+
+        </div>
+    </div>
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td class="pic"><img src="{{value.imgurl}}" alt="" class="car_pic"></td>
+            {{if value.status==0}}
+            <td><a href="/index.php/Car/product_details?id={{value.car_price_id}}">{{value.carstyle}}</a></td>
+            {{else if value.status==1}}
+            {{if value.pay_obj==1}}
+            <td><a href="/index.php/Car/car_price_pay?pid={{value.id}}">{{value.carstyle}}</a></td>
+            {{else}}
+            <td><a href="/index.php/Car/product_details?id={{value.car_price_id}}">{{value.carstyle}}</a></td>
+            {{/if}}
+            {{else}}
+            <td><a href="/index.php/Car/product_details?id={{value.car_price_id}}">{{value.carstyle}}</a></td>
+            {{/if}}
+
+            <td>{{value.exterior_color_name}}</td>
+            <td>{{value.interior_color_name}}</td>
+            <td>
+                {{if value.status==0 || value.status==2}}
+                {{value.info}}
+                {{else}}
+                {{if value.pay_obj==3}}
+                {{value.info}}
+                {{else}}
+                {{each value.info as vv index}}
+                <span class="city-low-price">{{vv.area_name}}底价：{{vv.pay_low_price}}</span>
+                {{/each}}
+                {{/if}}
+                {{/if}}
+            </td>
+            <td>{{value.money}}</td>
+            <td>{{value.updatetime}}</td>
+            <td>{{value.validity}}</td>
+            {{if value.status==0}}
+            <td>未支付</td>
+            {{else if value.status==1}}
+            <td>已支付</td>
+            {{else}}
+            <td>失效</td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </script>
+    <script>
+        $(function () {
+            $('#J_OrderListMain').AjaxListerContainer({
+                loader: '<tr><td colspan="9" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+                nuller: '<tr><td colspan="9" class="null_list">您暂无任何询价订单！快去 <a href="/index.php/car/product_search" target="_blank">询价</a>你喜欢的车吧！</td></tr>',
+                ajaxUrl: '/member.php/MemberGeneral/querylist'
+            });
+        });
+    </script>
+</block>

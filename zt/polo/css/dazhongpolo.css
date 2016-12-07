@@ -1,0 +1,190 @@
+.polo-wrap{
+    width:900px;
+    height:114px;
+    background:#2986b3;
+    padding-top:10px;
+    z-index:20;
+    position:fixed;
+    margin-left:-434px;
+    left:50%;
+    bottom:0;
+}
+.polo-wrap .polo-box{
+    width:868px;
+    margin:0 auto;
+    background:#fff;
+    box-shadow:2px 2px 5px #06374e;
+}
+.polo-wrap .fill{
+    font-size:26px;
+    font-weight: bold;
+    color:#fff;
+    line-height:40px;
+    width:120px;
+    background:#2986b3;
+    position:relative;
+    left:-10px;
+    top:10px;
+}
+#triangle-right {
+    position: relative;
+    left: -10px;
+    top: 3px;
+    border-top: 20px solid transparent;
+    border-left: 25px solid #2986b3;
+    border-bottom: 20px solid transparent;
+}
+.polo-wrap .polo-title{
+    height:42px;
+}
+.polo-wrap .polo-title p{
+    font-weight:bold;
+    font-size:16px;
+    color:#f00;
+   padding-top:12px;
+}
+.polo-wrap .polo-mes{
+    padding-top:10px;
+}
+.polo-wrap .polo-mes .detailed li{
+    display:inline-block;
+    margin-left:6px;
+}
+.polo-wrap .polo-mes .detailed .input-box{
+    font-size:20px;
+    color:#ef8019;
+    background:#ffe0a2;
+    width:190px;
+    margin-left:60px;
+}
+.polo-wrap .polo-mes .detailed .input-box span{
+    margin:0 5px;
+}
+.polo-wrap .polo-mes .detailed input{
+    font-size:18px;
+    width:140px;
+    height:40px;
+    background:#ffe0a2;
+    border:none;
+}
+.polo-wrap .polo-mes .detailed-name{
+    background:url(../images/logo-name.png) no-repeat;
+    height:50px;
+}
+.polo-wrap .polo-mes .detailed-tel{
+    background:url(../images/logo-tel.png) no-repeat;
+    height:50px;
+}
+
+.polo-wrap .polo-mes .buy-now{
+    font-size:22px;
+    font-weight:bold;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    width:180px;
+    line-height:42px;
+    background:#f00;
+    box-shadow: 1px 1px 1px #2f1e1f;
+}
+.polo-wrap .polo-mes .detailed .entered{
+    font-size:12px;
+    color:#f00;
+    font-weight:bold;
+}
+img{
+    display: block;
+    vertical-align: middle;
+}
+.banner .banner-1,.banner .banner-2{
+    width:100%;
+    height:323px;
+}
+.banner .banner-1{
+    background: url(../images/POLO_01.png) center top no-repeat;
+}
+.banner .banner-2{
+    background: url(../images/POLO_03.png) center top no-repeat;
+}
+.buy-process{
+    background: url(../images/POLO_02.png) center top no-repeat;
+    width:100%;
+    height: 740px;
+}
+.polo-bd .pics{
+    width:100%;
+    height:421px;
+}
+.polo-bd .content1{
+    background: url(../images/POLO_05.png) center top no-repeat;
+}
+.polo-bd .content2{
+    background: url(../images/POLO_06.png) center top no-repeat;
+}
+.polo-bd .content3{
+    background: url(../images/POLO_07.png) center top no-repeat;
+}
+.polo-bd .content4{
+    background: url(../images/POLO_08.png) center top no-repeat;
+}
+.polo-bd .content5{
+    background: url(../images/POLO_09.png) center top no-repeat;
+}
+.polo-bd .content6{
+    background: url(../images/POLO_10.png) center top no-repeat;
+}
+.polo-bd .content7{
+    background: url(../images/POLO_11.png) center top no-repeat;
+}
+.polo-bd .content8{
+    background: url(../images/POLO_12.png) center top no-repeat;
+
+}
+.polo-footer .footer1{
+    background: url(../images/POLO_13.png) center top no-repeat;
+    width:100%;
+    height:335px;
+}
+.polo-footer .footer2{
+    background: url(../images/POLO_14.png) center top no-repeat;
+    width:100%;
+    height:335px;
+}
+.polo-footer .footer3{
+    background: url(../images/POLO_15.png) center top no-repeat;
+    width:100%;
+    height:335px;
+    background-size: cover;
+}
+.polo-footer .footer4{
+    background: url(../images/POLO_16.png) center top no-repeat;
+    width:100%;
+    height:335px;
+}
+
+.buy-process .buy-process-box{
+    margin:0 auto;
+}
+.buy-process .process-bd{
+    padding-left:40%;
+    padding-top:165px;
+}
+.buy-process .process-bd .advice p{
+    font-weight:900;
+    font-size:18px;
+    color:#000;
+    line-height: 30px;
+}
+.buy-process .process-bd .spec{
+    font-size:28px;
+    font-style: oblique ;
+    color:#c72127;
+   text-decoration:underline;
+}
+
+.buy-process .process-bd .product-list{
+    margin-left: -200px;
+    margin-top: 70px;
+}
+.G_fl{float:left;}

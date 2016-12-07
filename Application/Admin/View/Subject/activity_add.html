@@ -1,0 +1,90 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">添加活动</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="__SELF__" id="commentForm" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="activity_name">活动名称：</label>
+                            <div class="controls">
+                                <input  name="activity_name" id="activity_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="activity_number">活动标识：</label>
+                            <div class="controls">
+                                <input  name="activity_number" id="activity_number" type="text" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="starttime">活动时间：</label>
+                            <div class="controls">
+                                <input  name="starttime" id="starttime" value="2016-08-15" type="text"  onClick="WdatePicker()" style="width: 230px;" required>
+                                ----
+                                <input  name="endtime" id="endtime"  value="2016-08-16" type="text"  onClick="WdatePicker()" style="width: 230px;" required>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">确定</button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.validate.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}messages_zh.js"></script>
+    <script>
+        $().ready(function() {
+            $("#commentForm").validate(
+                    {
+                        rules: {
+                            activity_number: {
+                                required: true,
+                                rangelength: [5,15]
+                            },
+                            starttime:{
+                                required:true,
+                                dateISO:true
+                            },
+                            endtime:{
+                                required:true,
+                                dateISO:true
+                            }
+                        },
+                        messages: {
+                            activity_number: {
+                                required: "这是必填字段",
+                                number: "请输入5-15之间的字符串"
+                            },
+                            starttime:{
+                                required:'这是必填字段',
+                                dateISO:'请输入正确的时间格式'
+                            },
+                            endtime:{
+                                required:'这是必填字段',
+                                dateISO:'请输入正确的时间格式'
+                            }
+                        }
+                    }
+            );
+        });
+    </script>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+</block>

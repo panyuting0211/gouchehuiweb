@@ -1,0 +1,255 @@
+<extend name="uc_base" />
+<block name="body">
+	<div id="uc_main">
+		<form action="__SELF__" method="post" enctype="multipart/form-data">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">账号资料</h2>
+				<div class="UC_main_r_id">
+					<div class="UC_member_infowrap">
+						<div class="list">
+							<dl>
+								<dt>用户名：</dt>
+								<dd>
+									{$user_info.user_name}
+								</dd>
+							</dl>
+							<dl>
+								<if condition="$user_info.nick eq null">
+									<dt>昵称：</dt>
+									<dd>
+										<input type="text" name="nick"  class="txt">
+									</dd>
+									<else />
+									<dt>昵称：</dt>
+									<dd class="nick" id="j_nickbox">
+                                        <input type="text" value="" name="nick">
+                                        <span>{$user_info.nick}</span>
+									</dd>
+								</if>
+							</dl>
+							<dl>
+                                <dt>积分：</dt>
+                                <dd>
+                                    <span>{$user_info.total_jifen}</span>
+									<a href="####" id="J_scoreDetailBtn">积分详情</a>
+                                    <a href="{:U('FS_scorerela')}">(查看积分规则和作用？)</a>
+                                </dd>
+							</dl>
+							<dl>
+								<dt>公司名称：</dt>
+								<dd>
+									{$user_info.name_4s}
+								</dd>
+							</dl>
+							<dl>
+								<dt>公司地址：</dt>
+								<dd>{$user_info.addr}
+								</dd>
+							</dl>
+							<dl>
+								<dt>主营品牌：</dt>
+								<dd>{$user_info.brand_name}
+								</dd>
+							</dl>
+							<dl>
+								<dt>我的邀请码：</dt>
+								<dd>{$user_info.my_num}
+								</dd>
+							</dl>
+							<dl>
+								<dt>绑定手机号：</dt>
+								<dd><span id="J_infotel">{$user_info.tel}</span>
+									<input type="button" class="G_btn_a" value="修改" id="J_modefytel">
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+								</dt>
+								<dd><input type="submit" class="submit" value="保存"></dd>
+							</dl>
+						</div>
+						<input type="hidden" name="id" value="{$user_info.id}">
+
+						<div class="filebox">
+							<div class="imgbox">
+								<img src="{:OSS}{$user_info.head_url}" alt="">
+							</div>
+							<!--<a href="javascript:;">修改头像</a>-->
+							<a class="ui_button_primary" href="javascript:;" id="set-uploadhead-btn"><u><i></i>修改头像</u>
+								<input type="file" hidefocus="true" name="headimg">
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="{$Think.const.JS_URL}app/layer.js"></script>
+	<script>
+		$(document).ready(function(){
+			var _input_txt = $("#j_nickbox input[type=text]");
+			var _input_sub = $("form input[type=submit]");
+			var _span = $("#j_nickbox span");
+			_input_txt.hide();
+			$("#j_nickbox").on("click",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				_span.hide();
+				_input_txt.show();
+				_input_txt.val(_span.text());
+				_input_sub.val("修改");
+			});
+			$(document).click(function(){
+                console.log(_input_txt);
+				_span.text(_input_txt.val()).show();
+				_input_txt.hide();
+				_input_txt.attr("value",_span.text());
+				_input_sub.val("保存");
+				if(_input_txt.val()== ""){
+					_input_txt = _span.text();
+				}
+			});
+
+			//修改手机号
+			$("#J_modefytel").on("click",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+                e.
+				layer.open({
+					type: 1,
+					area: ['320px', '160px'],
+					shadeClose: true, //点击遮罩关闭
+					title: ['修改绑定手机号', 'font-size:18px;color:#666'],
+					content: '\<\div style="padding:20px; font-size:20px;text-align:center;color:#666;">请与对应公关人员联系！\<\/div>'
+				});
+			});
+			$("#J_scoreDetailBtn").on("click",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				var phone = $("#J_infotel").text();
+				var phonenum = (phone.substring(0, 3) + "****" + phone.substring(7, 11));
+				layer.open({
+					type: 1,
+					area: ['500px', '390px'],
+					shadeClose: true, //点击遮罩关闭
+					title: ['手机验证码', 'font-size:18px;color:#666'],
+					content: '\<\div class="sendtelbox">' +
+					'\<\p class="text">验证码已发送至绑定手机号\<span\>'+phonenum+'\<\/span\> ，注意查收\<\/p>' +
+					'\<\div class="codebox"\>' +
+					'\<\input class="codetxt" placeholder="请输入验证码"\>' +
+					'\<\div class="codeBtn">发送</div>' +
+					'\<\/div\>' +
+					'\<\input class="G_btn_a submit" type="submit" value="提交"\/\>' +
+					'\<\div class="txt_a">修改绑定手机号\<\/\div\>' +
+					'\<\div class="tipsa">请与对应的公关人员联系！\<\/div\>' +
+					'\<\/div\>'
+				});
+
+				$(".sendtelbox").find(".txt_a").bind("click", function(){
+					$(".sendtelbox").find(".tipsa").html("请与对应的公关人员联系！").show();
+				});
+
+				$(".sendtelbox").find(".codeBtn").bind("click", sendCode);
+				/* 提交 */
+
+				//发送验证码
+				function checkData(ele) {
+					if (!ele) {
+						return true;
+					}
+					var value = $.trim(ele.value);
+					switch (ele.name) {
+						case "username":
+							if (!value || new RegExp("^((13[0-9])|(15[0-9])|(18[0-9])|14[0-9]|17[0-9])[0-9]{8,8}$").test(value) == false) {
+								$(".J_giftPhone").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>请输入正确的手机号码</p>');
+								return false;
+							}else{
+								return true;
+							}
+							break;
+						case "code":
+							if (!value || value.length < 6 || new RegExp("^([0-9])+$").test(value) == false) {
+								$(".J_giftPhone").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>请输入正确的验证码</p>');
+								return false;
+							} else if (value.length == 6) {
+								return true;
+							}
+							break;
+					}
+				}
+
+				function sendCode(e) {
+					var flag1 = checkData(document.getElementById("J_phonenum"));
+					if (flag1) {
+						var postData = {
+							tel: phone,
+						}
+						$.ajax({
+							type: "POST",
+							url: "/member.php/Public/note",
+							dataType: "JSON",
+							data: postData,
+							success: function(data) {
+								if (data.status == 0) {
+									$(".sendtelbox").find(".codeBtn").unbind("click");
+									intervalTime(60);
+								}else if(data.status == 205405){
+									$(".sendtelbox").find(".tipsa").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>号码异常/同一号码发送次数过于频繁 请稍后再试！</p>').show();
+								}else if(data.status == 1){
+									$(".sendtelbox").focus();
+									$(".sendtelbox").find(".tipsa").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>'+ data.msg +'</p>').show();
+								}
+							}
+						});
+					}
+				}
+
+				function intervalTime(num) {
+					var num = parseInt(num);
+					var i = 0;
+					$(".sendtelbox").find(".codeBtn").addClass("G_btn_disabled");
+					$(".sendtelbox").find(".codeBtn").html("<span></span>秒重新发送");
+					$(".sendtelbox").find(".codeBtn").find("span").text(num);
+					var inter = setInterval(function() {
+						if (i < num) {
+							i++;
+							$(".sendtelbox").find(".codeBtn").find("span").text(num - i);
+						} else {
+							clearInterval(inter);
+							$(".sendtelbox").find(".codeBtn").removeClass("G_btn_disabled");
+							$(".sendtelbox").find(".codeBtn").html("重新发送").bind("click", sendCode);
+						}
+					}, 1000);
+				}
+
+				/* 提交 */
+				$(".sendtelbox .submit").on("click",function(){
+					var data={
+						telphone:phone,
+						code :$(".sendtelbox .codetxt").val(),
+					}
+					$.ajax({
+						url:"fs_codecheck",
+						type:"POST",
+						data:data,
+						success:function(e){
+							if(e.status ==1){
+								console.log(e);
+								location.href = "/member.php/Member4s/FS_score_details.html";
+							}else{
+								alert(e.msg);//提交成功
+							}
+						},
+						error:function(e){
+							alert(e.msg);//提交失败
+						}
+					})
+
+				});
+
+			});
+
+		});
+	</script>
+</block>

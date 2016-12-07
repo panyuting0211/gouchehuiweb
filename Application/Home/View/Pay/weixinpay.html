@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WeChat</title>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}wechat.css"/>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <script>
+        var timer;
+        function  ajaxget() {
+            $.ajax({
+                type:"POST",
+                url:"/index.php/Pay/orderstatus",
+                dataType:"json",
+                data:{out_trade_no:$("#out").data("out")},
+                success:function (data) {
+                    if (data.status==1)
+                    {
+                        clearTimeout(timer);
+                        window.location.href=data.url;
+                    }else {
+                       timer= setTimeout(ajaxget,1000);
+                    }
+                }
+
+            });
+        }
+        window.onload = function(){
+            timer=setTimeout(ajaxget,5000);
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1 class="paylogo">
+            <a href="">
+                <img src="{$Think.const.IMG_URL}wechatss_03.png">
+            </a>
+        </h1>
+    </div>
+    <div class="cont">
+        <div class="cont_wrap">
+            <div class="area primary">
+                <div class="pay_msg qr_default" id="payMsg">
+                    <div class="area_hd">
+                        <h2>支付结果</h2>
+                    </div>
+                    <div class="area_bd" id="pay_succesd"></div>
+                    <div class="area_bd" id="pay_error"></div>
+                    <div class="area_bd" id="pay_normal">
+                        <div class="area_bd" id="qr_normal">
+                            <span class="qr_img_wrapper">
+                                <img class="qrcode" alt="二维码" id="QRcode" src="{$data}" style="width: 305px;height: 305px">
+                                <img class="guide pngFix" src="{$Think.const.IMG_URL}webpay_guide.png" alt="" id="guide" style="left: 50%; opacity: 0; display: none; margin-left: -101px;">
+                            </span>
+                            <div class="msg_default_box">
+                                <i class="icon60_qr pngFix"></i>
+                                <p>请使用微信扫描</p>
+                                <p>二维码以完成支付</p>
+                            </div>
+                            <div class="msg_box">
+                                <i class="icon60_qr pngFix"></i>
+                                <p><strong>扫描成功</strong>请在手机确认支付</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="area second">
+                <div class="pay_bill shopping">
+                    <div class="area_hd">
+                        <h2>支付清单</h2>
+                        <span class="icon_wrapper">
+                            <i></i>
+                        </span>
+                    </div>
+                    <div class="area_bd">
+                        <h3 class="pay_money">
+                            <span>￥</span>{$pay_info.money}
+                        </h3>
+                        <div class="pay_bill_unit no_extra">
+                            <dl>
+                                <dt>收款方</dt>
+                                <dd>南京易橙汇网络科技有限公司</dd>
+                            </dl>
+                            <div class="pay_bill_info">
+                                <p><label>商品名称</label><span class="pay_bill_value">
+                                    <if condition="$pay_info['pay_obj'] eq 1">咨询底价
+                                        <elseif condition="$pay_info['pay_obj'] eq 2"/>支付定金
+                                         <elseif condition="$pay_info['pay_obj'] eq 4"/>一元抢（双十一）
+                                    </if></span></p>
+                                <p>
+                                    <label>订单交易</label>
+                                    <span class="pay_bill_value">{$pay_info.out_trade_no}</span>
+                                </p>
+                                <p><label>商品描述</label><span class="pay_bill_value">{$pay_info.carstyle}</span></p>
+                            </div>
+                            <div id="out" data-out="{$pay_info.out_trade_no}"></div>
+                        </div>
+                        <!--
+                            <div class="pay_bill_unit no_extra">
+                            <dl>
+                            <dt></dt>
+                            <dd></dd>
+                            </dl>
+                            <div class="pay_bill_info">
+                            <p><label>交易单号</label><span class="pay_bill_value"></span></p>
+                            <p><label>创建时间</label><span class="pay_bill_value"></span></p>
+                            </div>
+                            </div>
+                            -->
+                    </div>
+                </div>
+            </div>
+            <div class="aside">
+                <div class="pay_widget help">
+                    <div class="pay_widget_hd">
+                        <i></i>
+                    </div>
+                    <div class="pay_widget_bd">
+                        <strong class="widget_name">客服</strong>
+                        <p class="widget_desc">400-138-0808</p>
+                    </div>
+                </div>
+                <!--
+                  这是另一种更简单的结构，但是扩展性较差。
+                        <dl class="pay_widget help">
+                          <dt class="widget_name">客服</dt>
+                          <dd class="widget_desc">020 - 865437767</dd>
+                          <dd class="widget_pic"><i class="icon30_add_on"></i></dd>
+                        </dl>
+                 -->
+            </div>
+    </div>
+        </div>
+    <div class="footer">
+        <p class="copyright">
+            CopyRight @2015 - 2018 GOuchehui.com.cn All rights reserved 版权所有南京易橙汇网络科技有限公司
+        </p>
+        <p class="copyright">Powered By Jiangsu ERUN备案号:苏ICP备13031090号-2</p>
+    </div>
+    <script src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.JS_URL}wechat.js"></script>
+</body>
+</html>

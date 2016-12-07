@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>订单</title>
+</head>
+<body>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+        <!--用户位置 开始-->
+        <div class="US_position G_f16 ftx02">
+            位置：
+            <a href="#">购车惠> </a>
+            <a href="">订单 </a>
+            <a href=""><strong></strong></a>
+        </div>
+        <!--用户位置 结束-->
+
+        <!--oeder start-->
+        <div class="orderbox">
+            <form action="{:U('order_update_activity')}" id="J_actForm" method="post" enctype="multipart/form-data">
+                <div class="orderwrap">
+                    <!--步骤 start-->
+                    <div class="flowstep">
+                        <ol class="detail-stepbar flowstep-5">
+                            <li class="step-first">
+                                <div class="step-done">
+                                    <div class="step-name">填写并提交订单信息</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$pay_info.createtime}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <switch name="pay_info.status" >
+                                    <case value="0|1|3|5"><div class="step-cur"></case>
+                                    <case value="2"><div class="step-fail"></case>
+                                    <default /><div class="step-done">
+                                </switch>
+                                <div class="step-name">预付定金到购车惠</div>
+                                <div class="step-no">2</div>
+                                <div class="step-time">
+                                    <div class="step-time-wraper"></div>
+                                </div>
+                    </div>
+                    </li>
+                    <li>
+                        <switch name="pay_info.status" >
+                            <case value="4|6"><div class="step-cur"></case>
+                            <case value="7|8"><div class="step-done"></case>
+                            <default /><div>
+                        </switch>
+                        <div class="step-name">4s店出库中</div>
+                        <div class="step-no">3</div>
+                        <div class="step-time">
+                            <div class="step-time-wraper"></div>
+                        </div>
+                </div>
+                </li>
+                <li>
+                    <if condition="$pay_info.status eq 7">
+                        <div class="step-cur">
+                            <elseif condition="$pay_info.status eq 8" />
+                            <div class="step-done">
+                                <else/>
+                                <div>
+                    </if>
+                    <div class="step-name">到店看车付款提车</div>
+                    <div class="step-no">4</div>
+                    <div class="step-time">
+                        <div class="step-time-wraper"></div>
+                    </div>
+        </div>
+        </li>
+        <li class="step-last">
+            <if condition="$pay_info.status eq 8">
+                <div class="step-done">
+                    <else/>
+                    <div>
+            </if>
+            <div class="step-name">订单完成</div>
+            <div class="step-no">5</div>
+            <div class="step-time">
+                <div class="step-time-wraper"></div>
+            </div>
+    </div>
+    </li>
+    </ol>
+
+</div>
+<!--步骤 end-->
+
+<!--订单信息 start-->
+<div class="orderinfobox">
+
+    <div class="title G_f22 ftx02">
+        <h3>商品信息</h3>
+        <span>提示：车款颜色配置以厂家同款出厂配置为准</span>
+    </div>
+
+    <!--diangdan xiangqiang start-->
+    <table class="grid_bundle grid_7 G_f18 order_table">
+        <colgroup>
+            <col style="width:400px;">
+            <col style="width:200px;">
+            <col style="width:200px;">
+            <col>
+        </colgroup>
+        <thead>
+        <tr class="col_name G_f16">
+            <th>车款</th>
+            <th>外观颜色</th>
+            <th>内饰颜色</th>
+            <th>南京市底价</th>
+            <th>上牌地</th>
+            <th>定金</th>
+        </tr>
+        </thead>
+        <tbody class="bd ftx02 G_f16">
+        <tr>
+            <td colspan="3">
+                <div class="car_pic j_activityOrderPic">
+                    <img src="{:OSS}{$pay_info.exterior_img}" alt="car" />
+                </div>
+            </td>
+            <td colspan="3" class="G_f26">
+                {$pay_info.brand_name} . {$pay_info.car_model_name}
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+                <select id="car_id">
+                    <volist name="car_info" id="vo">
+                        <option value="{$vo.car_id}" <if condition="$vo.car_id eq $pay_info['car_id']">selected</if>>
+                        {$vo.car_name}
+                        </option>
+                    </volist>
+                </select>
+            </td>
+            <td><select id="exterior_color_id">
+                <volist name="exterior_info" id="vo">
+                    <option value="{$vo.exterior_color_id}" <if condition="$vo.exterior_color_id eq $pay_info['exterior_color_id']">selected</if>>
+                    {$vo.exterior_color_name}
+                    </option>
+                </volist>
+            </select></td>
+            <td><select id="interior_color_id" disabled="disabled">
+                <volist name="interior_info" id="vo">
+                    <option value="{$vo.interior_color_id}" <if condition="$vo.interior_color_id eq $pay_info['interior_color_id']">selected</if>>
+                    {$vo.interior_color_name}
+                    </option>
+                </volist>
+            </select></td>
+            <td><div id="low_price" style="color: #f00;">{$pay_info.low_price}</div>( 元 )</td>
+            <td><select id="card_place" name="ucc_name">
+                <volist name="area" id="vo">
+                    <option value="{$vo.sales_area_name}" <if condition="$i eq 0">selected</if>>
+                    {$vo.sales_area_name}
+                    </option>
+                </volist>
+            </select></td>
+            <td><div id="deposit" style="color: #f00;">{$pay_info.money}</div>( 元 )</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--订车人 信息 start-->
+    <div class="clientinfobox G_f16 ftx02">
+
+        <div class="title G_f22 ftx02">
+            <h3>订车人信息</h3>
+        </div>
+
+        <dl>
+            <dt>订车人姓名</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input type="text" name="buyer_name" class="j_validateInp" value="{$pay_info.buyer_name}"/>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>订车人手机号</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input type="text" name="buyer_tel" class="j_validateInp" value="{$pay_info.buyer_tel}"/>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>提车时间</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input id="datetimepicker" name="buy_time" class="j_validateInp" type="text" style="width: 167px;" value="{$pay_info.buy_time}">
+                    <i></i>
+                </div>
+            </dd>
+        </dl>
+        <dl class="j_hiddenInp j_payment" data-tip="付款方式">
+            <dt>付款方式</dt>
+            <dd>
+                <div class="choosebox G_f16">
+                    <ul data-type="buy_way">
+                        <li data-msg="新车全款" data-type="buy_way">新车全款<i></i></li>
+                        <li data-msg="新车分期" data-type="buy_way">新车分期<i></i></li>
+                    </ul>
+                </div>
+            </dd>
+        </dl>
+        <dl class="j_isBuyInsurance" data-tip="保险">
+            <dt>购买保险</dt>
+            <dd>
+                <div class="choosebox G_f16">
+                    <ul data-type="buy_way">
+                        <li data-msg="购买" class="active" data-type="insurance">购买<i></i></li>
+                        <li data-msg="不购买" data-type="insurance" class="disabled">不购买<i></i></li>
+                    </ul>
+                    <input type="hidden" name="insurance" value="购买">
+                </div>
+            </dd>
+        </dl>
+
+    </div>
+    <!--订车人 信息 end-->
+    <div  style="display: none;"><div class="onTheRoadDetailed" data-displacement="{$pay_info.displacement}">
+        <i class="icon-up-arrow"></i>
+        <div class="boxContent">
+            <table class="calcu_body">
+                <colgroup>
+                    <col class="first">
+                    <col class="second">
+                </colgroup>
+                <tbody>
+                <tr class="tit">
+                    <td colspan="2">
+                        <dl class="gch_price">
+                            <dt>购车惠底价：</dt>
+                            <dd>
+                                <span class="j_gchPrice">{$pay_info.low_price}</span><em class="yuan">元</em>
+                            </dd>
+                        </dl>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        交强险
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_strongInsurance" maxlength="8" disabled="true" value="{$pay_info.compulsory_insurance}">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        购置税
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_purchaseTax" maxlength="8" disabled="true" value="{$pay_info.cess}">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        上牌费用
+                    </td>
+                    <td class="money">
+                        <input type="text"  class="cost disabled j_licenseTax" maxlength="8" disabled="true" value="{$pay_info.licensing_fees}">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        车船使用税
+                        <select name="usageTax" class="usageTaxSlt j_usageTaxSlt">
+                            <option value="180">1.0升（含）以 下</option>
+                            <option value="360" selected = "selected" >1.0升以上至1.6升（含）</option>
+                            <option value="420">1.6升以上至2.0升（含）</option>
+                            <option value="720">2.0升以上至2.5升（含）</option>
+                            <option value="1800">2.5升以上至3.0升（含）</option>
+                            <option value="3000">3.0升以上至4.0升（含）</option>
+                            <option value="4500">4.0升以上</option>
+                        </select>
+                    </td>
+                    <td class="money">
+                        <input type="text"  class="cost disabled j_usageTax" maxlength="8" disabled="true" value="{$pay_info.travel_tax}">元
+                    </td>
+                </tr>
+                <tr class="tit j_insuranceSubtotal">
+                    <td colspan="2">
+
+                        <dl class="gch_price">
+                            <dt><span class="risk"><i class="icon"></i>保险小计:</span></dt>
+                            <dd>
+                                <span class="j_insuranceSubtotalNum">0</span><em class="yuan">元</em>
+
+                            </dd>
+                        </dl>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <span class="insurance-item">
+                        车辆损失险
+                    </span><select name="damageInsurance" class="damageInsuranceSlt" id="J_damageInsuranceSlt">
+                        <option value="603">家用6座以下</option>
+                        <option value="724">家用6至10座</option>
+                    </select>
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_damageInsurance" maxlength="8" disabled="true" value="0">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <span>第三者责任险</span>
+
+                        <span><select name="thirdInsurance" class="thirdInsuranceSlt" id="J_thirdInsuranceSlt">
+                            <option value="1614">保额：50万</option>
+                            <option selected="selected" value="2102">保额：100万</option>
+                        </select>
+                        </span>
+
+
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_thirdInsurance" maxlength="8" disabled="true" value="0">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <span class="insurance-item">
+                        附加不计免赔特约
+                    </span>
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_noDeductibleInsurance"  maxlength="8" disabled="true" value="0">元
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <span class="insurance-item">
+                        车上人员责任险
+                    </span>
+                        <p class="defTip">(默认为5个座位，每多出一个座位。多加26元)</p>
+                    </td>
+                    <td class="money">
+                        <input type="text" class="cost disabled j_passengerInsurance" maxlength="8" disabled="true" value="0">元
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="all_price"><p></p>上路价总额<span class="number j_allPrice">0</span>元<p class="c999 G_f14">(此结果有微小误差，实际费用以当地缴费为准)</p></div>
+
+    </div></div>
+    <!--bigPackages start-->
+    <div class="packagesbox">
+        <div class="title G_f22 ftx02">
+            <h3><if condition="$brand_id eq 66">参加别克活动送豪华大礼包<else />买保险即送豪华大礼包</if></h3>
+            <div class="price">价值：<span>￥{$package.price}</span></div>
+        </div>
+        <img src="{:OSS}{$package.imgurl}" alt="" class="onepackage"/>
+        <ul>
+            <!--  <li>
+                  <img src="{$Think.const.IMG_URL}packages_03.jpg" alt="宝马M3 真皮方向盘套"/>
+                  <span>宝马M3 真皮方向盘套</span>
+              </li>
+              <i>+</i>
+              <li>
+                  <img src="{$Think.const.IMG_URL}packages_05.jpg" alt="宝马M3 脚垫"/>
+                  <span>宝马M3 脚垫一副</span>
+              </li>
+              <i>+</i>
+              <li>
+                  <img src="{$Think.const.IMG_URL}packages_07.jpg" alt="宝马M3 专用机油"/>
+                  <span>宝马M3 专用机油3罐</span>
+              </li>
+              <i>+</i>
+              <li>
+                  <img src="{$Think.const.IMG_URL}packages_09.jpg" alt="米其林轮胎"/>
+                  <span>米其林备用轮胎一个</span>
+              </li>
+              <i>+</i>
+              <li>
+                  <img src="{$Think.const.IMG_URL}packages_11.jpg" alt="盾牌润滑油"/>
+                  <span>盾牌润滑油一瓶</span>
+              </li>-->
+        </ul>
+    </div>
+    <!--bigPackages end-->
+
+    <!--invoice start-->
+    <div class="invoicebox clearfix">
+        <div class="title G_f22 ftx02">
+            <h3>发票信息</h3>
+        </div>
+        <p class="G_f16 ftx02">定金无发票，支付信息为定金收据凭证。购车惠为信息平台，实际开票价与平台订车价如有差异，您只凭平台订车价支付车款，高出的部分不补差价，低于部分不退差价，不开发票。</p>
+    </div>
+    <!--invoice end-->
+    <input type="hidden" name="pay_id" value="{$pay_info.id}">
+    <input type="hidden" name="car_price_id" value="{$pay_info.car_price_id}">
+    <div id="ECS_ORDERTOTAL">
+        <table width="99%" class="tableCheckbar" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tbody>
+            <tr>
+                <td class="G_f16" align="right" bgcolor="#ffffff" style="color: #47ab3b;">
+                    <a href="#" class="j_orderDetailed"><i class="ui_icon  ui_icon_16 ui_icon_wb_suc_16"></i>订单金额明细查看</a>
+                </td>
+            </tr>
+            </tbody></table>
+    </div>
+    <!--定金支付 start-->
+    <div class="depositbox G_f16 ftx02">
+        <input type="submit" class="submit G_btn_a" value="去支付"/>
+        <div class="deposit">支付定金：<span data-price="2000">{$pay_info.money}元</span></div>
+    </div>
+    <!--定金支付 end-->
+</div>
+<!--订单信息 end-->
+</div>
+</form>
+</div>
+
+<!--oeder end-->
+</div>
+</div>
+<script src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.JS_URL}app.js"></script>
+<script src="{$Think.const.JS_URL}jquery.datetimepicker.js"></script>
+<script src="{$Think.const.JS_URL}order.js"></script>
+
+{~W('Cate/footer')}
+</body>
+</html>

@@ -1,0 +1,67 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">车型分类</a>
+        </div>
+        <h1>编辑分类</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('editcar_brand')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">所属大品牌：</label>
+                            <div class="controls">
+                                <select name="fid">
+                                    <option value="">请选择所属的大品牌</option>
+                                    <volist name="bigBrandList" id="vol">
+                                        <option value="{$vol.id}"<if condition="$vol['id'] eq $info['fid']">selected</if>>{$vol.big_brand_name}</option>
+                                    </volist>
+                                </select>
+                        </div>
+                            </div>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">品牌名称：</label>
+                            <div class="controls">
+                                <input id="webname" name="brand_name" type="text" value="{$info.brand_name}"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="brand_name">品牌首字母：</label>
+                            <div class="controls">
+                                <input id="webname" name="alif" type="text" value="{$info.alif}"></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="title">修改图片：</label>
+                            <div class="controls">
+                                <input   type="file" name="logo"  id="file_0" value="" >
+                                <p>(建议上传图片尺寸：40*40px)</p>
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="title">图片：</label>
+                            <div class="controls">
+                                <img src="{$Think.const.OSS}{$info.logo}" height="150" width="120" \>                  
+                            </div>
+
+
+                        </div>
+                      <input type="hidden" name="id" value="{$info.id}">
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</block>

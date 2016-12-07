@@ -1,0 +1,29 @@
+.J_clubList .club_title{
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.J_clubList .club_title span{
+    position: absolute;
+    padding: 0 10px;
+    border-bottom:1px solid #fa8c35;
+}
+
+
+.J_clubList .clublist{
+    width: 1220px;
+    margin-left: -20px;
+}
+
+.J_clubList .clublist .clubbox{
+    width:285px;
+    height: 430px;
+    float: left;
+    font-size: 14px;
+    color: #666;
+}
+

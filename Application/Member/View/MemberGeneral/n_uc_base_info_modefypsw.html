@@ -1,0 +1,109 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">账号资料</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="n_uc_base_info.html" title="">基本资料</a></li>
+                <li><a href="n_uc_base_info_address.html" title="">地址管理</a></li>
+                <li><a href="n_uc_base_info_pic.html" title="">头像修改</a></li>
+                <li class="cur"><a href="n_uc_base_info_modefypsw.html" title="">修改密码</a></li>
+            </ul>
+            <div class="modefy_psw ohd">
+                <div class="modefybox" id="J_modefypsw">
+                    <form action="#" id="J_modefyPswd" novalidate="novalidate">
+                        <dl>
+                            <dt>原&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码:</dt>
+                            <dd>
+                                <input type="password" class="oldpsw" name="old_password">
+                                <div class="tips"></div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>新&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码:</dt>
+                            <dd>
+                                <input type="password" class="newpsw" name="new_password">
+                                <div class="tips"></div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>确&nbsp;认&nbsp;密&nbsp;码:</dt>
+                            <dd>
+                                <input type="password" class="comfirmpsw" name="comfirm_password">
+                                <div class="tips"></div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>
+                                <input type="submit" class="submit G_btn_a" value="保存" id="J_pswsubmit">
+                                <div class="tips"></div>
+                            </dd>
+                        </dl>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+    <script>
+        $(function(){
+            var $modefypsw = $('#J_modefypsw'), $oldpsw = $modefypsw.find(".oldpsw"), $newpsw = $modefypsw.find(".newpsw"),$orderpsw = $modefypsw.find(".comfirmpsw");
+            $("#J_modefyPswd").validate({
+                rules: {
+                    old_password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    new_password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    comfirm_password: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: $newpsw
+                    }
+                },
+                messages: {
+                    old_password: {
+                        required: "请输入原密码",
+                        minlength: "密码不能小于6个字符"
+                    },
+                    new_password: {
+                        required: "请输入新密码",
+                        minlength: jQuery.format("密码不能小于6个字符")
+                    },
+                    comfirm_password: {
+                        required: "请输入确认密码",
+                        minlength: "确认密码不能小于6个字符",
+                        equalTo: "两次输入密码不一致"
+                    }
+                },submitHandler: function(form){
+                	console.log("打印一下");
+                    var t=$oldpsw.val(),
+                        r=$orderpsw.val(),
+                        n=$newpsw.val();
+                        $.ajax({
+                            type: "POST",
+                            url:"/member.php/MemberGeneral/modifyPass",
+                            dataType: "json",
+                            data:{password:t,newpassword:n,repassword:r},
+                            success:function(e){
+                                if (1 === e.status){
+                                   // $("#J_modefypsw").prepend('<div class="user-tip user-tip-suc"><i class="ui-icon"></i>'+ e.msg +'</div>');
+                                    alert(e.msg);
+                                }else{
+                                    //$("#J_modefypsw").prepend('<div class="user-tip user-tip-err"><i class="ui-icon"></i>'+ e.msg +'</div>');
+                                    alert(e.msg);
+                                    location.reload();
+                                }
+                            }
+                        });
+                },invalidHandler: function(form, validator) {  //不通过回调
+                    return false;
+                }
+            });
+        });
+    </script>
+</block>

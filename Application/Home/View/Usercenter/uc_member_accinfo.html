@@ -1,0 +1,87 @@
+<extend name="UC_base" />
+<block name="body">
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">帐号资料</h2>
+            <div class="UC_main_r_content">
+                <div class="accinfo_wrap G_f16 ftx05">
+                    <form action="__SELF__" method="post" enctype="multipart/form-data">
+                        <div class="accinfo_main_l">
+                        <dl>
+                            <dt>用户名：</dt>
+                            <dd>{$user_info.user_name}</dd>
+                        </dl>
+                        <dl>
+                            <dt>积分：</dt>
+                            <dd>{$user_info.total_jifen}
+                                <a href="FS_score_details" class="ftx_01">积分详情</a>
+                                <a href="__APP__/home/Guide/intergral.html" class="ftx_01">(积分的作用?)</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>昵称：</dt>
+                            <dd>
+                                <if condition="$user_info.nick eq ''">
+                                    <input type="text" id="nick_name" name="nick" class="nick_name_ipt"/>
+                                    <else /><p>{$user_info.nick}</p>
+                                </if>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>手机号：</dt>
+                            <dd>
+                                <if condition="$user_info.tel eq ''">
+                                    <input type="text" id="phone_adress" name="tel" class="email_adress_ipt nick_name_ipt "/>
+                                    <else /><p>{$user_info.tel}</p>
+                                </if>
+                            </dd>
+
+                        </dl>
+                        <dl>
+                            <dt>邮箱：</dt>
+                            <dd>
+                                <if condition="$user_info.email eq ''">
+                                    <input type="email" id="eamil_adress" name="email" class="email_adress_ipt"/>
+                                    <else /><p>{$user_info.email}</p>
+                                </if>
+                            </dd>
+
+                        </dl>
+                        <dl>
+                            <dt>我的邀请码：</dt>
+                            <dd>{$user_info.my_num}</dd>
+                        </dl>
+                        <dl>
+                            <dt>绑定邀请码:</dt>
+                            <dd>{$user_info.binding_num}</dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>
+                                <input type="submit" class="submit_btn G_btn_a"  value="保存"/>
+                            </dd>
+                        </dl>
+                </div>
+                        <div class="accinfo_main_r">
+                            <div class="user_portrait filebox">
+                                <div class="imgbox">
+                                    <img src="{$user_info.head_url}"/>
+                                </div>
+                                <a class="ui_button_primary" href="javascript:;" id="set-uploadhead-btn">
+                                    <u>
+                                        <i></i>
+                                        修改头像
+                                    </u>
+                                    <input type="file" hidefocus="true" name="headimg">
+                                </a>
+                            </div>
+                        </div>
+                        <input type="hidden" name="user_id" value="{$user_info.id}">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</block>

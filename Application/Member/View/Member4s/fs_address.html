@@ -1,0 +1,98 @@
+<extend name="uc_base" />
+<block name="body">
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">设置收货地址
+                <if condition="$role eq 1">
+                    <a href="UC_member_accInfo.html"><i></i>返回上一页</a>
+                    <elseif condition="$role eq 2"/>
+                    <a href="FS_member_accInfo.html"><i></i>返回上一页</a>
+                </if>
+            </h2>
+            <div class="UC_main_r_id">
+                <div class="J_scoreAddress">
+                    <dl>
+                        <dt>真实姓名:</dt>
+                        <if condition="$info eq null">
+                            <dd><input type="text" class="username"><div class="tips"></div></dd>
+                            <else/>
+                            <dd><p class="usernameP">{$info.receiver}</p><div class="tips"></div></dd>
+                        </if>
+                    </dl>
+                    <dl>
+                        <dt>手机号:</dt>
+                        <if condition="$info eq null">
+                            <dd><input type="text" class="userphone"><div class="tips"></div></dd>
+                            <else/>
+                            <dd><p class="userphoneP">{$info.telphone}</p><div class="tips"></div></dd>
+                        </if>
+                    </dl>
+                    <dl>
+                        <dt>收货地址:</dt>
+                        <dd class="adressbox">
+                            <div class="address_list">
+                                <ul class="address_list_wrap">
+                                    <if condition="$info eq null">
+                                        <div class="hadaddress"></div>
+                                        <else/>
+                                        <div class="hadaddress"  id="J_defalut">
+                                            <li class="item default" data-provice="{$info.receipt_province}" data-city="{$info.receipt_city}" data-quarter="{$info.receipt_quarter}" data-address="{$info.receipt_address}">
+                                                <input type="radio" name="address" id="address1" value="{$info.id}" checked><label for="address1">{$info.receipt_province}. {$info.receipt_city}. {$info.receipt_quarter}. {$info.receipt_address}</label>
+                                                <div class="modefybox">
+                                                    <ul class="modefyDel">
+                                                        <li class="modefy">修改</li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </if>
+                                    <!--<li class="item default">-->
+                                    <!--<input type="radio" name="address" id="address1"><label for="address1">南京市玄武区徐庄软件园研发三区F栋B区303室</label>-->
+                                    <!--<div class="modefybox">-->
+                                    <!--<ul class="modefyDel">-->
+                                    <!--<li class="modefy">修改</li>-->
+                                    <!--<li class="del">删除</li>-->
+                                    <!--</ul>-->
+                                    <!--</div>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div>
+                            <div class="choiceaddressbox">
+                                <ul>
+                                    <!--<li class="choiceaddress">-->
+                                    <!--<select name="proveice" class="proveice">-->
+                                    <!--<option data-id="" value="选择省" selected>选择省</option>-->
+                                    <!--<option data-id="" value=""></option>-->
+                                    <!--</select>-->
+                                    <!--<select name="city" class="city">-->
+                                    <!--<option data-id="" value="选择市" selected>选择市</option>-->
+                                    <!--<option data-id="" value=""></option>-->
+                                    <!--</select>-->
+                                    <!--<select name="quarter" class="quarter">-->
+                                    <!--<option data-id="" value="选择省" selected>选择区</option>-->
+                                    <!--<option data-id="" value=""></option>-->
+                                    <!--</select>-->
+                                    <!--<input type="text" class="detailaddress" placeholder="详细地址">-->
+                                    <!--<div class="modefybox">-->
+                                    <!--<ul class="modefyDel">-->
+                                    <!--<li class="modefy">确定</li>-->
+                                    <!--<li class="del">删除</li>-->
+                                    <!--</ul>-->
+                                    <!--</div>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div>
+                            <div class="addadress">
+                                <input type="button" class="addBtn" value="新增地址">
+                                <span class="text">您只会有一个有效地址，我们承诺绝对不会向第三方公开您的通讯地址，请放心填写！</span>
+                            </div>
+                            <div class="submitbox">
+                                <input type="submit" class="G_btn_a submit" value="提交">
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

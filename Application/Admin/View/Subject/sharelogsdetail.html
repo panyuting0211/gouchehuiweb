@@ -1,0 +1,55 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="" id="commentForm" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label">车款照片：</label>
+                            <div class="controls">
+                                <img src="{$info.image_url}" alt="">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">车款价格：</label>
+                            <div class="controls">
+                                <table>
+                                    <tr>
+                                        <td><span>裸车价:</span>{$info.bare_price}元</td>
+                                        <td>购置税:{$info.cess}元</td>
+                                        <td>交强险:{$info.compulsory_insuran}元</td>
+                                    </tr>
+                                    <tr>
+                                        <td>商业保险:{$info.business}元</td>
+                                        <td>车船使用税:{$info.travel_tax}元</td>
+                                        <td>上牌费:{$info.licensing_fees}元</td>
+                                    </tr>
+                                    <tr>
+                                        <td>购车惠上路价:{$info.low_price}元</td>
+                                        <td>其他上路价:{$info.price}元</td>
+                                        <td>为您节省:{$info.discount}元</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="control-group" id="low_price">
+                            <label class="control-label" for="low_price">赠品：</label>
+                            <div class="controls">
+                                {$info.gifts}
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+</block>

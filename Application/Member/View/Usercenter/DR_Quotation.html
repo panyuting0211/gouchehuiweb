@@ -1,0 +1,195 @@
+<extend name="UC_base" />
+<block name="body">
+    <script type="text/javascript" src="{$Think.const.JS_URL}linkage_quotes.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <div id="uc_main" class="QM">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">报价管理<p class="tips">（提示：报价单位 为：元）</p></h2>
+            <p class="mainBrand ftx02 G_f16">
+                <!--主营品牌：<span>奥迪</span>-->
+            </p>
+            <div class="carselectbox_wrap">
+                <div class="carselect_box">
+                    <form action="__SELF__" method="post">
+                        <select name="brand_id" id="brand" class="item select">
+                            <option value="选择品牌" selected>选择品牌</option>
+                            <volist name="brand_info" id="vo">
+                                <option value="{$vo.brand_id}" <if condition="$vo.brand_id eq $brand_id">selected</if>>{$vo.brand_name}</option>
+                            </volist>
+                        </select>
+                        <select name="car_model_id" id="model" class="item select">
+                            <option value="" selected>选择车型</option>
+                            <volist name="model_info" id="vo">
+                                <option value="{$vo.car_model_id}" <if condition="$vo.car_model_id eq $car_model_id">selected</if>>{$vo.car_model_name}</option>
+                            </volist>
+                        </select>
+                        <select name="car_id" id="style" class="item select">
+                            <option value="" selected>选择车款</option>
+                            <volist name="car_info" id="vo">
+                                <option value="{$vo.car_id}" <if condition="$vo.car_id eq $car_id">selected</if>>{$vo.car_name}</option>
+                            </volist>
+
+                        </select>
+                        <select  name="exterior_color_id" id="exterior_color" class="item select">
+                            <option value="" selected>选择外观颜色</option>
+                            <volist name="exterior_info" id="vo">
+                                <option value="{$vo.exterior_color_id}" <if condition="$vo.exterior_color_id eq $exterior_color_id">selected</if>>{$vo.exterior_color_name}</option>
+                            </volist>
+                        </select>
+                        <select name="interior_color_id" id="interior_color" class="item select">
+                            <option value="" selected>选择内饰颜色</option>
+                            <volist name="interior_info" id="vo">
+                                <option value="{$vo.interior_color_id}" <if condition="$vo.interior_color_id eq $interior_color_id">selected</if>>{$vo.interior_color_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city_id" id="" class="item select">
+                            <volist name="cities" id="vo">
+                                <option value="{$vo.id}" <if condition="$vo.id eq $city_id">selected</if>>{$vo.city_name}</option>
+                            </volist>
+                        </select>
+                        <input type="submit" class="item submit G_btn_a" value="查找"/>
+                    </form>
+                </div>
+            </div>
+            <div class="UC_main_r_content G_f16 ftx02">
+                <div class="uc_tips uc_tips_suc" id="J_ucTips">
+                </div>
+                <table class="grid_bundle" style="margin-bottom:0;">
+                </table>
+                <if condition="$country_quotes_info neq null">
+                    <table class="grid_bundle QS_table">
+                        <thead>
+                        <tr class="col_name">
+                            <th>范围</th>
+                            <th>底价</th>
+                            <th>销售区域</th>
+                            <th>4S店</th>
+                            <th>地址</th>
+                            <th>库存</th>
+                            <th CLASS="td_w205">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bd G_f15" id="J_QsTable">
+                        <if condition="$city_quotes_info neq null">
+                            <tr data-id="10">
+                                <td data-md="152300" data-tpn="price">{$city_name}</td>
+                                <td class="more" data-md="1010" colspan="6" data-tpn="low_price">
+                                    <table  class="grid_bundle grid_6 G_mb0">
+                                        <colgroup>
+                                            <col class="w139">
+                                            <col  class="w140">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                        </colgroup>
+                                        <volist name="city_quotes_info" id="vo" key="k">
+                                            <tr data-id="10">
+                                                <td class="bprice" data-md="152300">{$vo.low_price}</td>
+                                                <td class="area" data-md="1010">{$vo.sales_area}</td>
+                                                <td class="ssss" data-md="151290">{$vo.name_4s}</td>
+                                                <td class="adress" data-md="21">{$vo.city_name}</td>
+                                                <td class="stock" data-md="15">{$vo.stock}</td>
+                                                <td class="opera">
+                                                    <if condition="$k eq 1">
+                                                        <a href="javascript:;" class="btn_more j_moreInfo"><span>展示更多</span><b></b></a>
+                                                    </if>
+                                                </td>
+                                            </tr>
+                                        </volist>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </if>
+                        <if condition="$province_quotes_info neq null">
+                            <tr data-id="10">
+                                <td data-md="152300" data-tpn="price">{$province_name}</td>
+                                <td class="more" data-md="1010" colspan="6" data-tpn="low_price">
+                                    <table  class="grid_bundle grid_6 G_mb0">
+                                        <colgroup>
+                                            <col class="w139">
+                                            <col  class="w140">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                        </colgroup>
+                                        <volist name="province_quotes_info" id="vo" key="k">
+                                            <tr data-id="10">
+                                                <td class="bprice" data-md="152300">{$vo.low_price}</td>
+                                                <td class="area" data-md="1010">{$vo.sales_area}</td>
+                                                <td class="ssss" data-md="151290">{$vo.name_4s}</td>
+                                                <td class="adress" data-md="21">{$vo.address}</td>
+                                                <td class="stock" data-md="15">{$vo.stock}</td>
+                                                <td class="opera">
+                                                    <if condition="$k eq 1">
+                                                        <a href="javascript:;" class="btn_more j_moreInfo"><span>展示更多</span><b></b></a>
+                                                    </if>
+                                                </td>
+                                            </tr>
+                                        </volist>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </if>
+                        <if condition="$country_quotes_info neq null">
+                            <tr data-id="10">
+                                <td data-md="152300" data-tpn="price">全国</td>
+                                <td class="more" data-md="1010" colspan="6" data-tpn="low_price">
+                                    <table  class="grid_bundle grid_6 G_mb0">
+                                        <colgroup>
+                                            <col class="w139">
+                                            <col  class="w140">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                            <col  class="">
+                                        </colgroup>
+                                        <volist name="country_quotes_info" id="vo" key="k">
+                                            <tr data-id="10">
+                                                <td class="bprice" data-md="152300">{$vo.low_price}</td>
+                                                <td class="area" data-md="1010">{$vo.sales_area}</td>
+                                                <td class="ssss" data-md="151290">{$vo.name_4s}</td>
+                                                <td class="adress" data-md="21">{$vo.address}</td>
+                                                <td class="stock" data-md="15">{$vo.stock}</td>
+                                                <td class="opera">
+                                                    <if condition="$k eq 1">
+                                                        <a href="javascript:;" class="btn_more j_moreInfo"><span>展示更多</span><b></b></a>
+                                                    </if>
+                                                </td>
+                                            </tr>
+                                        </volist>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </if>
+
+                        </tbody>
+                    </table>
+                </if>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="J_saleTable"></div>
+
+    <script type="text/javascript" src="{$Think.const.JS_URL}app.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.j_moreInfo', $('#J_QsTable>tr')).each(function(){
+                var _this = $(this);
+                _this.removeClass('active').find('span').text('展开更多');
+                _this.closest('tr').nextAll().hide();
+            });
+            $('.j_moreInfo', $('#J_QsTable>tr')).click(function(e){
+                var _this = $(this);
+                _this.hasClass('active') ? (_this.removeClass('active').find('span').text('展开更多'),_this.closest('tr').nextAll().hide()) :(_this.addClass('active').find('span').text('收起'),_this.closest('tr').nextAll().show());
+            });
+        });
+    </script>
+
+</block>

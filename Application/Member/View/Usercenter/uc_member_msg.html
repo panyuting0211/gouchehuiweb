@@ -1,0 +1,34 @@
+<extend name="UC_base" />
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ZB_member.css"/>
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">消息通知</h2>
+            <div class="UC_main_r_content">
+                <table class="grid_bundle grid_2">
+                    <colgroup>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr class="col_name">
+                        <th>消息内容</th>
+                        <th>消息时间</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bd G_f15 ftx02">
+                    <volist name="msg_info" id="vo">
+                    <tr>
+                        <td><div class="msg_cont">{$vo.json}</div></td>
+                        <td><div class="msg_time">{$vo.createtime}</div></td>
+                    </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="viciao">{$pagelist}</div>
+            </div>
+
+        </div>
+    </div>
+
+</block>

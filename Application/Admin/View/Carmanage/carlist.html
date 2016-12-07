@@ -1,0 +1,256 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">所有车款</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/allcar'"><a data-toggle="tab" href="#tab1">品牌</a></li>
+                        <li class="nav_tabs_li" onclick="window.location.href='__CONTROLLER__/car_model'"><a data-toggle="tab" href="#tab2">车型</a></li>
+                        <li class="active nav_tabs_li" style="width:33.4%;"><a data-toggle="tab" href="#tab3">车款</a></li>
+                    </ul>
+                </div>
+                <div class="widget-content tab-content">
+                    <div class="widget-yu-btn widget-right-search" style="margin-bottom:5px">
+                        <div class="search">
+                            <input type="submit" class="btn button_sou" id="" value="公开底价设置" onclick="location.href='{:U('set_public_carprice')}'">
+                        </div>
+                        <div style="position:relative;left:-10px;" class="search">
+                            <input type="submit" class="btn button_sou" id="" value="+添加车款" onclick="location.href='{:U('addcar')}'">
+                        </div>
+                        <form action="{:U('carlist')}" method="post">
+                            <div class="text_input22">
+                                <select name="brand_id" style="width:150px;" id="pinpai">
+                                    <option value="">选择品牌</option>
+                                    <volist name="select_brand" id="vo">
+                                        <option value="{$vo.brand_id}"
+                                        <if condition="$vo.brand_id eq $select_brand_id"> selected="selected"</if>
+                                        >{$vo.brand_name}</option>
+                                    </volist>
+                                </select>
+
+                                <select name="model_id" style="width:150px;" id="chexing">
+                                    <option value="">选择车型</option>
+                                    <if condition="$in_model_info neq null">
+                                        <volist name="in_model_info" id="vo">
+                                            <option value="{$vo.id}"
+                                            <if condition="$vo.id eq $select_model_id"> selected="selected"</if>
+                                            >{$vo.car_model_name}</option>
+                                        </volist>
+                                    </if>
+                                </select>
+
+                                <select name="car_id" style="width:300px;" id="chekuang">
+                                    <option value="">选择车款</option>
+                                    <if condition="$in_model_info neq null">
+                                        <volist name="in_car_info" id="vo">
+                                            <option value="{$vo.id}"
+                                            <if condition="$vo.id eq $select_car_id"> selected="selected"</if>
+                                            >{$vo.car_name}</option>
+                                        </volist>
+                                    </if>
+                                </select>
+                                <select name="status" style="width:150px;">
+                                    <option value="">全部</option>
+                                    <option value="1"
+                                    <if condition="$select_status eq 1"> selected</if>
+                                    >在售</option>
+                                    <option value="0"
+                                    <if condition="$select_status eq '0'"> selected</if>
+                                    >停售</option>
+                                </select>
+                                <button type="submit" class="btn button_sou" id="" url="">筛选</button>
+                            </div>
+                        </form>
+                    </div>
+                    <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped with-check Yu-table-cark-list" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th style="width:58px;">品牌</th>
+                                <th>车型</th>
+                                <th>车款</th>
+                                <th>排序</th>
+                                <th>状态</th>
+                                <th>排量</th>
+                                <th>图片</th>
+                                <th>官方指导价</th>
+                                <th>外观颜色
+                                    <a href='javascript:;' style="font-size:21px;color:green;float:right;" onclick="all_exterior_show(this)">&darr;</a>
+                                </th>
+                                <th>内饰颜色</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="info2" id="vo">
+                                <tr>
+                                    <td style="width:63px;">{$vo.brand_name}</td>
+                                    <td style="width:63px;">{$vo.car_model_name}</td>
+                                    <td style="width:300px;">{$vo.car_name}</td>
+                                    <td style="width:63px;">{$vo.order}</td>
+                                    <td style="width:63px;">
+                                        <if condition='$vo.car_status eq "1"'>
+                                            <font size="2px" color='green'>在售</font>
+                                            <else/>
+                                            <font size="2px" color='red'>停售</font>
+                                        </if>
+                                    </td>
+                                    <td style="width:63px;">{$vo.displacement}</td>
+                                    <td style="width:40px;">
+                                        <if condition='$vo.photo_status eq "1"'>
+                                            <font size="2px" color='green'>有</font>
+                                            <else/>
+                                            <font size="2px" color='red'>无</font>
+                                        </if>
+                                    </td>
+                                    <td style="width:70px;">{$vo.auth_price}</td>
+
+                                    <td style="width:450px;text-align:left;">
+                                        <div style="display:none;float:left">
+                                            <?php static $key1=-1; $key1++;?>
+                                            <volist key="k1" name="exterior_color_info[$key1]" id="vo1">
+                                                <div style="float:left;line-height:30px;">
+                                                    <div style="margin-right:5px;line-height:30px;float:left;">{$vo1.color_name}</div>
+                                                    <div style="line-height:30px;float:left;text-align:left;padding:8px;display: inline-block;background:{$vo1.color_value};border:1px solid #dedede;margin-right:20px;margin-top:5px;"></div>
+                                                </div>
+                                            </volist>
+                                        </div>
+                                        <div style="float:right;">
+                                            <a href='javascript:;' class='exterior_id' style="font-size:20px;color:green;" onclick="exterior_show(this)">&darr;</a>
+                                        </div>
+
+                                    </td>
+
+                                    <td style="width:225px;text-align:left;">
+                                        <div style="display:none">
+                                            <?php static $key2=-1;$key2++; ?>
+                                            <volist key="k2" name="interior_color_info[$key2]" id="vo2">
+                                                <div style="float:left;line-height:30px;">
+                                                    <div style="margin-right:5px;line-height:30px;float:left;">{$vo2.color_name}</div>
+                                                    <div style="height:11px;width:11px;float:left;margin-top:5px;margin-left:-1px;">
+                                                        <volist name="vo2['color_value']" id="vo3">
+                                                            <span style="padding:4px 8px;background:{$vo3};float:left;"></span>
+                                                        </volist>
+                                                    </div>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </div>
+
+                                            </volist>
+                                        </div>
+
+                                    </td>
+
+
+                                    <td style="width:350px;">
+                                        <a class="btn btn-info" style="margin:5px;" title="更多图片" href="__CONTROLLER__/carimage/car_id/{$vo.id}">更多图片</a>
+                                        <a class="btn btn-info" style="margin:5px;" title="价格走势" href="__CONTROLLER__/priceline/car_id/{$vo.id}">价格走势</a>
+                                        <a class="btn btn-info" style="margin:5px;" title="编辑" href="__CONTROLLER__/editcar/car_id/{$vo.id}">编辑</a>
+                                        <a class="btn btn-info" style="margin:5px;" title="外观颜色" href="__CONTROLLER__/car_exterior_color/car_id/{$vo.id}">外观颜色</a>
+                                        <a class="btn btn-info" style="margin:5px;" title="内饰颜色" href="__CONTROLLER__/car_interior_color/car_id/{$vo.id}">内饰颜色</a>
+                                        <a class="btn btn-danger" style="margin:5px;" title="删除" href="javascript:;" onclick="{ if(confirm('您确定要删除吗？')) {window.location.href='__CONTROLLER__/deletecar/car_id/{$vo.id}'}}"> 删除</a>
+
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="pagination">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="viciao">
+        <ul>{$pagelist}</ul>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#pinpai").change(function () {
+                var $obj = $('#pinpai').find('option:selected');
+                $("#chexing").empty();
+                $("#chekuang").empty();
+                $("#chexing").append("<option value=''>请选择车型</option>");
+                $("#chekuang").append("<option value=''>选择车款</option>");
+
+                $.post("__MODULE__/Ajax/addModelHandle",
+                        {brand_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data, function (key, val) {
+                                $("#chexing").append("<option value='" + val.id + "'>" + val.car_model_name + "</option>");
+                            });
+
+                        },
+                        "json");
+            })
+            $("#chexing").change(function () {
+                var $obj = $('#chexing').find('option:selected');
+                $("#chekuang").empty();
+                $("#chekuang").append("<option value=''>请选择车款</option>");
+
+                $.post("__MODULE__/Ajax/addModelHandle",
+                        {car_model_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data, function (key, val) {
+                                $("#chekuang").append("<option value='" + val.id + "'>" + val.car_name + "</option>");
+                            });
+
+                        },
+                        "json");
+            })
+
+        });
+
+
+        function exterior_show(aa) {
+            var x = $(aa).parent().siblings('div').css('display');
+
+            if (x == 'block') {
+                $(aa).parent().siblings('div').hide();
+                $(aa).parent().parent().next().find('div').hide();
+                $(aa).html('&darr;');
+            }
+            if (x == 'none') {
+                $(aa).parent().siblings('div').show();
+                $(aa).parent().parent().next().find('div').show();
+                $(aa).html('&uarr;');
+            }
+        }
+        function all_exterior_show(aa) {
+            var size = $(aa).css('font-size');
+            if (size == '20px') {
+                $('.exterior_id').each(function (i, n) {
+                    $(n).parent().siblings('div').hide();
+                    $(n).parent().parent().next().find('div').hide();
+                    $(n).html('&darr;');
+                });
+                $(aa).html('&darr;');
+                $(aa).css('font-size', '21px');
+            } else {
+                $('.exterior_id').each(function (i, n) {
+                    $(n).parent().siblings('div').show();
+                    $(n).parent().parent().next().find('div').show();
+                    $(n).html('&uarr;');
+                });
+                $(aa).html('&uarr;');
+                $(aa).css('font-size', '20px');
+            }
+        }
+    </script>
+</block>

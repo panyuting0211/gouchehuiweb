@@ -1,0 +1,253 @@
+<extend name="uc_base" />
+<block name="body">
+
+    <div id="uc_main" class="QM">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">报价管理<p class="tips">（提示：报价单位 为：元）</p></h2>
+            <p class="mainBrand ftx02 G_f16">
+                <span>主营品牌：<a href="#" data-id="{$brand_id}" class="G_btn_a j_fuBrand j_mainBrand">{$brand_name}</a></span>
+                <if condition="$brandList">
+				<span style="margin-left: 40px;" >副营品牌：
+                    <volist name="brandList" id="vol">
+                        <a href="#" data-id="{$vol['brand_id']}"class="j_fuBrand">{$vol.brand_name}</a>
+                    </volist>
+                </span>
+				</if>
+
+            </p>
+            <ul class="offer-switch">
+                <li><a href="fs_quotation" class="offered">已报价</a></li>
+                <li><a href="fs_unquotation" class="unoffer cur">未报价</a></li>
+            </ul>
+            <div class="carselectbox_wrap">
+                <div class="carselect_box">
+                    <div class="j_linkSelecter link-selecter drop-down-menu" id="J_models" data-type="1">
+                        <i class="drop-down-menu-result-i"></i>
+                        <span class="drop-down-menu-result" data-code="0">请选择车型</span>
+
+                    </div>
+
+                    <div class="j_linkSelecter link-selecter drop-down-menu car-kuan no-select" id="J_car" data-type="2">
+                        <i class="drop-down-menu-result-i"></i>
+                        <span class="drop-down-menu-result" data-code="0">请选择车款</span>
+
+                    </div>
+
+                    <div class="j_linkSelecter link-selecter drop-down-menu car-color no-select" id="J_exColor" data-type="3" data-typecolor="ex">
+                        <i class="drop-down-menu-result-i"></i>
+                        <span class="drop-down-menu-result" data-code="0">请选择外观颜色</span>
+
+                    </div>
+
+                    <div class="j_linkSelecter link-selecter drop-down-menu car-color no-select" id="J_inColor" data-type="3" data-typecolor="in">
+                        <i class="drop-down-menu-result-i"></i>
+                        <span class="drop-down-menu-result" data-code="0">请选择内饰颜色</span>
+                    </div>
+
+                    <input type="submit" class="item submit G_btn_a j_seachOffer" value="筛选"/>
+                </div>
+            </div>
+
+            <div class="UC_main_r_content G_f16 ftx02">
+                <div class="batchOperation clearfix">
+                            <span class="cur_page_sizes G_fl">
+                                <span>每页显示</span>
+                                <span class="drop-down-menu middle" id="J_CustomPageSide">
+                                    <i class="drop-down-menu-result-i"></i>
+                                    <span class="drop-down-menu-result" data-code="20">20</span>
+                                    <div class="drop-down-sub hide">
+                                        <ul class="page-ul">
+                                            <li data-code="10"><p>10</p><i class="icon-nike"></i>
+                                            </li>
+                                            <li data-code="20"><p>20</p><i class="icon-nike"></i>
+                                            </li>
+                                            <li data-code="30"><p>30</p><i class="icon-nike"></i>
+                                            </li>
+                                            <li data-code="40"><p>40</p><i class="icon-nike"></i>
+                                            </li>
+                                            <li data-code="50"><p>50</p><i class="icon-nike"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </span>
+                                <span>条</span>
+                            </span>
+                    <div class="G_fl friendship_tips">
+                        <i class="ui_icon ui_icon_16 ui_icon_wb_exc_16"></i>友情提示：批量修改区域和批量取消报价，仅限已报价的记录！
+                    </div>
+                    <div class="G_fr">
+                        <input type="button" class="item submit G_btn_b btn_34px G_btn_disabled" value="批量添加报价" id="J_BatchEditOfferBtn"/>
+                    </div>
+                </div>
+                <div class="uc_tips uc_tips_suc" id="J_ucTips">
+
+                </div>
+                <div class="content" id="ajax_lists">
+                    <div id="newslist">
+                        <table class="grid_bundle QM_table grid_11" id="J_QmTable">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col class="stock">
+                                <col class="onway">
+                                <col>
+                                <col class="operation">
+                            </colgroup>
+                            <thead>
+                            <tr class="col_name">
+                                <th>
+                                    <input type="checkbox" value="all"/>
+                                </th>
+                                <th>车型</th>
+                                <th>车款</th>
+                                <th>外观颜色</th>
+                                <th>内饰颜色</th>
+                                <th>报价</th>
+                                <th>优惠</th>
+                                <th>底价</th>
+                                <th>库存</th>
+                                <th>在途</th>
+                                <th>销售区域</th>
+                                <th CLASS="td_w205">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="bd G_f15" >
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fsq-pager pager" id="J_uiOfferPager"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="J_saleTable"></div>
+    <script type="text/javascript" src="{$Think.const.JS_URL}city_json.js"></script>
+    <script type="text/javascript" src="{$Think.const.JS_URL}ui_edit.js"></script>
+    <script>
+
+        $(function(){
+            var Page = 1; // 全局当前页码
+            var bid = $('.j_mainBrand').data('id');
+            var qianzui = '/member.php';
+            $.uccarFilterLike();
+
+            $('.j_fuBrand').on('click', function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                var $this = $(this);
+                bid = $this.data('id');
+
+                $('.j_fuBrand').removeClass('G_btn_a');
+                $this.addClass('G_btn_a');
+
+                $.uccarFilterLike({
+                    isModelFlag: !1,
+                    brand_id: bid
+                });
+
+                $.ucPager({
+                    pageSize: parseInt($.trim($("#J_CustomPageSide").find(".drop-down-menu-result").text())),
+                    model: $('#J_models').find('li.current').data("code"),
+                    style: $('#J_car').find('li.current').data("code"),
+                    brand_id: bid,
+                    exterior_color: $('#J_exColor').find('li.current').data("code"),
+                    interior_color: $('#J_inColor').find('li.current').data("code"),
+                    asynUrl: qianzui+"/Member4s/FS_unquotation_ajax"
+                });
+            });
+            $.ucPager({
+                pageSize: parseInt($.trim($("#J_CustomPageSide").find(".drop-down-menu-result").text())),
+                model: $('#J_models').find('li.current').data("code"),
+                style: $('#J_car').find('li.current').data("code"),
+                brand_id: bid,
+                exterior_color: $('#J_exColor').find('li.current').data("code"),
+                interior_color: $('#J_inColor').find('li.current').data("code"),
+                asynUrl: qianzui+"/Member4s/FS_unquotation_ajax"
+            });
+
+            $("#J_uiOfferPager").on("click", "a", function(e) {
+                Page = $(e.target).data("page");
+                $.ucPager({
+                    page: Page,
+                    pageSize: parseInt($.trim($("#J_CustomPageSide").find(".drop-down-menu-result").text())),
+                    model: $('#J_models').find('li.current').data("code"),
+                    brand_id: bid,
+                    style: $('#J_car').find('li.current').data("code"),
+                    exterior_color: $('#J_exColor').find('li.current').data("code"),
+                    interior_color: $('#J_inColor').find('li.current').data("code"),
+                    asynUrl: qianzui+"/Member4s/FS_unquotation_ajax"
+                });
+            });
+
+            $(".j_seachOffer").on("click", function(){
+                $.ucPager({
+                    page: Page,
+                    pageSize: parseInt($.trim($("#J_CustomPageSide").find(".drop-down-menu-result").text())),
+                    model: $('#J_models').find('li.current').data("code"),
+                    brand_id: bid,
+                    style: $('#J_car').find('li.current').data("code"),
+                    exterior_color: $('#J_exColor').find('li.current').data("code"),
+                    interior_color: $('#J_inColor').find('li.current').data("code"),
+                    asynUrl: qianzui+"/Member4s/FS_unquotation_ajax"
+                });
+                $("#J_QmTable").find("input[value=all]").removeAttr("checked");
+                $("#J_QmTable").find("input[value=all]").removeClass("checked");
+            });
+
+
+
+            //报价管理自定义下拉菜单
+            !function(){
+                $("#J_CustomPageSide").click(function (e) {
+                    var $dropDownSub = $(this).find(".drop-down-sub"),
+                            _val = $(this).find(".drop-down-menu-result").attr("data-code");
+                    $dropDownSub.find("li").removeClass("current");
+                    if ($dropDownSub.is(":hidden")) {
+                        var li = $dropDownSub.find("li[data-code=" + _val + "]");
+                        li.addClass("current");
+                        e.stopPropagation();
+                        $dropDownSub.show();
+                    } else {
+                        $dropDownSub.hide();
+                    }
+                });
+                $("#J_CustomPageSide").find(".drop-down-sub").find("li").click(function(e) {
+                    var $this = $(this),
+                            $thisVal = $.trim($this.data("code"));
+                    $this.siblings().removeClass("current");
+                    $this.addClass("current");
+                    $("#J_CustomPageSide").find(".drop-down-menu-result").text($thisVal).attr("data-code", $thisVal);
+
+                    $.ucPager({
+                        page: Page,
+                        pageSize: parseInt($thisVal),
+                        model: $('#J_models').find('li.current').data("code"),
+                        brand_id: bid,
+                        style: $('#J_car').find('li.current').data("code"),
+                        exterior_color: $('#J_exColor').find('li.current').data("code"),
+                        interior_color: $('#J_inColor').find('li.current').data("code"),
+                        asynUrl: qianzui+"/Member4s/FS_unquotation_ajax"
+                    });
+
+                    $("#J_CustomPageSide").find(".drop-down-sub").hide();
+                    e.stopPropagation();
+                });
+                $(document).click(function () {
+                    $("#J_CustomPageSide").find(".drop-down-sub").hide();
+                });
+            }();
+
+        });
+
+    </script>
+</block>

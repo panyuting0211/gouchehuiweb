@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>成员授权</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/matrix-style.css" />
+<link rel="stylesheet" href="css/matrix-media.css" />
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+
+<!-- header -->
+<!--Header-part-->
+<div id="header">
+  <h1><a href="dashboard.html">Matrix Admin</a></h1>
+  <ul class="header-nav">
+  <li><a href="#" ><i class="icon-cogs"></i>系统</a></li>
+  <li><a href="#" class="active"><i class="icon-user"></i>用户</a></li>
+  <li><a href="#"><i class="icon-wrench"></i>插件管理</a></li>
+  </ul>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  Welcome <span class="text">admin</span><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#"><i class="icon-home"></i>返回前台</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="icon-check"></i>修改密码</a></li>
+        <li class="divider"></li>
+        <li><a href="login.html"><i class="icon-cog"></i>修改昵称</a></li>
+		<li class="divider"></li>
+		<li><a href="login.html"><i class="icon-exclamation-sign"></i>帮助</a></li>
+      </ul>
+    </li>
+    <li class="dropdown hide" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">消息</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> 新建消息</a></li>
+        <li class="divider"></li>
+        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+      </ul>
+    </li>
+    <li class=""><a title="" href="login.html"><i class="icon icon-off"></i> <span class="text">退出</span></a></li>
+  </ul>
+</div>
+<!-- / header -->
+
+<!-- left -->
+<div id="left">
+<div id="sidebar">
+
+  <ul>
+    <li class="submenu"> <a href="#"><i class="icon icon-list"></i> <span>用户</span> <i class="icon icon-new-style  icon-chevron-down"></i></a>
+      <ul>
+        <li><a class="active" href="form-common.html">用户管理</a></li>
+		<li><a href="form-common.html">权限管理</a></li>       
+      </ul>
+    </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-list"></i> <span>行为管理</span> <i class="icon icon-new-style  icon-chevron-down"></i></a>
+      <ul>
+        <li><a href="form-common.html">用户行为</a></li>
+        <li><a href="form-validation.html">行为日志</a></li>
+      </ul>
+    </li>
+  </ul>
+   
+</div>
+</div>
+<!-- / left-->
+
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 用户</a> <a href="#" class="current">权限管理</a> </div>
+    <h1>成员授权</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+
+            <div class="widget-yu-btn widget-right-search">
+			<div class="search">
+  <form class="form-search">
+  <input type="text" class="input-medium search-query" placeholder="">
+  <button type="submit" class="btn" id="search" url="/admin.php?s=/Menu/index/pid/0.html">新增</button>
+</form>
+</div>         <select name="pid">
+                    <option value="0">角色名称</option><option value="1">总经理&nbsp;</option><option value="2">总监&nbsp;</option></select>
+             
+             
+            </div>
+
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead>
+                <tr>                
+                  <th>UID</th>
+                  <th>昵称</th>                
+                  <th>最后登录时间</th>
+				  <th>最后登录IP</th>
+                  <th>状态</th>                 
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>                 
+                  <td><a href="/admin.php?s=/Menu/index/pid/1.html">1</a></td>
+                  <td>sl</td>                 
+                  <td class="center"> 1970-01-01</td>
+				  <td>08:00</td>
+                  <td>禁用
+                    </td>                 
+                  <td class="center">
+                            <a title="解除授权" href="/admin.php?s=/Menu/edit/id/1.html">解除授权</a>                           
+                        </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+		  <div class="form-actions">
+    		<button type="submit"  id="submit" class="btn btn-primary">确定</button>
+			<button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+    	</div>	  
+</div>
+</div>
+  </div>
+
+
+</div>
+<!--Footer-part-->
+<div class="row-fluid">
+  <div id="footer" class="span12">Copyright@2008-2012 Gouchehui.com.cn All rights reserved. 版权所有 南京易橙汇网络科技有限公司<br/>
+Powered by Jiangsu ERUN 备案号：苏ICP备13031090号-2</div>
+</div>
+<!--end-Footer-part-->
+</div>
+<script type="text/javascript">
+    (function(){
+        var ThinkPHP = window.Think = {
+            "ROOT"   : "__ROOT__", //当前网站地址
+            "APP"    : "__APP__", //当前项目地址
+            "PUBLIC" : "__PUBLIC__", //项目公共目录地址
+            "DEEP"   : "{:C('URL_PATHINFO_DEPR')}", //PATHINFO分割符
+            "MODEL"  : ["{:C('URL_MODEL')}", "{:C('URL_CASE_INSENSITIVE')}", "{:C('URL_HTML_SUFFIX')}"],
+            "VAR"    : ["{:C('VAR_MODULE')}", "{:C('VAR_CONTROLLER')}", "{:C('VAR_ACTION')}"]
+        }
+    })();
+    </script>
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery.ui.custom.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/matrix.js"></script>
+<script type="text/javascript">
+        $(function() {
+            //搜索功能
+            $("#search").click(function() {
+                var url = $(this).attr('url');
+                var query = $('.form-search').find('input').serialize();
+                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+                query = query.replace(/^&/g, '');
+                if (url.indexOf('?') > 0) {
+                    url += '&' + query;
+                } else {
+                    url += '?' + query;
+                }
+                window.location.href = url;
+            });
+            //回车搜索
+            $(".search-query").keyup(function(e) {
+                if (e.keyCode === 13) {
+                    $("#search").click();
+                    return false;
+                }
+            });
+
+            //点击排序
+        	$('.list_sort').click(function(){
+        		var url = $(this).attr('url');
+        		var ids = $('.ids:checked');
+        		var param = '';
+        		if(ids.length > 0){
+        			var str = new Array();
+        			ids.each(function(){
+        				str.push($(this).val());
+        			});
+        			param = str.join(',');
+        		}
+
+        		if(url != undefined && url != ''){
+        			window.location.href = url + '/ids/' + param;
+        		}
+        	});
+        });
+    </script>
+</body>
+</html>

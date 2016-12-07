@@ -1,0 +1,49 @@
+<extend name="UC_base" />
+<block name="body">
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">账号资料
+                <if condition="$role eq 1">
+                    <a href="UC_member_accInfo.html"><i></i>返回上一页</a>
+                    <elseif condition="$role eq 2"/>
+                        <a href="FS_member_accInfo.html"><i></i>返回上一页</a>
+                </if>
+            </h2>
+            <div class="UC_main_r_id">
+                <div class="pointD_wrap">
+                    <div class="title">
+                        <h3>积分详情</h3>
+                        <p>当前积分:<span>{$total_jifen}</span></p>
+                        <a href="{:U('fs_address')}" class="exchange">收货地址</a>
+                        <a href="" class="exchange" id="J_duihuan">积分兑换</a>
+                    </div>
+                    <table class="grid_bundle grid_11">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>日期</th>
+                            <th>来源/用途</th>
+                            <th>获取/消耗</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bd G_f15">
+                        <volist name="info" id="vo">
+                            <tr>
+                                <td>{$vo.createtime}</td>
+                                <td>{$vo.info}</td>
+                                <td>{$vo.score}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    <div class="viciao">{$pagelist}</div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</block>

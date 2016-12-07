@@ -1,0 +1,141 @@
+<extend name="uc_base" />
+<block name="body">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZZ_four.css">
+	<div id="uc_main">
+		<div class="UC_main_r">
+			<h2 class="UC_main_r_tit">编辑</h2>
+			<form action="__SELF__" method="post">
+				<div class="UC_main_r_editor" id="J_ScarEdit">
+					<div class="control-group clearfix">
+						<label class="control-label">车型：</label><div class="controls">{$special_car_info.car_model_name}	</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label">车款：</label><div class="controls">{$special_car_info.car_name}</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label">外观颜色：</label><div class="controls">{$special_car_info.exterior_color_name}</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label">内饰颜色：</label> <div class="controls">{$special_car_info.interior_color_name}</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label" for="title">市场价：</label>
+						<div class="controls">
+							<input type="text" name="price" class="j_number especial_editor_input" value="{$special_car_info.price}"> 元
+							<p class="help-block"></p>
+						</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label" for="title">特价：</label>
+						<div class="controls">
+							<input type="text" name="special_price" class="j_number especial_editor_input" value="{$special_car_info.special_price}"> 元
+							<p class="help-block"></p>
+						</div>
+					</div>
+
+					<div class="control-group clearfix">
+						<label class="control-label" for="title">销售区域：</label>
+						<div class="controls">
+							<div class="cities j_cities">
+								<div class="j_citiesInner">
+									<volist name="area_info" id="vo">
+										<span data-name="{$vo.sales_area_name}" class="city j_delCity" title="{$vo.sales_area_name}">{$vo.sales_area_name}</span>
+
+									</volist>
+									<input type="hidden" name="selas_area_name" value="{$special_car_info.area_name_str}">
+									<input type="hidden" name="selas_area_level" value="{$special_car_info.area_level_str}">
+								</div>
+								<if condition="$area_info eq null">
+									<a href="javascript:;" class="G_btn_b j_editCities" title="添加区域">添加区域</a>
+									<else />
+									<a href="javascript:;" class="G_btn_b j_editCities" title="修改区域">修改区域</a>
+								</if>
+							</div>
+
+						</div>
+					</div>
+					<div class="control-group clearfix">
+						<label class="control-label" for="title">活动日期：</label>
+						<div class="controls clearfix">
+							<div class="control_time">
+								<i class="icon-user"></i>
+								<input type="text" name="startdate" class="especial_editor_input" value="{$special_car_info.start_date}">
+							</div>
+							<div class="control_time">——</div>
+							<div class="control_time">
+								<i class="icon-user"></i>
+								<input type="text" name="enddate" class="especial_editor_input" value="{$special_car_info.end_date}">
+							</div>
+						</div>
+					</div>
+					<div class="control-group-activity clearfix">
+						<label class="control-label" for="title">活动数量：</label>
+						<div class="controls">
+							<input type="text" name="number" class="j_number especial_editor_input" value="{$special_car_info.number}"> 辆
+							<p class="help-block"></p>
+						</div>
+					</div>
+					<div class="control-group-activity clearfix">
+						<label class="control-label" for="title">活动说明：</label>
+						<div class="controls">
+							<textarea class="control_textarea" name="description">{$special_car_info.description}</textarea>
+							<p class="help-block"></p>
+						</div>
+					</div>
+
+					<div class="btn_box"><input type="submit" class="G_btn_a btn_34px j_btnEdit" data-type="add" value="修改报价"></input></div>
+					<input type="hidden" name="special_car_id" value="{$special_car_info.id}">
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}city_json.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}app.js"></script>
+	<script type="text/javascript" src="{$Think.const.JS_URL}jquery.datetimepicker.js"></script>
+	<script  type="text/javascript">
+		$('input[name="startdate"]').datetimepicker({lang:'ch',format:'Y-m-d H:i'});
+		$('input[name="enddate"]').datetimepicker({lang:'ch'});
+		$(function(){
+
+			$('input.j_number','#J_ScarEdit').keyup(function(e){
+				var anode = $(this),
+						a = $(this).val(),
+						floatReg = /^[0-9]*[1-9][0-9]*$/;
+				if(a == ""){
+					return false;
+				}else{
+					a = parseInt(a);
+					if (isNaN(a)) {
+						a = 1;
+					}
+					if (a <= 0) {
+						a = Math.abs(a);
+					}
+					if ($(this).val() != a) {
+						$(this).val(a);
+					}
+				}
+			});
+
+			$('.j_editCities').click(function(e){
+				e.preventDefault();
+
+				var _selectCityArrs = [],
+						$cities = $(this).closest('.j_cities'),
+						$curCities = $cities.find('.j_delCity');
+				$.each($curCities, function(j, p){
+					_selectCityArrs[j] = $(p).data('name');
+				});
+
+				$cities.areaPop({
+					popObj: $('#J_salesArea'),
+					selectedArea: _selectCityArrs
+				});
+			});
+		});
+	</script>
+</block>

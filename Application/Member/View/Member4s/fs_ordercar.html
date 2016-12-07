@@ -1,0 +1,56 @@
+<extend name="uc_base" />
+<block name="body">
+	<div id="uc_main">
+		<div class="UC_main_r">
+			<h2 class="UC_main_r_tit">定车订单</h2>
+			<div class="Order_car">
+				<form action="__SELF__" METHOD="post">
+				<input type="text" name="out_trade_no" class="Order_input" placeholder="订单号" value="{$out_trade_no}"/>
+				<input type="submit" value="搜索" class="Order_button">
+				</form>
+			</div>
+			<div class="UC_main_r_content">
+				<table class="grid_bundle table_fontsize">
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col class="w160">
+						<col>
+						<col>
+					</colgroup>
+					<thead>
+					<tr class="col_name">
+						<th>商品名称</th>
+						<!--<th>车款</th>-->
+						<th>外观颜色</th>
+						<th>内饰颜色</th>
+						<th>底价</th>
+						<th>订单号</th>
+						<th>下单时间</th>
+						<th>提车时间</th>
+					</tr>
+					</thead>
+					<tbody class="bd">
+					<volist name="info" id="vo">
+						<tr>
+							<td>{$vo.carstyle}</td>
+							<!--<td>{$vo.car_name}</td>-->
+							<td>{$vo.exterior_color_name}</td>
+							<td>{$vo.interior_color_name}</td>
+							<td>{$vo.low_price}</td>
+							<td>{$vo.out_trade_no}</td>
+							<td>{$vo.createtime}</td>
+							<td>{$vo.buy_time}</td>
+						</tr>
+					</volist>
+					</tbody>
+				</table>
+				<div class="viciao">{$pagelist}</div>
+			</div>
+
+		</div>
+	</div>
+</block>

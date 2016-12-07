@@ -1,0 +1,243 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<style type="text/css">
+    .white_content {
+            display: none;
+            position: fixed;
+            top: 25%;
+            left: 35%;
+            width: 20%;
+            height: 20%;
+            padding: 16px;
+            border: 2px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+     .hide_xiugai {
+        margin-top: 10px;
+        hover:blue;
+        font-size:15px;
+        color:green;
+
+     }
+     .res_info{
+        display: none;
+        position: static;
+        text-align: center;
+        /* margin-top: 50px; */
+        width: 100%;
+        margin-top: 10px;
+        color: #DA3333;
+        /* border: 1px dashed #f00; */
+        padding: 6px 0px;
+        background: #F1D2D2;
+    }
+     li{
+        list-style: none;
+     }
+</style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a> <a href="__CONTROLLER__/carlist" class="current">所有车款</a><div class="carmanage_right"><a href="__CONTROLLER__/carlist" style="color:#006dcc;">返回上一页</a></div> </div>
+                <h1>外观颜色</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <form action="{:U('Carmanage/exterior_colorupHandle')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">品牌：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.brand_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">车型：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.car_model_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">车款：</label>
+                                    <div class="controls" style="margin-top:5px;">
+                                        {$car_info.car_name}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">外观颜色：</label>
+                                    <div class="controls">
+                                        <input id="exterior" name="exterior_color_name" type="text">
+                                        <input type="hidden" name="car_id" value="{$car_info.id}">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="webname">颜色值：</label>
+                                    <div class="controls">
+                                        <input id="exterior_value" name="exterior_color_value" type="text">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="title">封面图片：</label>
+                                    <div class="controls">
+                                        <input  type="file" name="imgurl"  id="file_upload" value="" >
+                                        <p class="help-block" style="margin-top:10px;">(每个种类图片最多上传5张,(外观、内饰、空间、细节)尺寸为最低600*400px)</p>
+                                    </div>
+                                    <div style="margin-left:170px;" id="image" class="image">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-actions">
+                                <button type="submit"  id="submit" class="btn btn-primary">添加</button>
+                            </div>
+                            <div class="widget-yu-btn widget-right-search">
+                                <div class="text_input22">
+                                    <div id="content-header">  <h1>已添加颜色</h1> </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="control_surface">
+                            <volist name="exterior_info" id="vo">
+                                <div class="control_surdivext">
+                                    <a href="javascript:;" style="margin-left:20px" onclick="tanchuang(this)">修改</a>
+                                    <div id='hide_exterior_id2' style="display:none">{$vo.id}</div>
+                                    <a href="javascript:;" id='fuzhi' onclick="aa(this)" style='float:right'>复制</a>
+                                    <div class="control_surdivone">
+                                        <img src="{$Think.const.OSS}{$vo.imgurl}">
+                                    </div>
+                                    <div class="control_surfacetwo">
+                                        <div class="control_surfontext">{$vo.color_name}</div>
+                                        <div style="background:{$vo.color_value}" class="control_surcolorext innercolor0"></div>
+                                    </div>
+                                    <div class="control_delete">
+                                         <a title="删除" href="javascript:;" onclick="{ if(confirm('您确定要删除吗？')) {window.location.href='__CONTROLLER__/delete_exterior_color/id/{$vo.id}'}}"> 删除</a> 
+                                    </div>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="light" class="white_content">
+        <div style="margin-left:40px;">
+            <li>
+                外观颜色：
+                <input id="exterior2" name="color_name" type="text" style="width:100px">
+                <input type="hidden" id='hide_exterior_id' >
+            </li>
+            <li>
+                颜色值：&nbsp;&nbsp;&nbsp;
+                <input id="exterior_value2" name="color_value" type="text" style="width:100px">
+            </li>
+            <li style="margin-left:60px;">
+                <input class='hide_xiugai' type="button" onclick="change_color()" value="修改" />
+                <input class='hide_xiugai' type="button" onClick="closeWindow()" value="关闭" />
+            </li>
+            <p id='res_info' class='res_info'></p>
+                
+        </div>
+    </div>
+    <script src="{$Think.const.ADMIN_JS_URL}uploadifyduotu/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{$Think.const.ADMIN_JS_URL}uploadifyduotu/uploadify.css">
+    <script type="text/javascript">
+
+        function aa(b){
+            var aaa=$(b).siblings('.control_surfacetwo');
+            var color_name = aaa.find('.control_surfontext').html();
+            var color_value= aaa.find('.innercolor0').css('background-color');
+            if($.browser.msie&&$.browser.version>8||$.browser.mozilla||$.browser.webkit) {
+                color_value=color_value.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                color_value="#"+hex(color_value[1])+hex(color_value[2])+hex(color_value[3]);
+            }
+            color_value=color_value.toUpperCase();
+            if($(b).html()=='修改'){
+                $('#exterior2').val(color_name);
+                $('#exterior_value2').val(color_value);
+                var exterior_id=$(b).siblings('#hide_exterior_id2').html();
+                // alert(exterior_id);
+                $('#hide_exterior_id').val(exterior_id);
+            }else if($(b).html()=='复制'){
+                $('#exterior').val(color_name);
+                $('#exterior_value').val(color_value);
+            }
+            
+        }
+
+        function tanchuang(b){
+            $('#light').show();
+            aa(b);
+            $('#res_info').hide();
+        }
+
+        function closeWindow(){
+            $('#light').hide();
+        }
+        function change_color(){
+            var id         =$('#hide_exterior_id').val();
+            var color_name =$('#exterior2').val();
+            var color_value=$('#exterior_value2').val();
+            // alert(color_name);
+            $.post(
+                "__CONTROLLER__/change_color",
+                {id:id,color_name:color_name,color_value:color_value},
+                function(data,textStatus){
+                    $('#res_info').show();
+                    $('#res_info').html(data);
+                }
+            );
+        }
+
+        function hex(x){
+            return ("0"+parseInt(x).toString(16)).slice(-2);
+        }
+
+        function del(delName, delId) {    //点击删除链接，ajax
+            //alert(delId);
+            var info = $('#url').val();  //获取url
+            var d = '#' + delName;
+            var url = info + "/del";    //删除图片的路径
+            $.post(url, {'name': delId}, function (data) {    //ajax后台
+                $(d).html(data.info);           //输出后台返回信息
+                $(d).hide(3000);              //自动隐藏
+            }, 'json');                   //josn格式
+
+        }
+        $(function () {
+            $('#file_upload').uploadify({
+                'formData': {
+                    'timestamp': '{$time}',            //时间
+                    'token': '{$time | md5}',   //加密字段
+                    // 'url': $('#url').val() + '/upload/',  //url
+                    // 'imageUrl': $('#root').val()        //root
+                },
+
+                'fileTypeDesc': 'Image Files',          //类型描述
+                //'removeCompleted' : false,    //是否自动消失
+                'fileTypeExts': '*.gif; *.jpg; *.png',    //允许类型
+                'fileSizeLimit': '3MB',         //允许上传最大值
+                'swf': '{$Think.const.ADMIN_JS_URL}uploadifyduotu/uploadify.swf', //加载swf
+                'uploader': '__CONTROLLER__/uploadify',         //上传路径
+                'buttonText': '文件上传',                 //按钮的文字
+
+                'onUploadSuccess': function (file, data, response) {    //成功上传返回
+                    var n = parseInt(Math.random() * 100);                //100以内的随机数
+                    //插入到image标签内，显示图片的缩略图
+                    $('#image').append('<div id="' + n + '" class="photo" style="margin-left:10px;"><a href="' + data + '"  target="_blank"><img src="{$Think.const.OSS}' + data + '"  style="height:80px;width:80px;" /><input name="images[]" type="hidden" value="' + data + '"></a><div class="del"><a href="javascript:vo(0)" onclick=del("' + n + '","/Public/upload/' + data + '");return false;>删除</a></div></div>');
+                }
+            });
+        });
+
+
+    </script>
+
+</block>

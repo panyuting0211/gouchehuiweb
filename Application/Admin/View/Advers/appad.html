@@ -1,0 +1,98 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">{$atitle}</a></div>
+    </div>
+    <div class="container-fluid">
+        <form id="export-form" method="post" action="{:U('Advers/AdverdelSelect?ac=1')}">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-yu-btn widget-right-search">
+                        <a class="btn btn-primary" href="{:U('Advers/appadadd')}">
+                            <i class="icon-plus"></i>添加广告
+                        </a>
+                    </div>
+                    <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <!-- <th style="width:50px;"><input class="checkbox check-all" type="checkbox"/></th> -->
+                                <th>广告名</th>
+                                <th>广告图</th>
+                                <th>广告链接</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <volist name="info" id="vo">
+                                <tbody>
+                                <tr>
+                                    <form>
+                                        <td style="height:115px;line-height:115px;">{$vo.ad_name}</td>
+                                        <td style="height:115px;line-height:115px;"><img src="{$Think.const.OSS}{$vo.imgurl}" style="width:314px;height:98px;"/></td>
+                                        <td style="height:115px;line-height:115px;">{$vo.adurl}</td>
+                                        <td class="center" style="height:115px;line-height:115px;">
+                                            <label class="radio inline">
+                                                <input type="radio" name="status" id="ajax_ad1"
+                                                <if condition="$vo['status'] eq 1">checked</if>
+                                                value="{$vo.id}"/>显示
+                                            </label>
+                                            <label class="radio inline">
+                                                <input type="radio" name="status" id="ajax_ad0"
+                                                <if condition="$vo['status'] neq 1">checked</if>
+                                                value="{$vo.id}"/>不显示
+                                            </label>
+                                        </td>
+
+                                        <td class="center" style="height:115px;line-height:115px;">
+                                            <a class="btn btn-info" title="编辑" href="{:U('Advers/edit_ad?id='.$vo['id'])}">编辑</a>
+                                            <a class="confirm ajax-get btn btn-danger" title="删除" href="{:U('Advers/DelSelect?id='.$vo['id'])}">删除</a>
+                                        </td>
+                                    </form>
+                                </tr>
+        </tbody>
+        </volist>
+        </table>
+    </div>
+    </div>
+    <div class="viciao">
+        <ul>{$pagelist}</ul>
+
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    <script>
+        function dodel(url) {
+            if (confirm('你确定要删除吗？')) {
+                window.location = url;
+            }
+        }
+
+        $(function () {
+            $("input[id='ajax_ad1']").click(function () {
+                var val = $(this).val();
+                $.post("__CONTROLLER__/ajax_ad",
+                        {ad_id1: val},
+                        function (data, textStatus) {
+                        }
+                )
+            });
+
+            $("input[id='ajax_ad0']").click(function () {
+                var val = $(this).val();
+                $.post("__CONTROLLER__/ajax_ad",
+                        {ad_id0: val},
+                        function (data, textStatus) {
+                        }
+                )
+            });
+
+        })
+    </script>
+
+</block>

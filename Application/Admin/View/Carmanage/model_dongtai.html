@@ -1,0 +1,92 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a> <a href="#" class="current">底价车</a> </div>
+    
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+    <form action="{:U('Carmanage/addmodel_dongtai')}"  method="post">
+  <fieldset>
+    <div class="control-group">
+      <label class="order_list" for="tip" style="margin-left:0px;margin-bottom:20px;">动态内容</label>
+        <div class="controls">
+          <textarea class="form-control" id="tip" name="content" rows="7" style="width:500px;"></textarea>                              
+        </div>
+        </div>
+        <input type="hidden" name="car_model_id" value="{$model_id}" />
+  </fieldset>
+
+      <div class="form-actions"><button type="submit" class="btn btn-primary">发送</button></div>
+    </form> 
+       <div class="widget-yu-btn widget-right-search">                                            
+              <div class="order_list" name="del" type="submit" value="" style="margin-left:0px;">历史动态</div>
+                </div>
+          <div class="widget-content nopadding" style="margin-top:30px;">
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead>
+                <tr>                
+                  <th>动态内容</th>
+                  <th>发送时间</th>                                       
+                  <th>操作</th>           
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="info" id="vo">
+                <tr>                 
+                  <td>{$vo.content}</td>
+                  <td>{$vo.createtime}</td>                                           
+                  <td class="center">                                         
+                 <!--  <a title="详情" href="__CONTROLLER__/del_model_dongtai/id/{$vo.id}">删除</a>          -->
+                  <a title="详情" href="javascript:" onclick="{if(confirm('确定要删除吗')){window.location.href='__CONTROLLER__/del_model_dongtai/id/{$vo.id}'}}">删除</a>                                         
+
+                  </td>
+                </tr> 
+                </volist>              
+              </tbody>
+               
+            </table>
+          </div>
+            
+    <div class="pagination">
+              <!-- <ul>
+          <li><a href="#">首页</a></li>
+                <li><a href="#">上一页</a></li>
+                <li class="active"> <a href="#">1</a> </li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">下一页</a></li>
+         <li><a href="#">末页</a></li>
+              </ul>
+         <ul>
+          <li><a >共12页</a></li>               
+              </ul>
+          <ul>
+          <li><a>跳转至</a></li>                     
+              </ul>
+           <ul>
+          <li><a style="padding:0px;"><input type="text" style="width:50px;border:0px;margin-bottom:0px;"/></a></li>                  
+              </ul>
+         <ul>
+          <li><a style="padding:0px;"><button type="sumbit" class="bottom_page_sure">确定</button></a></li>                     
+              </ul> -->
+            </div>
+      
+                
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</block>

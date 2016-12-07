@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>订单</title>
+</head>
+<body>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+        <!--用户位置 开始-->
+        <div class="US_position G_f16 ftx02">
+            位置：
+            <a href="#">购车惠> </a>
+            <a href="">订单 </a>
+            <a href=""><strong></strong></a>
+        </div>
+        <!--用户位置 结束-->
+
+        <!--oeder start-->
+        <div class="orderbox">
+            <form action="{:U('order_update')}" id="J_actForm" method="post" enctype="multipart/form-data">
+                <div class="orderwrap">
+                    <!--步骤 start-->
+                    <div class="flowstep">
+                        <ol class="detail-stepbar flowstep-5">
+                            <li class="step-first">
+                                <div class="step-done">
+                                    <div class="step-name">填写并提交订单信息</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$pay_info.createtime}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <switch name="pay_info.status" >
+                                    <case value="0|1|3|5"><div class="step-cur"></case>
+                                    <case value="2"><div class="step-fail"></case>
+                                    <default /><div class="step-done">
+                                </switch>
+                                <div class="step-name">预付定金到购车惠</div>
+                                <div class="step-no">2</div>
+                                <div class="step-time">
+                                    <div class="step-time-wraper"></div>
+                                </div>
+                    </div>
+                    </li>
+                    <li>
+                        <switch name="pay_info.status" >
+                            <case value="4|6"><div class="step-cur"></case>
+                            <case value="7|8"><div class="step-done"></case>
+                            <default /><div>
+                        </switch>                            <div class="step-name">4s店出库中</div>
+                        <div class="step-no">3</div>
+                        <div class="step-time">
+                            <div class="step-time-wraper"></div>
+                        </div>
+                </div>
+                </li>
+                <li>
+                    <if condition="$pay_info.status eq 7">
+                        <div class="step-cur">
+                            <elseif condition="$pay_info.status eq 8" />
+                            <div class="step-done">
+                                <else/>
+                                <div>
+                    </if>                            <div class="step-name">到店看车付款提车</div>
+                    <div class="step-no">4</div>
+                    <div class="step-time">
+                        <div class="step-time-wraper"></div>
+                    </div>
+        </div>
+        </li>
+        <li class="step-last">
+            <if condition="$pay_info.status eq 8">
+                <div class="step-done">
+                    <else/>
+                    <div>
+            </if>                            <div class="step-name">订单完成</div>
+            <div class="step-no">5</div>
+            <div class="step-time">
+                <div class="step-time-wraper"></div>
+            </div>
+    </div>
+    </li>
+    </ol>
+
+</div>
+<!--步骤 end-->
+
+<!--订单信息 start-->
+<div class="orderinfobox">
+
+    <div class="title G_f14 ftx02">
+        <h3>商品信息</h3>
+    </div>
+
+    <!--diangdan xiangqiang start-->
+    <table class="grid_bundle grid_7 G_f18">
+        <colgroup>
+            <col class="w204">
+            <col class="w290">
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+        <tr class="col_name G_f16">
+            <th>商品</th>
+            <th>商品名称</th>
+            <th>外观颜色</th>
+            <th>内饰颜色</th>
+            <th>{$pay_info.low_price_city_name}底价</th>
+            <th>上牌地</th>
+            <th>定金</th>
+        </tr>
+        </thead>
+        <tbody class="bd ftx02 G_f16">
+        <tr>
+            <td>
+                <div class="car_pic">
+                    <img src="{:OSS}{$pay_info.exterior_img}" alt="car"/>
+                </div>
+            </td>
+            <td>{$pay_info.carstyle}</td>
+            <td>{$pay_info.exterior_color_name}</td>
+            <td>{$pay_info.interior_color_name}</td>
+            <td>{$pay_info.low_price}元</td>
+            <td>{$pay_info.card_place}</td>
+            <td><span class="j_orderDepostPrice">{$pay_info.order_money}</span>元</td>
+        </tr>
+        </tbody>
+    </table>
+    <!--diangdan xiangqiang end-->
+    <div class="order-span">
+    	<span>提示：车款颜色配置以厂家同款出厂配置为准</span>
+    </div>
+
+    <!--订车人 信息 start-->
+    <div class="clientinfobox G_f16 ftx02">
+        <div class="title G_f14 ftx02">
+            <h3>订车人信息</h3>
+        </div>
+
+        <dl>
+            <dt>订车人姓名</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input type="text" name="buyer_name" class="j_validateInp" value="{$pay_info.buyer_name}"/>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>订车人手机号</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input type="text" name="buyer_tel" class="j_validateInp" value="{$pay_info.buyer_tel}"/>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>提车时间</dt>
+            <dd class="j_tipsWrapper">
+                <div class="ui_input_text">
+                    <input id="datetimepicker" name="buy_time" class="j_validateInp" type="text" style="width: 167px;" value="{$pay_info.buy_time}">
+                    <i></i>
+                </div>
+            </dd>
+        </dl>
+        <dl class="j_hiddenInp j_payment" data-tip="付款方式" data-defaultval="{$pay_info.buy_way}">
+            <dt>付款方式</dt>
+            <dd>
+                <div class="choosebox G_f16">
+                    <ul data-type="buy_way">
+                        <li data-msg="新车全款" data-type="buy_way">新车全款<i></i></li>
+                        <li data-msg="新车分期" data-type="buy_way">新车分期<i></i></li>
+                    </ul>
+                </div>
+            </dd>
+        </dl>
+        <dl class="j_isBuyInsurance" data-tip="保险">
+            <dt>购买保险</dt>
+            <dd>
+                <div class="choosebox G_f16">
+                    <ul data-type="buy_way">
+                        <li data-msg="购买" class="active" data-type="insurance">购买<i></i></li>
+                        <!--<li data-msg="不购买" data-type="insurance" class="disabled">不购买<i></i></li>-->
+                    </ul>
+                    <input type="hidden" name="insurance" value="购买">
+                </div>
+            </dd>
+        </dl>
+
+    </div>
+    <!--订车人 信息 end-->
+    <!--定金金额明细 start-->
+    <div class="paydetail">
+    	<div class="title G_f14 ftx02">
+            <h3 class="G_fl">定金金额明细</h3>
+        </div>
+        <div class="payCon" id="J_OrderInsuranceContenter"  data-displacement="{$pay_info.displacement}">
+        	<table border="" cellspacing="" cellpadding="" class="paytab G_f14">
+        		<tr>
+        			<td rowspan="5" width="130" class="tabSort">基本金额</td>
+        			<td width="480">购车惠底价</td>
+        			<td width="165">￥<span class="j_lowPrice">{$pay_info.low_price}</span></td>
+        		</tr>
+                
+        		<tr class="j_baseTr">
+        			<td width="480">
+                        <i class="tips-mandatory">*</i>
+                        <span class="checkFrame selected"></span><span class="j_insuranceName">购置税</span></td>
+        			<td width="165">
+                        ￥<span class="j_purchaseTax j_spanVal">-</span>
+                        <input type="hidden" name="cess" value=""/>
+                    </td>
+                    
+        		</tr>
+
+        		<tr class="j_baseTr j_agencyService">
+            			<td width="480">
+                            <i class="tips-mandatory">*</i>
+                            <span class="checkFrame selected"></span><span class="j_insuranceName">车船使用税</span></td>
+            			<td width="165">
+                            ￥<span class="j_usageTax j_spanVal">-</span>
+                            <input type="hidden" name="travel_tax" value=""/>
+                        </td>
+        		</tr>
+
+
+        		<tr class="j_baseTr j_agencyService">
+                    <td width="480">
+                        <i class="tips-mandatory">*</i>
+                        <span class="checkFrame selected"></span><span class="j_insuranceName">上牌费</span></td>
+        			<td width="165">
+                        ￥<span class="j_licenseTax j_spanVal">-</span>
+                        <input type="hidden" name="licensing_fees" value="" />
+                    </td>
+        		</tr>
+
+
+        		<tr class="tabTr G_f12">
+        			<td colspan="2" class="subtotal">小计：<span>￥<i class="j_baseSubtotal">-</i></span></td>
+        		</tr>
+
+        		<!--保险-->
+
+        		<tr class="j_tr j_agencyService">
+        			<td rowspan="6" width="130" class="tabSort">保险</td>
+        			<td width="480">
+                        <i class="tips-mandatory">*</i>
+                        <span class="checkFrame selected"></span><span class="j_insuranceName">交强险</span></td>
+        			<td width="165">
+                        ￥<span class="j_strongInsurance j_spanVal">-</span>
+                        <input type="hidden" name="compulsory_insurance" value="" />
+                    </td>
+        		</tr>
+
+
+        		<tr class="j_tr j_agencyService">
+        			<td width="480">
+                        <i class="tips-mandatory">*</i>
+        				<span><span class="checkFrame selected"></span><span class="j_insuranceName">车辆损失险</span></span>
+                        <span class="selRadio">
+                            <select name="damageInsurance" class="damageInsuranceSlt" id="J_damageInsuranceSlt">
+                                <option value="603" selected="selected">家用6座以下</option>
+                                <option value="724">家用6至10座</option>
+                            </select>
+                        </span>
+        			</td>
+        			<td width="165">
+                        ￥<span class="j_damageInsurance j_spanVal">-</span>
+                        <input type="hidden" name="car_loss_dang"  class="j_inpVal" value="" />
+                    </td>
+        		</tr>
+
+
+        		<tr class="j_tr j_agencyService">
+        			<td width="480">
+                        <i class="tips-mandatory">*</i>
+        				<span><span class="checkFrame selected"></span><span class="j_insuranceName">第三者责任险</span></span>
+                        <span class="selRadio">
+                            <select name="thirdInsurance" class="thirdInsuranceSlt" id="J_thirdInsuranceSlt">
+                                <option value="1614">保额：50万</option>
+                                <option selected="selected" value="2102">保额：100万</option>
+                            </select>
+                        </span>
+
+        			</td>
+        			<td width="165">
+                        ￥<span class="j_thirdInsurance j_spanVal">-</span>
+                        <input type="hidden" name="liability"  class="j_inpVal" value="" />
+                    </td>
+        		</tr>
+
+
+        		<tr class="j_tr j_agencyService">
+        			<td width="480"><span class="checkFrame j_checkItem selected"></span><span class="j_insuranceName">车上人员责任险</span>（默认为5个座位，每多出一个座位，多加26元）</td>
+        			<td width="165">
+                        ￥<span class="j_passengerInsurance j_spanVal">-</span>
+                        <input type="hidden" name="car_liability"  class="j_inpVal" value="" />
+                    </td>
+        		</tr>
+
+
+        		<tr class="j_tr j_agencyService">
+        			<td width="480"><span class="checkFrame j_checkItem selected"></span><span class="j_insuranceName">附加不计免赔特约</span></td>
+        			<td width="165">
+                        ￥<span class="j_noDeductibleInsurance j_spanVal">-</span>
+                        <input type="hidden" name="deductible_special"  class="j_inpVal" value="" />
+                    </td>
+        		</tr>
+
+        		<tr class="tabTr G_f12">
+        			<td colspan="2" class="subtotal">小计：<span>￥<i class="j_insuranceSubtotal">-</i></span></td>
+        		</tr>
+        		<tr class="tabTr G_f12">
+        			<td colspan="3" class="subtotal"><span class="c999">(此结果有微小误差，实际费用以当地缴费为准)</span>总计：<span>￥<i class="j_alltotal">-</i></span></td>
+        		</tr>
+        	</table>
+        </div>
+    </div>
+    <!--定金金额明细 end-->
+    
+
+    <!--bigPackages start-->
+    <div class="packagesbox">
+        <div class="title G_f14 ftx02">
+            <h3>精品礼包</h3>
+            <div class="price">价值：<span>￥{$package.price}</span></div>
+        </div>
+        <img src="{:OSS}{$package.imgurl}" alt="{$package.description}" class="onepackage"/>
+        <!--<ul>-->
+              <!--<li>-->
+                  <!--<dl>-->
+                  	<!--<dt><img src="http://test3.gouchehui.com:8082/Public/Home/images/packages_03.jpg" alt="宝马M3 真皮方向盘套"/></dt>-->
+                  	<!--<dd>宝马M3 真皮方向盘套</dd>-->
+                  <!--</dl>-->
+              <!--</li>-->
+              <!--<i>+</i>-->
+              <!--<li>-->
+              	<!--<dl>-->
+              		<!--<dt><img src="http://test3.gouchehui.com:8082/Public/Home/images/packages_05.jpg" alt="宝马M3 脚垫"/></dt>-->
+              		<!--<dd>宝马M3 脚垫一副</dd>-->
+              	<!--</dl>-->
+              <!--</li>-->
+              <!--<i>+</i>-->
+              <!--<li>-->
+              	<!--<dl>-->
+              		<!--<dt><img src="http://test3.gouchehui.com:8082/Public/Home/images/packages_07.jpg" alt="宝马M3 专用机油"/></dt>-->
+              		<!--<dd>宝马M3 专用机油3罐</dd>-->
+              	<!--</dl>-->
+              <!--</li>-->
+              <!--<i>+</i>-->
+              <!--<li>-->
+              	<!--<dl>-->
+              		<!--<dt><img src="http://test3.gouchehui.com:8082/Public/Home/images/packages_09.jpg" alt="米其林轮胎"/></dt>-->
+              		<!--<dd>米其林备用轮胎一个</dd>-->
+              	<!--</dl>-->
+              <!--</li>-->
+              <!--<i>+</i>-->
+              <!--<li>-->
+              	<!--<dl>-->
+              		<!--<dt><img src="http://test3.gouchehui.com:8082/Public/Home/images/packages_11.jpg" alt="盾牌润滑油"/></dt>-->
+              		<!--<dd>盾牌润滑油一瓶</dd>-->
+              	<!--</dl>-->
+              <!--</li>-->
+        <!--</ul>-->
+    </div>
+    <!--bigPackages end-->
+
+    <!--invoice start-->
+    <div class="invoicebox clearfix">
+        <div class="title G_f14 ftx02">
+            <h3>发票信息</h3>
+        </div>
+        <p class="G_f14 ftx02">定金无发票，支付信息为定金收据凭证。购车惠为信息平台，实际开票价与平台订车价如有差异，您只凭平台订车价支付车款，高出的部分不补差价，低于部分不退差价，不开发票。</p>
+    </div>
+    <!--invoice end-->
+    <!--discount start-->
+    <div class="invoicebox clearfix hide" id="J_OrderCouponListBox">
+        <div class="title G_f14 ftx02">
+            <h3>优惠券</h3>
+        </div>
+        <div class="discou">
+        	<ul id="J_OrderCouponList">
+                <script id="tplItem" type="text/html">
+                {{each list as value index}}
+                {{if value.status == 1 || value.status == 5}}
+
+                <li data-number="{{value.ticket_number}}" {{if value.money > 500}}class="hot"{{/if}}>
+                    <dl>
+                        <dt class="G_f18">￥<span class="G_f30 j_moneyBox">{{value.money}}</span></dt>
+                        <dd class="G_f12">{{value.starttime}}-{{value.endtime}}</dd>
+                    </dl>
+                    <i></i>
+                </li>
+                {{/if}}
+
+                {{/each}}
+                </script>
+        	</ul>
+        	<p>金额抵用<span>￥ <i id="J_disMoney">-</i></span></p>
+        </div>
+    </div>
+    <!--discount end-->
+    
+    <input type="hidden" name="pay_id" value="{$pay_info.id}">
+    <!-- 合同 start -->
+    <div style="display: none;">
+    <div class="order-contract" id="J_CheckCon">
+        <div class="information clearfix">
+            <p class="contract-num">合同编号：<span></span></p>
+            <div class="company G_fl">
+                <p><span class="tit">甲方：</span><span class="bd">南京易橙汇网络科技有限公司</span></p>
+                <p><span class="tit">地址：</span><span class="bd">江苏省南京市玄武区徐庄软件园研发三区F幢2号楼三层</span></p>
+                <p><span class="tit">电话：</span><span class="bd">025-85581702/85581703</span></p>
+                <p><span class="tit">传真：</span><span class="bd">025-85581729-8005</span></p>
+            </div>
+            <div class="consumer G_fl">
+                <p><span class="tit">乙方：</span><span class="bd j_partyBname"></span></p>
+                <p><span class="tit">地址：</span><span class="bd j_partyBaddress"></span></p>
+                <p><span class="tit">电话：</span><span class="bd j_partyBtel"></span></p>
+                <p><span class="tit">身份证：</span><span class="bd j_partyBcode"></span></p>
+            </div>
+        </div>
+
+        <div class="matters">
+            <h2>一.委托事项:</h2>
+            <p>乙方全权委托甲方代为定购以下车型汽车，并负责代为办理汽车上牌手续。</p>
+            <div class="matter-mes">
+                <table border=1 cellspacing=0 cellpadding=0 >
+                    <tr>
+                        <td>
+                            车型：<span>{$pay_info.carstyle}</span>
+                        </td>
+                        <td>
+                            ①车辆统一价格：<span>{$pay_info.auth_price}</span> 元
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>车身颜色：<span>{$pay_info.exterior_color_name}</span> </td>
+                        <td>②优惠：<span>{$pay_info.discount}</span> 元</td>
+                    </tr>
+                    <tr>
+                        <td>内饰：<span>{$pay_info.interior_color_name}</span></td>
+                        <td>③车辆净价：<span>{$pay_info.low_price}</span> 元</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="other">
+            <table border=1 cellspacing=0 cellpadding=0 >
+                <tr class="oth-t">
+                    <td>选装件</td>
+                    <td>赠送物品</td>
+                    <td>代办服务</td>
+                </tr>
+                <tr class="oth-b">
+                    <td><span></span></td>
+                    <td>{$package.description}</td>
+                    <td class="j_orderAgencyService"></td>
+                </tr>
+                <tr>
+                    <td>④选装件总计:</td>
+                    <td><span></span></td>
+                    <td>代办服务总计: <span class="j_agencyServicePrice"></span>元</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="buycar">
+            <p>车辆订购部分</p>
+            <table border=1 cellspacing=0 cellpadding=0 >
+                <tr>
+                    <td colspan=3 rowspan=3 class="paym">定 金 不 退</td>
+                    <td>⑦应付款总计：<span class="j_allPriceBox"></span>元</td>
+                </tr>
+                <tr>
+                    <td>⑧应付定金：<span class="j_depositPrice">{$pay_info.order_money}</span>元</td>
+
+                </tr>
+                <tr>
+                    <td>⑨应付余额：<span class="j_balancePrice"></span>元</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="carandpay">
+            <h2>二.交车与付款：</h2>
+            <ol>
+                <li>
+                    <div class="place">
+                        <p>交货地点与方式：由乙方到甲方指定4S店提车。</p>
+                        <p>预计交车日：<span class="j_buyCarDateTime"></span>之前</p>
+                        <p>乙方将定金付至甲方指定账户，待甲方确认定金款到帐后，合同生效，乙方即可在约定日期提车。</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pay-mode">
+                        <p>付款方式：签订本合同时，乙方支付上述定金，余款乙方在提车之日将车付至4S店指定账户，待4S店确认车款全额到帐后，乙方方可提车。</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="car-price">
+                        <p>车价以提车时销售价格为准。车价包含:<b> 裸车价 + 保险 + 其他等</b></p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="obligation">
+            <h2>三.权益与义务:</h2>
+            <ol>
+                <li>
+                    <p>甲方应当勤勉尽责的办理上述车型汽车的委托定购车辆事宜，委托定购车辆必须符合上述有关型号及配置的约定。</p>
+                </li>
+                <li>
+                    <p>甲方保证所委托定购的车辆为全新车辆。根据工作进度由甲方督促4S店提供如下单据：<span class="spec">车辆合格证、销售发票（3联）、车辆一致性证书、保修手册、车辆钥包含遥控。</span></p>
+                </li>
+                <li>
+                    <p>甲方协助乙方维护自身正当权益。</p>
+                </li>
+                <li>
+                    <p>乙方有按照本合同的约定履行按时足额付款的义务。</p>
+                </li>
+                <li>
+                    <p>乙方应当在约定的时间和地点及时进行车辆验收并提车。</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="acceptance">
+            <h2>四.车辆验收：</h2>
+            <p>提车时按车辆出厂标准由乙方或乙方委托的代表验收，如异议应当场提出，如当场未提出异议，则视为乙方认可甲方定购的车辆符合交车标准，且达到车辆出厂标准，车辆交接完毕后所产生的全部责任由乙方自行承担。</p>
+        </div>
+
+        <div class="responsibility">
+            <h2>五.违约责任:</h2>
+            <ol>
+                <li><p>如果甲方交付的汽车与本合同第一条约定不符，则乙方可以不接收车,甲方须在3个工作日内无条件退回全部已收款项。</p></li>
+                <li><p>如果乙方单方取消协议所定车辆到达协议交接地点，甲方发出交接提车通知两日内，乙方因自身原因未来办理交接提车，甲方有权解除合同，乙方已经支付的所有款项不予退回。</p></li>
+                <li><p>如因乙方原因导致车辆无法成交，乙方已经支付的所有款项不予退回。</p></li>
+                <li><p>甲方单方取消协议，乙方有权解除合同，甲方应当退回全部已收款项。</p></li>
+                <li><p>由于罢工，自然灾害，交通，天气，战争等不可抗拒或生产厂家（代理商）不及时交货等原因或因政府（如海关，商检局）非正常工作情况造成延误交车，甲方可免除违约责任。</p></li>
+            </ol>
+        </div>
+
+        <div class="repair">
+            <h2>六.维修与保养:</h2>
+            <p>代购车辆质量保证由车辆生产厂家（授权经销商）提供，以厂方出具的维修、保养服务配套条款为准，如属质量问题，安国家相关法律法规维护权益。</p>
+        </div>
+
+        <div class="solve">
+            <h2>七.解决合同纠纷方式:</h2>
+            <p>双方同意，有关本合同签订、履行而发生的任何争议，在无法通过协商解决和调解方式解决的情况下：</p>
+            <ol>
+                <li>
+                    <p>任何一方均可向南京市仲裁委员会提出仲裁。</p>
+                </li>
+                <li>
+                    <p>任何一方均可向甲方所在地人民法院提起诉讼。</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="clause">
+            <h2>八.补充条款：</h2>
+            <p>易橙汇网络科技有限公司旗下购车惠汽车平台为互联网信息平台，基于线上线下的信息的滞后特性，在收到用户委托定车定金后，无法履行定车事项及时通知用户并退还定金不视为违约，特此声明。</p>
+        </div>
+
+        <div class="others">
+            <h2>九.其他:</h2>
+            <ol>
+                <li><p>本合同条款未尽事宜，由甲乙双方协商解决。</p></li>
+                <li><p>本合同共计壹页。本合同一式贰份，双方各执壹份，双方代表签字（或盖章），并由甲方加盖公章后生效，此协议至交车当日截至。</p></li>
+            </ol>
+        </div>
+
+        <div class="footer clearfix">
+            <div class="company G_fl">
+                <p>甲方：<span>南京易橙汇网络科技有限公司</span></p>
+                <p>甲方代表签署（盖章）：</p>
+                <p>签订日期：<span></span></p>
+                <i class="con-pic"></i>
+            </div>
+            <div class="user G_fl">
+                <p>乙方：<span></span></p>
+                <p>乙方代表签署(盖章)：<span></span></p>
+                <p>签订日期：<span></span></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--合同 end-->
+    <!--定金支付 start-->
+    <div class="depositbox G_f14 ftx02">
+    	<div class="G_fl">
+    		提示：提车成功后，在购车惠平台支付的定金可抵用车款
+    	</div>
+    	<div class="depMoney G_fr">
+    		<div class="deposit">应付定金：<i>￥</i><span class="spq1" id="J_DepositBox">{$pay_info.order_money}</span></div>
+    		<div class="deposit hide" id="J_CouponPrice">优惠券：<i>-￥</i><span class="spq1" id="J_CouponPriceBox">-</span></div>
+    		<div class="deposit G_f16">实际支付：<span data-price="3000"><i>￥</i><b id="J_RealPaidBox">{$pay_info.order_money}</b></span></div>
+        	<input type="submit" class="submit G_btn_a" value="去支付"/>
+    		<div class="view-contract">
+    			查看<a href="#" class="view-contract-btn" id="J_CheckBtn">《汽车委托订车合同》</a>
+    		</div>
+    	</div>
+    </div>
+    <!--定金支付 end-->
+</div>
+<!--订单信息 end-->
+</div>
+</form>
+</div>
+
+<!--oeder end-->
+</div>
+</div>
+<script src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.JS_URL}app.js"></script>
+<script src="{$Think.const.JS_URL}jquery.datetimepicker.js"></script>
+<script src="{$Think.const.JS_URL}order.js"></script>
+{~W('Cate/footer')}
+</body>
+</html>

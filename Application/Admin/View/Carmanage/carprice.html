@@ -1,0 +1,246 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+  <div id="content-header">
+    <div id="breadcrumb">
+      <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+        汽车管理
+      </a>
+      <a href="#" class="current">底价车</a>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+          <div class="text_input22">
+
+            <select name="city_name" id="city" style="width:150px;">
+              <option value="">选择城市</option>
+            <volist name="city_name" id="vo">
+              <option value="{$vo.city_name}">{$vo.city_name}</option>
+            </volist>
+            </select>
+
+            <select name="name_4s" id="name_4s" style="width:150px;">
+              <option value="">选择4s店</option>
+            </select>
+
+            <select name="brand_name" id="brand" style="width:150px;">
+              <option value="">选择品牌</option>
+                <volist name="brand_info_new" id="vo">
+                  <option value="{$vo.brand_name}">{$vo.brand_name}</option>
+                </volist>
+            </select>
+
+            <select name="car_model_name" style="width:150px;" id="model">
+              <option value="">选择车型</option>
+            </select>
+            
+            <select name="car_name" style="width:300px;" id="car">
+              <option value="">选择车款</option>
+            </select>
+
+            <select name="exterior_color_name" style="width:150px;" id="exterior">
+              <option value="">外观颜色</option>
+            </select>
+
+            <select name="interior_color_name" style="width:150px;" id="interior">
+              <option value="">内饰颜色</option>
+            </select>
+            <button class="btn button_sou" id="commit" onclick="getPage(1)"/>筛选</button>
+          </div>
+        <div class="content" id="ajax_lists">
+          <div class="widget-content nopadding" style="margin-top:0px;">
+          	<h4>总计：<span class="userdata badge"></span>个 </h4>
+          <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+            <thead>
+              <tr>
+                  <th>城市</th>
+                  <th>账号</th>                                        
+                  <th>公司名称</th>
+                  <th>品牌</th>
+                  <th>车型</th>                                       
+                  <th>车款</th>
+                  <th>内饰颜色</th>
+                  <th>外观颜色</th>
+                  <th>报价时间</th>
+                  <th>报价</th>
+                  <th>底价</th>
+                  <th>优惠</th>                                       
+                  <th>库存</th>
+                  <th>在途</th>                                       
+                  <th>销售区域</th>             
+                </tr>                        
+              </thead>
+            <tbody>
+             
+            </tbody>
+           
+          </table>
+        </div>
+
+        
+      <div class="pager">
+       
+      </div>
+      </div>
+
+<style type="text/css">
+  
+.pager{text-align:center;}
+.pager a{padding:3px 8px;margin-left:3px;line-height:20px;background:#f9f9f9;border:1px solid #DBDBDB;text-decoration: none}
+.pager a:hover,
+.pager a.current{background-color:#7CD5B1;color:#fff;border:1px solid #7CD5B1;cursor:pointer;}
+</style>
+
+
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+$(function(){
+      $("#city").change(function(){
+        var $obj=$('#city').find('option:selected');
+        $("#name_4s").empty();
+        
+        $("#name_4s").append("<option value=''>请选择4s店名称</option>");
+       
+        $.post( "__MODULE__/Ajax/carprice_ajax",
+                {city_name : $obj.val()},
+                function(data,textStatus){
+                  $.each(data,function(key,val){
+                    $("#name_4s").append("<option value='"+val.name_4s+"'>"+val.name_4s+"</option>");         
+                  });
+
+                },
+                "json");
+      })
+
+     
+
+      $("#brand").change(function(){
+        var $obj=$('#brand').find('option:selected');
+        $("#model").empty();
+        $("#car").empty();
+        $("#interior").empty();
+        $("#exterior").empty();
+        $("#model").append("<option value=''>请选择车型</option>");
+        $("#car").append("<option value=''>选择车型</option>");
+        $("#exterior").append("<option value=''>选择外观颜色</option>");
+        $("#interior").append("<option value=''>选择内饰颜色</option>");
+        $.post( "__MODULE__/Ajax/carprice_ajax",
+                {"brand_name" : $obj.val()},
+                function(data,textStatus){
+                  $.each(data,function(key,val){
+                    $("#model").append("<option value='"+val.car_model_name+"'>"+val.car_model_name+"</option>");
+                  });
+
+                },
+                "json");
+      })
+
+      $("#model").change(function(){
+        var $obj=$('#model').find('option:selected');
+        $("#car").empty();
+        $("#interior").empty();
+        $("#exterior").empty();
+        $("#car").append("<option value=''>请选择车型</option>");
+        $("#exterior").append("<option value=''>选择外观颜色</option>");
+        $("#interior").append("<option value=''>选择内饰颜色</option>");
+        $.post( "__MODULE__/Ajax/carprice_ajax",
+                {car_model_name : $obj.val()},
+                function(data,textStatus){
+                  $.each(data,function(key,val){
+                    $("#car").append("<option value='"+val.car_name+"'>"+val.car_name+"</option>");
+                  });
+
+                },
+                "json");
+      })
+
+      $("#car").change(function(){
+        var $obj=$('#car').find('option:selected');
+        $("#exterior").empty();
+        $("#exterior").append("<option value=''>请选择外观颜色</option>");
+        $("#interior").empty();
+        $("#interior").append("<option value=''>请选择内饰颜色</option>");
+
+        $.post( "__MODULE__/Ajax/carprice_ajax",
+                {car_name : $obj.val()},
+                function(data,textStatus){
+                  $.each(data,function(key,val){
+                      if(val.exterior_color_name){
+                        $("#exterior").append("<option value='"+val.exterior_color_name+"'>"+val.exterior_color_name+"</option>");
+                      }
+                      if(val.interior_color_name){
+                        $("#interior").append("<option value='"+val.interior_color_name+"'>"+val.interior_color_name+"</option>");
+                      }
+
+                  });
+
+                },
+                "json");
+      })
+
+    });
+
+    
+      var url_ajax = "__MODULE__/Ajax/carprice_ajax2";
+            $(function() {
+                $("#ajax_lists").delegate(".pager a", "click", function() {
+                    var page = $(this).attr("data-page");
+                    getPage(page);
+                })
+                getPage(1);
+
+            });
+            function getPage(page) {
+                $("thead").css('display','none');
+                $('tbody').empty();
+                $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+                var city     =$('#city').find('option:selected').val();
+                var name_4s  =$('#name_4s').find('option:selected').val();
+                var brand    =$('#brand').find('option:selected').val();
+                var model    =$('#model').find('option:selected').val();
+                var car      =$('#car').find('option:selected').val();
+                var exterior =$('#exterior').find('option:selected').val();
+                var interior =$('#interior').find('option:selected').val();
+             
+                $.post( "__MODULE__/Ajax/carprice_ajax2",
+                    {city:city,name_4s:name_4s,brand:brand,model:model,car:car,exterior:exterior,interior:interior, p:page},
+                    function(data,textStatus){
+                    	if(data.count==null){
+													$(".userdata").text("0");
+												}else{
+													$(".userdata").text(data.count);
+												}
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display','');
+                        var pagelist=data[0];          
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info=data[1];
+
+                        $.each(info,function(key,val){
+                            var aaa='';
+                            $.each(val.sales_area_name,function(key,val1){
+                              aaa+=val1.sales_area_name+' ';
+                            });
+                            if(val.updatetime == '0000-00-00 00:00:00'){
+                                val.updatetime=val.createtime;
+                            }
+                            $('tbody').append("<tr><td>"+val.city_name+"</td><td>"+val.user_name+"</td><td>"+val.name_4s+"</td><td>"+val.brand_name+"</td><td>"+val.car_model_name+"</td><td>"+val.car_name+"</td><td>"+val.interior_color_name+"</td><td>"+val.exterior_color_name+"</td><td>"+val.updatetime+"</td><td>"+val.auth_price+"</td><td>"+val.low_price+"</td><td>"+val.discount+"</td><td>"+val.stock+"</td><td>"+val.onway+"</td><td>"+aaa+"</td></tr>")
+                        });
+
+                    },
+                    "json");
+            }
+
+  </script>
+
+ 
+  </block>

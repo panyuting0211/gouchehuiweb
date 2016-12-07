@@ -1,0 +1,44 @@
+<extend name="uc_base" />
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ZB_member.css"/>
+    <div id="uc_main">
+        <div class="UC_main_r QMH">
+            <h2 class="UC_main_r_tit">报价管理<p class="G_fr G_f14">（提示：报价单位 为：元）</p></h2>
+            <div class="carinfo G_f16 ftx02">
+                <div class="item">车型：<span>{$car_price_info.car_model_name}</span></div>
+                <div class="item">车款：<span>{$car_price_info.car_name}</span></div>
+                <div class="item">外观颜色：<span>{$car_price_info.exterior_color_name}</span></div>
+                <div class="item">内饰颜色：<span>{$car_price_info.interior_color_name}</span></div>
+            </div>
+            <h2 class="history_qmh G_f20 ftx02">历史报价</h2>
+            <div class="UC_main_r_content G_f16 ftx02">
+                <table class="grid_bundle grid_11">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr class="col_name">
+                        <th>报价</th>
+                        <th>底价</th>
+                        <th>优惠</th>
+                        <th>报价时间</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bd G_f15">
+                    <volist name="price_trend" id="vo">
+                        <tr>
+                            <td>{$vo.price}</td>
+                            <td>{$vo.low_price}</td>
+                            <td>{$vo.discount}</td>
+                            <td>{$vo.createtime}</td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</block>

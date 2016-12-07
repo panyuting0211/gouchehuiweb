@@ -1,0 +1,72 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div id="content-wrap">
+  <div id="content-header">
+      <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>会员管理</a><a href="#" class="current">4s店会员</a>
+        <div class="carmanage_right"><a href="__CONTROLLER__/shopUser/p/{$page}" style="color:#006dcc;">返回上一页</a></div>
+      </div>
+      <h1>积分</h1>
+  </div>
+  <div style="margin-left: 20px;">
+    <label class="control-label" for="webname" style="width: 160px;text-align: right;float:left;">总积分：</label>
+    <span>{$total_score}</span>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <form action="__CONTROLLER__/integral" class="form-horizontal" method="post">
+          <fieldset> 
+            <input type="hidden" name="user_id" value="{$user_id}" />
+            <input type="hidden" name='total_score' value="{$total_score}"> 
+            <div class="control-group">
+              <label class="control-label" for="webname">数值：</label>
+              <div class="controls">
+                <input style="width:100px;" name="score_change" type="text">&nbsp;&nbsp;分  <span style="margin-left: 40px">提示：负数表示减，正数表示加</span>
+              </div>
+
+            </div> 
+            <div class="control-group">
+              <label class="control-label" for="tip">备注原因：</label>
+              <div class="controls">
+                <textarea class="form-control" id="tip" name="info" rows="7"></textarea>
+              </div>
+            </div>
+          </fieldset>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">修改</button>                      
+            </div>
+        </form>
+        <span style="font: normal small-caps 600 20px 宋体;">修改记录</span>  
+        <div class="widget-content" >
+          <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+            <thead>
+              <tr>    
+                <th>数值</th>            
+                <th style="width:300px;">原因</th>
+                <th style="width:200px;">修改时间</th>                                        
+                <th>操作账号</th>                         
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="score_change_info" id="vo">
+              <tr>     
+                <td style="height:115px;line-height:115px;">{$vo.score}</td>            
+                <td style="height:115px;line-height:115px;">{$vo.info}</td>
+                <td>{$vo.createtime}</td>
+                <td style="height:115px;line-height:115px;">{$vo.createuser}</td>
+              </tr> 
+              </volist> 
+            </tbody>             
+           
+          </table>
+        </div>                                        
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</block>

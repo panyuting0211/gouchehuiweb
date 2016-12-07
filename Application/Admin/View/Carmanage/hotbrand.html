@@ -1,0 +1,147 @@
+<style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                {$ctitle}
+            </a>
+            <a href="" class="current">{$atitle}</a>
+        </div>
+    </div>
+    <p id='ajax_delete_id' style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="widget-yu-btn">
+
+                    <div class="widget-yu-btn widget-right-search" style="margin-bottom:5px;">
+                        <a  class="btn button_sou" href="{:U('AddHotBrand')}">+添加热门品牌</a>
+                    </div>
+                    <div class="content" id="ajax_lists">
+                        <div class="widget-content nopadding" style="margin-top:0px;">
+                            <h4>总计：<span class="userdata badge"></span>个 </h4>
+                            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>品牌名称</th>
+                                    <th>品牌LOGO</th>
+                                    <th>客户端</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pager"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <link href="{$Think.const.ADMIN_CSS_URL}Css.css" rel="stylesheet" type="text/css">
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.kkPages.js"></script>
+    <link href="{$Think.const.ADMIN_CSS_URL}Css.css" rel="stylesheet" type="text/css">
+    <script>
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            $.post("__MODULE__/Ajax/HotBrandList",
+                    {p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").show();
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            var td1 = "<td style='height:50px;line-height:50px;'>" + val.brand_name + "</td>";
+                            var td2 = "<td><img src='" + val.logo + "' style='width:150px;' /></td>";
+                            var td3 = "<td style='height:50px;line-height:50px;'>" + val.client + "</td>";
+                            var td4 = "<td style='height:50px;line-height:50px;'>" + val.order + "</td>";
+                            var td5 = "<td class='center' style='height:50px;line-height:50px;'><a class='btn btn-info' title='编辑' href='__CONTROLLER__/addhotbrand/id/" + val.id + "'>编辑</a><a class='btn btn-danger' title='删除' value='" + val.id + "' href='javascript:;' onclick='ajax_delete(this)'>删除</a></td>";
+
+                            $('tbody').append("<tr>" + td1 + td2 + td3 +td4+td5+ "</tr>");
+                        });
+
+                    },
+                    "json");
+        }
+
+        function ajax_delete(aa) {
+            var id = $(aa).attr("value");
+            if (confirm('确定要删除吗？')) {
+                $.post("__MODULE__/Ajax/DelHotBrand",
+                        {id: id},
+                        function (data, textStatus) {
+                            if (data) {
+                                $(aa).parent().parent().remove();
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除成功');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            } else {
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除失败');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            }
+                        }
+                );
+            }
+        }
+    </script>

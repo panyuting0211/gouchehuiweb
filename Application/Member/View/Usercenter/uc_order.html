@@ -1,0 +1,56 @@
+<extend name="UC_base" />
+<block name="body">
+<!-- 	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZB_member.css"/> -->
+		<div id="uc_main">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">我的订单</h2>
+				<div class="UC_main_r_content">
+					<table class="grid_bundle table_fontsize">
+						<colgroup>
+						 <col>
+						 <col>
+						 <col>
+						 <col>
+						 <col>
+						 <col class="table_tr">
+						</colgroup>
+						<thead>
+						  <tr class="col_name">
+						  <th>订单号</th>
+						  <th>商品名称</th>
+						  <th>底价</th>
+						  <th>定金</th>
+						  <th>订单状态</th>
+						  <th>操作</th>
+						  </tr>
+						</thead>
+						<tbody class="bd G_f14 ftx02">
+						<volist name="orderlist" id="vo">
+							<tr>
+								<td>{$vo.out_trade_no}</td>
+								<td>{$vo.carstyle}</td>
+								<td>{$vo.low_price_city_name}底价：{$vo.low_price}</td>
+								<td>{$vo.money}</td>
+                                <if condition="$vo.status eq 0">
+								<td>未支付</td>
+								<td class="table_font">
+									<a class="table_input" href="{:U('Order/order_info',array('pay_id'=>$vo['id']))}">立即支付</a>
+									<a href="{:U('UC_order_info',array('pay_id'=>$vo['id']))}">查看详情</a>
+								</td>
+							    <elseif condition="$vo.status eq 1"/>
+							    <td>已支付</td>
+							    <td class="table_font">
+									<a href="{:U('UC_order_info',array('pay_id'=>$vo['id']))}">查看详情</a>
+								</td>
+							    </if>								
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+					<div class="viciao">{$pagelist}</div>
+				</div>
+				
+			</div>
+		</div>
+	
+</block>

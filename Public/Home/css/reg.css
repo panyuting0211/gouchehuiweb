@@ -1,0 +1,308 @@
+/* 注册 */
+.reg_form{
+	width:776px;
+	margin:60px auto 0;
+	padding-bottom: 20px;
+	border:1px solid #dedede;
+}
+
+.reg_form .reg_hd li{
+	float:left;
+	width:50%;
+	height:65px;
+	line-height: 65px;
+	text-align: center;
+	background: -webkit-linear-gradient(-90deg, rgba(249,249,249,1) 0, rgba(238,238,238,1) 100%);
+	background: -moz-linear-gradient(180deg, rgba(249,249,249,1) 0, rgba(238,238,238,1) 100%);
+	background: linear-gradient(180deg, rgba(249,249,249,1) 0,  rgba(238,238,238,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#f9f9f9,endcolorstr=#eeeeee,gradientType=0); 
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#f9f9f9,endcolorstr=#eeeeee,gradientType=0);
+	position:relative; 
+	cursor:pointer;
+	-webkit-transition: border .2s cubic-bezier(0.43, 0.37, 1, 1);
+    -moz-transition: border .2s cubic-bezier(0.43, 0.37, 1, 1);
+    transition: border .2s cubic-bezier(0.43, 0.37, 1, 1);
+}
+.reg_form .reg_hd .cur{
+	color:#fff;
+	background: -webkit-linear-gradient(-90deg, rgba(255,185,72,1) 0, rgba(223,112,5,1) 100%);
+	background: -moz-linear-gradient(180deg, rgba(255,185,72,1) 0, rgba(223,112,5,1) 100%);
+	background: linear-gradient(180deg, rgba(255,185,72,1) 0,  rgba(223,112,5,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#ffb948,endcolorstr=#DF7005,gradientType=0); 
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#ffb948,endcolorstr=#DF7005,gradientType=0); 
+}
+.reg_form .reg_hd .cur .icon_down_arrow{
+	position:absolute;
+	left:50%;
+	bottom:-8px;
+	margin-left: -8px;
+	display:block;
+	width:15px;
+	height:15px;
+	background: #DF7005;
+	-webkit-transform: rotateZ(45deg);
+	transform: rotateZ(45deg)   ;
+}
+.reg_form .reg_bd{
+	width:403px;
+	margin: 40px auto;
+}
+.reg_form .ui_input_text{margin-bottom: 20px;}
+.reg_form .ui_input_btn{margin-bottom: 30px;}
+
+
+.icon_agreement{
+	float:left;
+	width:23px;
+	height:23px;
+	background-position:0 0;
+	cursor:pointer;
+}
+
+.ui_agreement{line-height: 23px;}
+.reg_form input{ width: 385px;;}
+.reg_form .input_blue{
+    border: 1px #e2e2e2 solid;
+    color: #fff;
+    font-family: microsoft yahei;
+    background: #2194ff;
+    cursor: pointer;
+    padding-left: 0;
+    text-align: center;
+    _width: 0;
+}
+.reg_form .input_gray{
+    border: 1px #e2e2e2 solid;
+    color: #333;
+    font-family: microsoft yahei;
+    background: #fafafa;
+    background: -ms-linear-gradient(top,#fff,#f7f7f7);
+    background: -moz-linear-gradient(top,#fff,#f7f7f7);
+    background: -webkit-gradient(linear,top,from(#fff),to(#f7f7f7));
+    background: -webkit-linear-gradient(top,#fff,#f7f7f7);
+    background: -o-linear-gradient(top,#fff,#f7f7f7);
+    cursor: pointer;
+    padding-left: 0;
+    text-align: center;
+    _width: 0;
+}
+.reg_form .btn_vc {
+    display:inline-block;
+    font-size: 20px;
+    width: 140px;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.reg_form .code{
+	width:229px;
+}
+.reg_form .invitation_code{
+	width:209px;
+}
+.reg_form .ui_input_text input[type=checkbox] {
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin: 1px 7px 0 0;
+    _margin: -5px -5px 0 0;
+    cursor: pointer;
+    vertical-align: bottom;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    background: url(../images/common/ico_warn.png);
+}
+input[type=checkbox]:checked {
+    background: #fff;
+}
+.input-tip ul {
+    background: #fafafa;
+    border: 1px solid #e9e9e9;
+    width: 220px;
+    padding: 10px;
+}
+.reg_form .ui_input_text input[type=checkbox]:checked::after {
+    content: url(../images/common/icon_agent_suc.png);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.reg_mes {
+    display: inline-block;
+    background: url(../images/register_pw.png) no-repeat;
+    width: 313px;
+}
+.mes_pass_in {
+    height: 35px;
+    background-position: 0 -76px;
+    margin-top: 10px;
+}
+.mes_pass_strong{height:35px;background-position:0 -114px}
+/* 找回密码 */
+.find_pw_frame{margin-top: 60px;}
+.step li{
+	display: table-cell;
+    width: 1%;
+	position:relative;
+	padding-right: 23px;
+	background:#b6b6b6;
+}
+.step>li.cur>a/*, .step>li.cur>a:focus, .step>li.cur>a:hover,.step>li>a:hover*/ {
+    color: #fff;
+    background-color: #fa8c35;
+    text-decoration: none;
+}
+.step li a:after {
+    content: "";
+}
+.step li a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+    color:#fff;
+    text-decoration: none;
+}
+.step_arrow li:nth-child(n+2) a {
+    margin-left: -20px;
+    border-radius: 0;
+}
+.step_arrow li:not(:last-child) a:after{
+    position: absolute;
+    top: -1px;
+    right: -23px;
+    width: 45px;
+    height: 45px;
+    transform: scale(0.707) rotate(45deg);
+    -ms-transform: scale(0.707) rotate(45deg); 	/* IE 9 */
+    -moz-transform:scale(0.707) rotate(45deg); 	/* Firefox */
+    -webkit-transform: scale(0.707) rotate(45deg); /* Safari 和 Chrome */
+    z-index: 1;
+    background: #b6b6b6;
+    border-radius: 0 5px 0 50px;
+    border-top: 2px solid #FFF;
+    border-right: 2px solid #FFF;
+    box-sizing: content-box;
+}
+.step_arrow li:last-child{padding-right: 0;}
+/*.step_arrow li a:hover:after,*/ .step_arrow li.cur a:after {
+    background-color: #fa8c35;
+}
+.step a .icon_num_white{width:23px;
+height:23px;
+line-height: 23px;
+margin-right: 5px;
+color:#fa8c35;
+font-size: 16px;
+font-style: normal;
+}
+.find_Pwd_Form{
+	padding:95px 235px 0;
+}
+.find_Pwd_Form .ui_input_text{
+	margin-bottom: 10px;
+}
+.find_Pwd_Form .label {
+	float:left;
+    width: 150px;
+    line-height: 45px;
+    text-align: right;
+    font-size: 18px;
+    color: #666;
+    padding-right: 10px;
+}
+.find_Pwd_Form .login_name{
+	width:350px;
+}
+.tips{line-height: 40px}
+.find_Pwd_Form .submit_btn{
+	width:193px;
+	line-height: 46px;
+	height:46px;
+	font-size: 18px;
+	margin-left: 160px;
+}
+.find_Pwd_State{
+	font-size:18px;
+	text-align: center;
+}
+.find_Pwd_State .state_txt{
+	margin-top:30px;
+}
+.find_Pwd_State .ui_resetok{
+    margin: 0 3px 0 0;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    width: 66px;
+    height: 66px;
+    background: url(../images/reset_pw_ok.png) no-repeat 0 0;
+    }
+
+.find_Pwd_State .return_home{
+	margin-top:30px;
+}
+.ui-validation-content {
+    width: 900px;
+    margin: 35px auto;
+    border: 1px solid #ddd;
+    padding: 0 30px 30px;
+}
+.ui-validation-content .ui-valid-title {
+    padding-top: 60px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+.ui-validation-content .ui-valid-title .ui-text {
+    font-size: 18px;
+}
+.info_add_box {
+    border-top: 1px dashed #dcdcdc;
+    margin-top: 50px;
+    padding-top: 50px;
+}
+.info_add_box .formelem {
+    padding-left: 220px;
+}
+.info_add_box .formelem .subbox{
+    margin-left: 100px;
+}
+.info_add_box .formelem li{
+    margin-bottom: 10px;
+}
+.registerbox .formbox .label_title {
+    width: 100px;
+    text-align: right;
+    float: left;
+    display: inline;
+    font-size: 14px;
+    color: #666;
+    line-height: 36px;
+}
+.registerbox .formbox .inputbox {
+    margin-left: 100px;
+}
+.registerbox .formbox .normalText {
+    padding: 0 4px;
+    width: 240px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+}
+.registerbox .formbox .code{
+    width: 130px;
+    margin-right: 10px;
+}
+.formbox .error {
+    padding-left: 33px;
+    color: #f00;
+}

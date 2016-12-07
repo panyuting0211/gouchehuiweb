@@ -1,0 +1,41 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title"><a href="n_uc_base.html"> 个人中心首页</a> > 新消息</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="n_uc_dynamic_statistics.html" title="">消息统计</a></li>
+                <li class="cur"><a href="n_uc_dynamic_sys.html" title="">系统消息</a></li>
+            </ul>
+            <div class="uc_dynamic_sys ohd">
+                <div class="sys_msg" id="J_sys_msg">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="tplCreditsOrderList" type="text/html">
+        {{each list as value index}}
+        <p>{{value.json}}</p>
+        {{/each}}
+    </script>
+    <script>
+        $(function(){
+            var $orderList = $('#J_sys_msg'),
+                    $loader = $('<div style="width:954px;" class="uc_loading"><i></i>数据加载中...</div>');
+            $orderList.find(".uc_loading").length || ($orderList.append($loader));
+            $.post("/member.php/MemberGeneral/sysmessage", function(db){
+                console.log(db);
+                //var orderListNum = db.list.length;
+                $orderList.find('.uc_loading').remove();
+                if(db.length == 0){
+                    $orderList.html("<p>暂无消息！</p>");
+                }else{
+                    console.log("Y");
+                    html = template('tplCreditsOrderList', db);
+                    $orderList.html(html);
+                }
+            });
+        });
+    </script>
+</block>

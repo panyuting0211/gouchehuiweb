@@ -1,0 +1,259 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb">
+                    <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                        {$ctitle}
+                    </a>
+                    <a href="#" class="current">特价车</a>
+                    <a href="#" class="current">详情</a>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid"><!-- 按钮触发模态框 -->
+                    <div class="span8">
+                        <button class="btn btn-success btn-large offset5" data-toggle="modal" data-target="#myModalpass" style="margin-right: 35px;">
+                            <i class="icon-ok"></i>{$Think.session.admin_name}审核通过
+                        </button>
+                        <button class="btn btn-danger btn-large" data-toggle="modal" data-target="#myModalunpass">
+                            <i class=" icon-remove"></i> {$Think.session.admin_name}审核不通过
+                        </button>
+                    </div>
+                    <div class="span4">
+                        <a href="/admin.php/Carmanage/carspecial" class="btn btn-primary btn-lg active offset3" role="button">返回上一页</a>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <h3>基本信息</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>车款：</dt>
+                                    <dd>{$info.car_name}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>车型：</dt>
+                                    <dd>{$info.car_model_name}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>品牌：</dt>
+                                    <dd>{$info.brand_name}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>外观颜色：</dt>
+                                    <dd>{$info.exterior_color_name}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>内饰颜色：</dt>
+                                    <dd>{$info.interior_color_name}</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="span4">
+                        <h3>公司信息</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>公司名称：</dt>
+                                    <dd>{$info.name_4s}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>账号：</dt>
+                                    <dd>{$info.user_name}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>文本标签：</dt>
+                                    <dd>{$info.city_name}</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span4">
+                        <if condition="$info.status eq 6">
+                            <img src="/Public/Admin/images/unpass.png"/>
+                            <elseif condition="($info.status egt 2) and ($info.status elt 5)"/>
+                            <img src="/Public/Admin/images/pass.png"/>
+                        </if>
+
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <h3>价格信息</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>市场价：</dt>
+                                    <dd>{$info.price}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>特价：</dt>
+                                    <dd>{$info.special_price}</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                        <h3>活动说明</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>备注：</dt>
+                                    <dd>{$info.description}</dd>
+                                </dl>
+                            </li>
+
+                        </ul>
+                        <h3>审核信息</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>备注：</dt>
+                                    <dd>{$info.remark}</dd>
+                                </dl>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="span4">
+                        <h3>其他信息</h3>
+                        <ul class="unstyled">
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>活动日期：</dt>
+                                    <dd>{$info.start_date} 至 {$info.end_date}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>活动数量：</dt>
+                                    <dd>{$info.number}</dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>销售区域：</dt>
+                                    <dd>
+                                        <volist name="info['cities']" id="vo">{$vo.area}</volist>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>车图片：</dt>
+                                    <dd><img src="{$info.car_image}"></dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="dl-horizontal">
+                                    <dt>修改图片：</dt>
+                                    <dd>
+                                        <form class="form-inline" enctype="multipart/form-data" method="post">
+                                            <input type="file" name="image"/>
+                                            <input type="hidden" name="id" value="{$info.id}">
+                                            <input class="btn btn-primary" type="submit" value="提交">
+                                        </form>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="id" value="{$info.id}">
+        </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModalpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabelpass">
+                        {$Think.session.admin_name}审核通过操作
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    确认对<strong>{$info.brand_name}{$info.car_model_name}{$info.car_name}</strong>进行审核通过操作？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-primary j_operaBtn" data-confirm="1">
+                        确认
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModalunpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabelunpass">
+                        {$Think.session.admin_name}审核不通过操作
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    确认对<strong>{$info.brand_name}{$info.car_model_name}{$info.car_name}</strong>进行审核不通过操作？
+                    <textarea class="form-control" rows="3" id="remark"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-primary j_operaBtn" data-confirm="2">
+                        确认
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.j_operaBtn').on('click', function (e) {
+                var $this = $(this),
+                        confirmVal = $this.data('confirm');
+                $.post("/admin.php/Carmanage/check_special",
+                        {
+                            car_special_id: $("#id").val(),
+                            confirm: confirmVal,
+                            remark: $("#remark").val(),
+                        },
+                        function (data) {
+                            alert(data.msg);
+                            location.reload();
+                        });
+            });
+        });
+
+    </script>
+
+</block>

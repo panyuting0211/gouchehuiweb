@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大众POLO</title>
+    <link rel="stylesheet" href="/Public/Home/css/base.css"/>
+    <link rel="stylesheet" href="css/dazhongpolo.css">
+    <link rel="stylesheet" href="/Public/Home/js/app/skin/layer.css" id="layui_layer_skinlayercss" />
+
+</head>
+<body>
+<div id="site_nav">
+    <div id="sn_bd">
+        <div class="sn_container">
+
+            <ul class="sn_quick_menu">
+                <li class="menu_item"><a href="http://www.gouchehui.com/member.php/Public/reg?callback=http%3A%2F%2Fwww.gouchehui.com%2F" target="_blank">注册</a></li>
+                <li class="sn_separator"></li>
+                <li class="menu_item"><a href="http://www.gouchehui.com/member.php/Public/login?callback=http%3A%2F%2Fwww.gouchehui.com%2F" target="_blank">登录</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div id="header">
+    <div class="headerLayout">
+        <div class="headerCon">
+            <h1 id="gchLogo">
+                <div id="J_FpLogo">
+                    <a href="/index.php/index/index" target="_self"> <img id="J_FpDoodle" class="fp-doodle" src="/Public/Home/images/logo187X78.png" alt="购车惠"></a>
+                </div>
+            </h1>
+            <div class="local_city">
+                    <span class="lc_name" id="J_switchCity">
+
+                    </span>
+
+            </div>
+            <div class="header_extra">
+                <div class="header_banner">
+                    <div id="J_FpEventBanner" class="fp-event-banner  hidden G_fr" style="display: block;">
+                        <ul class="hot_query clearfix">
+                            <li><strong>热门搜索：</strong></li>
+                            <li><a href="/index.php/car/product_search/select/%E4%BC%A0%E7%A5%BA" title="传祺">传祺</a></li><li><a href="/index.php/car/product_search/select/%E5%AE%9D%E9%A9%AC" title="宝马">宝马</a></li><li><a href="/index.php/car/product_search/select/%E5%A5%A5%E8%BF%AA" title="奥迪">奥迪</a></li><li><a href="/index.php/car/product_search/select/%E5%A5%A5%E8%BF%AAa6l" title="奥迪a6l">奥迪a6l</a></li>                        </ul>
+                    </div>
+                </div>
+                <div id="gchSearch" class="gch_search">
+                    <form action="/index.php/car/product_search" class="gchSearch_form" method="GET">
+                        <div class="gchSearch_input clearfix">
+                            <label for="mq" style="visibility: visible; display: none;">搜索 买车</label>
+                            <div class="s_combobox">
+                                <div class="s_combobox_input_wrap">
+                                    <input type="text" name="select" value="" id="mq" class="s-combobox-input" aria-label="请输入搜索文字">
+                                </div>
+                            </div>
+                            <button type="submit">搜索<s></s></button>
+                        </div>
+                    </form>
+                    <div class="hot-search G_Tahoma">
+                        <dl>
+                            <dt>热门搜索：</dt>
+                            <dd><a href="/index.php/car/product_search/select/%E4%BC%A0%E7%A5%BA" title="传祺">传祺</a></dd><dd><a href="/index.php/car/product_search/select/%E5%AE%9D%E9%A9%AC" title="宝马">宝马</a></dd><dd><a href="/index.php/car/product_search/select/%E5%A5%A5%E8%BF%AA" title="奥迪">奥迪</a></dd><dd><a href="/index.php/car/product_search/select/%E5%A5%A5%E8%BF%AAa6l" title="奥迪a6l">奥迪a6l</a></dd>	                    </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navwrap" id="GL_navWrap">
+    <div class="main_container nav">
+        <!--<div class="all_categories_wrap"></div>-->
+        <div class="home_main_nav">
+            <ul>
+                <li><a href="/index.php/index/index">首页</a></li>
+                <li><a href="/index.php/car/product_search">优惠买车</a></li>
+                <li><a href="/index.php/car/product">底价车</a></li>
+                <li><a href="/index.php/car/special_price_car">活动特卖 <i class="icon-new icon-new-hot"></i></a></li>
+
+                <li><a href="http://shop.gouchehui.com">汽车配饰</a></li>
+                <li class="lh">
+                    <a href="/index.php/carlife/carshow">车生活 <i class="nav-sign" style="visibility: hidden;"></i></a>
+                    <div class="navigation-sub" style="visibility: hidden;">
+                        <div class="navigation-sub-a">
+                            <a href="/index.php/carlife/carshow">车主秀</a>
+                            <a href="/index.php/carlife/carknowledge">车知识</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/index.php/guide/process">购车指南</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav-bott" style="visibility: hidden;"> </div>
+</div>
+<div class="polo-wrap">
+    <div class="polo-box">
+        <div class="polo-title clearfix">
+
+            <div id="triangle-right" class="G_fl"></div>
+            <p class="G_fl">即刻下单就送购车大礼包，高达3580元。</p>
+        </div>
+        <div class="polo-mes">
+            <div class="detailed">
+                <ul class="j_formBox">
+                    <li class="detailed-name"><div class="input-box"><span>姓名</span><input type="text" name="user"></div></li>
+                    <li class="detailed-tel"><div class="input-box"><span>手机</span><input type="text" name="tel"></div></li>
+                    <li class="entered"><a href="#" class="buy-now j_submitBtn" >立即报名>></a><span>（立即报名享受更多优惠）</span></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <div class="banner-1"></div><div class="banner-2"></div>
+</div>
+
+<div class="buy-process">
+    <div class="buy-process-box">
+        <div class="process-bd">
+            <div class="advice">
+                <p>1、客服<span class="spec">免费</span>在线咨询</p>
+                <p>2、全场<span class="spec">免</span>询价费，客服电话 <span class="spec">400-138-0808</span></p>
+                <p>3、下单即送大礼包，最高价值<span class="spec">3580</span>元</p>
+            </div>
+            <div class="product-list">
+                <img src="images/pro-list.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="polo-bd">
+    <div class="content1 pics"></div><div class="content2 pics"></div><div class="content3 pics"></div><div class="content4 pics"></div><div class="content5 pics"></div><div class="content6 pics"></div><div class="content7 pics"></div><div class="content8 pics"></div>
+</div>
+
+<div class="polo-footer">
+    <div class="footer1"></div><div class="footer2"></div><div class="footer3"></div><div class="footer4"></div>
+</div>
+<div class="commitment_wrap ">
+    <div class="commitmentbox main_container">
+        <div class="wrap">
+            <div class="item">
+                <div class="imgbox">
+                    <img src="/Public/Home/images/index/promiss1.png" alt="底价"></div>
+                <div class="txtbox">
+                    <h3 class="G_f18 ftx07">底价</h3>
+                    <p class="G_f14 ftx02">一键看底价，买车更安心</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="imgbox"><img src="/Public/Home/images/index/promiss2.png" alt="认证"></div>
+                <div class="txtbox">
+                    <h3 class="G_f18 ftx07">认证</h3>
+                    <p class="G_f14 ftx02">正规4S店提车，买车更放心</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="imgbox"><img src="/Public/Home/images/index/promiss3.png" alt="真实"></div>
+                <div class="txtbox">
+                    <h3 class="G_f18 ftx07">真实</h3>
+                    <p class="G_f14 ftx02">买到底价，节省不是一点点</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="imgbox"><img src="/Public/Home/images/index/promiss4.png" alt="安全"></div>
+                <div class="txtbox">
+                    <h3 class="G_f18 ftx07">安全</h3>
+                    <p class="G_f14 ftx02">购车惠担保，安全有保障</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footerWrap">
+    <div class="footerTop">
+        <div class="footer-list G_fl">
+            <dl>
+                <dt>订单服务</dt>
+                <dd><a href="/index.php/guide/process" title="购车指南">购车指南</a></dd>
+                <dd><a href="/index.php/guide/problem_price" title="常见问题">常见问题</a></dd>
+                <dd><a href="/index.php/guide/notice" title="购车需知">购车需知</a></dd>
+            </dl>
+            <dl>
+                <dt>关于我们</dt>
+                <dd><a href="/index.php/guide/introduce" title="公司简介">公司简介</a></dd>
+                <dd><a href="/index.php/guide/feedback" title="在线反馈">在线反馈</a></dd>
+                <dd><a href="/index.php/guide/concern" title="关注我们">关注我们</a></dd>
+            </dl>
+            <dl>
+                <dt>关注我们</dt>
+                <dd><a href="/index.php/guide/contact" title="客服电话">客服电话</a></dd>
+                <dd><a href="/index.php/guide/contact" title="商务合作">商务合作</a></dd>
+                <dd><a href="/index.php/guide/contact" title="联系邮箱">联系邮箱</a></dd>
+            </dl>
+        </div>
+        <div class="footer-ewm G_fl">
+            <ul>
+                <li>
+                    <img src="/Public/Home/images/wechat_servse.png">
+                    <span>微信服务号</span>
+                </li>
+                <li>
+                    <img src="/Public/Home/images/app_down.png">
+                    <span>app下载</span>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-tel G_fr">
+            <p class="p1">400-138-0808</p>
+            <p>周一至周五  （节假日除外）</p>
+            <p>9:00-17:30（仅收市话费）</p>
+        </div>
+    </div>
+    <div class="footerBot">
+        <p>CopyRight @2015-2016 gouchehui.com All rights reserved 版权所有南京易橙汇网络科技有限公司</p>
+        <p>备案号:苏ICP备13031090号-3</p>
+        <!--<div class="footerBot-pic">
+            <img src="/Public/Home/images/footerBot_01.png">
+            <img src="/Public/Home/images/footerBot_02.png">
+        </div>-->
+    </div>
+    <div style="display:none">
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        <script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8ee160ab7cf066c5b5eadcdb24bb415a' type='text/javascript'%3E%3C/script%3E")); </script><script src=" http://hm.baidu.com/h.js?8ee160ab7cf066c5b5eadcdb24bb415a" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=8ee160ab7cf066c5b5eadcdb24bb415a" target="_blank"><img border="0" src="http://eiv.baidu.com/hmt/icon/21.gif" width="20" height="20"></a>
+        <script src="http://s95.cnzz.com/z_stat.php?id=1258873107&amp;web_id=1258873107" language="JavaScript"></script><script src="http://c.cnzz.com/core.php?web_id=1258873107&amp;t=z" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1258873107" target="_blank" title="站长统计">站长统计</a>
+    </div>
+</div>
+<script src="/Public/Home/js/jquery-1.8.1.min.js"></script>
+<script src="/Public/Home/js/layer.js"></script>
+<script>
+    $(function(){
+        $('.j_submitBtn').on('click', function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            var $form = $(this).closest('.j_formBox');
+            
+            var user = $(".input-box input[name=user]").val(),
+            	tel = $(".input-box input[name=tel]").val(),
+                regtel=/^1[34578]\d{9}$/;
+            if(user==""){
+            	layer.msg("请填写您的姓名！");
+				return false;
+			}else if(tel==""){
+				layer.msg("请填写您的手机号！");
+				return false;
+			}else if(!regtel.test(tel)){
+				layer.msg("您的手机号格式有误！");
+				return false;
+			}else{
+				$.ajax({
+	                type: "POST",
+//	                url: "https://www.woodche.com/YchLrestServer/api/nl/car/user_activity/add",
+	                url: "http://192.168.13.111/YchLrestServer/api/nl/car/user_activity/add",
+	                contentType: 'application/json; charset=utf-8',
+	                data: JSON.stringify({"query":{"source":1,"flag":1,"user_name": $form.find('[name=user]').val(), "tel": $form.find('[name=tel]').val(), "activity_price":0,"activity_number":"zt01_POLO","activity_name":"大众POLO活动专场","brand_id":752,"brand_name":"大众","car_model_id":"1263","car_model_name":"polo","car_id":"","car_name":"","exterior_color_id":"","exterior_color_name":"","interior_color_name":"","interior_color_id":"","createuser":""}}),
+	                success:function(data){
+	                if(data.code === 0){
+	                    layer.msg("成功提交报名！");
+	                }else if(data.code === -1){
+	                    layer.msg("您已报名成功！");
+	                }
+	                }
+	            });
+			}
+        });
+
+    });
+</script>
+</body>
+</html>

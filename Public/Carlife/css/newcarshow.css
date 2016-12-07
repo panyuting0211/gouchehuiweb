@@ -1,0 +1,1113 @@
+.crumbs{
+    height: 64px;
+    line-height: 60px;
+    color: #777;
+}
+
+/*cont*/
+.cont{
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.cont .maincont{
+    width: 868px;
+    border: 1px solid #eee;
+    float: left;
+    background-color: #fff;
+    padding: 10px;
+}
+.cont .sblider{
+    margin-left: 920px;
+    border:1px solid #eee;
+    background-color: #fff;
+}
+
+.showinfo .userinfobox{
+    
+}
+
+.showinfo .userinfobox .userpic{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    float: left;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+}
+.userinfobox .userpic img{
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+}
+
+
+.userinfobox .userinfo{
+    margin-left: 60px;
+}
+.userinfobox .userinfo .name{
+    font-size: 16px;
+    line-height:22px;
+}
+
+.showinfo .infobox{
+    padding: 15px 0 ;
+    border-bottom:1px dashed #eee;
+}
+
+
+.infobox .imgbox{
+    width: 880px;
+    margin-left: -12px;
+    overflow: hidden;
+}
+
+.infobox .imgbox img{
+    width: 428px;
+    margin-left: 12px;
+    height: 260px;
+    float: left;
+}
+.infobox  .des{
+    font-size: 14px;
+    color: #666;
+    line-height: 24px;
+    padding-top: 10px;
+}
+
+
+.showinfo    .buttonbox{
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+}
+
+.showinfo .buttonbox .creatime{
+    display: inline-block;
+    float: left;
+}
+.creatime .year{
+    margin-right: 20px;
+}
+
+
+.buttonbox .sharebox{
+    width: 270px;
+    height: 40px;
+    float: right;
+}
+
+.likebox{
+    width: 100%;
+    display: flex;
+}
+
+.likebox a{
+    flex: 1;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 0;
+    background: url("../images/like_button.png") no-repeat;
+}
+.likebox a span{
+    display: inline-block;
+    line-height: 20px;
+    margin-left: 25px;
+}
+
+.likebox .comments{
+    background-position:0px -75px;
+}
+.likebox .likes{
+    background-position: 0 -39px ;
+}
+
+
+#J_commentbox {
+    display: none;
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 10px;
+    padding-bottom: 40px;
+}
+
+#J_commentbox .arrowup{
+    position: absolute;
+    display: block;
+    width:0;
+    height:0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-bottom:8px solid #f4f4f4;
+    right: 72px;
+    top: -8px;
+}
+
+#J_commentbox #J_comment_des{
+    width: 100%;
+    height: 100px;
+    border:none;
+}
+
+#J_commentbox .button{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+
+.commentlistwrap{
+    padding-top: 10px;
+}
+
+.commentlistwrap .title{
+    height: 34px;
+    line-height: 34px;
+    font-size: 18px;
+    color: #333;
+    border-bottom:2px solid #eee;
+}
+
+
+.commentlistwrap .feed_friend_list{
+    position: relative;
+}
+
+.commentlistwrap .feed_friend_list .f-single{
+    border-bottom:1px solid #f4f4f4;
+    position: relative;
+    padding: 15px 0;
+    overflow: hidden;
+}
+
+
+.f-single .userpic{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+}
+
+.f-single .userpic img{
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+}
+
+
+.f-single .feed-subject{
+    margin-left: 50px;
+}
+
+.feed-subject .username{
+    font-size: 16px;
+    color: #333;
+}
+
+.f-single .f_wrap{
+    overflow: hidden;
+}
+
+.f_wrap .f_des{
+    color: #666;
+    line-height: 24px;
+}
+
+.f-detail .f_creatime{
+  display: inline-block;
+    float: left;
+    height: 40px;
+    line-height:40px;
+    color: #666;
+}
+.f-detail .f_creatime .year{
+    float: left;
+}
+
+.f_creatime .time{
+    margin-left:20px;
+}
+
+.f-detail .likebox{
+    width: 200px;
+    float: right;
+}
+
+.f-single .innercomment{
+    position: relative;
+    display: none;
+}
+
+.innercomment .arrowup{
+    position: absolute;
+    display: block;
+    width:0;
+    height:0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-bottom:8px solid #f4f4f4;
+    right: 72px;
+    top: -8px;
+}
+
+.innercomment .commentbox{
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 13px;
+    height: 34px;
+}
+
+.innercomment .commentbox .emoji{
+    width: 34px;
+    height: 34px;
+    left: 0;
+    top:0;
+}
+.innercomment .commentbox .enter{
+    display: block;
+    width: 670px;
+    height: 34px;
+    line-height: 34px;
+    position: absolute;
+    left: 40px;
+    background-color: #fff;
+    border: none;
+    top: 13px;
+    text-indent: 2rem;
+}
+.innercomment .commentbox .submit{
+    position: absolute;
+    display: block;
+    width: 86px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    background-color: #fa8c35;
+    color: #fff;
+    right: 19px;
+    top:13px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.innercomment .showcommentlist li{
+    height: 40px;
+    line-height: 40px;
+    padding: 5px 0 4px;
+    border-bottom:1px dashed #eee;
+    position: relative;
+}
+.innercomment .showcommentlist li .user{
+    margin-left: 50px;
+    color: #358df6;
+}
+
+.innercomment .showcommentlist li .details{
+    display: inline-block;
+}
+
+.innercomment .showcommentlist li .time{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+}
+
+
+
+.cont .sblider .title{
+    height:40px;
+    line-height:40px;
+    border-bottom:1px solid #eee;
+    font-size: 16px;
+    color: #333;
+    text-indent: 10px;
+}
+
+
+.sblider .right_list{
+    padding-top: 10px ;
+}
+
+.sblider .right_list .item{
+    padding: 10px;
+    border-bottom:1px solid #f4f4f4;
+}
+
+.sblider .userinfowrap{
+    position: relative;
+
+}
+
+.sblider .userinfowrap .userpic{
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    overflow: hidden;
+    position: absolute;
+}
+
+.sblider .userinfo{
+    margin-left: 50px;
+    height:40px;
+    color: #666;
+}
+
+
+.sblider .item .info{
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    overflow: hidden;
+}
+
+.sblider .item .info .imgbox{
+    height: 160px;
+}
+
+.sblider .item .info .imgbox img{
+    width: 100%;
+    height:100%;
+}
+.sblider .item .info .des{
+    color: #666;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/*新车秀*/
+.J_list .title{
+    position: relative;
+    height:40px;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.J_list .title span{
+    position: absolute;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid #fa8c35;
+    padding: 0 10px;
+}
+
+.J_list .newcarlistWrap{
+    width: 1220px;
+    overflow: hidden;
+    margin-left: -20px;
+}
+
+.J_list .newcarlistWrap .show{
+    margin-left: 20px;
+    width: 570px;
+    float: left;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.f-zoon-info{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border:1px solid #eee;
+    padding: 10px;
+}
+
+.f-zoon-info .userinfowrap{
+    position: relative;
+    padding-bottom:10px;
+}
+
+.f-zoon-info .userpic{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    overflow: hidden;
+}
+.f-zoon-info  img{
+    width: 100%;
+    height: 100%;
+}
+
+.f-zoon-info .userinfo{
+    margin-left: 50px;
+}
+
+
+.f-zoon-info .info{
+    border-bottom:1px dashed #eee;
+}
+
+.f-zoon-info .info .imgbox{
+    height: 350px;
+}
+
+.f-zoon-info .info .des{
+    color: #666;
+    height: 30px;
+    line-height:30px;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.f-zoon-info .half{
+    width: 50%;
+}
+
+/*club*/
+.clubinfoWrap{
+    background-color: #fff;
+    position: relative;
+    color: #666;
+}
+
+
+.clubinfobox{
+    position: relative;
+    height: 200px;
+    padding-bottom: 10px;
+}
+
+.clubinfobox .clubpic{
+    position: absolute;
+    width:200px;
+    height: 200px;
+    overflow: hidden;
+    left: 5px;
+    top:5px;
+}
+
+
+.clubinfobox .clubdetails{
+    margin-left: 210px;
+}
+
+.clubdetails .clubhead{
+    overflow: hidden;
+    position: relative;
+    height: 56px;
+    padding: 10px 0;
+}
+
+.clubdetails .jionbutton {
+    height: 36px;
+    line-height: 36px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 16px;
+}
+
+
+.clubdetails .leftbox .name{
+    line-height: 28px;
+    font-size: 16px;
+}
+
+
+.clubdetails .club-details{
+    position:relative;
+    line-height:2em;
+    height:4em;
+    overflow:hidden;
+    font-size: 14px;
+}
+.club-details::after {
+    content:"...";
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 20px 1px 45px;
+    background:url(http://css88.b0.upaiyun.com/css88/2014/09/ellipsis_bg.png) repeat-y;
+}
+
+.clubdetails .club_membersinfo{
+    border-top:1px solid #eee;
+    margin-top: 10px;
+}
+
+.club_membersinfo ul{
+    border:1px solid #eee;
+    width: 450px;
+    height: 30px;
+    margin-top: 10px;
+    border-right: none;
+}
+.club_membersinfo ul a{
+    display: block;
+    width: 149px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-right:1px solid #eee;
+    float: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+.club_membersinfo ul .active{
+    background-color: #fa8c35;
+    color: #fff;
+}
+
+
+.clubinfoWrap .dynamicbox{
+    position: relative;
+}
+
+.dynamicbox .title{
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.dynamicbox .dynamicinfobox{
+    background-color: #f7f7f7;
+    padding:15px;
+    padding-bottom: 60px;
+}
+
+.dynamicinfobox .txtareabox{
+    width: 100%;
+    height: 150px;
+    background-color: #fff;
+    border:1px solid #eee;
+}
+
+.dynamicinfobox .submit{
+    position: absolute;
+    right: 20px;
+    bottom:20px;
+}
+
+.dynamicinfobox .addimg{
+    position: absolute;
+    display: inline-block;
+    bottom:20px;
+    cursor: pointer;
+}
+
+#J_dynamicTitle{
+    height: 80px;
+    width: 900px;
+    float: left;
+    background-color: #f7f7f7;
+}
+
+.listTitle ul{
+    height:40px;
+    background-color: #eee;
+    margin-top: 20px;
+}
+.listTitle ul li{
+    width: 150px;
+    position: relative;
+    line-height:40px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.listTitle ul li:hover{
+    background-color: #fa8c35;
+    color: #fff;
+}
+
+
+.listTitle ul .active{
+    background-color: #fa8c35;
+    color: #fff;
+}
+
+.listTitle ul .active .arrowdown{
+    position: absolute;
+    display: block;
+    width: 0;
+    height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-top:10px solid #fa8c35;
+    left:65px;
+}
+
+
+.dynamicListWrap{
+     overflow: hidden;
+    float: left;
+    width: 900px;
+}
+
+.dynamicListWrap .dynamicList{
+    background-color: #f7f7f7;
+}
+
+.dynamicList .item{
+    position: relative;
+    border:1px solid #eee;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.dynamicList .item .iteminfowrap{
+    position: relative;
+    font-size: 14px;
+    color: #666;
+}
+
+.dynamicList .item .iteminfowrap .userpic{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    left: 0;
+    top:0;
+}
+.dynamicList .item .iteminfowrap .userpic img{
+    width: 40px;
+    height: 40px;
+}
+
+
+.dynamicList .item .iteminfowrap .iteminfo{
+    margin-left: 50px;
+}
+
+.dynamicList .iteminfo .info{
+    padding: 10px 0;
+}
+
+.dynamicList .iteminfo .info .imgbox{
+    overflow: hidden;
+    width: 510px;
+    margin-left: -5px;
+}
+
+.dynamicList .iteminfo .info .imgbox img{
+    width: 165px;
+    height: 105px;
+    float: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.dynamicList .userhead .name{
+    font-size: 16px;
+}
+
+
+.dynamicList .item .itemModefy{
+    border-top:1px solid #f4f4f4;
+    margin-top: 10px;
+    height: 42px;
+    line-height:42px;
+}
+
+.dynamicList .itemModefy .creatime{
+    display: inline-block;
+    width: 50%;
+    float: left;
+    height: 42px;
+    padding-left: 50px;
+}
+
+.dynamicList .itemModefy .likebox{
+    width: 200px;
+    height: 40px;
+    float: right;
+}
+
+.sblider .activeMemberList{
+    overflow: hidden;}
+
+.sblider .activeMemberList .activeMem{
+    height: 40px;
+    padding: 15px 0;
+    line-height: 40px;
+    position: relative;
+    color: #666;
+}
+
+.activeMemberList .activeMem .num{
+    font-size: 14px;
+    display:inline-block;
+    width: 50px;
+    text-align: center;
+    float: left;
+    font-style: italic;
+}
+.activeMemberList .activeMem .yellow{
+    color: #ff9900;
+}
+.activeMemberList .activeMem img{
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    overflow: hidden;
+    float: left;
+}
+
+.activeMemberList .activeMem .name{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+
+
+
+/*人在车途*/
+#J_travelTitle{
+    height: 80px;
+    width: 900px;
+    float: left;
+    background-color: #f7f7f7;
+    margin-top: -20px;
+}
+
+
+.travel_title{
+    margin-top: 20px;
+    height: 40px;
+    position: relative;
+    border-bottom:1px solid #dfdffd;
+    background: url("../images/ontravel_title_bf.png") no-repeat;
+    background-position: 95px 14px;
+}
+
+.travel_title span{
+    display: inline-block;
+    position: absolute;
+    padding: 0 10px;
+    border-bottom:1px solid #fa8c35;
+    line-height: 40px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+.activeclubListWrap{
+    margin-top: 20px;
+    color: #666;
+}
+
+.activeclubList li{
+    height: 50px;
+    line-height: 50px;
+}
+.activeclubList .activeMem .num {
+    font-size: 14px;
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    float: left;
+    font-style: italic;
+}
+.activeclubList .activeMem .yellow {
+    color: #ff9900;
+}
+
+
+/*车友会列表*/
+
+.J_clubList .club_title{
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.J_clubList .club_title span{
+    position: absolute;
+    padding: 0 10px;
+    border-bottom:1px solid #fa8c35;
+}
+
+
+.J_clubList .clublist{
+    width: 1220px;
+    margin-left: -20px;
+}
+
+.J_clubList .clublist .clubbox{
+    border:1px solid #eee;
+    width:283px;
+    height: 428px;
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.J_clubList .clublist .clubbox .clubwrap{
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    color: #666;
+    font-size: 14px;
+    -webkit-transition: all .5s ease ;
+    -moz-transition: all .5s ease ;
+    -ms-transition: all .5s ease ;
+    -o-transition: all .5s ease ;
+    transition: all .5s ease ;
+
+}
+.J_clubList .clubbox .clubwrap:hover{
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.J_clubList .clubbox .clubpic{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    overflow: hidden;
+    left:50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.J_clubList .clubbox .info{
+    margin-top: 220px;
+}
+.J_clubList .clubbox .name{
+    font-size: 18px;
+    color: #333;
+    line-height: 30px;
+}
+
+.J_clubList .clubbox .cap_name,.J_clubList .clubbox .num{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    line-height: 26px;
+}
+
+.J_clubList .clubbox .des{line-height: 26px;}
+
+
+.J_clubList .addclub{
+    position: absolute;
+    left: 10px;
+    bottom: 18px;
+}
+.J_clubList .addclub a{
+    display: block;
+    width: 124px;
+    height:35px;
+    line-height: 35px;
+    text-align: center;
+    background-color: #cfcfcf;
+    font-size: 14px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+
+.J_clubList .addclub .add{
+    background-color: #fa8c35;
+    color: #fff;
+}
+
+
+.J_clubList .addclub a:hover{
+    text-decoration: none;
+}
+
+/*车友会成员*/
+.J_clubmemberList{
+    margin: 10px;
+    border-top: 1px solid #eee;
+}
+.J_clubmemberList .title{
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+.J_clubmemberList .memlist{
+    overflow: hidden;
+    margin-left: -20px;
+}
+
+.J_clubmemberList .memlist li{
+    position: relative;
+    width: 174px;
+    height: 208px;
+    float: left;
+    border:1px solid #eee;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+.J_clubmemberList .memlist li:hover{
+    background-color: #f7f7f7;
+}
+
+.J_clubmemberList .memlist li a{
+    position: absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    display: block;
+    text-align: center;
+}
+.J_clubmemberList .memlist li a img{
+    width: 140px;
+    height: 140px;
+    border: 2px solid #fff;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    overflow: hidden;
+    margin: 15px;
+}
+
+.J_clubmemberList .memlist li a span{
+    font-size: 16px;
+    color: #666;
+}
+
+
+.J_clubacvityList{
+    border-top: 1px solid #eee;
+    margin:0 20px 20px;
+}
+
+.J_clubacvityList li{
+    position: relative;
+    padding: 20px 0 30px;
+    border-bottom:1px solid #f1f1f1;
+    height: 197px;
+}
+
+.J_clubacvityList li .imgbox{
+    width: 315px;
+    height: 197px;
+    position: absolute;
+    left:0;
+    top:20px;
+}
+.J_clubacvityList li .imgbox img{
+    width: 100%;
+    height: 100%;
+}
+
+.J_clubacvityList li .txtbox{
+    margin-left: 335px;
+}
+
+
+.J_clubacvityList .head{
+    font-size: 20px;
+    line-height: 35px;
+    color: #333;
+}
+.J_clubacvityList  .organizer{
+    line-height: 35px;
+    font-size: 14px;
+    color: #ff9900;
+}
+.J_clubacvityList  .des{
+    font-size: 14px;
+    line-height: 35px;
+    color: #999;
+}
+
+.J_clubacvityList  .formore {
+    position: absolute;
+    display: block;
+    width: 138px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    border:1px solid #ff9900;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    color: #ff9900;
+    font-size: 16px;
+    left: 335px;
+    bottom: 32px;
+}
+
+
+
+.cont .J_clubacvity_right_list .title{
+    border:none;
+}
+.J_clubacvity_right_list ul{
+    padding: 0 10px;
+}
+.J_clubacvity_right_list li{
+    position: relative;
+    height: 245px;
+    margin-top: 20px;
+    border-bottom:1px solid #f4f4f4;
+}
+
+.J_clubacvity_right_list li a{
+    position: absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+}
+.J_clubacvity_right_list li a:hover{
+    text-decoration: none;
+}
+
+.J_clubacvity_right_list a img{
+    width: 100%;
+    height: 168px;
+}
+.J_clubacvity_right_list a p{
+    line-height: 28px;
+    color: #666;
+    font-size: 16px;
+}
+.J_clubacvity_right_list a span{
+    line-height: 28px;
+    color: #999;
+    font-size: 14px;
+}

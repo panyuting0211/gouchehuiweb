@@ -1,0 +1,123 @@
+<extend name="Public/base"/>
+
+<block name="body">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">经销商会员</a><a href="#" class="current">编辑</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="{:U('Members/DealerupdHandle')}" class="form-horizontal" method="post">
+                    <fieldset>           
+                        <div class="control-group">
+                            <label class="control-label" for="webname">账号：</label>
+                             <div class="controls">
+                         <input id="webname" name="username" type="text" value="{$info.user_name}" readonly>         
+                             </div>
+                    </div> 
+                    <div class="control-group">
+                            <label class="control-label" for="webname">密码：</label>
+                             <div class="controls">
+                         <input id="webname" name="password" type="password" value="{$info.password}">         
+                             </div>
+                    </div>
+                        <div class="control-group">
+        <label class="control-label" for="name">状态：</label>
+        <div class="controls">
+        <label class="radio inline">
+        <input type="radio" name="status" value="1" <if condition="$info['status'] eq 1">checked</if>  >开启</label>
+         <label class="radio inline"> 
+        <input type="radio" name="status" value="0" <if condition="$info['status'] eq 0">checked</if> >关闭</label>         
+    </div>
+  </div>            
+                    <div class="control-group">
+                            <label class="control-label" for="webname">公司名称：</label>
+                             <div class="controls">
+                         <input id="webname" name="dealer_name" type="text" value="{$info.dealer_name}">         
+                             </div>
+                    </div> 
+                <div class="control-group">
+                    <label class="control-label" for="name">公司地址：</label>
+                    <div class="controls">
+                <select style="width:100px;" name="province" id="province">
+                    <option>选择省份</option>
+                        <volist name="province" id="vol">
+                            <option value="{$vol.id}" <if condition="$vol['id'] eq $info['province_id']">selected</if>>{$vol.province_name}</option>
+                        </volist>                                 
+                </select>
+                <select style="width:100px;" name="city_id" id="city">
+                    <volist name="city_all" id="vol">   
+                        <option value='{$vol.id}' <if condition="$vol['id'] eq $info['city_id']">selected</if>>{$vol.city_name}</option>
+                    </volist>                                                                
+                </select>
+                <input name="addr" type="text" value="{$info.addr}">
+                <p class="help-block">公司详细地址</p>                 
+                    </div>
+                </div>
+                    <input type="hidden" name="id" value="{$info.id}">  
+                    <div class="control-group">
+                    <label class="control-label" for="webname">联系人：</label>
+                             <div class="controls">
+                         <input id="webname" name="contacts" type="text" value="{$info.contacts}">         
+                             </div>
+                    </div>
+    <div class="control-group">
+                            <label class="control-label" for="webname">联系电话：</label>
+                             <div class="controls">
+                         <input id="webname" name="tel" type="text" value="{$info.tel}">         
+                             </div>
+                    </div>  
+<div class="control-group">
+                            <label class="control-label" for="webname">权限：</label>
+                             <div class="controls" style="margin-top:5px;">
+                        <input class="checkbox check-all" type="checkbox" name='power[]' value="1" <if condition="($info.power eq 1) or ($info.power eq 3) or ($info.power eq 5) or ($info.power eq 7) "> checked </if> style="margin:0px 5px 0 0;" /> 报价
+                        <input class="checkbox check-all" type="checkbox" name='power[]' value="2" <if condition="($info.power eq 2) or ($info.power eq 3) or ($info.power eq 6) or ($info.power eq 7) "> checked </if> style="margin:0px 5px 0 5px;" />
+4S店名称、地址
+                        <input class="checkbox check-all" type="checkbox" name='power[]' value="4" <if condition="($info.power eq 4) or ($info.power eq 5) or ($info.power eq 6) or ($info.power eq 7) "> checked </if> style="margin:0px 5px 0 5px;"/> 库存
+                                             
+                             </div>
+                             
+                    </div>                                                                                                                                                        
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">保存</button>                      
+                    </div>
+                </form>                                                               
+</div>
+</div>
+  </div>
+
+
+
+    <!--<script type="text/javascript">-->
+        <!--Think.setValue("pid", 0);-->
+        <!--Think.setValue("hide", 0);-->
+        <!--Think.setValue("is_dev", 0);-->
+    <!--</script>-->
+
+    </div>
+    <script src="{$Think.const.ADMIN_JS_URL}/region_select.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        //获得城市ID
+        $("#province").change(function(){
+            var $obj=$('#province').find('option:selected');
+            $("#city").empty();
+            $("#city").append("<option value=''>选择城市</option>");
+
+            $.post( "__MODULE__/Ajax/city",
+                    {province_id : $obj.val()},
+                    function(data,textStatus){
+                           $.each(data,function(key,val){
+                           $("#city").append("<option value='"+val.id+"'>"+val.city_name+"</option>");
+                         });
+
+                    },
+                    "json");
+            })
+        
+    })
+    </script>
+</block>

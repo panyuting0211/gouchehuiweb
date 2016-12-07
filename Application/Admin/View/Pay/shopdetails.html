@@ -1,0 +1,265 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">订车订单</a><a href="#" class="current">订单详情</a></div>
+                <h1>{$atitle}</h1>
+            </div>
+            <div class="container-fluid" id="J_OrderInfo" data-id="{$info.id}" data-url="__CONTROLLER__/changestatus">
+                <!--  后台订单详情-未支付 begin -->
+                <div class="flowstep">
+                </div>
+                <div class="row-fluid">
+                    <h4 class="span4">订单状态:
+                        <switch name="info.order_status">
+                            <case value="0">
+                                未确认
+                            </case>
+                            <case value="1">
+                                已确认
+                            </case>
+                            <case value="2">
+                                已取消
+                            </case>
+                            <case value="3">
+                                无效
+                            </case>
+                            <case value="4">
+                                退货
+                            </case>
+                            <case value="5">
+                                已分单
+                            </case>
+                        </switch>
+                    </h4>
+                    <h4 class="span4">支付状态:
+                        <switch name="info.pay_status">
+                            <case value="0">
+                                未付款
+                            </case>
+                            <case value="1">
+                                付款中
+                            </case>
+                            <case value="2">
+                                已付款
+                            </case>
+                        </switch>
+                    </h4>
+                    <h4 class="span4">配送状态:
+                        <switch name="info.shipping_status">
+                            <case value="0">
+                                未发货
+                            </case>
+                            <case value="1">
+                                已发货
+                            </case>
+                            <case value="2">
+                                已收货
+                            </case>
+                            <case value="5">
+                                配货中
+                            </case>
+                        </switch>
+                    </h4>
+                </div>
+                <div class="uc_order_info">
+                    <div class="order_title_bar">
+                        <div class="order_title"><span>商品信息</span></div>
+                    </div>
+                    <div class="order_content">
+                        <table>
+                            <colgroup>
+                                <col width="260">
+                                <col width="110">
+                                <!-- 宝贝 -->
+                                <col class="col1">
+                                <!-- 交易状态 -->
+                                <col class="col2">
+                                <!-- 单价（元） -->
+                                <col class="col3">
+                                <!-- 数量 -->
+                                <col class="col4">
+                                <!-- 优惠 -->
+                                <col class="col5">
+                                <!-- 合计（元） -->
+                                <col class="col6">
+                                <!-- 运费（元） -->
+                                <!-- 买/卖家信息 -->
+                            </colgroup>
+                            <tbody class="base-info">
+                            <tr>
+                                <td>
+                                    <span class="label">订单编号：</span>
+                                    <span class="order-num">{$info.order_sn}</span>
+                                </td>
+                                <td colspan="3">
+
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="label">成交时间：</span>
+                                    <span class="trade-time">{$info.add_time}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody class="goods-order">
+                            <tr class="order-hd">
+                                <th class="item">订单编号</th>
+                                <th class="item">商品名称</th>
+                                <th class="item">成交时间</th>
+                            </tr>
+                            <volist name="goods" id="vo">
+                                <tr class="order-item">
+                                    <td class="item">{$info.order_sn}</td>
+                                    <td class="item" style="width: 400px;">{$vo.goods_name}</td>
+                                    <td class="item">{$info.add_time}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="uc_order_info">
+                    <div class="order_title_bar">
+                        <div class="order_title"><span>订车人信息</span></div>
+                    </div>
+                    <div class="order_content">
+                        <table>
+                            <colgroup>
+                                <col width="260">
+                                <col width="110">
+                                <!-- 宝贝 -->
+                                <col class="col1">
+                                <!-- 交易状态 -->
+                                <col class="col2">
+                                <!-- 单价（元） -->
+                                <col class="col3">
+                                <!-- 数量 -->
+                                <col class="col4">
+                                <!-- 优惠 -->
+                                <col class="col5">
+                                <!-- 合计（元） -->
+                                <col class="col6">
+                                <!-- 运费（元） -->
+                                <col class="col7">
+                                <!-- 买/卖家信息 -->
+                            </colgroup>
+
+                            <tbody class="goods-order">
+                            <tr class="order-hd">
+                                <th class="item">收货人</th>
+                                <th class="excolor">收货地址</th>
+                                <th class="incolor">手机号</th>
+                                <th class="price">配送方式</th>
+                                <th class="upcitycard">快递号</th>
+                                <th class="deposit">发票类型</th>
+                                <th class="status">发票抬头</th>
+                                <th class="status">发票内容</th>
+                            </tr>
+                            <tr class="order-item">
+                                <td class="item">{$info.consignee}</td>
+                                <td class="excolor" width="25%">
+                                    {$info.province_name}{$info.city_name}{$info.district_name}{$info.address}
+                                </td>
+                                <td class="incolor">{$info.tel}</td>
+                                <td class="price">{$info.shipping_name}</td>
+                                <td class="upcitycard">{$info.shipping_id}</td>
+                                <td class="deposit">{$info.inv_type}</td>
+                                <td class="status">{$info.inv_payee}</td>
+                                <td class="status">{$info.inv_content}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <!--  后台订单详情-未支付 end -->
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4 offset8"></div>
+        <h4 class="span4 offset8">商品金额：{$info.subtotal}元</h4>
+        <h4 class="span4 offset8">积分抵扣：{$info.integral_money}元</h4>
+        <h4 class="span4 offset8">运费：20元</h4>
+        <h4 class="span4 offset8">-------------------------------</h4>
+        <h4 class="span4 offset8">总额：{$info.money}元</h4>
+    </div>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+    <script src="/Public/Admin/js/confirm.js"></script>
+    <script>
+        $(function () {
+            var $orderInfo = $('#J_OrderInfo'), _url = $orderInfo.data('url'), _id = $orderInfo.data('id');
+
+            $orderInfo.on('click', '.j_statusImgOpera', function (e) {
+                var _status = $(this).data('status');
+                e.preventDefault();
+                $.ajax({
+                    url: _url,
+                    data: {id: _id, status: _status},
+                    success: function (a) {
+                        location.reload();
+                    },
+                    error: function () {
+                        this.errormsg()
+                    }
+                });
+            });
+            $orderInfo.on('click', '.j_statusOpera', function (e) {
+                e.preventDefault();
+                var _status = $(this).data('status');
+                Confirm.show('状态操作', '你确认操作订单状态吗？', {
+                    '确定': {
+                        'primary': true,
+                        'callback': function () {
+                            $.ajax({
+                                url: _url,
+                                data: {id: _id, status: _status},
+                                success: function (a) {
+                                    location.reload();
+                                },
+                                error: function () {
+                                    this.errormsg()
+                                }
+                            });
+                        }
+                    },
+                    '取消': {
+                        'primary': false,
+                        'callback': function () {
+                            Confirm.hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</block>

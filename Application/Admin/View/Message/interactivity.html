@@ -1,0 +1,172 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script src="http://www.gouchehui.com/Public/Home/js/app/jquery.cxselect.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		#interact,.interact{
+			margin-top: 20px;
+			font-size: 13px;
+		}
+		.interact select{
+			font-family: "微软雅黑";
+		}
+		.interact .control-label{
+			width: 90px;
+		}
+		.interact .table td{
+			text-align: center;
+		}
+		.interact h4 p{
+			float: right;
+		}
+		.interact button{
+			margin-left: 10px;
+		}
+		#interact button{
+			margin-top: -8px;
+		}
+		.pager{text-align:center;}
+		.pager a{padding:3px 8px;margin-left:3px;line-height:20px;background:#f9f9f9;border:1px solid #DBDBDB;text-decoration: none}
+		.pager a:hover, .pager a.current{background-color:#7CD5B1;color:#fff;border:1px solid #7CD5B1;cursor:pointer;}
+	</style> 
+		<div id="content">
+			<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+				<button class="close fixed" style="margin-top: 4px;">×</button>
+				<div class="alert-content">返回内容！</div>
+			</div>
+			
+			<div id="content-wrap">
+				<div id="content-header">
+			        <div id="breadcrumb">
+			           <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>互动管理</a>
+			           <a href="#" title="Go to Home" class="tip-bottom">网站点击率</a>
+			           <a href="#" class="current">活动页</a>
+			        </div>
+			    </div>
+			    
+			    <div class="container-fluid">
+
+					  <div class="control-group" id="interact">
+					    <!--<label class="control-label" for="inputEmail">活动页品牌：</label>-->
+					    <select class="span2 brand" id="" data-required="false" data-first-title="请选择活动品牌" data-first-value="" data-url="{:U('Ajax/brand')}" name="brand_id">
+
+						</select>
+						<select class="span2 model" id="" data-required="false" data-first-title="请选择车型" data-url="{:U('Ajax/addModelHandle')}" data-first-value="" name="car_model_id">
+
+						</select>
+						<select class="span4 car" id="" data-required="false" data-first-title="请选择车款" data-url="{:U('Ajax/addModelHandle')}" data-first-value="" name="car_id">
+						</select>
+					  <button type="submit" class="btn btn-primary">查看</button>
+					  </div>
+
+					
+					<div class="row-fluid interact" id="inter_lists">
+			    		<h4>
+			    			总计：（<span class="interdata badge"></span>条数据。其中，点击次数为：<span class="interclick badge"></span> ；IP点击次数为：<span class="interip badge"></span>）
+			    		</h4>
+			    		<table class="table table-bordered table-striped table-hover">
+							  <thead>
+							    <tr>
+							      <th>品牌</th>
+							      <th>车型</th>
+							      <th>车款</th>
+							      <th>点击次数</th>
+							      <th>IP地址</th>
+							      <th>IP点击次数</th>
+                                  <th>用户名</th>
+							      <th>点击时间</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							   
+							  </tbody>
+			    		</table>
+			    		<div class="pager"></div>
+					</div>
+			    </div>
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+		
+		$(function(){
+			$('#interact').cxSelect({
+		      selects: ['brand', 'model', 'car'],
+		      emptyStyle: 'none',
+		      jsonName: 'name',
+		      jsonValue: 'value'
+		  });
+		  
+		    var url_ajax = "/index.php/subject/activesList";
+            
+	        $("#inter_lists").delegate(".pager a", "click", function() {
+	            var page = $(this).attr("data-page");
+	            getPage(page);
+	        });
+	        
+	        $("#interact button").on("click", function() {
+	            getPage(1);
+	        });
+	        
+	        getPage(1);
+
+            function getPage(page) {
+                $("#inter_lists h4").css('display','none');
+                $("thead").css('display','none');
+                $('tbody').empty();
+                $("#inter_lists").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+				
+				
+				if($('select.brand').val() ==null){
+					var brand  = '';					 		 
+				}else{
+					var brand  = $('select.brand').val();				
+				}
+				if($('select.model').val() ==null){
+					var model  = '';					 		 
+				}else{
+					var model  = $('select.model').val();		
+				}
+				if($('select.car').val() ==null){
+					var car    = '';					 		 
+				}else{
+					var car    = $('select.car').val();				
+				}
+               
+                $.post( "/index.php/subject/activesList",
+                    {brand_id:brand, car_model_id:model, car_id:car, p:page},
+                    function(data,textStatus){
+                        $('tbody').empty();
+                        $('#inter_lists').find('.onload').remove();
+                		$("#inter_lists h4").css('display','');
+                        $("thead").css('display','');
+                        $('.pager').empty();
+                        var pagelist=data['page'];          
+                        $('#inter_lists .pager').html(pagelist);
+
+                        data.list && data.list.length > 0 &&　($.each(data.list,function(key,val){
+                            $('tbody').append("<tr><td>"+val.brand_name+"</td><td>"+val.car_model_name+"</td><td>"+val.car_name+"</td><td>"+val.click_num+"</td><td>"+val.ip+"</td><td>"+val.ip_click+"</td><td>"+val.user_name+"</td><td>"+val.create_time+"</td></tr>")
+                        }));
+                        
+                    	if(data.count==null){
+                    		$(".interclick").text("0");
+                    	}else{
+                    		$(".interclick").text(data.count);
+                    	}
+                    	if(data.ip_count==null){
+                    		$(".interdata").text("0");
+                    		$(".interip").text("0");
+                    	}else{
+                    		$(".interdata").text(data.ip_count);
+                    		$(".interip").text(data.ip_count);
+                    	}
+                    	
+                    },
+                    "json");
+                    
+            }
+            
+		});
+
+	</script>
+</block>

@@ -1,0 +1,739 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>购车惠后台管理系统</title>
+    <link rel="stylesheet" href="/Public/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Public/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="/Public/Admin/css/matrix-media.css" />
+    <link rel="stylesheet" href="/Public/Admin/css/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Public/Admin/css/Css.css" />
+    <style type="text/css">
+        .citysite{
+            background: #00ff00;padding: 3px;
+        }
+        .row-fluid .nav li label{
+        	font-size: 14px;
+        }
+        #myTabCon{
+        	height: 600px;
+        	padding-top: 20px;
+        	overflow-x:hidden;
+        	overflow-y: auto;
+        	border: 1px solid #1B6D85;
+        }
+        #myTabCon ul li{
+        	margin-bottom: 10px;
+        	font-size: 14px;
+        }
+    </style>
+    <script src="/Public/Admin/js/jquery.min.js"></script>
+    <script src="/Public/Admin/js/jquery.ui.custom.js"></script>
+    <script src="/Public/Admin/js/jquery-1.7.2.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/matrix.js"></script>
+    <script src="/Public/Admin/js/jquery.kkPages.js"></script>
+</head>
+	<body>
+		<div id="content">
+			<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+				<button class="close fixed" style="margin-top: 4px;">×</button>
+				<div class="alert-content">返回内容！</div>
+			</div>
+			
+			<div id="content-wrap">
+				<div class="container-fluid">
+					<form action="" method="post" class="form-horizontal">
+						<span style="font-size: 14px;">你目前所在的用户组：<B>{$name}</B> 分配权限</span>
+						<hr />
+						<div class="row-fluid">
+							<div class="span3">
+								<ul id="myTa" class="nav nav-pills nav-stacked" role="tablist">
+									<li role="presentation" class="checkbox active">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />用户管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />广告管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />互动管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />城市管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />会员管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />汽车管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />订单管理</label>
+										</a>
+									</li>
+									<li role="presentation" class="checkbox">
+										<a href="javascript:;">
+											<label name="name" value=""><input id="" name="" value="" pid="" level="1" type="checkbox" />车生活</label>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="span9">
+								<div id="myTabCon" class="tab-content">
+							      <div>
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >权限管理(nodeList)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加权限(addNode)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除权限(delNode)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑权限(editNode)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >角色管理(roleList)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加角色(addRole)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除角色(delRole)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑角色(editRole)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >权限配置(access)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >管理员管理(managerList)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加管理员(addManager)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除管理员(delManager)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑管理员(editManager)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >网站首页(adver)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加网站广告(AdverAdd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除网站广告（APP广告）(DelSelect)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >修改网站广告(Adverupd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存添加网站广告(adveraddHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存编辑网站广告(edit_ad_haddle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >APP首页(AppAd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加APP广告(AppAdAdd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑APP广告(AppAdup)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存添加APP广告(AppAdAddHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >设置网站图片是否展示（APP广告）(ajax_ad)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >问题咨询(Messagelist)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >咨询详情( MessageDet)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除咨询(message_delete_ajax)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存留言修改(editMessage)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >在线反馈 (online_feedback)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除在线反馈(DelSelectcon)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >APP互动(appMessage)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >APP回复(appReply)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除APP互动(app_delete_ajax)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除APP回复(appReplyDel)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >城市站点(citysite)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加城市(addcity)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存添加城市(addcity_handdle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除城市(deletecity)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >设置城市是否启用(changestatus)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >普通会员(member)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >普通会员详情(Memberdetails)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除普通会员(user_general_delete_)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >4S店会员(shopUser)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加4S店会员(shopUserAdd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除4s店会员(user_4s_delete_ajax)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑4S店会员(editShopUser)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存添加4s店会员(shopAddHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存编辑4s店会员(editShopUserHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >查询报价信息(Offer)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >查看积分(integral)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >历史报价(history_price)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >经销商会员(Dealer)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加经销商会员(Dealeradd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存添加经销商(DealeraddHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑经销商会员(Dealerupd)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >保存编辑经销商(DealerupdHandle)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除经销商(user_dealer_delete_a)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >所有车款(allcar)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加品牌(addcar_brand)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑品牌(editcar_brand)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除品牌(deletecar_brand)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >所有车款-车型(car_model)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加车型(addcar_model)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑车型(editcar_model)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除车型(deletecar_model)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车型关注(model_focus)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车型动态(model_dongtai)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加车型动态(addmodel_dongtai)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除车型动态(del_model_dongtai)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >所有车款-车款(carlist)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加车款(addcar)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑车款(editcar)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除车款(deletecar)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车款所有图片(carimage)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >多图上传(uploadify)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除图片(deleteimage)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >价格走势(priceline)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车款外观颜色(car_exterior_color)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >修改外观颜色(change_color)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除外观颜色(delete_exterior_color)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >内饰颜色(car_interior_color)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >内饰颜色图上传处理(interior_colorupHand)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除内饰颜色(delete_interior)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >首页公开底价设置(set_public_carprice)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除首页公开底价设置(del_index_car_price)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >首页公开底价图片展示(car_index_image)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >首页公开底价上传图片处理(car_index_image_upha)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车型分类(cartype)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >添加车型分类(addcartype)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >编辑车型分类(editcartype)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除车型分类(deletecartype_ajax)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >底价车(carprice)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >特价车(carspecial)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除特价车(deletecarspecial)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >特价车图片上传(carpicture)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >特价车图片上传处理(carpicture_up)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >礼包(carspecial_gift)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >删除礼包(del_gift)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >询价记录(orderList)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >询价失败订单列表(fail_orderlist)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >订车订单(depositList)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >订单详情(orderDetails)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >订单删除(delOrder)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >订单编辑(editOrder)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >订车订单分配(distribute)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >改变订单状态(changestatus)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >积分兑换(credits_exchange)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >积分兑换订单详情(credits_exchange_det)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							      <div style="display: none;">
+							      	<ul class="row-fluid">
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车知识(carKnowledge)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车友会(carFriend)
+							      			</label>
+							      		</li>
+							      		<li class="checkbox span4">
+							      			<label name="name" value="">
+							      				<input id="" name="" value="" pid="" level="2" type="checkbox" >车工具(carTool)
+							      			</label>
+							      		</li>
+							      	</ul>
+							      </div>
+							</div>
+						</div>
+						</div>
+						<div class="row-fluid" style="margin: 20px 0;">
+							<div class="span4"></div>
+							<div class="span8">
+								<input type="submit" value="保存修改" class="btn btn-primary" >
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var aLi=$("#myTa li");
+				aLi.on("mouseover",function(){
+					var aindex=$(this).index(),
+						myTabCon=$("#myTabCon>div");
+					myTabCon.hide().eq(aindex).show();
+					aLi.removeClass("active").eq(aindex).addClass("active");
+				});
+				
+			})
+			
+			$(function(){
+				$('#myTa li input[type="checkbox"]').click(function(){
+					var liindex=$(this).parents("li").index();
+					var co=$("#myTabCon>div");
+					var incheck = $(this).attr("checked") ;
+					if(incheck=="checked"){
+						co.eq(liindex).find("input[type='checkbox']").attr('checked',true);
+					}else{
+						co.eq(liindex).find("input[type='checkbox']").attr('checked',false);
+					}
+				});
+			})
+			
+			$(function(){
+				$("#myTabCon>div li input[type='checkbox']").click(function(){
+					var divindex=$(this).parents("div").index()-4;
+					var liin=$("#myTa li").eq(divindex).find("input[type='checkbox']");
+					var inlen = $("#myTabCon>div li input[type='checkbox']:checked").length; 
+					if(inlen>0){
+						liin.attr('checked',true);
+					}else{
+						liin.attr('checked',false);
+					}
+				});
+			})
+			
+		</script>
+	</body>
+</html>

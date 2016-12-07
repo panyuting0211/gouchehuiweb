@@ -1,0 +1,60 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">我的订单</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="n_uc_myorder.html" title="">购车订单</a></li>
+                <li><a href="n_uc_myinquiry.html" title="">询价订单</a></li>
+                <li class="cur"><a href="n_uc_credits.html" title="">车币订单</a></li>
+                <!--<li><a href="n_uc_shop_order_list.html" title="">商城订单</a></li>-->
+            </ul>
+
+                <div class="uc_credits ohd"  id="J_CreditsOrderListMain">
+                    <div class="table">
+                        <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                            <colgroup>
+                                <col class="">
+                                <col class="">
+                                <col>
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr class="col_name">
+                                <th>订单号</th>
+                                <th>商品名称</th>
+                                <th>消耗车币</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="j_list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="G_pager j_pager"></div>
+                </div>
+
+        </div>
+
+    </div>
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td>{{value.out_trade_no}}</td>
+            <td>{{value.goods_name}}</td>
+            <td>{{value.score_value}}</td>
+            <td><a href="n_uc_credits_details.html?id={{value.id}}">查看详情</a></td>
+        </tr>
+        {{/each}}
+    </script>
+    <script>
+        $(function(){
+            $('#J_CreditsOrderListMain').AjaxListerContainer({
+                loader: '<tr><td colspan="4" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+                nuller: '<tr><td colspan="4" class="null_list">您暂无任何询价订单！快去 <a href="/index.php/car/product_search" target="_blank">询价</a>你喜欢的车吧！</td></tr>',
+                ajaxUrl: '/member.php/MemberGeneral/scorelist'
+            });
+        });
+    </script>
+</block>

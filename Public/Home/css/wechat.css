@@ -1,0 +1,205 @@
+body{
+	background-color: #e2e3e8;
+}
+
+.header{height: 90px;}
+.header h1{
+    text-align: center;
+    padding-top: 24px;
+}
+
+.cont{
+	width: 950px;
+	border-left: 1px solid #cfd0d5;
+	border-right: 1px solid #cfd0d5;
+	margin: 0 auto; 
+	background-color: #fff;
+	box-shadow:0px 3px 10px #999a9d;
+	margin-bottom: 60px;
+	position: relative;
+    padding-bottom: 20px;
+}
+
+.cont_wrap{
+	padding: 28px;
+}
+
+.area {
+    text-align: center;
+}
+
+.area_hd h2 {
+    display: none;
+}
+
+.pay_msg_t {
+    line-height: 2.2;
+    color: #000;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.area_bd {
+    display: none;
+}
+
+#pay_normal,#qr_normal {
+    display: block;
+}
+
+.qr_img_wrapper {
+    display: block;
+    position: relative;
+    height: 306px;
+}
+.msg_default_box{
+	display: inline-block;
+    width: 278px;
+    height: 84px;
+    border: 1px solid #f57611;
+    background-color: #fa8c35;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-align: center;
+    letter-spacing: 6px;
+    color: #fff;
+}
+.msg_default_box p {
+    height: 42px;
+    line-height: 42px;
+    letter-spacing: normal;
+    text-align: center;
+    font-size: 16px;
+}
+.qr_default .msg_box {
+    display: none;
+}
+.msg_box p {
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: normal;
+    text-align: left;
+    font-size: 16px;
+}
+.guide {
+    display: none;
+    position: absolute;
+    top: 0;
+    margin-left: -101px;
+}
+
+/**/
+.pay_bill .area_hd {
+    border-bottom: 3px solid #e0e3eb;
+    padding-bottom: 4px;
+    height: 60px;
+}
+
+.pay_bill .area_hd .icon_wrapper {
+    display: inline-block;
+    position: relative;
+    top: 34px;
+    padding-left: 12px;
+    padding-right: 14px;
+    background-color: #fff;
+}
+.icon_wrapper i{
+    display: block;
+    width: 33px;
+    height: 31px;
+    background: url(../images/gwc_03.png) no-repeat 0 0;
+    margin: 10px;
+}
+
+.pay_bill .area_bd {
+    display: block;
+}
+.pay_money{
+	  padding-bottom: 20px;
+    padding-top: 50px;
+    color: #ff6600;
+    font-size: 60px;
+    font-weight: 400;
+    border-bottom: 1px solid #d0d8e4;
+    line-height: 68px;
+}
+
+.pay_bill_unit.no_extra {
+    background: none;
+}
+
+.pay_bill_unit {
+    padding: 18px 0 40px;
+}
+
+.pay_bill_unit.no_extra dl{
+    display: inline-block;
+    margin: 0 auto;
+}
+.pay_bill_unit.no_extra dl dd{
+    float: left;
+    font-size: 20px;
+    color: #4a4a4a;
+    line-height: 30px;
+    margin-left: 10px;
+}
+.pay_bill_unit.no_extra dl dt{
+    display: inline-block;
+    float: left;
+    line-height: 34px;
+    font-size: 14px;
+    color: #8e8e8e;
+}
+.pay_bill_info {
+    padding-top: 10px;
+    line-height: 26px;
+    border-bottom: 3px solid #e2e3e8;
+    padding-bottom: 24px;
+}
+.pay_bill_info  p{overflow: hidden;    font-size: 14px;
+    color: #8e8e8e;
+    line-height: 35px;}
+.pay_bill_info  p label{
+    float: left;
+}
+.pay_bill_info  p span.pay_bill_value{
+    float: right;
+}
+.aside {
+    clear: both;
+}
+.pay_widget_hd {
+    padding-top: .35em;
+}
+
+.pay_widget_hd, .pay_widget_bd {
+    display: inline-block;
+    vertical-align: middle;
+}
+.pay_widget_hd i{
+    display: block;
+    width: 31px;
+    height: 31px;
+    background: url("../images/phone_03.png") no-repeat 0 0;
+}
+.pay_widget_bd{margin-left: 10px}
+.pay_widget_bd .widget_name{
+    font-size: 14px;
+    color: #8e8e8e;
+}
+.pay_widget_bd .widget_desc{color:#4a4a4a}
+.footer {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+    background-color: #f1f1f1;
+    border-top: 1px solid #c1c1c1;
+    color: #8b8e98;
+    font-size: 12px;
+}
+.footer p{
+    line-height: 28px;
+    color: #a0a0a0;
+}
+

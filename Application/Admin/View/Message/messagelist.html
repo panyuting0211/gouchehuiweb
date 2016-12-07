@@ -1,0 +1,245 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+
+            <div id="content-header">
+                <div id="breadcrumb"><a href="javascript:;" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="" class="current">{$atitle}</a></div>
+                <!--   <h1>{$atitle}</h1> -->
+            </div>
+            <p id='ajax_delete_id' style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12" id="Yu-db-backup">
+
+                        <div class="widget-yu-btn">
+                            <div class="widget-yu-btn widget-right-search">
+
+                                <select name="brand" style="width:150px;" id="brand">
+                                    <option value="">--选择品牌--</option>
+                                    <volist name="brand" id="vol">
+                                        <option value="{$vol.car_brand_id}"
+                                        <if condition="$vol['car_brand_id'] eq $brand_id">selected</if>
+                                        >{$vol.brand_name}</option>
+                                    </volist>
+                                </select>
+
+                                <select name="model" style="width:150px;" id="model">
+                                    <option value="">--选择车型--</option>
+                                </select>
+
+                                <select name="question_type" style="width:150px;" id="question_type">
+                                    <option value="">--问题类型--</option>
+                                    <option value="1"
+                                    <if condition="$question_type eq 1">selected</if>
+                                    >商品咨询</option>
+                                    <option value="2"
+                                    <if condition="$question_type eq 2">selected</if>
+                                    >支付相关</option>
+                                    <option value="3"
+                                    <if condition="$question_type eq 3">selected</if>
+                                    >发票问题</option>
+                                    <option value="4"
+                                    <if condition="$question_type eq 4">selected</if>
+                                    >其它问题</option>
+                                </select>
+
+                                <select name="reply_status" style="width:150px;" id="reply_status">
+                                    <option value="">--回复状态--</option>
+                                    <option value="0"
+                                    <if condition="$reply_status eq '0'">selected</if>
+                                    >未回复</option>
+                                    <option value="1"
+                                    <if condition="$reply_status eq 1">selected</if>
+                                    >已回复</option>
+                                </select>
+                                <button class="btn button_sou" id="commit" onclick="getPage(1)"/>
+                                筛选</button>
+                            </div>
+
+                            <div class="content" id="ajax_lists">
+                                <div class="widget-content nopadding">
+                                    <h4>总计：<span class="userdata badge"></span>个 </h4>
+                                    <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                        <thead>
+                                        <tr>
+                                            <th>品牌</th>
+                                            <th>车型</th>
+                                            <th>提问会员</th>
+                                            <th>问题类型</th>
+                                            <th>问题内容</th>
+                                            <th>提问日期</th>
+                                            <th>回复内容</th>
+                                            <th>回复日期</th>
+                                            <th>问题状态</th>
+                                            <th>问题来源</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pager">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+
+        </style>
+    </div>
+    <script type="text/javascript">
+        $("#brand").change(function () {
+            var $obj = $('#brand').find('option:selected');
+            $("#model").empty();
+            $("#model").append("<option value=''>请选择车型</option>");
+
+            $.post("/admin.php/Ajax/get_model",
+                    {brand_id: $obj.val()},
+                    function (data, textStatus) {
+                        $.each(data, function (key, val) {
+                            $("#model").append("<option value='" + val.car_model_id + "'>" + val.car_model_name + "</option>");
+                        });
+
+                    },
+                    "json");
+        })
+        /*var url_ajax = "__CONTROLLER__/carprice_ajax2";*/
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+
+            var brand = $('#brand').find('option:selected').val();
+            var model = $('#model').find('option:selected').val();
+            var question_type = $('#question_type').find('option:selected').val();
+            var reply_status = $('#reply_status').find('option:selected').val();
+
+            $.post("__MODULE__/Ajax/messagelist_ajax",
+                    {brand: brand, model: model, question_type: question_type, reply_status: reply_status, p: page},
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+
+                        $.each(info, function (key, val) {
+                            if (val.brand_name == null)       val.brand_name = '';
+                            if (val.reply == null)            val.reply = '';
+                            if (val.reply_time == null)       val.reply_time = '';
+                            if (val.question_type == 1)       val.question_type = '商品资讯';
+                            if (val.question_type == 2)       val.question_type = '支付相关';
+                            if (val.question_type == 3)       val.question_type = '发票问题';
+                            if (val.question_type == 4)       val.question_type = '其它问题';
+                            if (val.status == 1)              val.status = '<font style="color:green;">显示</font>';
+                            if (val.status == 0)              val.status = '<font style="color:red;">不显示</font>';
+                            $('tbody').append("<tr>" +
+                                    "<td>" + val.brand_name + "</td>" +
+                                    "<td>" + val.model_name + "</td>" +
+                                    "<td>" + val.user_name + "</td>" +
+                                    "<td>" + val.question_type + "</td>" +
+                                    "<td>" + val.question + "</td>" +
+                                    "<td>" + val.createtime + "</td>" +
+                                    "<td>" + val.reply + "</td>" +
+                                    "<td>" + val.reply_time + "</td>" +
+                                    "<td>" + val.status + "</td>" +
+                                    "<td>" + val.from + "</td>" +
+                                    "<td><a class='btn btn-info' href='__CONTROLLER__/MessageDet/id/" + val.id + "'>详情</a>" +
+                                    "<a class='btn btn-danger' title='删除' value='" + val.id + "' href='javascript:;' onclick='ajax_delete(this)'>删除</a>" +
+                                    "</td>" +
+                                    "</tr>")
+                        });
+
+                    },
+                    "json");
+        }
+
+        function ajax_delete(aa) {
+            var id = $(aa).attr("value");
+            if (confirm('确定要删除吗？')) {
+                $.post("__CONTROLLER__/message_delete_ajax",
+                        {id: id},
+                        function (data, textStatus) {
+                            if (data) {
+                                $(aa).parent().parent().remove();
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除成功');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            } else {
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除失败');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            }
+                        }
+                );
+            }
+        }
+
+    </script>
+</block>

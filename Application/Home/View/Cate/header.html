@@ -1,0 +1,149 @@
+<script type="text/javascript">
+
+    var USER = {};
+    USER.tel= '{$userinfo.tel}';
+    USER.ID = '{$userinfo.id}';
+    USER.nick = '{$userinfo.nick}';
+    USER.face = '{$userinfo.head_url}';
+</script>
+
+<div id="site_nav">
+    <div id="sn_bd">
+        <div class="sn_container">
+
+            <if condition="$userinfo.id neq null">
+                <div class="sign_in" id="J_signIn">
+                    <div class="user">
+                        <span class="user_name" data-name="{$userinfo.user_name}">
+                            <if condition="$userinfo.user_name neq  null">
+                                {$userinfo.user_name}
+                                <else />
+                                {$userinfo.nick}
+                            </if>
+                        </span>
+                        <div class="arrow">
+                        </div>
+                    </div>
+                    <ul class="user_msg">
+                        <li><a href="{:MEMBER_URL}n_uc_index">个人中心</a></li>
+                      <!--  <li><a href="{:MEMBER_URL}uc_member_query">我的询价</a></li>
+                        <li><a href="{:MEMBER_URL}uc_member_msg">消息通知<span class="icon_num_yellow">{$userinfo.msg}</span></a></li>-->
+                        <li><a href="{:LOGIN_URL}loginout?callback={$callBackUrl}" class="sign_out">退出</a></li>
+                    </ul>
+                </div>
+
+                <else />
+                <ul class="sn_quick_menu">
+                    <li class="menu_item"><a href="{:LOGIN_URL}reg?callback={$callBackUrl}">注册</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item"><a href="{:LOGIN_URL}login?callback={$callBackUrl}">登录</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item" style="display: none;"><a href="{:LOGIN_URL}login_test?callback={$callBackUrl}">登录测试4S</a></li>
+                </ul>
+            </if>
+
+
+        </div>
+    </div>
+</div>
+<div id="header">
+    <div class="headerLayout">
+        <div class="headerCon">
+            <h1 id="gchLogo">
+                <div id="J_FpLogo">
+                    <a href="{:U('Index/index')}" target="_self"> <img id="J_FpDoodle" class="fp-doodle" src="{$Think.const.IMG_URL}logo187X78.png" alt="购车惠"></a>
+                </div>
+            </h1>
+            <div class="local_city">
+                    <span class="lc_name" id="J_switchCity">
+                        <if condition="$city_name">{$city_name}<elseif condition="$province_name"/>{$province_name}<elseif condition="$con"/>全国<else /> 选择城市</if>
+                        <i></i>
+                    </span>
+                    <textarea class="storedata hide">
+                    <div class="choose-site lay_cont" id="J_citiesBox">
+                        <div class="site-list" id="div_citylist">
+
+                            <dl>
+                                <dt>全国：</dt>
+                                <dd>
+                                    <a href="{:U('Index/index?con=quanguo')}">全国</a>
+                                </dd>
+                            </dl>
+                            <volist name="province" id="vol">
+                                <dl>
+                                    <dt>{$vol.province_name}：</dt>
+                                    <dd>
+                                        <a href="{:U('Index/index?province='.$vol['id'])}">{$vol.province_name}</a>
+                                        <volist name="vol['city']" id="sub">
+                                            <a href="{:U('Index/index?city='.$sub['id'])}">{$sub.city_name}</a>
+                                        </volist>
+                                    </dd>
+                                </dl>
+                            </volist>
+                        </div>
+                    </div>
+                    </textarea>
+            </div>
+            <div class="header_extra">
+                <div class="header_banner">
+                    <div id="J_FpEventBanner" class="fp-event-banner  hidden G_fr" style="display: block;">
+                        <ul class="hot_query clearfix">
+                            <li><strong>热门搜索：</strong></li>
+                            <volist name="search_res" id="vol">
+                                <li><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}">{$vol.search_key}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div id="gchSearch" class="gch_search">
+                    <form action="{:U('Car/product_search')}" class="gchSearch_form" method="GET">
+                        <div class="gchSearch_input clearfix">
+                            <label for="mq" style="visibility: visible; display: none;">搜索 买车</label>
+                            <div class="s_combobox">
+                                <div class="s_combobox_input_wrap">
+                                    <input type="text" name="select" value="<if condition="isset($select) and $select neq null">{$select}</if>" id="mq" class="s-combobox-input" aria-label="请输入搜索文字">
+                                </div>
+                            </div>
+                            <button type="submit">搜索<s></s></button>
+                        </div>
+                    </form>
+					<div class="hot-search G_Tahoma">
+	                    <dl>
+	                        <dt>热门搜索：</dt>
+	                        <volist name="search_res" id="vol">
+	                            <dd><a href="{:U('Car/product_search',array('select'=>$vol['search_key']))}" title="{$vol.search_key}">{$vol.search_key}</a></dd>
+	                        </volist>
+	                    </dl>
+	                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navwrap" id="GL_navWrap">
+    <div class="main_container nav">
+        <!--<div class="all_categories_wrap"></div>-->
+        <div class="home_main_nav">
+        	<ul>
+        		<li><a href="{:U('Index/index')}">首页</a></li>
+        		<li><a href="{:U('Car/product_search')}" <if condition=" (ACTION_NAME eq 'product_search')">class="hover"</if>>优惠买车</a></li>
+        		<li><a href="{:U('Car/product')}" <if condition=" (ACTION_NAME eq 'product')">class="hover"</if>>底价车</a></li>
+        		<li><a href="{:U('Car/special_price_car')}" <if condition=" (ACTION_NAME eq 'special_price_car')">class="hover"</if>>活动特卖 <i class="icon-new icon-new-hot"></i></a></li>
+
+        		<li><a href="http://shop.gouchehui.com">汽车配饰</a></li>
+        		<li class="lh">
+        			<a href="{:U('Carlife/carshow')}" <if condition="(ACTION_NAME eq 'carshow')">class="hover"<elseif  condition="(ACTION_NAME eq 'carknowledge')" />class="hover"</if>>车生活 <i class="nav-sign"></i></a>
+        			<div class="navigation-sub">
+		        		<div class="navigation-sub-a">
+		        			<a href="{:U('Carlife/carshow')}">车主秀</a>
+		        			<a href="{:U('Carlife/carknowledge')}">车知识</a>
+		        		</div>
+		        	</div>
+        		</li>
+                <li><a href="{:U('Guide/process')}" <if condition=" (ACTION_NAME eq 'process')">class="hover"</if>>购车指南</a></li>
+        	</ul>
+        </div>
+    </div>
+    <div class="nav-bott"> </div>
+</div>

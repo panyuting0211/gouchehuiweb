@@ -1,0 +1,195 @@
+<extend name="n_uc_base" />
+<block name="body">
+	<div class="uc_main GB_main_r">
+		<div class="uc_main_wrapper">
+			<div id="J_BaseUserInfo">
+                
+            </div>
+
+			<div class="mod_item my_footprint">
+				<div class="hd"><h3>我的足迹</h3></div>
+				<div class="bd" id="J_FootprintList">
+					
+				</div>
+			</div>
+			<div class="mod_item my_car">
+				<div class="hd"><a href="n_uc_garage.html" class="G_fr managementBtn">管理</a><h3>我的爱车</h3></div>
+				<div class="bd" id="J_MyCar">
+					
+				</div>
+			</div>
+			<div class="mod_item car_buy_plan">
+				<div class="hd"><a href="n_uc_garage_planbuy.html" class="G_fr managementBtn">管理</a><h3>计划购车</h3></div>
+				<div class="bd" id="J_BuyCarPlan">
+					
+				</div>
+			</div>
+			<div class="mod_item car_atten">
+				<div class="hd"><a href="n_uc_garage_attencar.html" class="G_fr managementBtn">管理</a><h3>关注的车</h3></div>
+				<div class="bd" id="J_AttenCar">
+					
+				</div>
+				<div class="ft_other">
+					<div class="tit"><h4 class="G_f18">看看其他车友都在关注什么车</h4></div>
+					<div class="list">
+						<ul class="clearfix" id="J_otherAttenCar">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script id="tplFootprintList" type="text/html">
+        {{each list as value index}}
+        <div class="car_box">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.car_model_imageurl}}" alt="{{value.brand_name}}{{value.car_model_name}}{{value.car_name}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18" title="{{value.brand_name}}{{value.car_model_name}}">{{value.brand_name}}{{value.car_model_name}}</h5>
+                                <p>{{value.car_name}}</p>
+                                <p class="details"><a target="_blank" href="http://gouchehui.com/index.php/car/product_details/id/{{value.id}}">查看详情</a></p>
+                            </div>
+                        </div>
+        {{/each}}
+        </script>
+
+        <script id="tplBaseUserInfo" type="text/html">
+        <div class="uc_baseinfo">
+                <div class="cheb">
+                    <div class="chebWrapper clearfix">
+                        <div class="ChebRaiders">
+                            <a href="n_uc_car_currency_rule_wrapper.html" title="如何获取车币？">如何获取车币？</a>
+                        </div>
+                        <div class="myCheb Skin_color">
+                            <p class="G_f16">我的车币</p>
+                            <p class="G_tr G_f26 j_myCoin">{{total_coin}}</p>
+                        </div>
+                    </div>
+                    <div class="punchTheClock">
+                        <a href="javascript:void(0);" data-punchstatus="{{signstatus}}" id="J_PunchTheClock" class="punchTheClock_btn G_f16">
+                            今日打卡
+                            <span>+5车币</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="name">
+                        <strong class="Skin_txt G_f20">{{user_name}}</strong>
+                            <span class="uc_icon_level">
+                                <span class="txt_out">
+                                    <span class="txt_in">
+                                        <span title="升级有好礼">Lv.{{grade}}</span>
+                                    </span>
+                                </span>
+                            </span>
+                    </div>
+                    <div class="dynamic">
+                        <a href="#" title="车友会"><span>0</span>个车友会</a>
+                        <a href="#" title="动态"><span>0</span>个动态</a>
+                        <a href="{:U('n_uc_garage_attencar')}" title="关注"><span>{{attention}}</span>个关注</a>
+                    </div>
+                    <dl class="lvlBox">
+                        <dt>等级：</dt>
+                        <dd>
+                            <div class="lvl_energy_bar" class="j_lvlEnergyBar">
+                                <span style="width:{{percentage}}"></span>
+                            </div>
+                            <div class="lvl_energy_percentage">{{total_jifen}}/{{denominator}}</div>
+                            <span class="grade">V{{grade}}</span>
+                        </dd>
+                    </dl>
+                    <dl class="integral">
+                        <dt>积分：</dt>
+                        <dd>
+                            <span>{{total_jifen}}</span>
+                            <a href="n_uc_get_points.html" class="get" title="如何获得积分？">如何获得积分？&gt;&gt;</a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </script>
+        <script id="tplMyCar" type="text/html">
+        {{each list as value index}}
+        <div class="car_box">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.car_model_imageurl}}" alt="{{value.brand_name}}{{value.car_model_name}}{{value.car_name}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18" title="{{value.brand_name}}{{value.car_model_name}}">{{value.brand_name}}{{value.car_model_name}}</h5>
+                                <p>{{value.car_name}}</p>
+                                <p class="guide_price">官方指导价：<span class="price"><em>{{value.auth_price}}</em>元起</span></p>
+                                <p class="details"><a href="n_uc_garage.html">查看详情</a></p>
+                            </div>
+                        </div>
+        {{/each}}
+        </script>
+        <script id="tplBuyCarPlan" type="text/html">
+        {{each list as value index}}
+            <div class="car_box">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.image}}" alt="{{value.brand_name}}{{value.car_model_name}}{{value.car_name}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18" title="{{value.brand_name}}{{value.car_model_name}}">{{value.brand_name}}{{value.car_model_name}}</h5>
+                                <p>{{value.car_name}}</p>
+                                <p class="guide_price">官方指导价：<span class="price"><em>{{value.auth_price}}</em>元起</span></p>
+                                <p class="details"><a href="n_uc_garage_planbuy.html">查看详情</a></p>
+                            </div>
+                        </div>
+        {{/each}}                
+        </script>
+        <script id="tplAttenCar" type="text/html">
+        {{each list as value index}}
+            <div class="car_box">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.image}}" alt="{{value.car_brand}}{{value.car_model}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f16" title="{{value.car_brand}}{{value.car_model}}">{{value.car_brand}}{{value.car_model}}</h5>
+                                <p class="guide_price"><span class="price"><em>{{value.min_price}}</em>元</span> - <span class="price"><em>{{value.max_price}}</em>元</span></p>
+                                <p class="details"><a href="n_uc_garage_attencar.html">查看详情</a></p>
+                            </div>
+                        </div>
+        {{/each}}                    
+        </script>
+        <script id="tplOtherAttenCar" type="text/html">
+        {{each list as value index}}
+        <li data-brandid="{{value.car_brand_id}}" data-modelid="{{value.car_model_id}}">
+                                <div class="productImg_wrap">
+                                    <a href="#" title="" class="productImg">
+                                        <img src="{{value.image}}" alt="{{value.car_brand}}{{value.car_model}}">
+                                    </a>
+                                </div>
+                                <div class="nameBox">
+                                    <span class="name">{{value.car_brand}}{{value.car_model}}</span>
+                                    {{if value.attention == 1}}
+                                    <a href="javascript:void(0);" class="atten_btn j_addAtten added">已关注</a>
+                                    {{else}}
+                                    <a href="javascript:void(0);" class="atten_btn j_addAtten">关注</a>
+                                    {{/if}}
+                                </div>
+                            </li>
+                            {{/each}} 
+        </script>
+
+
+<script src="{$Think.const.JS_URL}app/index.js"></script>
+</block>

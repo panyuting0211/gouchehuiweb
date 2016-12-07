@@ -1,0 +1,788 @@
+body{
+    background:url(../images/background.png) repeat;
+}
+a{
+    text-decoration:none;
+}
+a:link{
+    text-decoration:none;
+}
+a:visited{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
+}
+a:active{
+    text-decoration:none;
+}
+.banner img,.gift img,.foot-box img{
+    width:100%;
+}
+img{vertical-align:bottom; display:block;}
+.main .main-wrap{
+    width:1118px;
+    margin:0 auto;
+}
+.float-box{
+    display: none;
+    background:url(../images/float-nav.png) no-repeat;
+    width:130px;
+    height:512px;
+    position:fixed;
+    left:50%;
+    top:50%;
+    margin-top:-256px;
+    margin-left:560px;
+    z-index:20;
+}
+.float-box ul{
+padding-top:122px;
+}
+.float-box li a{
+    display:block;
+    height:29px;
+    margin-top:13px;
+}
+.float-box li .contact{
+    position:relative;
+}
+.float-box li .contact span{
+    display:none;
+    width:140px;
+    height:29px;
+    border-radius:16px;
+    background:#f2a203;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+    line-height:29px;
+    position:absolute;
+    right:130px;
+}
+.float-box li .contact:hover span{
+    display:block;
+}
+.main .buy-process{
+    height:400px;
+    background:url(../images/process.png) no-repeat;
+
+    position:relative;
+}
+.main .buy-process .step{
+    position:absolute;
+    left:130px;
+    top:130px;
+}
+.main .buy-process li{
+    width:456px;
+    height:80px;
+    font-size:20px;
+    color:#fff600;
+}
+.main .buy-process li p{
+    font-size:14px;
+    color:#fff;
+}
+.main .buy-process li p span{
+    color:#fff600;
+}
+.main .buy-process a{
+    display:block;
+    width:96px;
+    height:96px;
+    position:absolute;
+    right:70px;
+    bottom:30px;
+}
+.main .hot-honda{
+    height:710px;
+    margin-top:40px;
+    background:url(../images/backpic-hot.png) no-repeat;
+    position:relative;
+}
+.main .hot-honda .active-time{
+    position:absolute;
+    right:100px;
+    top:35px;
+}
+.main .hot-honda .active-time p{
+    font-size:14px;
+    color:#fff;
+}
+.main .hot-honda .active-time .date{
+    font-size:20px;
+    color:#fff;
+    background:#d00045;
+    height:26px;
+    line-height:26px;
+    border-radius:4px;
+}
+.main .hot-model .left-box{
+    padding-left:105px;
+    padding-top:90px;
+}
+.main .hot-model .left-box h2{
+    font-size:36px;
+    color:#fffd9c;
+    border-bottom:1px dashed #8ab6f7;
+    padding-bottom:12px;
+    margin-top:90px;
+    margin-bottom:20px;
+}
+.main .hot-model .left-box .style{
+    font-size:22px;
+    color:#cbfff9;
+    margin-bottom:25px;
+}
+.main .hot-model .left-box ul{
+    border:1px solid #cbfff9;
+    padding:5px;
+    margin-bottom:5px;
+    width:404px;
+    height: 96px;
+}
+.main .hot-model .left-box li{
+    display:inline-block;
+}
+.main .hot-model .left-box .details-name{
+    font-size:16px;
+    color:#cbfff9;
+    margin-bottom:5px;
+}
+.main .hot-model .left-box .details-name p{
+  text-align:center;
+    width:138px;
+}
+.main .hot-model .left-box .buy-num{
+    font-size:16px;
+    color:#fff;
+}
+.main .hot-model .left-box .buy-num i{
+    display:inline-block;
+    width:32px;
+    height:24px;
+    background:url(../images/gift.png) no-repeat;
+    vertical-align: -3px;
+    margin-right:8px;
+}
+.main .hot-model .left-box .active-pri{
+    font-size:24px;
+    color:#cbfff9;
+}
+.main .hot-model .left-box .active-pri span{
+    font-size:48px;
+    color:#fffd9c;
+}
+.main .hot-model .left-box .active-pri .buy-now{
+    display:inline-block;
+    background:url(../images/buy-hot.png) no-repeat;
+    width:138px;
+    height:44px;
+    margin-left:16px;
+}
+.main .hot-model .left-box .official-pri{
+    font-size:18px;
+    color:#cbfff9;
+    text-decoration:line-through;
+}
+
+.main .hot-model .right-box{
+    position:relative;
+    padding-top:294px;
+    padding-right:75px;
+}
+.main .hot-model .right-box .tip{
+    height:100px;
+    width:100px;
+    background:url(../images/off-price.png) no-repeat;
+    position:absolute;
+    right:135px;
+    top:309px;
+}
+.main .hot-model .right-box .tip .off-pri{
+ padding-top:14px;
+}
+.main .hot-model .right-box .tip p{
+    font-size:22px;
+    color:#fff;
+    text-align:center;
+}
+.main .hot-buick{
+    height:710px;
+    margin-top:50px;
+    background:url(../images/backpic-hot.png) no-repeat;
+    position:relative;
+}
+.main .hot-buick .active-time{
+    position:absolute;
+    right:100px;
+    top:35px;
+}
+.main .hot-buick .active-time p{
+    font-size:14px;
+    color:#fff;
+}
+.main .hot-buick .active-time .date{
+    font-size:20px;
+    color:#fff;
+    background:#d00045;
+    height:26px;
+    line-height:26px;
+    padding: 0 5px;
+    border-radius:4px;
+}
+/*����*/
+.session .trumpchi{
+    background:url(../images/trumpchi-back.jpg) no-repeat;
+}
+.session .buick{
+    background:url(../images/buick-back.jpg) no-repeat;
+}
+.session .toyota{
+    background:url(../images/toyota-back.jpg) no-repeat;
+}
+.session .hyundai{
+    background:url(../images/hyundai-back.jpg) no-repeat;
+}
+.session .honda{
+    background:url(../images/honda-back.png) no-repeat;
+}
+.session .example{
+    margin-top:70px;
+    position:relative;
+    height:672px;
+}
+.session .example .active-time{
+    position:absolute;
+    right:100px;
+    top:35px;
+}
+.session .example .active-time p{
+    font-size:14px;
+    color:#fff;
+}
+.session .example .active-time .date{
+    font-size:20px;
+    color:#fff;
+    background:#d00045;
+    height:26px;
+    line-height:26px;
+    padding: 0 5px;
+    border-radius:4px;
+}
+.session .example .left-box{
+    background:url(../images/back-left.png) no-repeat;
+    width:308px;
+    height:486px;
+    position:absolute;
+    top:145px;
+    left:92px;
+}
+.session .example .left-box p{
+    color:#fff;
+   text-align:center;
+}
+.session .example .left-box .style-name{
+    font-size :20px;
+    color:#959898;
+    text-align:center;
+    margin-top:8px;
+}
+.session .example .left-box .spec-pic{
+    width:307px;
+    margin-bottom:10px;
+}
+.session .example .left-box .active-pri{
+    font-size:18px;
+}
+.session .example .left-box .active-pri span{
+    font-size:28px;
+    color:#ffea00;
+}
+.session .example .left-box .old-pri{
+    font-size:16px;
+    margin-top:7px;
+    text-decoration:line-through;
+}
+.session .example .left-box .buy-now{
+    display: block;
+    width: 232px;
+    height: 55px;
+    margin-left: 37px;
+    margin-top: 15px;
+}
+.session .example .left-box .buy-num i{
+    background:url(../images/session-gift.png) no-repeat;
+    width:22px;
+    height:20px;
+    display:inline-block;
+    vertical-align: -3px;
+    margin-right:15px;
+}
+.session .example .right-box{
+    width:650px;
+    padding-top:145px;
+    padding-right:58px;
+}
+.session .example .right-box .small-box{
+    width:308px;
+    height:235px;
+    margin-right:10px;
+    margin-bottom:12px;
+}
+.session .example .right-box .small-box .name{
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    overflow: hidden;
+}
+.session .example .right-box .small-box .details{
+    background:#ffea00;
+}
+.session .example .right-box .small-box .details p{
+    line-height:15px;
+}
+.session .example .right-box .small-box .details li{
+    display:inline-block;
+}
+.session .example .right-box .small-box .details .off-pri{
+text-decoration: line-through;
+    color:#666;
+}
+.session .example .right-box .small-box .details .active-pri{
+    font-size:15px;
+}
+.session .example .right-box .small-box .details .active-pri span{
+    font-size:18px;
+    color:#dd3f59;
+    font-weight:bold;
+}
+.session .example .right-box .small-box .details .unknow{
+    font-size:22px;
+    font-weight:bold;
+    color:#dd3f59;
+    vertical-align: 5px;
+}
+.session .example .right-box .small-box .details a{
+    display:block;
+    width:80px;
+    height:30px;
+    background:#9cd6ef;
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 2px 2px #888;
+}
+.session .example .right-box .small-box .details a span{
+    font-size:21px;
+   vertical-align: 5px;
+    color:#000;
+}
+.session .example .right-box .small-box .buy-num{
+    width:40px;
+}
+/*�����*/
+.main .favourite{
+    background:url(../images/choice.png) no-repeat;
+    height:390px;
+    margin-top:50px;
+}
+.main .favourite .options{
+    padding-top:210px;
+    padding-left:127px;
+}
+.main .favourite .options input{
+    width:285px;
+    height:38px;
+    margin-right:20px;
+    font-size:18px;
+    color:#d60846;
+}
+.main .favourite .options a{
+    display:block;
+    width:330px;
+    height:54px;
+    font-size:21px;
+    color:#d60846;
+    background:#ffea00;
+    text-align:center;
+    line-height:54px;
+    margin-top:50px;
+    margin-left:290px;
+}
+.main .advantage{
+    background: url(../images/advantage.png) no-repeat;
+    height: 133px;
+    width: 666px;
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    margin-left: -333px;
+    background-size: 100%;
+}
+.foot-box img{
+    margin:0 auto;
+}
+
+
+.favourite .likemes{
+    width:815px;
+    margin:0 auto 50px;
+}
+.favourite .likemes .carbrand{
+    display:inline-block;
+    margin-right:30px;
+}
+.favourite .likemes .carbrand input{
+    width:150px;
+    height:40px;
+    background:#fff;
+}
+.favourite .likemes .carmodel{
+    display:inline-block;
+    margin-right:30px;
+}
+.favourite .likemes .carmodel input{
+    width:150px;
+    height:40px;
+    background:#fff;
+}
+.favourite .likemes .carstyle{
+    display:inline-block;
+    margin-right:30px;
+}
+.favourite .likemes .carstyle input{
+    width:240px;
+    height:40px;
+    background:#fff;
+}
+.favourite .click-on{
+    text-align:center;
+}
+.favourite .click-on a{
+    display:block;
+    width:230px;
+    height:44px;
+    line-height:44px;
+    margin:0 auto;
+    font-size:18px;
+    color:#fff;
+    background:#e74e67;
+}
+
+.likemes select{
+    width: 235px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 15px 0 20px;
+    font-size: 16px;
+    color: #60228b;
+}
+.likemes select.sel-last{
+    margin-right: 0;
+}
+.pop-qiang{
+    padding-top: 100px;
+    padding-left: 242px;
+    width: 374px;
+    height: 167px;
+    background: url(../images/pop-qiang.png) no-repeat center center;
+    position: relative;
+}
+.pop-qiang .close-btn{
+    width: 21px;
+    height: 21px;
+    line-height: 99em;
+    position: absolute;
+    right:70px;
+    top: 94px;
+    overflow: hidden;
+}
+.pop-qiang p{
+    color:#fff;
+    font-size: 16px;
+    font-family: '\5FAE\8F6F\96C5\9ED1', arial, "\5b8b\4f53";
+}
+.pop-qiang p .s{
+    color: #fcff00;
+}
+.pop-qiang .con{
+    margin-top: 8px;
+    position: relative;
+}
+.pop-qiang .con label.error{
+    position: absolute;
+    right: 192px;
+    top: 12px;
+    color: #f00;
+}
+.pop-qiang input, .pop-qiang button{
+    height: 42px;
+    line-height: 42px;
+    border: none;
+}
+.pop-qiang .code, .pop-qiang .telInp{
+    width: 169px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+.pop-qiang .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #fff;
+    color:#000;
+    cursor: pointer;
+}
+.pop-qiang .receive-btn{
+    width: 92px;
+    text-align: center;
+    color:#fff;
+    background: #ff563f;
+    cursor: pointer;
+}
+
+.poper-main{
+    padding: 10px 20px;
+    font-size: 14px;
+    overflow-y: scroll;
+    background: #fff;
+    position: relative;
+}
+
+.poper-main .alert-pop{
+    padding: 20px 30px;
+    background: #fff2da;
+    margin-bottom: 15px;
+}
+.poper-main .alert-pop .alert-pop-hd{
+    margin-bottom: 10px;
+}
+.poper-main .alert-pop .entered{
+    font-size: 24px;
+    color:#666;
+}
+.poper-main .alert-pop .entered .total-number{
+    color:#ff4040;
+    margin: 0 5px;
+}
+.poper-main .alert-pop .ft dt{
+    line-height: 28px;
+}
+.poper-main .alert-pop .ft dd{
+    margin-left: 60px;
+    color:#ff4040;
+}
+.poper-main .alert-pop .ft .discount{
+    margin: 0 15px;
+}
+.poper-main .alert-pop .ft .discount i{
+    margin-right: 5px;
+}
+.poper-main .alert-pop .count-down s{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ff4040;
+    color: #fff;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.poper-main .alert{
+    padding: 8px 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 14px;
+    color:#333;
+}
+.poper-main .alert .user-info{
+    display: inline-block;
+    width: 500px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+    top: 5px;
+}
+.poper-main .alert .user-info ul{
+    position: absolute;
+}
+.poper-main .alert .user-info li{
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.poper-main .icon{
+    display: inline-block;
+    background: url(../images/icon-qixi-pop.png) no-repeat;
+    vertical-align: middle;
+}
+.poper-main .alert .total-number{
+    color:#ff3518;
+
+}
+.poper-main .alert .info{
+    color:#38a4ff;
+    font-weight: normal;
+}
+.poper-main .alert .icon-laba{
+    width: 20px;
+    height: 16px;
+    margin-right: 10px;
+}
+.poper-main .base-info{
+    margin-bottom: 20px;
+}
+.poper-main .base-info dl,.poper-main .base-info dt,.poper-main .base-info dd{
+    float: left;
+}
+.poper-main .base-info dl .price{
+    color:#ff5938;
+    font-size: 16px;
+}
+.poper-main .base-info dl .tips{
+    color:#ff9361;
+}
+.poper-main .base-info .mr{
+    margin-right: 50px;
+}
+.poper-main .jiegou{
+    overflow: hidden;
+}
+.poper-main .jiegou dt{
+    float: left;
+}
+.poper-main .jiegou dd{
+    margin-left: 75px;
+}
+.poper-main .car dd a{
+    display: inline-block;
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    border:1px solid #ccc;
+    background: #f5f5f5;
+    text-align: center;
+    margin-right: 40px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.poper-main .car dd a .icon-selected{
+    display: none;
+    width: 16px;
+    height: 16px;
+    background-position: -34px -34px;
+    position: absolute;
+    right:0;
+    bottom: 0;
+}
+.poper-main .car dd a:hover,.poper-main .car dd a.hover{
+    border:1px solid #ff3518;
+    text-decoration: none;
+    background: #fff;
+}
+.poper-main .car dd a.hover i{
+    display: block;
+}
+.poper-main .color dd a{
+    display: inline-block;
+    padding: 1px;
+    background: #fff;
+    border:2px solid #eee;
+    margin-right: 17px;
+}
+.poper-main .color dd a:hover,.poper-main .color dd a.hover{
+    border-color: #ff3518;
+}
+.poper-main .color dd a span{
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.poper-main .form-box dt{float: left;}
+.poper-main .form-box dl{
+    margin-bottom: 10px;
+}
+.poper-main .form-box dd{
+    margin-left: 75px;
+    position: relative;
+}
+.poper-main .form-box dl{
+    margin-right: 15px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.poper-main .form-box dd input{
+    padding-left: 10px;
+    width: 230px;
+    height: 28px;
+    line-height: 28px;
+}
+.poper-main .form-box dd .code{
+    width: 138px;
+}
+.poper-main .form-box dd .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #007d9a;
+    color: #000;
+    height: 32px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+.poper-main .form-box dd .vercode-inp{
+    width: 240px;
+}
+.poper-main .form-box dd .pwd-send{
+    display: inline-block;
+    width: 90px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: #3AA2E4;
+    color: #fff;
+}
+.poper-main .form-box dd input.error{
+    background: #ffc3c3;
+    border: 1px solid #ff6767;
+}
+.poper-main .form-box dd label.error{
+    color: #f00;
+    position: absolute;
+    left: 350px;
+}
+.poper-main .submit-box{
+    padding: 20px 0;
+    color:#a1a1a2;
+}
+.poper-main .submit-box .btn-submit{
+    width: 320px;
+    height: 36px;
+    text-align: center;
+    background: #ff3518;
+    color:#fff;
+    font-size: 14px;
+    border:none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.poper-main .color{
+    margin-bottom: 10px;
+    overflow: hidden;
+}

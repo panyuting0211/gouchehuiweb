@@ -1,0 +1,621 @@
+body{
+	background: #f00b36;
+}
+img{
+	width: 100%;
+	vertical-align: top;
+}
+.banner,.banner p,.coupon,.preheat,.preheat-top,.select-car,.ewm{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.coupon a{
+	width: 180px;
+	height: 60px;
+	position: absolute;
+	top: 28%;
+	left: 65%;
+}
+/*活动预热 strat*/
+.preheat{
+	background: url(../images/preheat_01.jpg) center top no-repeat;
+	background-size: 100%;
+	padding-top: 25px;
+}
+.preheat-top{
+	width: 1170px;
+	height: 180px;
+	margin: 0 auto;
+}
+.preheat-top-step1{
+	width: 376px;
+	height: 179px;
+	margin-left: 190px;
+	display: inline-block;
+}
+.preheat-top-date{
+	display: inline-block;
+	margin-left: 25px;
+	width: 380px;
+	text-align: center;
+	padding-top: 40px;
+	position: relative;
+}
+.preheat-top-date h2{
+	text-align: center;
+	line-height: 24px;
+	color: #FFFFFF;
+	margin-bottom: 12px;
+}
+.preheat-top-time{
+	width: 380px;
+	color: #fff;
+	font-family: "微软雅黑";
+	position: absolute;
+	left: 114px;
+	top: 115px;
+}
+.preheat-top-time span{
+	margin-right: 105px;
+}
+/*活动热卖的内容*/
+.preheat-con{
+	width: 964px;
+	height: 885px;
+	margin: 0 auto;
+	position: relative;
+}
+.preheat-con-hd{
+	width: 990px;
+	height: 85px;
+	margin-left: -10px;
+	position: relative;
+}
+.preheat-con-hd li{
+	width: 165px;
+	height: 25px;
+	padding-top: 40px;
+	float: left;
+	color: #fff;
+	text-align: center;
+	background: url(../images/preheat-top_02.png) center top no-repeat;
+	cursor: pointer;
+	position: relative;
+}
+.preheat-con-hd li.over{
+	background: url(../images/preheat-top_03.png) center top no-repeat;
+}
+.preheat-con-hd li.on dt{
+	width: 33px;
+	height: 45px;
+	background: url(../images/preheat-top_04.png) center center no-repeat;
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	margin-left: -16px;
+}
+.preheat-con-bd{
+	width: 964px;
+	height: 766px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+.preheat-con-ul{
+	width: 5784px;
+}
+.preheat-con-ul ul{
+	width: 5784px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.preheat-con-bd li{
+	width: 964px;
+	height: 766px;
+	float: left;
+}
+.preheat-con-bd img{
+	width: auto;
+}
+.sliderl1,.sliderl2{
+	width: 874px;
+	height: 379px;
+	padding-left: 90px;
+	background-size: 100%;
+	position: relative;
+}
+.preheat-slide div.sliderl1{
+	background: url(../images/preheat-con_bg_01.png) center center no-repeat;
+	margin-bottom: 8px;
+}
+.preheat-slide div.sliderl2{
+	background: url(../images/preheat-con_bg_02.png) center center no-repeat;
+}
+.preheat-slide div.sliderl1 .slide-carname{
+	padding-top: 75px;
+}
+.preheat-slide div.sliderl2 .slide-carname{
+	padding-top: 72px;
+}
+.slide-carname dd{
+	color: #000000;
+	font-size: 12px;
+	margin-top: 5px;
+}
+.slide-carprice{
+	margin-top: 50px;
+	height: 85px;
+	overflow: hidden;
+}
+.slide-carprice p.slider-p1{
+	width: 116px;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 14px;
+	color: #fff;
+	float: left;
+	text-decoration: line-through;
+}
+.slide-carprice p.slider-p2{
+	font-size: 44px;
+	color: #ff3715;
+	float: left;
+	margin: 16px 0 0 35px;
+	display: inline-block;
+}
+.slide-carnum{
+	width: 320px;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 10px;
+}
+.slide-carnum dt{
+	width: 190px;
+}
+.slide-carnum a{
+	width: 190px;
+	height: 50px;
+	display: inline-block;
+}
+.slide-carnum dd{
+	color: #fe4f30;
+	margin-left: 10px;
+	display: inline-block;
+}
+.preheat-slide div .slide-carimg{
+	position: absolute;
+}
+.predate1 div.sliderl1 .slide-carimg{
+	right: 0;
+	top: 80px;
+}
+.predate1 div.sliderl2 .slide-carimg{
+	right: 10px;
+	top: 75px;
+}
+.predate2 div.sliderl1 .slide-carimg{
+	right: 0;
+	top: 80px;
+}
+.predate2 div.sliderl2 .slide-carimg{
+	right: -30px;
+	top: 42px;
+}
+.predate3 div.sliderl1 .slide-carimg{
+	right: 10px;
+	top: 75px;
+}
+.predate3 div.sliderl2 .slide-carimg{
+	right: 10px;
+	top: 60px;
+}
+.predate4 div.sliderl1 .slide-carimg{
+	right: 20px;
+	top: 62px;
+}
+.predate4 div.sliderl2 .slide-carimg{
+	right: 10px;
+	top: 100px;
+}
+.predate5 div.sliderl1 .slide-carimg{
+	right: 25px;
+	top: 62px;
+}
+.predate5 div.sliderl2 .slide-carimg{
+	right: 10px;
+	top: 60px;
+}
+.predate6 div.sliderl1 .slide-carimg{
+	right: 20px;
+	top: 95px;
+}
+.predate6 div.sliderl2 .slide-carimg{
+	right: -2px;
+    top: 55px;
+}
+.predate6 div.sliderl2 .slide-carimg img{
+	width: 540px;
+    height: 300px;
+}
+.preheat-con a.prev,.preheat-con a.next{
+	width: 49px;
+	height: 85px;
+	display: block;
+	position: absolute;
+	top: 50%;
+	margin-top: -42px;
+}
+.preheat-con a.prev{
+	background: url(../images/preheat-con_left.png) center center no-repeat;
+	left: -80px;
+}
+.preheat-con a.next{
+	background: url(../images/preheat-con_right.png) center center no-repeat;
+	right: -80px;
+}
+
+/*活动预热 end*/
+.select-car{
+	height: 464px;
+	background: url(../images/select_01.jpg) center center no-repeat;
+}
+.options{
+	width: 1000px;
+	height: 126px;
+	margin: 340px auto 0;
+}
+.options .likemes{
+	width: 1000px;
+	padding-left: 60px;
+	overflow: hidden;
+}
+.options .carbrand,.options .carmodel,.options .carstyle{
+	float: left;
+	width: 254px;
+	margin-right: 70px;
+}
+.options select{
+	width: 222px;
+	height: 40px;
+	line-height: 40px;
+	background: #fff;
+	display: block;
+	outline: none;
+	border: none;
+	padding: 0 12px 0 20px;
+    font-size: 16px;
+    color: #60228b;
+}
+.options .click-on{
+	width: 320px;
+	line-height: 38px;
+	text-align: center;
+	margin: 25px auto 0;
+	background: #fa882f;
+	color: #fff;
+	border-radius: 3px;
+	border: 1px solid #fff;
+}
+.options .click-on a{
+	color: #FFFFFF;
+	display: block;
+}
+.ewm{
+	padding-bottom: 10px;
+}
+
+.pop-qiang{
+    padding-top: 100px;
+    padding-left: 242px;
+    width: 374px;
+    height: 167px;
+    background: url(../images/pop-qiang.png) no-repeat center center;
+    position: relative;
+}
+.pop-qiang .close-btn{
+    width: 21px;
+    height: 21px;
+    line-height: 99em;
+    position: absolute;
+    right:70px;
+    top: 94px;
+    overflow: hidden;
+}
+.pop-qiang p{
+    color:#fff;
+    font-size: 16px;
+    font-family: '\5FAE\8F6F\96C5\9ED1', arial, "\5b8b\4f53";
+}
+.pop-qiang p .s{
+    color: #fcff00;
+}
+.pop-qiang .con{
+    margin-top: 8px;
+    position: relative;
+}
+.pop-qiang .con label.error{
+    position: absolute;
+    right: 192px;
+    top: 12px;
+    color: #f00;
+}
+.pop-qiang input, .pop-qiang button{
+    height: 42px;
+    line-height: 42px;
+    border: none;
+}
+.pop-qiang .code, .pop-qiang .telInp{
+    width: 169px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+.pop-qiang .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #fff;
+    color:#000;
+    cursor: pointer;
+}
+.pop-qiang .receive-btn{
+    width: 92px;
+    text-align: center;
+    color:#fff;
+    background: #ff563f;
+    cursor: pointer;
+}
+
+.poper-main{
+    padding: 10px 20px;
+    font-size: 14px;
+    overflow-y: scroll;
+    background: #fff;
+    position: relative;
+}
+
+.poper-main .alert-pop{
+    padding: 20px 30px;
+    background: #fff2da;
+    margin-bottom: 15px;
+}
+.poper-main .alert-pop .alert-pop-hd{
+    margin-bottom: 10px;
+}
+.poper-main .alert-pop .entered{
+    font-size: 24px;
+    color:#666;
+}
+.poper-main .alert-pop .entered .total-number{
+    color:#ff4040;
+    margin: 0 5px;
+}
+.poper-main .alert-pop .ft dt{
+    line-height: 28px;
+}
+.poper-main .alert-pop .ft dd{
+    margin-left: 60px;
+    color:#ff4040;
+}
+.poper-main .alert-pop .ft .discount{
+    margin: 0 15px;
+}
+.poper-main .alert-pop .ft .discount i{
+    margin-right: 5px;
+}
+.poper-main .alert-pop .count-down s{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ff4040;
+    color: #fff;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.poper-main .alert{
+    padding: 8px 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 14px;
+    color:#333;
+}
+.poper-main .alert .user-info{
+    display: inline-block;
+    width: 500px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+    top: 5px;
+}
+.poper-main .alert .user-info ul{
+    position: absolute;
+}
+.poper-main .alert .user-info li{
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.poper-main .icon{
+    display: inline-block;
+    background: url(../images/icon-qixi-pop.png) no-repeat;
+    vertical-align: middle;
+}
+.poper-main .alert .total-number{
+    color:#ff3518;
+
+}
+.poper-main .alert .info{
+    color:#38a4ff;
+    font-weight: normal;
+}
+.poper-main .alert .icon-laba{
+    width: 20px;
+    height: 16px;
+    margin-right: 10px;
+}
+.poper-main .base-info{
+    margin-bottom: 20px;
+}
+.poper-main .base-info dl,.poper-main .base-info dt,.poper-main .base-info dd{
+    float: left;
+}
+.poper-main .base-info dl .price{
+    color:#ff5938;
+    font-size: 16px;
+}
+.poper-main .base-info dl .tips{
+    color:#ff9361;
+}
+.poper-main .base-info .mr{
+    margin-right: 50px;
+}
+.poper-main .jiegou{
+    overflow: hidden;
+}
+.poper-main .jiegou dt{
+    float: left;
+}
+.poper-main .jiegou dd{
+    margin-left: 75px;
+}
+.poper-main .car dd a{
+    display: inline-block;
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    border:1px solid #ccc;
+    background: #f5f5f5;
+    text-align: center;
+    margin-right: 40px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.poper-main .car dd a .icon-selected{
+    display: none;
+    width: 16px;
+    height: 16px;
+    background-position: -34px -34px;
+    position: absolute;
+    right:0;
+    bottom: 0;
+}
+.poper-main .car dd a:hover,.poper-main .car dd a.hover{
+    border:1px solid #ff3518;
+    text-decoration: none;
+    background: #fff;
+}
+.poper-main .car dd a.hover i{
+    display: block;
+}
+.poper-main .color dd a{
+    display: inline-block;
+    padding: 1px;
+    background: #fff;
+    border:2px solid #eee;
+    margin-right: 17px;
+}
+.poper-main .color dd a:hover,.poper-main .color dd a.hover{
+    border-color: #ff3518;
+}
+.poper-main .color dd a span{
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.poper-main .form-box dt{float: left;}
+.poper-main .form-box dl{
+    margin-bottom: 10px;
+}
+.poper-main .form-box dd{
+    margin-left: 75px;
+    position: relative;
+}
+.poper-main .form-box dl{
+    margin-right: 15px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.poper-main .form-box dd input{
+    padding-left: 10px;
+    width: 230px;
+    height: 28px;
+    line-height: 28px;
+}
+.poper-main .form-box dd .code{
+    width: 138px;
+}
+.poper-main .form-box dd .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #007d9a;
+    color: #000;
+    height: 32px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+.poper-main .form-box dd .vercode-inp{
+    width: 240px;
+}
+.poper-main .form-box dd .pwd-send{
+    display: inline-block;
+    width: 90px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: #3AA2E4;
+    color: #fff;
+}
+.poper-main .form-box dd input.error{
+    background: #ffc3c3;
+    border: 1px solid #ff6767;
+}
+.poper-main .form-box dd label.error{
+    color: #f00;
+    position: absolute;
+    left: 350px;
+}
+.poper-main .submit-box{
+    padding: 20px 0;
+    color:#a1a1a2;
+}
+.poper-main .submit-box .btn-submit{
+    width: 320px;
+    height: 36px;
+    text-align: center;
+    background: #ff3518;
+    color:#fff;
+    font-size: 14px;
+    border:none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.poper-main .color{
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.advantage {
+    background: url(../images/advantage.png) no-repeat;
+    height: 158px;
+    width: 1000px;
+    position: fixed;
+    left: 50%;
+    bottom: 15px;
+    margin-left: -500px;
+    background-size: 100%;
+    display: none;
+}

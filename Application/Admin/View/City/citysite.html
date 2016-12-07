@@ -1,0 +1,105 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content-header">
+
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                城市管理
+            </a>
+            <a href="#" class="current">城市站点</a>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="widget-yu-btn">
+
+                    <div class="widget-yu-btn widget-right-search" style="margin-bottom: 5px" ;>
+                        <button type="submit" class="btn button_sou" id="submit1" onclick="location.href='{:U('addcity')}'"><i class="icon-plus"></i>添加站点</button>
+                    </div>
+                    <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                    <div class="widget-content nopadding" style="margin-top:0px;">
+                        <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>区域</th>
+                                <th>省份</th>
+                                <th>城市</th>
+                                <th>站点状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="city" id="vo">
+                                <tr>
+                                    <td>{$vo.area_name}</td>
+                                    <td style="width:200px;">{$vo.province_name}</td>
+                                    <td>{$vo.city_name}</td>
+                                    <td>
+                                        <label class="radio inline"><input id="ajax_price1" type="radio" value="{$vo.id}"
+                                            <if condition="$vo.status eq 1">checked="checked"</if>
+                                            name="hide<?php echo $key; ?>" />启用</label>
+                                        <label class="radio inline"><input type="radio" id="ajax_price2" value="{$vo.id}"
+                                            <if condition="$vo.status eq 0">checked="checked"</if>
+                                            name="hide<?php echo $key;$key++ ;?>" />不启用</label>
+                                    </td>
+                                    <td class="center">
+                                        <a class="btn btn-danger" title="删除" href="javascript:;" onclick="{if(confirm('确定删除吗')){location.href='__CONTROLLER__/deletecity/cityid/{$vo.id}'}}">删除</a>
+                                    </td>
+                                </tr>
+                            </volist>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <link href="{$Think.const.ADMIN_CSS_URL}Css.css" rel="stylesheet" type="text/css">
+
+                    <div class="pagination">
+
+                        <script src="{$Think.const.ADMIN_JS_URL}jquery.kkPages.js"></script>
+                        <link href="{$Think.const.ADMIN_CSS_URL}Css.css" rel="stylesheet" type="text/css">
+                        <script>
+                            $(function () {
+
+                                $('.newslist').kkPages({
+
+                                    PagesClass: 'tr', //需要分页的元素
+                                    PagesMth: 5, //每页显示个数
+                                    PagesNavMth: 3 //显示导航个数
+
+                                });
+
+                            });
+                        </script>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("input[id='ajax_price1']").click(function () {
+            var val = $(this).val();
+            $.post("__CONTROLLER__/changestatus",
+                    {id: val},
+                    function (data, textStatus) {
+                    }
+            )
+        });
+
+        $("input[id='ajax_price2']").click(function () {
+            var val = $(this).val();
+            $.post("__CONTROLLER__/changestatus",
+                    {id2: val},
+                    function (data, textStatus) {
+                    }
+            )
+        });
+    </script>
+
+</block>

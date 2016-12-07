@@ -1,0 +1,83 @@
+<extend name="Public/base"/>
+<block name="body">
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">询价失败列表</a></div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+
+                        <h4>询价失败列表</h4>
+                        <div class="widget-content nopadding newslist">
+                            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th>会员</th>
+                                    <th>商品名称</th>
+                                    <th>外观颜色</th>
+                                    <th>内饰颜色</th>
+                                    <th>底价</th>
+                                    <th>上牌地</th>
+                                    <th>询价费</th>
+                                    <th>询价日期</th>
+                                    <th>失败原因</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="list" id="vo">
+                                    <tr>
+                                        <td>{$vo.user_name}</td>
+                                        <td>{$vo.carstyle}&nbsp;{$vo.car_name}</td>
+                                        <td>{$vo.exterior_color_name}</td>
+                                        <td>{$vo.interior_color_name}</td>
+                                        <td>
+                                            <?php static $ke=-1; $ke++;?>
+                                            <volist key="k1" name="area_price[$ke]" id="vo1">
+                                                {$vo1.area_name}:{$vo1.pay_low_price}<br/>
+                                            </volist>
+                                        </td>
+                                        <td>{$vo.card_place}</td>
+                                        <td>{$vo.money}</td>
+                                        <td>{$vo.createtime}</td>
+                                        <td>
+                                            <?php static $key1=-1; $key1++;?>
+                                            <volist key="k1" name="fail_city[$key1]" id="vo2">
+                                                {$vo2.area_name} 不满足提车<br/>
+                                            </volist>
+
+                                        </td>
+                                        <td class="center">
+                                            <!--   <a title="编辑" href="{:U('Pay/orderDetails',array('id'=>$vo['id']))}">订单</a> -->
+                                            <a onclick="if(confirm('确定删除?')) return true; else return false;"
+                                               class="confirm ajax-get" title="删除"
+                                               href="{:U('Pay/delOrder',array('id'=>$vo['id']))}">删除</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="viciao">
+                            {$pagelist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+</block>

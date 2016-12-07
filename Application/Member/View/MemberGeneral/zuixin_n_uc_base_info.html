@@ -1,0 +1,393 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">账号资料</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="n_uc_base_info.html" title="">基本资料</a></li>
+                <li><a href="n_uc_base_info_address.html" title="">地址管理</a></li>
+                <li><a href="n_uc_base_info_pic.html" title="">头像修改</a></li>
+                <li><a href="n_uc_base_info_modefypsw.html" title="">修改密码</a></li>
+            </ul>
+            <div class="uc_base_info ohd" id="J_uc_base_info">
+                <div class="tips_head">
+                    <p class="prompt">完善个人资料，即可获取50车币。  <i class="prompt_txt">“*”</i>星号为必填项</p>
+                </div>
+                <div class="infobox" id="J_infobox">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{$Think.const.JS_URL}ymdate.js"></script>
+    <script src="{$Think.const.JS_URL}app.js"></script>
+    <script src="{$Think.const.JS_URL}citiesJSON.js"></script>
+    <script>
+        $(function(){
+            var qianzhui = "/member.php";
+            /*取得默认用户信息*/
+            $.post(qianzhui + "/MemberGeneral/member_accinfo", function(db){
+                //对默认信息做处理
+                var birthday,year,mouth,day,province_id,city_id,district_id,address,kname,kpostcode,acccoin;
+//                if(db.birthday !== null){
+//                     year = db.birthday.substring(0,4);
+//                    mouth = db.birthday.substring(4,2);
+//                    day = db.birthday.substring(7,2);
+//                };
+//                if(db.province_id !== null){
+//                    province_id = db.province_id;
+//                };
+//                if(db.city_id !== null){
+//                    city_id = db.city_id;
+//                };
+
+                //判断资料是否完成，50车币
+                if(db.acccoin == 1){
+                    //完成资料
+                    $("#J_uc_base_info").find(".tips_head").empty();
+                }
+
+
+                function getmouth(o){
+                    var _mouthstring = '<option value="0">选择月份</option>';
+                    for(var j =1 ; j<= 12;j++){
+                        _mouthstring += '<option value="'+ j +'">'+ j +'</option>';
+                    }
+                    o.html(_mouthstring);
+                };
+                function getDay(o,i,k){
+                    //o 传入年份
+                    //i  传入月份
+                    //k 当前对象
+                    function addday(n){
+                        var _daystring = '';
+                        for(var j =1 ; j<= n;j++){
+                            _daystring += '<option value="'+ j +'">'+ j +'</option>';
+                        };
+                        return _daystring;
+                    }
+                    var danum;
+                    if(i == 2){    //2月份
+                        if((o % 4 == 0 && o %100 != 0) || o %400 == 0){  //闰年
+                            danum = addday(29);
+                        }else{  // 非闰年
+                            danum = addday(28);
+                        }
+                    }else if(i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12){
+                        //31天的月份
+                        danum = addday(31);
+                    }else{
+                        //30的月份
+                        danum = addday(30);
+                    }
+                    k.html(danum);
+                };
+
+                birthday = db.birthday || "1990-01-01";
+                year = birthday.substring(0,4);
+                mouth = birthday.substring(5,7);
+                day = birthday.substring(8,10);
+                province_id = db.province_id || "1";
+                city_id = db.city_id || "1";
+                district_id = db.district_id || "0";
+                address  = db.address;
+                kname = db.name || "",
+                kpostcode = db.postcode || "";
+                var html = $('<div id="user_info" >'+
+                        '<dl>'+
+//                      '<dt class="star">真实姓名:</dt>'+
+						'<dt>真实姓名:</dt>'+
+                        '<dd>'+
+                        '<input type="text" class="name" name="name" value="'+ kname +'">'+
+                        '<div class="tips"></div>'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt>性别:</dt>'+
+                        '<dd>'+
+                        '<select name="sex" id="sex">'+
+                        '<option value="0">男</option>'+
+                        '<option value="1">女</option>'+
+                        '</select>'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt>生日:</dt>'+
+                        '<dd>'+
+                        '<select name="year" id="year">'+
+                        '</select>'+
+                        '<select name="mouth" id="mouth">'+
+                        '</select>'+
+                        '<select name="day" id="day">'+
+                        '</select>'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt>现居住地:</dt>'+
+                        '<dd>'+
+                        '<select name="proveice" id="province" data-lvl="0">'+
+                        '</select>'+
+                        '<select name="city" id="city" data-lvl="1">'+
+                        '</select>'+
+                        '<select name="district" id="district" data-lvl="2">'+
+                        '</select>'+
+                        '<input type="text" class="postcode" name="address" value="'+db.address+'">'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt>手机号码:</dt>'+
+                        '<dd>'+
+                        '<input type="text" class="telephone" id="J_phonenum" name="telephone" value="'+ db.tel +'">'+
+                        '<div class="send" >发送验证码</div>'+
+                        '<input type="text" class="code">'+
+                        '<div class="tips"></div>'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt>邮编:</dt>'+
+                        '<dd>'+
+                        '<input type="text" class="postcode" name="postcode" value="'+ kpostcode +'">'+
+                        '</dd>'+
+                        '</dl>'+
+                        '<dl>'+
+                        '<dt></dt>'+
+                        '<dd>'+
+                        '<input type="submit" class="submit G_btn_a" value="保存">'+
+                        '<div class="tips"></div>'+
+                        '</dd>'+
+                        '</dl>'+'</div>'
+                );
+                /*年月日选择--如果有生日按生日选择--没有按照默认日期选择默认1990-01-01*/
+                html.find("#year").ymdate({
+                    year:year
+                });
+                getmouth(html.find("#mouth"));
+                getDay(year,parseInt(mouth,10),html.find("#day"));
+                html.find("#year").val(year);
+                html.find("#mouth").val(parseInt(mouth,10));
+                html.find("#day").val(parseInt(day,10));
+                /*shengshi*/
+                $.ajax({
+                    url:qianzhui + "/MemberGeneral/province",
+                    success:function(db){
+                        var provinceStr='';
+                        for(var i =0;i<db.length ;i++){
+                            provinceStr+='<option value="'+ db[i].value +'">'+ db[i].name  +'</option>'
+                        }
+                        html.find("#province").html(provinceStr);
+                        $("#province").attr('value',province_id);
+                        var data= {
+                            province:province_id
+                        };
+                        console.log(province_id);
+                        $.ajax({
+                            url:qianzhui + "/MemberGeneral/city",
+                            data:data,
+                            success:function(db){
+                                var citesStr='';
+                                for(var k =0;k<db.length ;k++){
+                                    citesStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                }
+                                html.find("#city").html(citesStr);
+                                $("#city").attr('value',city_id);
+                                var data1= {
+		                            province:province_id,
+		                            city:city_id
+		                        };
+                                $.ajax({
+		                            url:qianzhui + "/MemberGeneral/district",
+		                            data:data1,
+		                            success:function(db){
+		                                var districtStr='';
+		                                for(var j =0;j<db.length;j++){
+		                                    districtStr+='<option value="'+ db[j].value +'">'+ db[j].name  +'</option>'
+		                                }
+		                                html.find("#district").html(districtStr);
+		                                $("#district").attr('value',district_id);
+		                            }
+		                        });
+                            }
+                        });
+
+                    }
+                });
+
+
+
+                $("#J_infobox").html(html);
+
+                $("#province").on("change",function(){
+                    var data= {
+                        province:html.find("[name=proveice]").find("option:selected").val()
+                    };
+                    $.ajax({
+                        url:qianzhui + "/MemberGeneral/city",
+                        data:data,
+                        success:function(db){
+                            var citesStr='';
+                            for(var k =0;k<db.length ;k++){
+                                citesStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                            }
+                            html.find("#city").html(citesStr);
+                            var data= {
+		                        province:html.find("[name=proveice]").find("option:selected").val(),
+		                        city:html.find("[name=city]").find("option:selected").val()
+		                    };
+		                    $.ajax({
+		                        url:qianzhui + "/MemberGeneral/district",
+		                        data:data,
+		                        success:function(db){
+		                            var districtStr='';
+		                            for(var j =0;j<db.length ;j++){
+		                                districtStr+='<option value="'+ db[j].value +'">'+ db[j].name  +'</option>'
+		                            }
+		                            html.find("#district").html(districtStr);
+		                        }
+		                    });
+                        }
+                    });
+                })
+                
+                $("#city").on("change",function(){
+                    var data= {
+                        province:html.find("[name=proveice]").find("option:selected").val(),
+                        city:html.find("[name=city]").find("option:selected").val()
+                    };
+                    $.ajax({
+                        url:qianzhui + "/MemberGeneral/district",
+                        data:data,
+                        success:function(db){
+                            var districtStr='';
+                            for(var j =0;j<db.length ;j++){
+                                districtStr+='<option value="'+ db[j].value +'">'+ db[j].name  +'</option>'
+                            }
+                            html.find("#district").html(districtStr);
+                        }
+                    });
+                })
+
+                /*验证码发送*/
+                html.find(".send").bind("click", sendCode);
+
+                //发送验证码
+                function checkData(ele) {
+                    if (!ele) {
+                        return true;
+                    }
+                    var value = $.trim(ele.value);
+                    switch (ele.name) {
+                        case "telephone":
+                            if (!value || new RegExp("^((13[0-9])|(15[0-9])|(18[0-9])|14[0-9]|17[0-9])[0-9]{8,8}$").test(value) == false) {
+                                html.find(".send").closest("dd").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>请输入正确的手机号码</p>');
+                                return false;
+                            } else {
+                                return true;
+                            }
+                            break;
+                        case "code":
+                            if (!value || value.length < 6 || new RegExp("^([0-9])+$").test(value) == false) {
+                                html.find(".send").closest("dd").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>请输入正确的验证码</p>');
+                                return false;
+                            } else if (value.length == 6) {
+                                return true;
+                            }
+                            break;
+                    }
+                }
+
+                function sendCode(e) {
+
+                    var flag1 = checkData(document.getElementById("J_phonenum"));
+                    var phone =$("#user_info").find("[name=telephone]");
+                    if (flag1) {
+                        var postData = {
+                            tel: phone.val()
+                        };
+
+                        $.ajax({
+                            type: "POST",
+                            url: qianzhui + "/Public/note",
+                            dataType: "JSON",
+                            data: postData,
+                            success: function (data) {
+                                if (data.status == 0) {
+                                    html.find(".send").unbind("click");
+                                    intervalTime(60);
+                                } else if (data.status == 205405) {
+                                    html.find(".send").closest("dd").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>号码异常/同一号码发送次数过于频繁</p>');
+                                } else if (data.status == 1) {
+                                    phone.focus();
+                                    html.find(".send").closest("dd").find(".tips").html('<p class="err"><i class="ui_icon_20 icon_warn icon_warn_err"></i>' + data.msg + '</p>');
+                                }
+                            }
+                        });
+                    }
+                }
+
+                function intervalTime(num) {
+                    var num = parseInt(num);
+                    var i = 0;
+                    html.find(".send").addClass("G_btn_disabled");
+                    html.find(".send").html("<span></span>秒重新发送");
+                    html.find(".send").find("span").text(num);
+                    var inter = setInterval(function () {
+                        if (i < num) {
+                            i++;
+                            html.find(".send").find("span").text(num - i);
+                        } else {
+                            clearInterval(inter);
+                            html.find(".send").removeClass("G_btn_disabled");
+                            html.find(".send").html("重新发送").bind("click", sendCode);
+                        }
+                    }, 1000);
+                }
+
+                /*提交保存*/
+                html.find(".submit").on("click",function(){
+                    var data = {
+                        name:html.find("[name=name]").val(),
+                        sex:html.find("[name=sex]").val(),
+                        birthday:html.find("[name=year]").val()+"-"+leftZeroPad(html.find("[name=mouth]").val(),2)+"-"+leftZeroPad(html.find("[name=day]").val(),2),
+                        province_id:html.find("[name=proveice]").find("option:selected").val(),
+                        city_id:html.find("[name=city]").find("option:selected").val(),
+                        district_id:html.find("[name=district]").find("option:selected").val(),
+                        address:html.find("[name=address]").val(),
+                        postcode:html.find("[name=postcode]").val(),
+                        tel:html.find("[name=telephone]").val()
+                    };
+                    $.ajax({
+                        url: qianzhui + "/MemberGeneral/member_accinfo_save",
+                        data:data,
+                        type:"POST",
+                        success:function(db){
+                            if(db.status == 1){
+                                //修改失败
+                                 alert(db.msg);
+//                                HUI.PopOut.alert([db.msg ,""], 3, !0, "30%");
+//                                HUI.PopOut.alert([db.msg ,""], 3, !0, "30%").delay(4e3).queue(function() {
+//                                    HUI.PopOut.closeMask()})
+                                location.reload();
+                            }else{
+                                //修改成功
+                                alert(db.msg);
+//                                HUI.PopOut.alert([db.msg ,""], 3, !0, "30%").delay(4e3).queue(function() {
+//                                    HUI.PopOut.closeMask()})
+                                 location.reload();
+
+                            }
+                        }
+                    });
+                })
+
+            });
+            var MANY_ZEROS = "000000000000000000";
+
+            function leftZeroPad(val, minLength) {
+                if (typeof(val) != "string")
+                    val = String(val);
+                return (MANY_ZEROS.substring(0, minLength - val.length)) + val;
+            }
+//
+        });
+    </script>
+</block>

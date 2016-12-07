@@ -1,0 +1,202 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb">
+                    <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span9">
+                        <!--  <form class="form-search" method="post">  -->
+                        <div class="form-search">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <label>分类：</label>
+                                    <select id="type" style="margin-left: 28px;">
+                                        <option value="">全部</option>
+                                        <volist name="node" id="vo">
+                                            <option value="{$vo.id}">{$vo.type_name}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                                <div class="span4">
+                                    <label>审核状态：</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="check" value="" checked>全部</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="check" value="1">审核中</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="check" value="2">审核通过</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="check" value="3">审核失败</label>
+                                </div>
+                                <div class="span4">
+                                    <label>帖子首页放置：</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="index" value="" checked>全部</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="index" value="2">放置</label>
+                                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="index" value="1">未放置</label>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="span6">
+                                    <label>提交时间：</label>
+                                    <input type="text" class="input-large" name="begin_time" id="begin_time" value="{$starttime|date="Y-m-d",###}" onClick="WdatePicker()" >
+                                    <span style="color: #CCCCCC;">——</span>
+                                    <input type="text" class="input-large" name="end_time" id="end_time" value="{$endtime|date="Y-m-d",###}" onClick="WdatePicker()" >
+                                </div>
+                                <div class="span4">
+                                    <label>关键字：</label>
+                                    <input type="text" name="keyword" id="keyword">
+
+                                    <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i class="icon-search"></i> 搜索</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                <hr />
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>分类</th>
+                                <th>标题</th>
+                                <th>审核状态</th>
+                                <th>帖子首页放置</th>
+                                <th>提交时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#ajax_lists").delegate(".pager a", "click", function(){
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display','none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            var begin_time    =$('#begin_time').val();
+            var end_time      =$('#end_time').val();
+            var type          =$('#type').find('option:selected').val();
+            var index           = $("input[name='index']:checked").val();
+            var check       = $("input[name='check']:checked").val();
+            var keyword       = $("#keyword").val();
+
+            $.post( "__MODULE__/Ajax/carlife_carshow",
+                    {begin_time:begin_time,end_time:end_time,type:type,place_index:index,check:check,keyword:keyword,p:page},
+                    function(data,textStatus){
+                        if(data.count==null){
+                            $(".userdata").text("0");
+                        }else{
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display','');
+                        var pagelist=data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info=data[1];
+                        $.each(info,function(key,val){
+                            var td1="<td>"+val.user_name+"</td>";
+                            var td2="<td>"+val.type_name+"</td>";
+                            var td3="<td>"+val.title+"</td>";
+                            var td4 = "",btn1 = '';
+                            switch(parseInt(val.check, 10))
+                            {
+                                case 1:
+                                    td4 = "<td><font color='red'>未审核</font></td>";
+                                    break;
+                                case 2:
+                                    td4 = "<td><font color='green'>审核通过</font></td>";
+                                    if (parseInt(val.place_index, 10)==1) {
+                                        btn1 = "<a class='j_indexBtn btn btn-warning' value='" + val.id + "' data-index='2' href='#'>放置</a>";
+                                    }else
+                                    {
+                                        btn1 = "<a class='j_indexBtn btn btn-warning' value='" + val.id + "' data-index='1' href='#'>撤下</a>";
+                                    }
+                                    break;
+                                case 3:
+                                    td4 = "<td><font color='#ff1493'>审核失败</font></td>";
+                                    break;
+                            }
+                            var td5 = "";
+                            switch(parseInt(val.place_index, 10))
+                            {
+                                case 1:
+                                    td5 = "<td><font color='red'>未放置</font></td>";
+                                    break;
+                                case 2:
+                                    td5 = "<td><font color='green'>已放置</font></td>";
+                                    break;
+                            }
+                            var td6="<td>"+val.createtime+"</td>";
+                            var td7="<td class='center'>"+
+                                    "<a class='btn btn-primary' href='__CONTROLLER__/carshow_details/id/"+val.id+"'>详情</a>"+
+                                    btn1 +
+                                    "</td>";
+                            $('tbody').append("<tr>"+td1+td2+td3+td4+td5+td6+td7+"</tr>");
+                        });
+
+                        $('#ajax_lists tbody').find('.j_indexBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var  id = $(this).attr("value");
+                            place_index=$(this).data('index');
+                            $.confirm({
+                                title: '放置',
+                                content: '你确定将该帖子放置首页吗？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    $.post("/admin.php/Carlife/carshow_index",
+                                            {id:id,place_index:place_index},
+                                            function(db){
+                                                if(db.status == 1){
+                                                    location.reload();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+                        });
+
+                    },
+                    "json");
+        }
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+</block>

@@ -1,0 +1,94 @@
+<extend name="Public/base"/>
+<block name="body">
+  <style type="text/css">
+    .container-fluid h1{
+      line-height: 65px;
+    }
+    .container-fluid h1,.container-fluid h2,.container-fluid h3,.row-fluid,.conten-ft{
+      text-align: center;
+      position: relative;
+    }
+    .row-fluid img{
+      display: block;
+      margin: 0 auto;
+    }
+    .container-fluid h3>a{
+      position: absolute;
+      right:0;
+      top:10px;
+    }
+    .container-fluid p{
+      text-indent: 2em;
+    }
+    .content-bd{
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+    }
+  </style>
+  <div id="content">
+    <div id="content-wrap">
+      <div id="content-header">
+        <div id="breadcrumb">
+          <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+            {$ctitle}
+          </a>
+          <a href="#" class="current">车主秀</a>
+          <a href="#" class="current">详情</a>
+        </div>
+
+      </div>
+      <div class="container-fluid" id="ajax_lists">
+        <h3>{$info.title}<a href="#" class="j_checkBtn btn btn-primary" value="{$info.id}">admin 审核操作</a></h3>
+        <div class="conten-ft">分类：{$info.type_name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发帖者：{$info.user_name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提交时间：{$info.createtime}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车款：{$info.brand_name}&nbsp;&nbsp;&nbsp;{$info.car_model_name}&nbsp;&nbsp;&nbsp;{$info.car_name}</div>
+        <div style="text-align: center"><if condition="$info.image neq ''"><img src="{$info.image}"><else/>暂无封面图片</if></div>
+        <div class="content-bd">{$info.contents}</div>
+
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+  <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+  <script type="text/javascript">
+    $('#ajax_lists').find('.j_checkBtn').on('click', function(e){
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(e);
+      var  id = $(this).attr("value");
+      $.confirm({
+        title: '审核操作',
+        content: '',
+        confirmButton: '审核通过',
+        cancelButton: '审核不通过',
+        confirmButtonClass: 'btn-info',
+        cancelButtonClass: 'btn-danger',
+        closeIcon: true,
+        confirm: function(){
+          $.post("/admin.php/Carlife/carshow_check",
+                  {id:id,check:2},
+                  function(db){
+                    $.dialog({
+                      title: '状态提示！',
+                      content: db.msg,
+                      autoClose: 'dialog|2000',
+                    });
+                  }
+          );
+        },
+        cancel: function(button){
+
+          $.post("/admin.php/Carlife/carshow_check",
+                  {id:id,check:3},
+                  function(db){
+                    $.dialog({
+                      title: '状态提示！',
+                      content: db.msg,
+                      autoClose: 'dialog|2000',
+                    });
+                  }
+          );
+        }
+      });
+    });
+  </script>
+</block>

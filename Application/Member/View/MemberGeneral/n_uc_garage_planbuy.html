@@ -1,0 +1,148 @@
+<extend name="n_uc_base" />
+<block name="body">
+     <!-- main-content begin -->
+        <div class="uc_main GB_main_r">
+            <div class="uc_main_wrapper">
+                <h2 class="uc_middle_title">车库</h2>
+                <ul class="uc_sub_nav clearfix">
+                    <li><a href="n_uc_garage.html" title="">我的爱车</a></li>
+                    <li class="cur"><a href="n_uc_garage_planbuy.html" title="">计划购车</a></li>
+                    <li><a href="n_uc_garage_attencar.html" title="">关注的车</a></li>
+                </ul>
+                <div class="uc_garage_wrapper">
+                    <div id="J_GarMyCarList"></div>
+                    
+                    <div class="uc_g_opera_box">
+                        <div class="uc_opera_tips">
+                            <p>我们需要了解您爱车的基本信息，为您量身定做油耗记录、提醒等相关服务。</p>
+                            <p>还可添加<span class="num j_remainingNum">2</span>辆   （<span class="Skin_txt2">*</span>星号为必填项）</p>
+                        </div>
+                        <form action="" id="J_AddMyCarForm">
+                        <div class="uc_formlist" id="J_AddMyCar">
+                            <ul id="J_carSelector" class="uc_carSelector">
+                                <li>
+                                    <span class="hd"><em>*</em>我的爱车:</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择品牌" data-first-value="" data-url="/member.php/MemberGeneral/brand" name="brand" id="" class="brand uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <span class="hd"></span>
+                                    <div class="inp_box">
+         
+                                        <select  data-required="false" data-first-title="请选择车型" data-url="/member.php/MemberGeneral/car_model" data-first-value="" name="model" id="" class="model uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <span class="hd"></span>
+                                    <div class="inp_box">
+
+                                        <select  data-required="false" data-first-title="请选择车款" data-url="/member.php/MemberGeneral/car" data-first-value="" name="car" id="" class="car uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+                                    </div>
+
+                                </li>
+                            
+                            </ul>
+                            <ul id="J_citySelector" class="uc_citySelector">    
+                                <li>
+                                    <span class="hd"><em>*</em>所  在  地:</span>
+                                    <div class="inp_box">
+                                        <select data-required="false" data-first-title="请选择省份" data-first-value="" class="province uc_inp190 uc_inpBorder Skin_txt3" name="province" id="" data-url="/member.php/MemberGeneral/province" class="uc_inp190 uc_inpBorder Skin_txt3">
+                                        </select>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="hd"></span>
+                                    <div class="inp_box">
+
+                                        <select data-required="false" data-first-title="请选择城市" data-first-value="" class="city uc_inp190 uc_inpBorder Skin_txt3" name="city" id=""  data-url="/member.php/MemberGeneral/city">
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>   
+                            <li>     
+                                    <span class="hd"><em>*</em>购买时间:</span>
+                                    <div class="inp_box">
+                                         <select class="uc_inp190 uc_inpBorder Skin_txt3" name="buy_time">
+                                            <option value="0">请选择</option>
+                                            <option value="1个月内">1个月内</option>
+                                            <option value="3个月内">3个月内</option>
+                                            <option value="6个月内">6个月内</option>
+                                            <option value="6个月以上">6个月以上</option>
+                                        </select>
+                                    </div>
+
+                                </li>
+                                <!-- <li>
+                                    <span class="hd"><em>*</em>上传图片:</span>
+                                    <div class="inp_box">
+                                        <div class="upload_pic">
+                                            <a class="noface" href="javascript:void(0);">
+                                                <form node-type="low_form1" enctype="multipart/form-data" method="post">
+                                                    <input accept="image/gif, image/jpeg, image/x-png" type="file" action-type="changeFile" node-type="file1" name="mycar_pic" >
+                                                </form>
+                                                <div class="show_picbox"></div>
+                                                <div class="picbox_bg"></div>
+                                                <span class="horizontal_line"></span>
+                                                <span class="vertical_line"></span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </li> -->
+                                <li><span class="hd"></span><div class="inp_box"><input type="submit" class="G_btn_a btn_30px" value="提交"></div></li>
+                            </ul>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main-content end -->
+
+<script id="tplGarBuyPlanList" type="text/html">
+{{each list as value index}}
+
+        <div class="car_box" data-id="{{value.id}}"  data-buytime="{{value.buy_time}}" data-provinceid="{{value.province_id}}" data-cityid="{{value.city_id}}" data-carmodelid="{{value.car_model_id}}" data-brandid="{{value.brand_id}}" data-carid="{{value.car_id}}">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.image}}" alt="{{value.brand_name}}{{value.car_model_name}}{{value.car_name}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18" title="{{value.brand_name}}{{value.car_model_name}}">{{value.brand_name}}{{value.car_model_name}}</h5>
+                                <p>{{value.car_name}}</p>
+                                <p>计划在<span class="time">{{value.buy_time}}</span>在<span class="city">{{value.city}}</span>购车</p>
+                        <p class="guide_price btn_s2">官方指导价：<span class="price"><em>{{value.auth_price}}</em>元起</span>
+                        <span>降价提醒</span>
+                            
+                            </p>
+                            {{if value.price_id > 0}}
+                            <p class="btn_s2">
+                            <a href="http://gouchehui.com/member.php/car/product_details/id/{{value.price_id}}" class="G_btn_a btn_32px">立即购买</a>
+                            </p>
+                            {{else}}
+                            <p class="details"><a href="javascript:void(0);">暂无报价，可联系客服购买！</a><span>客服电话：400-138-0808</span></p>
+                            {{/if}}
+                            </div>
+                            <a href="javascript:void(0);" class="ui_icon uc_funcicon_del j_delBtn" title="删除"></a>
+                        <a href="javascript:void(0);" class="ui_icon uc_funcicon_edit j_editBtn" title="编辑"></a>
+                        </div>
+        {{/each}}
+</script>
+<script src="{$Think.const.JS_URL}app/jquery.datetimepicker.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+<script src="{$Think.const.JS_URL}garage_plan.js"></script>
+</block>

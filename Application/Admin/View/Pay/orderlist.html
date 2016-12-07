@@ -1,0 +1,535 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+
+        .search:after, .search:before {
+            display: table;
+            line-height: 0;
+            content: "";
+        }
+
+        .search:after {
+            clear: both;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+
+        #userTab {
+            width: 1000px;
+            margin-left: -500px;
+        }
+
+        #customer span.help-inline {
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        #myModalLabel ul {
+            margin-left: 86px;
+            display: inline;
+        }
+
+        #myModalLabel ul span {
+            color: red;
+        }
+
+        .form-horizontal input[type=text], .form-horizontal input[type=password], .form-horizontal textarea {
+            width: 206px;
+        }
+
+        #userAdd .form-horizontal .control-label {
+            width: auto;
+            margin-left: 120px;
+        }
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+            <p id='ajax_delete_id'
+               style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid">
+
+                <div class="row-fluid">
+                    <b>询价时间：</b>
+                    <input type="text" class="text_input_2" id='begin_time' name="begin_time" value="2016-06-18" onClick="WdatePicker()">
+                    <span style="color: #CCCCCC;">——</span>
+                    <input type="text" class="text_input_2" id='end_time' name="end_time" value="2016-07-18" onClick="WdatePicker()">
+                </div>
+                <div class="row-fluid">
+                    <b>询价状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="time_status" value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="time_status" value="1">有效</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="time_status" value="2">失效</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="time_status" value="-1">无效</label>
+                </div>
+                <div class="row-fluid" style="margin-top:8px;">
+                    <b>支付状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status" value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status" value="1">已支付</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status" value="-1">未支付</label>
+                </div>
+                <div class="row-fluid" style="margin-top:8px;">
+                    <b>跟踪状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status_track" value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status_track" value="2">已跟踪</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status_track" value="1">未跟踪</label>
+                </div>
+                <div class="row-fluid">
+                    <div class="span10">
+                        <b>关键词：</b>
+                        <input type="text" class="input-xlarge" style="margin-top:8px;" name="keyword" id='keyword' placeholder="会员名/商品名称">
+                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 搜索</button>
+                    </div>
+                    <div class="span2">
+                        <a class="btn btn-danger" href="{:U('fail_orderlist')}"><i class="icon-remove"></i>询价失败记录</a>
+                    </div>
+                </div>
+
+                <div class="content" id="ajax_lists">
+                    <div class="widget-content nopadding newslist">
+                        <h4>总计：<span class="userdata badge"></span>个 </h4>
+                        <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>会员名称</th>
+                                <th>来源</th>
+                                <th>活动类型</th>
+                                <th>商品名称</th>
+                                <th>上牌地</th>
+                                <th>询价费</th>
+                                <th>支付状态</th>
+                                <th>询价状态</th>
+                                <th>跟踪状态</th>
+                                <th>操作</th>
+                                <th>会员角色</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pager"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .error {
+            margin-left: 10px;
+            color: #f00;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            function CurentTime() {
+                var now = new Date();
+
+                var year = now.getFullYear();       //年
+                var month = now.getMonth() + 1;     //月
+                var day = now.getDate();            //日
+
+                var clock = year + "-";
+
+                if (month < 10)
+                    clock += "0";
+
+                clock += month + "-";
+
+                if (day < 10)
+                    clock += "0";
+
+                clock += day;
+
+                return clock;
+            }
+
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            });
+            $('#end_time').val(CurentTime());
+
+            getPage(1);
+
+            $('.btn-primary').on('click', function (e) {
+                getPage(1);
+            });
+
+            function getPage(page) {
+                $("#ajax_lists thead").css('display', 'none');
+                $('#ajax_lists tbody').empty();
+                $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+                var begin_time = $('#begin_time').val();
+                var end_time = $('#end_time').val();
+                var time_status = $("input:radio[name='time_status']:checked").val();
+                var pay_status = $("input:radio[name='pay_status']:checked").val();
+                var status_track = $("input:radio[name='status_track']:checked").val();
+                var keyword = $('#keyword').val();
+
+                $.post("/admin.php/ajax/orderList_ajax",
+                        {
+                            begin_time: begin_time,
+                            end_time: end_time,
+                            time_status: time_status,
+                            pay_status: pay_status,
+                            status_track: status_track,
+                            keyword: keyword,
+                            p: page
+                        },
+                        function (data, textStatus) {
+                            if (data.count == null) {
+                                $(".userdata").text("0");
+                            } else {
+                                $(".userdata").text(data.count);
+                            }
+                            $('#ajax_lists tbody').empty();
+                            $('#ajax_lists > .onload').remove();
+                            $("#ajax_lists thead").css('display', '');
+                            var pagelist = data[0];
+                            $('#ajax_lists .pager').html(pagelist);
+                            var info = data[1];
+                            var $tr = '';
+                            $.each(info, function (key, val) {
+                                var $payStatus = '',
+                                        $orderStatus = '',
+                                        $trackStatus = '',
+                                        $userStatus = '';
+                                switch (parseInt(val.status, 10)) {
+                                    case 0:
+                                        $payStatus = '<font color="red">未支付</font>';
+                                        $orderStatus = "<font color='red'>无效</font>";
+                                        break;
+                                    case 1:
+                                        $payStatus = '<font color="green">已支付</font>';
+                                        $orderStatus = "<font color='green'>有效</font>";
+                                        break;
+                                    case 9:
+                                        $payStatus = '<font color="red">支付中</font>';
+                                        $orderStatus = "<font color='red'>无效</font>";
+                                        break;
+                                    case 10:
+                                        $payStatus = '<font color="red">支付失败</font>';
+                                        $orderStatus = "<font color='red'>无效</font>";
+                                        break;
+                                    case 11:
+                                        $payStatus = '<font color="red">取消支付</font>';
+                                        $orderStatus = "<font color='red'>无效</font>";
+                                        break;
+                                    default:
+                                        $payStatus = '<font color="green">已支付</font>';
+                                        $orderStatus = '<font color="red">失效</font>';
+                                }
+
+                                if (parseInt(val.status_track, 10) === 1) {
+                                    $trackStatus = '<font color="red">未跟踪</font>';
+                                } else if (parseInt(val.status_track, 10) === 2) {
+                                    $trackStatus = '<font color="green">已跟踪</font>';
+                                }
+
+                                if (parseInt(val.cus_character, 10) === 1) {
+                                    $userStatus = '<a title="用户" data-val = "' + val.id + '" href="#"  class="j_userBtn btn btn-success"><i class="icon-user"></i> 用户</a>';
+                                } else if (parseInt(val.cus_character, 10) === 2) {
+                                    $userStatus = '<a title="内部" data-val = "' + val.id + '" href="#"  class="j_userBtn btn btn-warning">内部</a>';
+                                } else {
+                                    $userStatus = '<a title="判别" data-val = "' + val.id + '" href="#"  class="j_panbieBtn btn btn-info">判别</a>';
+                                }
+
+                                $tr += '<tr data-id="' + val.id
+                                        + '">' +
+                                        '<td>' + val.user_name + '</td>' +
+                                        '<td>' + val.from_order + '</td>' +
+                                        '<td>' + val.from_activity + '</td>' +
+                                        '<td>' + val.carstyle + '</td>' +
+                                        '<td>' + val.card_place + '</td>' +
+                                        '<td>' + val.money + '</td>' +
+                                        '<td>' +
+                                        $payStatus +
+                                        '</td>' +
+                                        '<td>' +
+                                        $orderStatus +
+                                        '</td>' +
+                                        '<td>' +
+                                        $trackStatus +
+                                        '</td>' +
+                                        '<td>' +
+                                        '<a title="详情" class="btn btn-info" value="' + val.id + '" href="/admin.php/Pay/query_details?id=' + val.id + '">详情</a>&nbsp;<a class="j_delBtn btn btn-danger" title="删除" value="' + val.id + '" href="#" >删除</a>' +
+                                        '</td>' +
+                                        '<td>' +
+                                        $userStatus +
+                                        '</td></tr>';
+                            });
+                            $('#ajax_lists tbody').append($tr);
+
+                            $('#ajax_lists tbody').find('.j_delBtn').on('click', function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                var $tr = $(this).closest('tr'),
+                                        id = $(this).attr("value");
+                                $.confirm({
+                                    title: '操作提示框!',
+                                    content: '你确定要删除该条信息？',
+                                    confirmButton: '确定',
+                                    cancelButton: '取消',
+                                    confirmButtonClass: 'btn-info',
+                                    cancelButtonClass: 'btn-danger',
+                                    closeIcon: true,
+                                    confirm: function () {
+                                        $.post("/admin.php/Pay/ajax_delete",
+                                                {id: id},
+                                                function (db) {
+                                                    if (db.status == 1) {
+                                                        $tr.remove();
+                                                    }
+                                                    $.dialog({
+                                                        title: '状态提示！',
+                                                        content: db.msg,
+                                                        autoClose: 'dialog|2000',
+                                                    });
+                                                }
+                                        );
+                                    }
+                                });
+
+                            });
+
+                            $('#ajax_lists tbody').find('.j_userBtn').on('click', function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                var $this = $(this),
+                                        $tr = $this.closest('tr'),
+                                        id = $tr.data('id');
+
+                                $.post("/admin.php/Ajax/cus_list",
+                                        {id: id},
+                                        function (db) {
+                                            var $payStatus = "", recordListStr = "";
+                                            if (parseInt(db.status, 10) === 0) {
+                                                $payStatus = '<font color="red">未支付</font>';
+                                            } else if (parseInt(db.status, 10) === 1) {
+                                                $payStatus = '<font color="green">已支付</font>';
+                                            } else {
+                                                $payStatus = '<font color="green">已支付</font>';
+                                            }
+                                            if (db && db.pay_cus.length > 0) {
+                                                $.each(db.pay_cus, function (i, record) {
+                                                    recordListStr += '<tr><td>' + i + '</td><td>' + record.createtime + '</td><td>' + record.cus_remark + '</td></tr>';
+                                                });
+                                            }
+                                            $con = '<div class="well">' +
+                                                    '<div class="">' +
+                                                    '<b>会员名：</b>' +
+                                                    '<span>' +
+                                                    db.cus_name
+                                                    + '</span>' +
+                                                    '</div>' +
+                                                    '<div class="">' +
+                                                    '<b>商品名称：</b>' +
+                                                    '<span>' +
+                                                    db.carstyle
+                                                    + '</span>' +
+                                                    '</div>' +
+                                                    '<div class="">' +
+                                                    '<b>支付状态：</b>' +
+                                                    '<span>' +
+                                                    $payStatus
+                                                    + '</span>' +
+                                                    '</div>' +
+                                                    '</div>' +
+                                                    '<table class="table table-striped">' +
+                                                    '<thead> ' +
+                                                    '<tr> <th style="text-align: left;">序号</th> <th style="text-align: left;">客服回访时间</th> <th style="text-align: left;">客服回访记录</th></tr>' +
+                                                    '</thead>' +
+                                                    '<tbody>' +
+                                                    recordListStr +
+                                                    '</tbody></table>' +
+                                                    '<form class="form-horizontal" action="" method="post">' +
+                                                    '<input type="hidden" name="id" value="' +
+                                                    id +
+                                                    '">' +
+                                                    '<div class="control-group">' +
+                                                    '<label class="control-label" for="cus_remark">备注：</label>' +
+                                                    '<div class="controls"> <textarea name="cus_remark" rows="4" cols="" id="cus_remark"></textarea> </div>' +
+                                                    '</div></form>';
+
+                                            var $infoListBox = $.confirm({
+                                                columnClass: 'col-md-1 col-md-offset-1',
+                                                title: '客服回访详细记录!',
+                                                content: $con,
+                                                confirmButton: '新增',
+                                                cancelButton: false,
+                                                confirmButtonClass: 'btn-info',
+                                                closeIcon: true
+                                            });
+
+                                            $infoListBox.confirm = function () {
+                                                var postDb = {},
+                                                        $cusRemark = $infoListBox.$content.find('[name=cus_remark]');
+                                                postDb.cus_remark = $cusRemark.val();
+                                                postDb.id = id;
+                                                if (postDb.cus_remark == '') {
+                                                    $cusRemark.after('<span style="color: #f00;">* 备注不能为空</span>');
+                                                    return false;
+                                                }
+                                                $.post("/admin.php/Pay/cus_action_add",
+                                                        postDb,
+                                                        function (db) {
+                                                            $.dialog({
+                                                                title: '状态提示！',
+                                                                content: db.msg
+                                                            });
+                                                        });
+                                            };
+
+                                        },
+                                        "json");
+                            });
+
+                            $('#ajax_lists tbody').find('.j_panbieBtn').on('click', function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                var $this = $(this),
+                                        $tr = $this.closest('tr'),
+                                        defName = $tr.find('td:eq(0)').text(),
+                                        id = $tr.data('id');
+
+                                var $con = '<form class="form-horizontal" action="" method="post"> ' +
+                                        '<input type="hidden" name="id" value="' + id + '">' +
+                                        '<div class="control-group"> ' +
+                                        '<label class="control-label" for="cus_character">角色：</label> ' +
+                                        '<div class="controls"> ' +
+                                        '<select name="cus_character" id="cus_character"> ' +
+                                        '<option value="0">选择询价会员角色</option> ' +
+                                        '<option value="1">用户</option> ' +
+                                        '<option value="2">内部</option> ' +
+                                        '</select> ' +
+                                        '</div> ' +
+                                        '</div> ' +
+                                        '<div class="control-group"> ' +
+                                        '<label class="control-label" for="cus_name">姓名：</label> ' +
+                                        '<div class="controls"> ' +
+                                        '<input type="text" name="cus_name" value="' + defName + '" id="cus_name" placeholder="输入您的姓名"> ' +
+                                        '</div> ' +
+                                        '</div> ' +
+                                        '<div class="control-group"> ' +
+                                        '<label class="control-label" for="cus_remark">备注：</label> ' +
+                                        '<div class="controls"> ' +
+                                        '<textarea name="cus_remark" rows="4" cols="" id="cus_remark"></textarea> ' +
+                                        '</div> ' +
+                                        '</div> ' +
+                                        '<div class="control-group"> ' +
+                                        '<div class="controls"> ' +
+                                        '<span class="help-inline">（以上均为必填）</span> ' +
+                                        '</div> ' +
+                                        '</div> ' +
+                                        '</form>';
+
+                                var $addNewInfoBox = $.confirm({
+                                    title: '客服回访!',
+                                    content: $con,
+                                    confirmButton: '确定',
+                                    cancelButton: '取消',
+                                    confirmButtonClass: 'btn-info',
+                                    cancelButtonClass: 'btn-danger',
+                                    closeIcon: true
+                                });
+                                $addNewInfoBox.confirm = function () {
+                                    var postDb = {}, $cusRemark = $addNewInfoBox.$content.find('[name=cus_remark]');
+                                    postDb.cus_character = $addNewInfoBox.$content.find('[name=cus_character]').val();
+                                    postDb.cus_name = $addNewInfoBox.$content.find('[name=cus_name]').val();
+                                    postDb.cus_remark = $cusRemark.val();
+                                    postDb.id = $addNewInfoBox.$content.find('[name=id]').val();
+
+                                    if (postDb.cus_remark == '') {
+                                        if ($cusRemark.closest('.controls').find('.error').length) {
+                                            $cusRemark.closest('.controls').find('.error').show();
+                                        } else {
+                                            $cusRemark.after('<span class="error">* 备注不能为空</span>');
+                                        }
+                                        return false;
+                                    }
+
+                                    if (parseInt(postDb.cus_character, 10) === 0) {
+                                        if ($addNewInfoBox.$content.find('[name=cus_character]').closest('.controls').find('.error').length) {
+                                            $addNewInfoBox.$content.find('[name=cus_character]').closest('.controls').find('.error').show();
+                                        } else {
+                                            $addNewInfoBox.$content.find('[name=cus_character]').after('<span class="error">* 请选择角色</span>');
+                                        }
+                                        return false;
+                                    }
+
+                                    $.post("/admin.php/Pay/cus_action",
+                                            postDb,
+                                            function (db) {
+                                                if (db && db.status == 1) {
+                                                    location.reload();
+                                                } else {
+                                                    $.dialog({
+                                                        title: '状态提示！',
+                                                        content: data.msg
+                                                    });
+                                                }
+                                            },
+                                            "json");
+                                }
+
+                            });
+
+
+                        },
+                        "json");
+
+            }
+
+
+        });
+    </script>
+
+</block>

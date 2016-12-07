@@ -1,0 +1,262 @@
+<extend name="Base/Common" />
+<block name="body">
+
+<!--   <div id="cont"> -->
+    <div class="cont">
+      <p>
+        位置:
+        <a href="####">购车惠></a>
+        <a href="####">我要买车></a>
+        <a href="####">详情></a>
+        <a href="####">订单</a>
+      </p>
+      <div class="xinxi">
+        <div class="liucheng">
+          <p>1.填写并核对订单信息</p>
+          <p>2.选择支付方式</p>
+        </div>
+        <!-- <form> -->
+          <div class="o-car-info">
+            <h2 class="tit">车辆信息</h2>
+            <div class="bd">
+              <dl class="o-car-prop tm-clear" id="color">
+                <dt class="o-car-metatit">外观颜色:</dt>
+                <dd class="J_propertyBox">
+                  <ul class="tm-clear color-pop">
+                   <li class="pp-selected">
+                      <a href="#" class="colorpickbox"  data-property-outcolor="#F00" style="background-color:{$styleone.color};"></a>
+                      <span class="des">{$styleone.colorname}</span>
+                    </li>
+            <!--       <volist name="info" id="vo"> -->
+                   
+                 <!--  </volist> -->
+                   <!--  <li>
+                      <a href="#" class="colorpickbox"  data-property-outcolor="#F00" style="background-color:#fff;"></a>
+                      <span class="des">白色白</span>
+                    </li> -->
+                  </ul>
+
+                </dd>
+              </dl>
+              <!--  <dl class="o-car-prop tm-clear">
+              <dt class="o-car-metatit">内饰颜色:</dt>
+              <dd class="J_propertyBox">
+                <ul class="tm-clear color-pop">
+                  <li class="pp-selected">
+                    <a  class="colorpickbox" href="#"  data-property-intcolor="#F00" style="background-color:#fff;"></a>
+                    <span class="des">白色白</span>
+                  </li>
+                  <li>
+                    <a href="#"  class="colorpickbox" data-property-intcolor="#F00" style="background-color:#fff;"></a>
+                    <span class="des">白色白</span>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            -->
+            <dl class="o-car-prop tm-clear" id="buytime">
+              <dt class="o-car-metatit">购车时间:</dt>
+              <dd class="J_propertyBox">
+                <ul class="tm-clear time-pop">
+                  <li class="pp-selected">
+                    <a href="#" class="timepickbox"  data-property-buytime="三天内" > <em>三天内</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"  class="timepickbox" data-property-buytime="一周内"> <em>一周内</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"  class="timepickbox" data-property-buytime="15天内"><em>15天内</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"  class="timepickbox" data-property-buytime="一月内"><em>一月内</em>
+                    </a>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl class="o-car-prop tm-clear" id="buyway">
+              <dt class="o-car-metatit">购车方式:</dt>
+              <dd class="J_propertyBox">
+                <ul class="tm-clear time-pop">
+                  <li class="pp-selected">
+                    <a href="#" class="timepickbox"  data-property-buytime="新车全款" >
+                      <em>新车全款</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"  class="timepickbox" data-property-buytime="新车分期">
+                      <em>新车分期</em>
+                    </a>
+                  </li>
+                  <!-- <div class="Warning">
+                    <img src="{$Think.const.IMG_URL}dingdan/images/important_03.jpg"></div> -->
+                </ul>
+              </dd>
+            </dl>
+            <dl class="o-car-prop tm-clear" id="buyplace">
+              <dt class="o-car-metatit">购车地点:</dt>
+              <dd class="J_propertyBox">
+                <dl class="select">
+                  <dt>请选择</dt>
+                  <dd>
+                    <ul>
+                   <!--  <volist name="location" id="vo"> -->
+                      <li>
+                        <a href="#">南京<!-- {$vo} --></a>
+                      </li>
+                   <!--  </volist> -->
+                      <!-- <li>
+                        <a href="#">下拉2</a>
+                      </li>
+                      <li>
+                        <a href="#">下拉3</a>
+                      </li>
+                      <li>
+                        <a href="#">下拉4</a>
+                      </li>
+                      <li>
+                        <a href="#">下拉5</a>
+                      </li>
+                      <li>
+                        <a href="#">下拉6</a>
+                      </li> -->
+                    </ul>
+                  </dd>
+                </dl>
+              </dd>
+            </dl>
+            <dl class="o-car-prop tm-clear" id="takeway">
+              <dt class="o-car-metatit">提车方式:</dt>
+              <dd class="J_propertyBox">
+                <ul class="tm-clear time-pop">
+                  <li class="pp-selected">
+                    <a href="#" class="timepickbox"  data-property-buytime="自提" >
+                      <em>自提</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"  class="timepickbox" data-property-buytime="送车上门">
+                      <em>送车上门</em>
+                    </a>
+                  </li>
+                  <!-- <div class="Warning">
+                    <img src="{$Think.const.IMG_URL}dingdan/images/important_03.jpg"></div> -->
+                </ul>
+              </dd>
+            </dl>
+          </div>
+          <script type="text/javascript">
+         $(function(){
+
+          $('.J_propertyBox li').click(function(e){
+             e.stopPropagation();
+             e.preventDefault();
+            var _this = $(this);
+            $(this).closest('ul').find('li').removeClass('pp-selected');
+            _this.addClass('pp-selected')   
+          });
+
+         });
+         </script>
+
+        </div>
+        <div class="o-user-info">
+          <h2 class="tit">个人信息</h2>
+          <div class="bd">
+            <dl class="o-user-prop tm-clear">
+              <label for="name">我的姓名:</label>
+              <input type="text" value="" onclick="this.value='';" id="name" name="name" class="input1" >
+              <div class="Warning">姓名不要填写错误，该姓名需与购车人发票一致</div>
+            </dl>
+            <dl class="o-user-prop tm-clear">
+              <label for="tele">手机号码:</label>
+              <input type="tele" value="" onclick="this.value=''" id="tele" name="tele" class="input1"  >
+              <div class="Warning">手机号不要填写错误，该号码将用于接收购车凭证</div>
+            </dl>
+           <!--  <dl class="o-user-prop tm-clear">
+              <label for="yanzhenma">验证码:</label>
+              <input type="text" value="验证码" onclick="this.value='';" id="yanzhenma" name="yanzhenma" class="input2"  >
+              <input type="button" id="yanzhenma" class="fasong" value="确认发送">
+              <div class="Warning">验证码打死不能告诉其他人</div>
+            </dl> -->
+          </div>
+        </div>
+
+        <div class="o-order-info">
+          <h2 class="tit">订单信息</h2>
+          <div class="bd">
+            <table width="1080" border="0" cellpadding="0" cellspacing="0">
+              <tr class="mingzi">
+                <td>商品</td>
+                <td>商品名称</td>
+                <td>价格</td>
+              </tr>          
+              <tr>
+                <td class="tupian">
+                  <img src="/Public/Upload{$info1.imgurl}"></td>
+                <td class="xiangqing">
+                  <span>{$info1.brand}&nbsp;{$info1.model}&nbsp;{$info1.style}</span>
+                  <input id="carid" type="hidden" value="{$info1.id}">                 
+                </td>
+                <td class="qian">
+                  定金：
+                  <span style="color:#ff0000;">{$info1.deposit}</span>
+                  元
+                </td>
+              </tr>          
+            </table>
+            <div class="tijiao">
+
+              <input type="submit" value="提交订单" class="tijiaodingdan">
+              <p>服务承诺：不提车随时退款</p>
+            </div>
+          </div>
+
+      <!--   </form> -->
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+$(function(){
+  $(".tijiaodingdan").click(function(){	  
+  if($("#buyplace .select dt").text()=='请选择')
+  {
+    alert("请选择正确的购车地点");return false;
+  }	  
+  if($("#name").val() == ''){
+	  alert("请填写姓名");return false;
+  }
+  var tel = $("#tele").val(); //获取手机号
+  var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+  if(telReg == false){
+	  alert("请输入正确的手机号码");return false;
+  }else{
+      $.post("{:U('Order/begin_pay')}",
+      {color:$("#color .pp-selected span").text(),
+       buy_time:$("#buytime .pp-selected em").text(),
+       buy_way:$("#buyway .pp-selected em").text(),
+       city:$("#buyplace .select dt").text(),
+       car_mode:$("#takeway .pp-selected em").text(),
+       buyer_name:$("#name").val(),
+       buyer_tel:tel,
+       car_id:$("#carid").val(),
+       money:$(".qian span").text(),
+       pay_obj:2
+       },
+      function(data,textStatus){
+          location.href = data.url;
+      });
+
+  }
+
+  
+
+  });
+
+})
+  </script>
+
+</block>

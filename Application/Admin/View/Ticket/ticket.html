@@ -1,0 +1,196 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content">
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">{$atitle}</a> </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span9">
+                        <!--  <form class="form-search" method="post">  -->
+                        <div class="form-search">
+                            <label>关键字：</label>
+                            <input type="text" name="keyword" id="keyword">
+                            <button type="submit" class="btn btn-primary j_searchBtn" onclick="getPage(1)"><i class="icon-search"></i> 搜索</button>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+
+                    <div class="span3">
+                        <a href="{:U('ticketadd')}" class="btn btn-primary" data-type="add"  id="J_AddBrandBtn"><i class="icon-plus"></i> 配置优惠券</a>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="content" id="ajax_lists">
+                    <div class="row-fluid" id="brandlist">
+                        <h4>总共 <span class="userdata badge">10</span> 条</h4>
+                        <div class="loading-container j_loadingContainer">
+
+                        </div>
+                        <table class="table table-bordered table-striped table-hover" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>券名称</th>
+                                <th>券价值</th>
+                                <th>优惠券发放数量</th>
+                                <th>券是否激活</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="pager">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript"  src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#ajax_lists").delegate(".pager a", "click", function(){
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display','none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            var keyword       = $("#keyword").val();
+
+            $.post( "__MODULE__/Ajax/ticket_ajax",
+                    {keyword:keyword,p:page},
+                    function(data,textStatus){
+                        if(data.count==null){
+                            $(".userdata").text("0");
+                        }else{
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display','');
+                        var pagelist=data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info=data[1];
+                        $.each(info,function(key,val){
+                            var td1="<td>"+val.id+"</td>";
+                            var td2="<td>"+val.ticket_name+"</td>";
+                            var td3="<td>"+val.money+"</td>";
+                            var td4 = "";
+                            switch(parseInt(val.amount, 10))
+                            {
+                                case 0:
+                                    td4 = "<td><font color='green'>不限</font></td>";
+                                    break;
+                                default:
+                                    td4 = "<td><font color='red'>"+val.amount+"张</font></td>";
+                                    break;
+                            }
+                            var td5 = "", btn1 = '',btn4='';
+                            switch(parseInt(val.release_status, 10))
+                            {
+                                case 1:
+                                    td5 = "<td><font color='green'>未激活</font></td>";
+                                    btn1 = "<a class='j_releaseBtn btn btn-success' value='" + val.id + "' href='#'>激活</a>";
+                                    btn4 = "<a class='j_delBtn btn btn-success' value='" + val.id + "' href='#'>删除</a>";
+                                    break;
+                                case 2:
+                                    td5 = "<td><font color='red'>已激活</font></td>";
+                                    break;
+                            }
+                            var td6="<td class='center'>"+
+                                    btn1 +
+                                    btn4 +
+                                    "</td>";
+                            $('tbody').append("<tr>"+td1+td2+td3+td4+td5+td6+"</tr>");
+                        });
+
+                        $('#ajax_lists tbody').find('.j_delBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value");
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要删除该条信息？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    $.post("/admin.php/Ticket/ticketdelete",
+                                            {id:id},
+                                            function(db){
+                                                if(db.status == 1){
+                                                    $tr.remove();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+
+                        });
+
+
+                        $('#ajax_lists tbody').find('.j_releaseBtn').on('click', function(e){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log(e);
+                            var $tr = $(this).closest('tr'),
+                                    id = $(this).attr("value");
+                            $.confirm({
+                                title: '操作提示框!',
+                                content: '你确定要激活该优惠券吗？',
+                                confirmButton: '确定',
+                                cancelButton: '取消',
+                                confirmButtonClass: 'btn-info',
+                                cancelButtonClass: 'btn-danger',
+                                closeIcon: true,
+                                confirm: function(){
+                                    $.post("/admin.php/Ticket/ticketrelease",
+                                            {id:id},
+                                            function(db){
+                                                if(db.status == 1){
+                                                    location.reload();
+                                                }
+                                                $.dialog({
+                                                    title: '状态提示！',
+                                                    content: db.msg,
+                                                    autoClose: 'dialog|2000',
+                                                });
+                                            }
+                                    );
+                                }
+                            });
+
+                        });
+
+
+                    },
+                    "json");
+        }
+
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+
+
+</block>

@@ -1,0 +1,432 @@
+/*bg bugcar guide*/
+
+.BG .banner{
+    width: 100%;
+    height: 360px;
+}
+
+/*.BG .banner a{*/
+    /*display: block;*/
+    /*width: 1920px;*/
+    /*height: 360px;*/
+    /*margin: 0 auto;*/
+/*}*/
+
+/*.BG .banner a img{*/
+    /*display: block;*/
+    /*width: 1920px;*/
+    /*height: 360px;*/
+/*}*/
+
+.BG .banner a{
+    display: block;
+    width: 100%;
+    height: 360px;
+    margin: 0 auto;
+    background: url("../images/guide_banner.jpg") no-repeat center center;
+}
+
+.BG .guidebox{
+    margin: 25px auto;
+    overflow: hidden;
+}
+
+.guidebox .guide_nav{
+    width: 250px;
+    height: 760px;
+    float: left;
+    background: #f2f2f2;
+    margin-right: 26px;
+}
+
+
+.guide_nav_wrap h3{
+    position: relative;
+    width: 210px;
+    height: 35px;
+    margin-top: 35px;
+    text-indent: 43px;
+    line-height: 35px;
+    background: #73b3ee;
+}
+
+.guide_nav_wrap h3 span{
+    color: #fff;
+}
+
+.guide_nav_wrap h3 i{
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    right: -10px;
+    top: 50%;
+    margin-top: -18px;
+    border-top: 18px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 10px solid #73b3ee;
+}
+
+.guide_nav_wrap a{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 58px;
+    line-height: 58px;
+    text-indent: 65px;
+    border-bottom: 1px solid #dcdcdc;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow:0 1px 0 #fff;
+    box-shadow: 0 1px 0 #fff;
+}
+
+.guide_nav_wrap a:hover,.guide_nav_wrap a:hover span{
+    text-decoration: none;
+    color: #fa8c35;
+}
+
+
+.guide_nav_wrap a span{color: #666;}
+
+.guide_nav_wrap a i{
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    left: 44px;
+    top: 50%;
+    margin-top: -7px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid #666;
+}
+
+
+.guide_nav_wrap a:hover i{border-left: 7px solid #fa8c35}
+.guide_nav_wrap .active span{color: #fa8c35}
+.guide_nav_wrap .active i{border-left: 7px solid #fa8c35}
+
+
+.guide_cont{margin-left: 276px;  }
+
+.guide_cont .title{
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+.guide_cont .title h3{
+    display: inline-block;
+    padding: 0 5px;
+    border-bottom: 2px solid #2194ff;
+}
+
+
+.title .bgcolorbox{
+    position: relative;
+    width: 20px;
+    height: 40px;
+    float: left;
+}
+
+.bgcolorbox i{
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top:12px;
+    left: 1px;
+    z-index: 2;
+    background: #73b3ee;
+}
+
+.bgcolorbox em{
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top:18px;
+    left: 7px;
+    z-index: 3;
+    border: 1px solid #fff;
+    background: #fa8c35;
+}
+
+/*流程*/
+.processbox img{display: block;}
+
+
+/*常见问题*/
+.questionbox{
+    overflow: hidden;
+    width: 100%;
+}
+
+.questionbox .ques_navbox{
+    width: 1000px;
+    height: 128px;
+    padding: 39px 0 2px;
+    margin-left: -13px;
+}
+
+.ques_navbox i{
+    display: inline-block;
+    width: 58px;
+    height: 4px;
+    margin-left: 13px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #dedede;
+}
+
+.ques_navbox a{
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    margin-left: 17px;
+    line-height: 110px;
+    text-align: center;
+    border: 4px solid #f5f5f5;
+    color: #fff;
+    background-color: #ccc;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: all .3s ease .1s;
+    -moz-transition: all .3s ease .1s;
+    -ms-transition: all .3s ease .1s;
+    -o-transition: all .3s ease .1s;
+    transition: all .3s ease .1s;
+}
+
+.ques_navbox a:hover{
+    text-decoration: none;
+    background-color: #fa8c35;
+    border-color: #fee8d7;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+.ques_navbox .active{
+    background-color: #fa8c35;
+    border-color: #fee8d7;
+}
+
+
+.ques_box{
+    overflow: hidden;
+}
+
+.ques_box h3{
+    height: 70px;
+    line-height: 70px;
+}
+
+.ques_box ul{
+    padding-left: 40px;
+}
+
+.ques_box ul li{
+    padding: 10px 0;
+}
+
+.ques_box ul li p{
+    line-height: 40px;
+}
+
+.ques_box ul li i{
+    display:block;
+    width: 27px;
+    height: 27px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 27px;
+    font-style: normal;
+    text-align: center;
+    border-radius: 50%;
+    float: left;
+    margin: 7px 6px 0;
+}
+
+.ques_box ul li span{
+    display: block;
+    margin-left: 40px;
+}
+
+.ques_box ul li .q i{background-color: #73b3ee}
+.ques_box ul li .a i{background-color: #fa8c35}
+
+.ques_box ul li .q span{
+    color:#444;
+    font-size: 16px;
+}
+
+.ques_box ul li .a span{
+    color:#666;
+    font-size: 14px;
+}
+
+
+/*公司简介*/
+.synopsis h3{
+    height:65px;
+    line-height: 65px;
+}
+
+.synopsis p{
+    line-height: 38px;
+    text-indent: 2em;
+}
+
+.synopsis img{
+    display: block;
+    margin-top: 10px;
+}
+
+
+/*积分相关*/
+.integral{padding-top: 20px;}
+
+.integral dl dt{
+    margin-left: 20px;
+    line-height: 70px;
+    color: #555;
+    font-size: 18px;
+}
+
+.integral dl dd{
+    margin-left: 60px;
+    font-size: 16px;
+    line-height: 50px;
+    color: #666;
+}
+
+
+/*微信公众号*/
+
+.wechat {
+    width:320px;
+    height: 400px;
+    margin: 75px auto 0;
+}
+
+.wechat p{
+    line-height: 70px;
+    font-size: 40px;
+    color: #666;
+}
+
+
+/*联系我们*/
+
+.contact{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.contact p{
+    line-height: 45px;
+    font-size: 18px;
+    color: #666;
+}
+
+.contact p span{color: #444}
+
+
+/*反馈*/
+.feedback{
+}
+
+.feedback .tips{
+    height: 38px;
+    line-height: 38px;
+    background-color:#feffdb;
+    border: 1px solid #ffddb3;
+    border-radius: 2px;
+    margin: 1px;
+}
+
+.feedback .tips span{padding-left: 15px;color: #666;}
+
+.feedback dl{margin:20px 25px 0;overflow: hidden;}
+.feedback dl dt{
+    float: left;
+    width: 70px;
+    line-height: 45px;
+    text-align: right;
+    color: #666;
+    font-size: 14px;
+}
+
+.feedback dl dd{
+    margin-left: 80px;
+    line-height: 45px;
+}
+
+.feedback dl dd input{float: left;}
+.feedback dl dd input:focus{
+    border-color: #2194f9;
+    box-shadow: 0 0 2px #21948f;
+}
+
+
+.feedback dl dd input.nickname{width: 776px}
+
+.feedback dl dd input.email_input{width: 776px;}
+
+.feedback dl dd input.code{width: 100px;}
+
+.feedback textarea{
+    height: 100%;
+    width: 776px; /* Fallback for browsers that don't support the calc() function */
+    width: -moz-calc(100% - 2px);
+    width: -webkit-calc(100% - 2px);
+    width: calc(100% - 2px);
+    border-color: #ccc;
+}
+
+.feedback textarea:focus{
+    outline: none;
+        border-color: #2194f9;
+    box-shadow: 0 0 2px #21948f;
+}
+
+
+.feedback dd img{
+    display: inline-block;
+    width: 115px;
+    height: 43px;
+    margin-left: 10px;
+}
+
+.feedback .alertbox{
+    height: 38px;
+    line-height: 38px;
+    background-color:#fff7f1;
+    border: 1px solid #fdc1c1;
+    border-radius: 2px;
+    margin: 1px;
+}
+
+.feedback .alertbox i{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/common/ico_warn.png) no-repeat -56px 3px;
+    margin: 9px;
+    float: left;
+}
+
+
+.submitbox input{
+    display: inline-block;
+    width: 127px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border: none;
+    color: #fff;
+    padding: 0;
+}

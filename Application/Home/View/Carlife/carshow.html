@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}carlife.css"/>
+</head>
+<body>
+{~W('Cate/header')}
+{~W('Cate/carlife_banner')}
+<!--车知识 strat-->
+<div class="wrap">
+	<div class="main_container" id="J_LifeList">
+		<!--车知识头部 strat-->
+		<div class="life-tit">
+			<div class="life-tit-hd">
+				<ul>
+					<li class="on"><a href="javascript:" title="全部">全部</a><b>|</b></li>
+					<li><a href="javascript:" title="新车">新车</a><b>|</b></li>
+					<li><a href="javascript:" title="装饰">装饰</a><b>|</b></li>
+					<li><a href="javascript:" title="改装">改装</a><b>|</b></li>
+					<li><a href="javascript:" title="自驾">自驾</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--车知识头部 end-->
+		<!--车知识列表 strat-->
+		<div class="life-con life-fr">
+			<div class="life-con-bd">
+				<div class="life-con-div">
+					<div class="life-reading">
+						<div class="life-readcon">
+							<ul>
+								<volist name="hot_all1" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="hot_all2" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="hot_all3" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="hot_all4" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="life-con-div">
+					<div class="life-reading">
+						<div class="life-readcon">
+							<ul>
+								<volist name="newshow1" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="newshow2" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="newshow3" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="newshow4" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="life-con-div">
+					<div class="life-reading">
+						<div class="life-readcon">
+							<ul>
+								<volist name="decoration1" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="decoration2" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="decoration3" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="decoration4" id="vo">
+									<li class="life-re1">
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+										<div class="life-rewz">
+											<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+											<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+											<a href="">
+												<dl>
+													<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+													<dd>{$vo.click_amount}</dd>
+												</dl>
+											</a>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+												<dd>{$vo.comment_amount}</dd>
+											</dl>
+											<dl class="dllast">
+												<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+												<dd>{$vo.thumbs_amount}</dd>
+											</dl>
+										</div>
+									</li>
+								</volist>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="life-con-div">
+					<div class="life-reading">
+						<div class="life-readcon">
+							<ul>
+								<volist name="refit1" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="refit2" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="refit3" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="refit4" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="life-con-div">
+					<div class="life-reading">
+						<div class="life-readcon">
+							<ul>
+								<volist name="travel1" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+							<ul>
+								<volist name="travel2" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="travel3" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+
+							</ul>
+							<ul>
+								<volist name="travel4" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<a href="">
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+												<dd>{$vo.click_amount}</dd>
+											</dl>
+										</a>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--车知识列表 end-->
+		</div>
+	</div>
+</div>
+<!--车知识 end-->
+
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+<script src="{$Think.const.js_URL}carlife.js"></script>
+
+{~W('Cate/footer')}
+</body>
+</html>

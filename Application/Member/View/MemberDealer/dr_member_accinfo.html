@@ -1,0 +1,60 @@
+<extend name="UC_base" />
+<block name="body">
+	<div id="uc_main">
+		<form action="__SELF__" method="post" enctype="multipart/form-data">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">账号资料</h2>
+				<div class="UC_member_infowrap">
+					<div class="list">
+						<dl>
+							<dt>用户名：</dt>
+							<dd>{$user_info.user_name}
+							</dd>
+						</dl>
+						<dl>
+							<if condition="$user_info.nick eq null">
+								<dt>昵称：</dt>
+								<dd>
+									<input type="text" name="nick" class="txt">
+								</dd>
+								<else />
+								<dt>昵称：</dt>
+								<dd>{$user_info.nick}</dd>
+							</if>
+						</dl>
+						<dl>
+							<dt>公司名称：</dt>
+							<dd>{$user_info.dealer_name}</dd>
+						</dl>
+						<dl>
+							<dt>公司地址：</dt>
+							<dd>{$user_info.addr}
+
+							</dd>
+						</dl>
+						<dl>
+							<dt>我的邀请码：</dt>
+							<dd>{$user_info.my_num}
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+							</dt>
+							<dd><input type="submit" class="submit" value="保存"></dd>
+						</dl>
+					</div>
+					<input type="hidden" name="id" value="{$user_info.id}">
+					<div class="filebox">
+						<div class="imgbox">
+							<img src="{:OSS}{$user_info.head_url}" alt="">
+						</div>
+						<a class="ui_button_primary" href="javascript:;" id="set-uploadhead-btn"><u><i></i>修改头像</u>
+							<input type="file" hidefocus="true" name="headimg">
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+</block>

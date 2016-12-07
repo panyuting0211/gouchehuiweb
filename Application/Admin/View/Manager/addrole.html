@@ -1,0 +1,59 @@
+<extend name="Public/base"/>
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">添加角色</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+<form action="{:U('Manager/addRoleHandle')}" class="form-horizontal" method="post">
+    	<fieldset>
+    	<div class="control-group">
+    		<label class="control-label" for="title">角色名称：</label>
+    		<div class="controls">
+    			<input id="name" type="text" name="name">
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="title">角色状态：</label>
+    		<div class="controls">
+              <label class="radio inline">
+    			<input type="radio"  name="status" value="1" checked="checked"/>开启</label>
+               <label class="radio inline">
+                <input type="radio"  name="status" value="0"/>关闭</label>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>	
+		<div class="control-group">
+			<label class="control-label" for="tip">角色描述：</label>
+		
+			<div class="controls">
+		    <textarea class="form-control" id="tip" name="remark" rows="7"></textarea>
+				<p class="help-block"></p>
+			</div>
+  </div>
+
+    	</fieldset>		
+    	<div class="form-actions">
+    		<button type="submit"  id="submit" class="btn btn-primary">确定</button>
+			<button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+    	</div>	
+    	</form>
+		<!-- Button to trigger modal -->
+
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+</block>

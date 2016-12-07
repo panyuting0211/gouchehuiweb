@@ -1,0 +1,104 @@
+<extend name="Public/base"/>
+<block name="body">
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb">
+                    <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                        {$ctitle}
+                    </a>
+                    <a href="#" class="current">{$atitle}</a>
+                </div>
+                <h1>{$atitle}</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="widget-yu-btn widget-right-search">
+                            <a href="__CONTROLLER__/Addnode" class="btn btn-primary">
+                                新增
+                            </a>
+                        </div>
+                        <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                        <div class="widget-content nopadding">
+                            <!-- <table class="table table-bordered table-striped with-check" id="Yu-db-backup">-->
+                            <table class="table table-bordered with-check" id="Yu-db-backup">
+                                <thead>
+                                <tr>
+                                    <th style="width:50px;">权限ID</th>
+                                    <th>权限结构</th>
+                                    <th>名称</th>
+                                    <th>排序</th>
+                                    <th>类型</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="node" id="vo">
+
+                                    <switch name="vo.level">
+                                        <case value="1">
+                                            <tr id="{$vo.id}" class="grandparent" style="background:#EEEEEE;font-weight:bold">
+                                        </case>
+                                        <case value="2">
+                                            <tr id="row_{$vo.id}" class="parent" style="background:#EEEEEE;font-weight:bold">
+                                        </case>
+                                        <case value="3">
+                                            <tr class="child_row_{$vo.pid}" style="background:#f9f9f9">
+                                        </case>
+                                    </switch>
+                                    <td style="width:50px;">{$i}</td>
+                                    <td style="text-indent:30px;">{$vo.title}</td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.sort}</td>
+                                    <switch name="vo.level">
+                                        <case value="1">
+                                            <td>项目</td>
+                                        </case>
+                                        <case value="2">
+                                            <td style="color:green">模块</td>
+                                        </case>
+                                        <case value="3">
+                                            <td style="color:#0367e2">操作</td>
+                                        </case>
+                                    </switch>
+                                    <if condition="$vo['display'] eq 1">
+                                        <td style="color:green">显示</td>
+                                        <else/>
+                                        <td style="color:red;">隐藏</td>
+                                    </if>
+                                    <td>
+                                        <a class="btn btn-info" href="{:U('Manager/editNode',array('id'=>$vo['id']))}">编辑</a>
+                                        <a class="btn btn-danger" onclick="if(confirm('确定删除?')) return true; else return false;" href="{:U('Manager/delNode',array('id'=>$vo['id']))}">删除</a>
+                                    </td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--       <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">确定</button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                      </div>
+                      -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('tr.parent').click(function () {   // 获取所谓的父行
+                $(this)
+                        .toggleClass("selected")   // 添加/删除高亮
+                        .siblings('.child_' + this.id).toggle();  // 隐藏/显示所谓的子行
+            }).click();
+        })
+    </script>
+</block>

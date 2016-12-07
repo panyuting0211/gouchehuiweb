@@ -1,0 +1,75 @@
+<extend name="UC_base" />
+<block name="body">
+	<div id="uc_main">
+		<div class="UC_main_r">
+			<h2 class="UC_main_r_tit">我的订单 > 订单详情</h2>
+			<div class="UC_main_r_top">
+				<ul>
+					<li>订单号：{$orderinfo.out_trade_no}</li>
+					<if condition="$orderinfo.status eq 0">
+						<li>订单状态：未支付</li>
+						<elseif condition="$orderinfo.status eq 1"/>
+						<li>订单状态：已支付</li>
+					</if>
+					<li>下单时间：{$orderinfo.createtime}</li>
+				</ul>
+			</div>
+
+			<div class="UC_main_r_title">商品信息</div>
+			<div class="UC_main_r_content">
+				<table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+					<colgroup>
+						<col class="table_img">
+						<col class="table_shopping">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+					</colgroup>
+					<thead>
+					<tr class="col_name">
+						<th>商品</th>
+						<th>商品名称</th>
+						<th>外观颜色</th>
+						<th>内饰颜色</th>
+						<th>{$orderinfo.low_price_city_name}底价</th>
+						<th>上牌地</th>
+						<th>定金</th>
+					</tr>
+					</thead>
+					<tbody class="">
+					<tr>
+						<td><img width="100%" src="{:OSS}{$orderinfo.car_model_image}"></td>
+						<td>{$orderinfo.carstyle}</td>
+						<td>{$orderinfo.exterior_color_name}</td>
+						<td>{$orderinfo.interior_color_name}</td>
+						<td>{$orderinfo.low_price}</td>
+						<td>{$orderinfo.card_place}</td>
+						<td>{$orderinfo.money}</td>
+					</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="UC_main_r_title">订车人信息</div>
+			<div class="UC_main_r_information">
+				<ul>
+					<li>订车人姓名：{$orderinfo.buyer_name}</li>
+					<li>订车人电话：{$orderinfo.buyer_tel}</li>
+					<li>购车时间：{$orderinfo.buy_time}</li>
+					<li>购车方式：{$orderinfo.car_mode}</li>
+					<li>付款方式：{$orderinfo.buy_way}</li>
+					<li>购买保险：{$orderinfo.insurance}</li>
+					<li>赠送豪华大礼包</li>
+				</ul>
+			</div>
+			<div class="UC_main_r_present"><ul><li class="UC_main_r_first">购买保险即送豪华大礼包</li><li class="UC_main_r_second">价值：<span>￥{$package.price}</span></li></ul></div>
+			<div class="UC_main_shopping">
+				<img src="{:OSS}{$package.imgurl}">
+			</div>
+
+		</div>
+	</div>
+
+</block>

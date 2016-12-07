@@ -1,0 +1,80 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+
+            <div id="content-header">
+                <div id="breadcrumb"><a href="javascript:;" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="" class="current">{$atitle}</a></div>
+                <!--  <h1>{$atitle}</h1> -->
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12" id="Yu-db-backup">
+
+                        <div class="widget-yu-btn">
+                            <div class="widget-yu-btn widget-right-search">
+                                <div class="search">
+                                </div>
+                            </div>
+                            <h4>总计：<span class="userdata badge">{$count}</span>个</h4>
+                            <div class="widget-content nopadding">
+                                <table class="table table-bordered table-striped with-check">
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>邮箱</th>
+                                        <th>手机号</th>
+                                        <th>问题类型</th>
+                                        <th>反馈意见</th>
+                                        <th>反馈时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <volist name="info" id="vo">
+                                        <tr>
+                                            <td>{$vo.username}</td>
+                                            <td>{$vo.email}</td>
+                                            <td>{$vo.tel}</td>
+                                            <td>{$vo.type}</td>
+                                            <td>{$vo.view}</td>
+                                            <td>{$vo.createtime}</td>
+                                            <td>
+                                                <a class="confirm ajax-get btn btn-danger" title="删除" href='__URL__/DelSelectcon/id/{$vo.id}'>删除</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <div class="pagination">
+                                <ul>{$pagelist}</ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            function dodel(url) {
+                if (confirm('你确定要删除吗？')) {
+                    window.location = url;
+                }
+            }
+
+        </script>
+
+    </div>
+
+</block>

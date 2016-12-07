@@ -1,0 +1,87 @@
+<div class="BG">
+    <script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.js_URL}metisMenu.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{$Think.const.js_URL}index.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<!--[if lt IE 9]>
+		<script type="text/javascript">
+			$(function(){
+				$(".menu-three-li > a").on("click",function(){
+					var a = $(this);
+					a.next(".menu-four-ul").toggle();
+					return false;
+				});
+			})
+		</script>
+	<![endif]-->
+	<script src="{$Think.const.js_URL}manual.js" type="text/javascript" charset="utf-8"></script>
+    
+    <div class="manual">
+    		<div class="manual-navbar">
+				<ul class="metismenu" id="menu">
+		          <li class="menu-first-li active">
+		            <a href="#" aria-expanded="true">购车指南</a>
+		            <ul aria-expanded="true" class="menu-second-ul">
+		              <li class="menu-three-li">
+		                <a href="{:U('process')}" class="<if condition="(ACTION_NAME eq 'process')">on</if>">购车流程</a>
+		              </li>
+		              <li class="menu-three-li active">
+		                <a href="#" aria-expanded="true"><i class="icon icon-new-style iext"></i>常见问题</a>
+		                <ul aria-expanded="true" class="menu-four-ul">
+		                  <li><a href="{:U('problem_price')}" class="<if condition="(ACTION_NAME eq 'problem_price')">on</if>">底价相关</a></li>
+		                  <li><a href="{:U('problem_askfee')}" class="<if condition="(ACTION_NAME eq 'problem_askfee')">on</if>">询价费相关</a></li>
+		                  <li><a href="{:U('problem_license')}" class="<if condition="(ACTION_NAME eq 'problem_license')">on</if>">上牌地相关</a></li>
+		                  <li><a href="{:U('problem_payment')}" class="<if condition="(ACTION_NAME eq 'problem_payment')">on</if>">定金相关</a></li>
+		                  <li><a href="{:U('problem_loan')}" class="<if condition="(ACTION_NAME eq 'problem_loan')">on</if>">贷款相关</a></li>
+		                </ul>
+		              </li>
+		              <li class="menu-three-li">
+		                <a href="{:U('notice')}" class="<if condition="(ACTION_NAME eq 'notice')">on</if>">购车须知</a>
+		              </li>
+		            </ul>
+		          </li>
+		          <li class="menu-first-li active">
+		            <a href="#" aria-expanded="true">特色服务</a>
+		            <ul aria-expanded="true" class="menu-second-ul">
+		              <li class="menu-three-li">
+		              	<a href="{:U('service')}" class="<if condition="(ACTION_NAME eq 'service')">on</if>">购车惠</a>
+		              </li>
+		              <li class="menu-three-li">
+		              	<a href="{:U('service_store')}" class="<if condition="(ACTION_NAME eq 'service_store')">on</if>">购车惠商城</a>
+		              </li>
+		              <li class="menu-three-li">
+		              	<a href="{:U('service_askfee')}" class="<if condition="(ACTION_NAME eq 'service_askfee')">on</if>">关于询价费</a>
+		              </li>
+		            </ul>
+		          </li>
+		          <li class="menu-first-li active">
+		            <a href="#" aria-expanded="true">关于我们</a>
+		            <ul aria-expanded="true" class="menu-second-ul">
+		              <li class="menu-three-li">
+		              	<a href="{:U('introduce')}" class="<if condition="(ACTION_NAME eq 'introduce')">on</if>">公司简介</a>
+		              </li>
+		              <li class="menu-three-li active">
+		                <a href="#" aria-expanded="true"><i class="icon icon-new-style iext"></i>联系我们</a>
+		                <ul aria-expanded="true" class="menu-four-ul">
+		                  <li><a href="{:U('contact')}" class="<if condition="(ACTION_NAME eq 'contact')">on</if>">联系我们</a></li>
+		                  <li><a href="{:U('feedback')}" class="<if condition="(ACTION_NAME eq 'feedback')">on</if>">在线反馈</a></li>
+		                </ul>
+		              </li>
+		              <li class="menu-three-li">
+		              	<a href="{:U('concern')}" class="<if condition="(ACTION_NAME eq 'concern')">on</if>">关注我们</a>
+		              </li>
+		            </ul>
+		          </li>
+		          <!--<li class="menu-first-li active">
+		            <a href="#" aria-expanded="true">公司新闻</a>
+		            <ul aria-expanded="true">
+		              <li class="menu-three-li">
+		              	<a href="{:U('problem_loan')}" class="<if condition="(ACTION_NAME eq 'problem_loan')">on</if>">团队建设</a>
+		              </li>
+		              <li class="menu-three-li">
+		              	<a href="{:U('problem_loan')}" class="<if condition="(ACTION_NAME eq 'problem_loan')">on</if>">近期活动</a>
+		              </li>
+		            </ul>
+		          </li>-->
+		        </ul>
+			</div>

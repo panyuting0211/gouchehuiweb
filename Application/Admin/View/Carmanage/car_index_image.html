@@ -1,0 +1,70 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>汽车管理</a> <a href="#" class="current">所有车款</a><a href="#" class="current">首页图片</a><div class="carmanage_right"><a href="__CONTROLLER__/set_public_carprice" style="color:#006dcc;">返回上一页</a>
+    </div> 
+    </div>  
+  </div>
+  <div class="container-fluid">
+  <div class="row-fluid">
+  <div class="span12">
+  <div class="widget-box">
+          <div style="margin-bottom:30px;" class="widget-title">
+            <ul class="nav nav-tabs">
+              <li class="nav_tabs_li"><a data-toggle="tab" href="#tab1">品牌</a></li>
+              <li class="nav_tabs_li"><a data-toggle="tab" href="#tab2">车型</a></li>
+              <li class="active nav_tabs_li" style="width:33.4%;"><a data-toggle="tab" href="#tab3">车款</a></li>
+            </ul>
+          </div>
+  <!-- <input type="submit" style="margin-top:5px;margin-left:5px;" class="btn button_sou" value="首页图片"> -->  
+  
+
+ <div id="tab3" class="tab-pane">
+<form action="__CONTROLLER__/car_index_image_uphanddle" enctype="multipart/form-data" method="post" class="form-horizontal">
+  <fieldset>    
+    <div class="control-group">
+        <label class="control-label" for="imgurl">车款：</label>
+        <div class="controls">
+            <span style="height: 100%;line-height: 30px;font-size: 14px;">{$imginfo.brand_name}&nbsp;&nbsp;{$imginfo.model_name}&nbsp;&nbsp;{$imginfo.car_name}</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="imgurl">上传图片：</label>
+        <div class="controls">
+          <input type="file" name="imgurl"  id="file_0" value="" >
+        </div>
+    </div>
+    <input type="hidden" name="id" value="{$id}">  
+  </fieldset>   
+    <div class="form-actions">
+        <button type="submit"  id="submit" class="btn btn-primary">添加</button>                      
+    </div>   
+</div>    
+</form>
+<div class="control_carstyle">
+          <div class="control_cartitle">
+            <a class="selected"></a>
+          </div>
+          <ul class="control_carpicture">
+              
+            <li>
+              <div style="border:1px #a9a9a9 solid">
+                <img width="300px" src="{$Think.const.OSS}{$imginfo.imgurl}">
+              </div>
+              <!-- <div class="control_delete">
+                <a href="__CONTROLLER__/deleteimage/color_img_id/{$vo.id}">删除</a>
+              </div> -->
+            </li>            
+
+          </ul>
+        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</block>

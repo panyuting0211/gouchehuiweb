@@ -1,0 +1,271 @@
+<extend name="n_uc_base" />
+
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.JS_URL}app/jquery.datetimepicker.css">
+    
+        <!-- main-content begin -->
+        <div class="uc_main GB_main_r">
+            <div class="uc_main_wrapper">
+                <ul class="uc_sub_nav clearfix">
+                    <li class="cur"><a href="n_uc_post.html" title="">发车主秀</a></li>
+                    <li><a href="n_uc_post_list.html" title="">我的车主秀</a></li>
+                </ul>
+                <div class="uc_post_list">
+                    <div class="uc_g_opera_box uc_post">
+
+                        <form enctype="multipart/form-data" action="" method="post" name="theForm">
+                        <div class="uc_formlist" id="J_AddMyCar">
+                                <ul id="J_carSelector" class="uc_carSelector">
+                                    <li style="">
+                                        <span class="hd">标题：</span>
+                                        <div class="inp_box">
+                                            <input  name="title" class="dataInp uc_inpBorder Skin_txt3" type="text" value="">
+                                        </div>
+
+                                    </li>
+                                    <li style="">
+                                        <span class="hd">选择主图：</span>
+                                        <div class="inp_box">
+                                                <div class="upload_pic">
+                                                    <a class="noface" href="javascript:void(0);">
+                                                        <input name="imgFlag" class="imgFlag" type="text" value="" />
+                                                        <input accept="image/gif, image/jpeg, image/x-png" type="file" action-type="changeFile" node-type="file1" name="image" >
+                                                        <div class="picbox"></div>
+                                                        <span class="horizontal_line"></span>
+                                                        <span class="vertical_line"></span>
+                                                    </a>
+                                                </div>
+                                            <p>仅支持jpg、jpeg、png、gif，且图片尺寸不小于 264*160 像素</p>
+                                        </div>
+
+                                    </li>
+                                    <li style="">
+                                        <span class="hd">文章类型：</span>
+                                        <div class="inp_box">
+                                            <select  data-required="false" data-first-title="请选择文章类型" data-first-value="" data-url="/member.php/MemberGeneral/post_type" name="type_id" id="" class="type_id uc_inp190 uc_inpBorder Skin_txt3">
+                                            </select>
+
+
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <span class="hd">品牌：</span>
+                                        <div class="inp_box">
+                                            <select  data-required="false" data-first-title="请选择品牌" data-first-value="" data-url="/member.php/MemberGeneral/brand" name="brand" id="" class="brand uc_inp190 uc_inpBorder Skin_txt3">
+                                            </select>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="hd">车型：</span>
+                                        <div class="inp_box">
+                                            <select  data-required="false" data-first-title="请选择车型" data-url="/member.php/MemberGeneral/car_model" data-first-value="" name="model" id="" class="model uc_inp190 uc_inpBorder Skin_txt3">
+                                            </select>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="hd">车款：</span>
+                                        <div class="inp_box">
+                                            <select  data-required="false" data-first-title="请选择车款" data-url="/member.php/MemberGeneral/car" data-first-value="" name="car_id" id="" class="car_id uc_inp190 uc_inpBorder Skin_txt3">
+                                            </select>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="hd"></span>
+                                        <div class="con-box">
+                                            <script id="J_Contents" name="contents" type="text/plain"></script>
+                                        </div>
+                                    </li>
+                                    <li><span class="hd"></span><div class="inp_box"><input type="submit" class="G_btn_a btn_30px" value="提交"></div></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main-content end -->
+    </div>
+</div>
+
+<script id="tplGarMyCarList" type="text/html">
+{{each list as value index}}
+        <div class="car_box" data-id="{{value.id}}" data-buytime="{{value.buy_time}}" data-provinceid="{{value.province_id}}" data-cityid="{{value.city_id}}" data-carmodelid="{{value.car_model_id}}" data-brandid="{{value.brand_id}}" data-carid="{{value.car_id}}">
+                            <div class="car_face">
+                                <div class="productImg_wrap">
+                                        <span class="productImg">
+                                            <img src="{{value.car_model_imageurl}}" alt="{{value.brand_name}}{{value.car_model_name}}{{value.car_name}}">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="car_info">
+                                <h5 class="G_f18" title="{{value.brand_name}}{{value.car_model_name}}">{{value.brand_name}}{{value.car_model_name}}</h5>
+                                <p>{{value.car_name}}</p>
+                                <p class="guide_price">官方指导价：<span class="price"><em>{{value.auth_price}}</em>元起</span></p>
+                                <p class="details"><a href="{{value.url}}" target="_blank">查看详情</a></p>
+                            </div>
+                            <a href="javascript:void(0);" class="ui_icon uc_funcicon_del j_delBtn" title="删除"></a>
+                        <a href="javascript:void(0);" class="ui_icon uc_funcicon_edit j_editBtn" title="编辑"></a>
+                        </div>
+        {{/each}}
+</script>
+<script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.datetimepicker.js"></script>
+<script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+    <script src="/Public/ueditor/ueditor.config.js"></script>
+    <script src="/Public/ueditor/ueditor.all.js"></script>
+    <script src="/Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function previewImage(file, maxW, maxH)
+            {
+                var MAXWIDTH  = maxW;
+                var MAXHEIGHT = maxH;
+                var imgBox = $(file).closest('.upload_pic').find('.picbox');
+                console.log(imgBox);
+                if (file.files && file.files[0])
+                {
+                    imgBox.html('<img class="imghead" />');
+                    var img = imgBox.find('.imghead').get(0);
+
+                    img.onload = function(){
+                        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                        img.width  =  rect.width;
+                        img.height =  rect.height;
+                        //img.style.marginLeft = rect.left+'px';
+                        img.style.marginTop = rect.top+'px';
+                    }
+                    var reader = new FileReader();
+                    reader.onload = function(evt){img.src = evt.target.result;}
+                    reader.readAsDataURL(file.files[0]);
+                }
+                else //兼容IE
+                {
+                    var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+                    file.select();
+                    var src = document.selection.createRange().text;
+                    div.innerHTML = '<img id=imghead>';
+                    var img = document.getElementById('imghead');
+                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+                    div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+                }
+            }
+            function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+                var param = {top:0, left:0, width:width, height:height};
+                if( width>maxWidth || height>maxHeight )
+                {
+                    rateWidth = width / maxWidth;
+                    rateHeight = height / maxHeight;
+
+                    if( rateWidth > rateHeight )
+                    {
+                        param.width =  maxWidth;
+                        param.height = Math.round(height / rateWidth);
+                    }else
+                    {
+                        param.width = Math.round(width / rateHeight);
+                        param.height = maxHeight;
+                    }
+                }
+
+                param.left = Math.round((maxWidth - param.width) / 2);
+                param.top = Math.round((maxHeight - param.height) / 2);
+                return param;
+            }
+
+            $('input[name="image"]').change(function(){
+
+                var $this = $(this),
+                        $btn = $this.closest('.upload_pic'),
+                        imgFlag = $btn.find('[name=imgFlag]');
+                imgFlag.val(1);
+
+                previewImage($(this).get(0), 190, 140);
+            });
+
+            $('#J_carSelector').cxSelect({
+                selects: ['type_id'],
+                parentSeletor: 'li',
+                jsonName: 'name',
+                jsonValue: 'value'
+            });
+
+            $('#J_carSelector').cxSelect({
+                selects: ['brand', 'model', 'car_id'],
+                parentSeletor: 'li',
+                jsonName: 'name',
+                jsonValue: 'value'
+            });
+
+            var ue = UE.getEditor('J_Contents',{
+                toolbars:[[
+                    'undo', 'redo', '|',
+                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                    'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                    'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                    'directionalityltr', 'directionalityrtl', 'indent', '|',
+                    'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                    'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                    'simpleupload', 'insertimage', 'emotion', 'attachment', 'map','pagebreak', '|',
+                    'horizontal', 'date', 'time', 'spechars', '|',
+                    'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
+                    'print', 'searchreplace', 'drafts'
+                ]],
+                initialFrameHeight:300
+            });
+
+            $('form[name=theForm]').validate({
+                debug: false, //调试模式取消submit的默认提交功能
+                rules:{
+                    title:{
+                        required:true
+                    },
+                    type_id:{
+                        required:true
+                    },
+                    brand:{
+                        required:true
+                    },
+                    model:{
+                        required: true
+                    },
+                    car_id:{
+                        required:true
+                    },
+                    imgFlag:{
+                        required: true
+                    }
+                },
+                messages:{
+                    title:{
+                        required:"请填写标题"
+                    },
+                    type_id:{
+                        required:"请选择文章类型"
+                    },
+                    brand:{
+                        required:"请选择品牌"
+                    },
+                    model:{
+                        required:"请选择车型"
+                    },
+                    car_id:{
+                        required: "请选择车款",
+                    },
+                    imgFlag:{
+                        required:"请选择上传主图"
+                    }
+                },submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form
+                    form.submit();
+                }
+            });
+
+        });
+    </script>
+
+</block>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>底价车_底价购车_购车惠</title>
+	<meta name="keywords" content="底价车，底价购车，汽车底价" />
+    <meta name="description" content="购车惠底价购车平台推荐底价车款。购车惠是一家汽车4S店实时在线报底价的平台，是国内首家提供汽车底价购买服务平台，保证上架车型所售底价均是正规4S店报价，且价格低于市场价格。购车惠提供全程购车服务，让客户买车更加方便快捷。" />
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZZ_front.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+{~W('Cate/header')}
+<div class="wrap">
+	<div class="main_container">
+	<div class="special_car_fiter bcf_style_1">
+	<dl class="bcf_type clearfix">
+		<dt>车型：</dt>
+		<dd id="J_carTypes">
+            	<a href="javascript:;" data-nh="1" class="active">不限</a>
+            <volist name="car_type" id="vol">
+                <a href="javascript:;" data-name="{$vol.car_type_name}" data-type="{$vol.car_type_id}">{$vol.car_type_name}</a>
+            </volist>
+		</dd>
+	</dl>
+	<div class="line"></div>
+	<dl class="bcf_price clearfix">
+		<dt>价格：</dt>
+		<dd id="J_priceRange">
+		<a href="javascript:;" data-nh="1" class="active">不限</a>
+		<a href="#" data-minp="0" data-maxp="8">8万以下</a>
+		<a href="#" data-minp="8" data-maxp="10">8-10万</a>
+		<a href="#" data-minp="10" data-maxp="15">10-15万</a>
+		<a href="#" data-minp="15" data-maxp="20">15-20万</a>
+		<a href="#" data-minp="20" data-maxp="30">20-30万</a>
+		<a href="#" data-minp="30" data-maxp="50">30-50万</a>
+		<a href="#" data-minp="50" data-maxp="80">50-80万</a>
+		<a href="#" data-minp="80" data-maxp="10000">80万以上</a>
+		<div id="J_CustomPriceBox" class="G_fl custom_price"><input type="text" name="price1" class="J_jiagekuang_txt" id="J_StartPrice" value="">
+                -
+                <input type="text" class="J_jiagekuang_txt" name="price2" id="J_EndPrice" value="">
+                万
+				<button class="G_btn_a" id="J_CustomPriceSubmit">确定</button></div>
+		</dd>
+	</dl>
+		<div class="line"></div>
+<dl class="bcf_brand clearfix">
+		<dt>品牌：</dt>
+		<dd>
+		<div id="J_selectFirstL" class="clearfix">
+                            <a href="javascript:;" data-nh="1" class="active">不限</a>
+							<volist name="brand_alif" id="vol">
+	                            <a href="javascript:;">{$vol.brand_alif}</a>
+                            </volist>
+                        
+                        </div>
+		<ul class="brand-name j_bcBrand"></ul>	
+		<volist name="brand_alif" id="vol">
+ 			<ul class="brand-name hide j_bcBrand">
+ 				<volist name="vol['list']" id="sub">
+	 				<li>
+	 					<a href="###"  data-bid="{$sub.brand_id}">{$sub.brand_name}</a>
+	 				</li>
+ 				</volist>
+ 			</ul>
+ 		</volist>		
+		</dd>
+	</dl>
+	<div class="line"></div>
+	<dl class="selected_condition clearfix" id="J_selectedCondition" style="display: none;">
+                <dt>已选：</dt>
+                <dd>
+                    <div class="select-cars-term">
+                        <ul>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+                            <li><a style="display: none;" href="javascript:;"><b></b></a></li>
+
+                        </ul>
+                        <!--<a href="javascript:;" class="clean_all" id="J_cleanAll">清空条件</a>-->
+                    </div>
+                </dd>
+            </dl>
+	</div>
+	<div class="main_contains_price">
+		<div class="carbox_wrap">
+			<ul class="carbox_ul clearfix" id="J_SearchCon">
+			</ul>
+		</div>
+		<div class="G_pager" id="J_Pager">
+
+		</div>
+	</div>
+	
+	</div>
+    </div>
+
+<script id="tplLi" type="text/html">
+	{{each list as value index}}
+	<li class="item">
+		<div class="caritem_wrap">
+			<div class="caritem">
+				<div class="xunjia G_tc G_f14">已有 <span class="s">{{value.car_xj_count}}</span> 人询价</div>
+				<div class="carimg">
+					<img src="{{value.car_model_imageurl}}" alt="{{value.brand_name}} {{value.car_model_name}} {{value.car_name}}">
+				</div>
+				<h3 class="car-brand">{{value.brand_name}}{{value.car_model_name}}</h3>
+				<p class="gf-price clearfix"><span class="G_fl gf_price">官方指导价：<s>{{value.min}}~{{value.max}} 万</s></span></p>
+				<p class="clearfix"><a  href="{{value.url}}" class="G_fr G_btn_a btn_34px">查询底价</a></p>
+			</div>
+		</div>
+	</li>
+	{{/each}}
+
+</script>
+
+	<script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<script type="text/javascript" src="{$Think.const.js_URL}filter.js"></script>
+	<script type="text/javascript">
+	var brand = '<?php if(isset($_GET['brand'])){echo $_GET['brand'];}else{ ?><?php }?>';
+	if(brand !=''){
+		$.bcfilter.init({currentBrandId:brand});
+	}
+	var car_type = '<?php if(isset($_GET['car_type'])){echo $_GET['car_type'];}else{ ?><?php }?>';
+	if(car_type !=''){
+		$.bcfilter.init({currentTypeId:car_type});
+	}
+	var minprice = '<?php if(isset($_GET['minprice'])){echo $_GET['minprice'];}else{ ?><?php }?>';
+	var maxprice = '<?php if(isset($_GET['maxprice'])){echo $_GET['maxprice'];}else{ ?><?php }?>';
+
+	if(minprice !== '' && maxprice !=''){
+		$.bcfilter.init({minPrice:minprice,maxPrice:maxprice});
+	}else{
+		$.bcfilter.init();
+	}
+	
+</script>
+{~W('Cate/footer')}
+</body>
+</html>

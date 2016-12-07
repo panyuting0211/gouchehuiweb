@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}carlife.css"/>
+</head>
+<body>
+{~W('Cate/header')}
+{~W('Cate/carlife_banner')}
+	<!--车知识 strat-->
+	<div class="wrap">
+		<div class="main_container" id="J_LifeList">
+			<!--车知识头部 strat-->
+			<div class="life-tit">
+				<div class="life-tit-hd">
+					<ul>
+						<li class="on"><a href="javascript:" title="全部">全部</a><b>|</b></li>
+						<li><a href="javascript:" title="美容">美容</a><b>|</b></li>
+						<li><a href="javascript:" title="装饰">装饰</a><b>|</b></li>
+						<li><a href="javascript:" title="维修">维修</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--车知识头部 end-->
+			<!--车知识列表 strat-->
+			<div class="life-con">
+				<div class="life-con-bd">
+					<!--全部的文章列表 strat-->
+					<div class="life-con-div">
+						<!--推荐阅读 strat-->
+						<div class="life-reading">
+							<h3 class="G_f14">推荐阅读</h3>
+							<ul>
+								<volist name="hot_all" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+											<dd>{$vo.click_amount}</dd>
+										</dl>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+						</div>	
+						<!--推荐阅读 end-->
+						<!--文章列表和知识排行 strat-->
+						<div class="life-list clearfix G_f14">
+							<!--文章列表 strat-->
+							<div class="life-art G_fl">
+								<h3><span>文章列表</span></h3>
+								<ul>
+									<volist name="hot_all_list" id="vo">
+									<li>
+										<span class="G_fr list-time">{$vo.createtime}</span>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--文章列表 strat-->
+							<!--知识排行 strat-->
+							<div class="life-know G_fr">
+								<h3><span>知识排行</span></h3>
+								<ul>
+									<volist name="hot_all_click" id="vo">
+									<li>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--知识排行 strat-->
+						</div>
+						<!--文章列表和知识排行 end-->
+					</div>
+					
+					<div class="life-con-div">
+						<!--推荐阅读 strat-->
+						<div class="life-reading">
+							<h3 class="G_f14">推荐阅读</h3>
+							<ul>
+								<volist name="hot_buty" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+											<dd>{$vo.click_amount}</dd>
+										</dl>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+						</div>	
+						<!--推荐阅读 end-->
+						<!--文章列表和知识排行 strat-->
+						<div class="life-list clearfix G_f14">
+							<!--文章列表 strat-->
+							<div class="life-art G_fl">
+								<h3><span>文章列表</span></h3>
+								<ul>
+									<volist name="hot_buty_list" id="vo">
+									<li>
+										<span class="G_fr list-time">{$vo.createtime}</span>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--文章列表 strat-->
+							<!--知识排行 strat-->
+							<div class="life-know G_fr">
+								<h3><span>知识排行</span></h3>
+								<ul>
+									<volist name="hot_buty_click" id="vo">
+									<li>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+
+								</ul>
+							</div>
+							<!--知识排行 strat-->
+						</div>
+						<!--文章列表和知识排行 end-->
+					</div>
+					
+					<div class="life-con-div">
+						<!--推荐阅读 strat-->
+						<div class="life-reading">
+							<h3 class="G_f14">推荐阅读</h3>
+							<ul>
+								<volist name="decoration" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+											<dd>{$vo.click_amount}</dd>
+										</dl>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+						</div>	
+						<!--推荐阅读 end-->
+						<!--文章列表和知识排行 strat-->
+						<div class="life-list clearfix G_f14">
+							<!--文章列表 strat-->
+							<div class="life-art G_fl">
+								<h3><span>文章列表</span></h3>
+								<ul>
+									<volist name="decoration_list" id="vo">
+									<li>
+										<span class="G_fr list-time">{$vo.createtime}</span>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--文章列表 strat-->
+							<!--知识排行 strat-->
+							<div class="life-know G_fr">
+								<h3><span>知识排行</span></h3>
+								<ul>
+									<volist name="decoration_click" id="vo">
+									<li>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--知识排行 strat-->
+						</div>
+						<!--文章列表和知识排行 end-->
+					</div>
+					
+					<div class="life-con-div">
+						<!--推荐阅读 strat-->
+						<div class="life-reading">
+							<h3 class="G_f14">推荐阅读</h3>
+							<ul>
+								<volist name="repair" id="vo">
+								<li class="life-re1">
+									<a href="{:U('carlife_details',array('id'=>$vo['id']))}"><img src="{$vo.image}"/></a>
+									<div class="life-rewz">
+										<h4 class="G_f16 wzcut"><i>{$vo.type_name}</i><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+										<p class="G_f12"><a href="{:U('carlife_details',array('id'=>$vo['id']))}">{$vo.summary}</a></p>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+											<dd>{$vo.click_amount}</dd>
+										</dl>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd>{$vo.comment_amount}</dd>
+										</dl>
+										<dl class="dllast">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd>{$vo.thumbs_amount}</dd>
+										</dl>
+									</div>
+								</li>
+								</volist>
+							</ul>
+						</div>	
+						<!--推荐阅读 end-->
+						<!--文章列表和知识排行 strat-->
+						<div class="life-list clearfix G_f14">
+							<!--文章列表 strat-->
+							<div class="life-art G_fl">
+								<h3><span>文章列表</span></h3>
+								<ul>
+									<volist name="repair_list" id="vo">
+									<li>
+										<span class="G_fr list-time">{$vo.createtime}</span>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--文章列表 strat-->
+							<!--知识排行 strat-->
+							<div class="life-know G_fr">
+								<h3><span>知识排行</span></h3>
+								<ul>
+									<volist name="repair_click" id="vo">
+									<li>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--知识排行 strat-->
+						</div>
+						<!--文章列表和知识排行 end-->
+					</div>
+					<!--全部的文章列表 end-->
+				</div>
+			</div>
+			<!--车知识列表 end-->
+		</div>
+	</div>
+	
+	<!--车知识 end-->
+	
+	
+	
+    <script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.js_URL}app.js"></script>
+    <script src="{$Think.const.js_URL}carlife.js"></script>
+	
+{~W('Cate/footer')}
+</body>
+</html>

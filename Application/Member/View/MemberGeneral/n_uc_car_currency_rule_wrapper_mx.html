@@ -1,0 +1,75 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">资产中心  >  车币</h2>
+
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="n_uc_car_currency_rule_wrapper.html" title="">车币获取方式</a></li>
+                <li  class="cur"><a href="n_uc_car_currency_rule_wrapper_mx.html" title="">车币明细</a></li>
+            </ul>
+            <div class="uc_car_currency_rule_wrapper ohd"  id="J_OrderListMain">
+
+                <div class="record">
+                    <p>您共有
+                        <span class="j_coin">11</span>
+                        车币，共
+                        <span class="j_allRecord">11</span>
+                        条记录</p>
+                </div>
+
+                <div class="table">
+                    <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>日期</th>
+                            <th>获取</th>
+                            <th>获取/消耗</th>
+                        </tr>
+                        </thead>
+                        <tbody class="j_list">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="G_pager j_pager"></div>
+            </div>
+        </div>
+    </div>
+
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td class="transaction-details">{{value.createtime}}</td>
+            <td class="get-integral">{{value.info}}</td>
+            {{if value.coin > 0}}
+            <td class="deduction-integral">+{{value.coin}}</td>
+            {{else}}
+            <td class="deduction-integral">-{{value.coin}}</td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </script>
+
+    <script src="{$Think.const.JS_URL}app.js"></script>
+    <script>
+        $('#J_OrderListMain').AjaxListerContainer({
+            pageSize: 10,
+            loader: '<tr><td colspan="3" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+            nuller: '<tr><td colspan="3" class="null_list">您暂无任何车币信息！</td></tr>',
+            ajaxUrl: '/member.php/MemberGeneral/coindetails_list'
+        });
+
+        $(function(){
+            $.post("/member.php/MemberGeneral/member_accinfo", function(db){
+                $('.j_coin').text(db.total_coin);
+            });
+        });
+
+    </script>
+</block>

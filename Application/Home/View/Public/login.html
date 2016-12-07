@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户登录 - 购车惠</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+	<div class="RL_header">
+		<div class="main_container clearfix">
+			<h1 class="RL_logo">
+				<a href="{:U('Index/index')}" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+			</h1>
+			<div class="RL_gradient_line G_fl"></div>
+			<h2 class="RL_ftitle G_fl G_f22">
+				登陆
+			</h2>
+			<div class="RL_returnHome G_fr">
+				<a href="{:U('Index/index')}" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+			</div>
+		</div>
+	</div>
+	<div class="main_container w1000">
+		<div class="login_wrap clearfix">
+		<div class="login_banner G_fl">
+			<img src="{$Think.const.IMG_URL}/login_banner.jpg" alt="">
+		</div>
+		<div class="login_content G_fl">
+			<div class="login_mod_box" id="login_normal">
+			 <form class="dengluk" action="{:U('Public/dologin')}" method="post">
+			 	<input type="hidden" name="next" <if condition="isset($url) and $url neq null">value="{$url}"<else />value="{$Think.session.lasturl}"</if> >
+				<div class="ui_input_text">
+					<input type="text" name="user_name" class="inp" placeholder="输入邮箱/手机号" autofocus="" autocomplete="on" value="">
+				</div>
+				<div class="ui_input_text">
+					<input type="password" name="password"  class="inp" placeholder="输入密码" autofocus="" autocomplete="off" value="">
+				</div>
+				<div class="ui_input_text clearfix G_f14">
+					<a href="{:U('findpw_account')}" title="忘记密码？" class="G_fl findpw">忘记密码</a>
+					<span class="nowreg G_fr">没有账号？ <a href="{:U('Public/reg')}" title="立即注册">立即注册</a></span>
+				</div>
+				<div class="ui_input_btn">
+					<button type="submit" class="submit_btn G_btn_a btn_54px" style="width: 100%;">登录</button>
+				</div>
+			</form>
+			<div class="login-tip G_mt10">
+                            <div id="login_error" class="G_wrong"  style="display: none;"></div>
+                        </div>
+				<div class="ot_login G_mt30  clearfix">
+					<h3 class="G_f16">其它登录方式</h3>
+					<div class="ui_input_btn">
+						<a href="loginsdk/type/qq" target="_blank" title="QQ登录" class="qq_login G_f18"><i class="ui_icon_32 icon_warn"></i>QQ登录</a><a href="loginsdk/type/weixin"  target="_blank" title="微信登录" class="wx_login G_f18"><i class="ui_icon_32 icon_warn"></i>微信登录</a>
+					</div>
+				</div>
+			</div>
+			<!--<div class="login_mod_box" id="login_normal">-->
+				<!--<form class="dengluk" action="{:U('Public/dologin')}" method="post" onsubmit="return false;">-->
+					<!--<div class="ui_input_text">-->
+						<!--<input type="text" name="user_name" placeholder="输入邮箱/手机号" autofocus="" autocomplete="on" value="">-->
+					<!--</div>-->
+					<!--<div class="ui_input_text">-->
+						<!--<input type="password" name="password" placeholder="输入密码" autofocus="" autocomplete="off" value="">-->
+					<!--</div>-->
+					<!--<div class="ui_input_text clearfix G_f14">-->
+						<!--<a href="{:U('findpw_account')}" title="忘记密码？" class="G_fl findpw">忘记密码</a>-->
+						<!--<span class="nowreg G_fr">没有账号？ <a href="{:U('Public/reg')}" title="立即注册">立即注册</a></span>-->
+					<!--</div>-->
+					<!--<div class="ui_input_btn">-->
+						<!--<input type="submit" class="submit_btn G_btn_a btn_54px" value="登录" name="submit_login" style="width: 100%;">-->
+					<!--</div>-->
+				<!--</form>-->
+				<!--<div class="login-tip G_mt10">-->
+					<!--<div id="login_error" class="G_wrong"  style="display: none;"></div>-->
+				<!--</div>-->
+				<!--<div class="ot_login G_mt30  clearfix">-->
+					<!--<h3 class="G_f16">其它登录方式</h3>-->
+					<!--<div class="ui_input_btn">-->
+						<!--<a href="loginsdk/type/qq" title="QQ登录" class="qq_login G_f18"><i class="ui_icon_32 icon_warn"></i>QQ登录</a><a href="loginsdk/type/weixin" title="微信登录" class="wx_login G_f18"><i class="ui_icon_32 icon_warn"></i>微信登录</a>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<!--<script type="text/javascript" src="{$Think.const.js_URL}login_check.js"></script>-->
+</body>
+</html>

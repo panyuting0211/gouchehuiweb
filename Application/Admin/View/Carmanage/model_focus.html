@@ -1,0 +1,60 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 汽车管理</a> <a href="#" class="current">底价车</a><div class="carmanage_right"><a href="" style="color:#006dcc;">返回上一页</a></div> </div>
+    <h1>关注</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">        
+          <div class="widget-content nopadding" >
+            <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+              <thead>
+                <tr>
+                  <th>会员账号</th>                
+                  <th>会员昵称</th>
+                  <th>关注时间</th>                                       
+                  <th>当前状态</th>           
+                </tr>
+              </thead>
+              <tbody>
+              <volist name="info" id="vo">
+                <tr>
+                  <td>{$vo.user_name}</td>       
+                  <td>{$vo.nick}</td>
+                  <td>{$vo.createtime}</td>                                           
+                  <td class="center">
+                  <if condition="$vo.isdelete eq 0">关注中                                         
+                  <else/> 取消关注 
+                  </if>
+                  </td>
+                </tr>
+              </volist>               
+              </tbody>
+                
+            </table>
+          </div>
+            
+    <div class="pagination">
+        
+    </div>
+      
+      <div class="viciao">
+          {$pagelist}
+      </div>
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+
+</block>

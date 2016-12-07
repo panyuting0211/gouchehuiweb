@@ -1,0 +1,201 @@
+<extend name="n_uc_base" />
+
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.JS_URL}app/jquery.datetimepicker.css">
+
+    <!-- main-content begin -->
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="n_uc_post.html" title="">发帖</a></li>
+                <li><a href="n_uc_post_list.html" title="">我的帖子</a></li>
+            </ul>
+            <div class="uc_post_list">
+                <div class="uc_g_opera_box uc_post">
+                    <div class="header-return">
+                        <span>修改帖子</span>
+                        <a href="javascript:history.back(1);" class="G_fr"><i class="icon-new-uc2 icon-return"></i>返回列表</a>
+                    </div>
+                    <form enctype="multipart/form-data" action="" method="post" name="theForm">
+                        <div class="uc_formlist" id="J_AddMyCar">
+                            <ul id="J_carSelector" class="uc_carSelector">
+                                <li style="">
+                                    <span class="hd">标题：</span>
+                                    <div class="inp_box">
+                                        <input  name="title" class="dataInp uc_inpBorder Skin_txt3" type="text" value="{$info.title}">
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">选择主图：</span>
+                                    <div class="inp_box">
+                                        <div class="upload_pic">
+                                            <a class="noface" href="javascript:void(0);">
+                                                <input name="imgFlag" class="imgFlag" type="text" value="1" />
+                                                <input accept="image/gif, image/jpeg, image/x-png" type="file" action-type="changeFile" node-type="file1" name="image" >
+                                                <div class="picbox"><img src="{$info.image}"></div>
+                                                <span class="horizontal_line"></span>
+                                                <span class="vertical_line"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">文章类型：</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择文章类型" data-first-value="" data-url="/member.php/MemberGeneral/post_type" name="type_id" id="" class="type_id uc_inp190 uc_inpBorder Skin_txt3">
+                                            <option value="{$info.type_id}">{$info.type_name}</option>
+                                        </select>
+
+
+                                    </div>
+
+                                </li>
+                                <li style="">
+                                    <span class="hd">品牌：</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择品牌" data-first-value="" data-url="/member.php/MemberGeneral/brand" name="brand" id="" class="brand uc_inp190 uc_inpBorder Skin_txt3">
+                                            <option value="{$info.brand_id}">{$info.brand_name}</option>
+                                        </select>
+
+                                    </div>
+                                    <span class="hd">车型：</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择车型" data-url="/member.php/MemberGeneral/car_model" data-first-value="" name="model" id="" class="model uc_inp190 uc_inpBorder Skin_txt3">
+                                            <option value="{$info.car_model_id}">{$info.car_model_name}</option>
+                                        </select>
+
+                                    </div>
+                                    <span class="hd">车款：</span>
+                                    <div class="inp_box">
+                                        <select  data-required="false" data-first-title="请选择车款" data-url="/member.php/MemberGeneral/car" data-first-value="" name="car_id" id="" class="car_id uc_inp190 uc_inpBorder Skin_txt3">
+                                            <option value="{$info.car_id}">{$info.car_name}</option>
+                                        </select>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="hd"></span>
+                                    <div class="con-box">
+                                        <script id="J_Contents" name="contents" type="text/plain">{$info.contents}</script>
+                                    </div>
+                                </li>
+                                <input type="hidden" name="id" value="{$info.id}">
+                                <li><span class="hd"></span><div class="inp_box"><input type="submit" class="G_btn_a btn_30px" value="提交"><span class="tips">（确定修改后将重新审核）</span></div></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main-content end -->
+    </div>
+    </div>
+
+    <script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+    <script src="{$Think.const.JS_URL}app/jquery.datetimepicker.js"></script>
+    <script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+    <script src="/Public/ueditor/ueditor.config.js"></script>
+    <script src="/Public/ueditor/ueditor.all.js"></script>
+    <script src="/Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function previewImage(file, maxW, maxH)
+            {
+                var MAXWIDTH  = maxW;
+                var MAXHEIGHT = maxH;
+                var imgBox = $(file).closest('.upload_pic').find('.picbox');
+                console.log(imgBox);
+                if (file.files && file.files[0])
+                {
+                    imgBox.html('<img class="imghead" />');
+                    var img = imgBox.find('.imghead').get(0);
+
+                    img.onload = function(){
+                        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                        img.width  =  rect.width;
+                        img.height =  rect.height;
+                        //img.style.marginLeft = rect.left+'px';
+                        img.style.marginTop = rect.top+'px';
+                    }
+                    var reader = new FileReader();
+                    reader.onload = function(evt){img.src = evt.target.result;}
+                    reader.readAsDataURL(file.files[0]);
+                }
+                else //兼容IE
+                {
+                    var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+                    file.select();
+                    var src = document.selection.createRange().text;
+                    div.innerHTML = '<img id=imghead>';
+                    var img = document.getElementById('imghead');
+                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+                    div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+                }
+            }
+            function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+                var param = {top:0, left:0, width:width, height:height};
+                if( width>maxWidth || height>maxHeight )
+                {
+                    rateWidth = width / maxWidth;
+                    rateHeight = height / maxHeight;
+
+                    if( rateWidth > rateHeight )
+                    {
+                        param.width =  maxWidth;
+                        param.height = Math.round(height / rateWidth);
+                    }else
+                    {
+                        param.width = Math.round(width / rateHeight);
+                        param.height = maxHeight;
+                    }
+                }
+
+                param.left = Math.round((maxWidth - param.width) / 2);
+                param.top = Math.round((maxHeight - param.height) / 2);
+                return param;
+            }
+
+            $('input[name="image"]').change(function(){
+                previewImage($(this).get(0), 190, 140);
+            });
+
+            $('#J_carSelector').cxSelect({
+                selects: ['type_id'],
+                parentSeletor: 'li',
+                jsonName: 'name',
+                jsonValue: 'value'
+            });
+
+            $('#J_carSelector').cxSelect({
+                selects: ['brand', 'model', 'car_id'],
+                parentSeletor: 'li',
+                jsonName: 'name',
+                jsonValue: 'value'
+            });
+
+            var ue = UE.getEditor('J_Contents',{
+                toolbars:[[
+                    'undo', 'redo', '|',
+                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                    'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                    'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                    'directionalityltr', 'directionalityrtl', 'indent', '|',
+                    'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                    'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                    'simpleupload', 'insertimage', 'emotion', 'attachment', 'map','pagebreak', '|',
+                    'horizontal', 'date', 'time', 'spechars', '|',
+                    'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
+                    'print', 'searchreplace', 'drafts'
+                ]],
+                initialFrameHeight:300
+            });
+
+        });
+    </script>
+
+</block>

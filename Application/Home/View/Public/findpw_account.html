@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>密码找回 - 购车惠</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+</head>
+<body>
+	<div class="RL_header">
+		<div class="main_container clearfix">
+			<h1 class="RL_logo">
+				<a href="/" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+			</h1>
+			<div class="RL_gradient_line G_fl"></div>
+			<h2 class="RL_ftitle G_fl G_f22">
+				找回密码
+			</h2>
+			<div class="RL_returnHome G_fr">
+				<a href="/" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+			</div>
+		</div>
+	</div>
+	<div class="main_container">
+		<div class="find_pw_frame">
+			<ul class="step step_arrow nav_pills clearfix">
+				<li class="cur"><a><i class="icon_num_white">1</i>填写账号</a></li>
+				<li><a><i class="icon_num_white">2</i>验证身份</a></li>
+				<li><a><i class="icon_num_white">3</i>重置密码</a></li>
+				<li><a><i class="icon_num_white">4</i>重置密码成功</a></li>
+			</ul>
+			<form id="J_fpwForm"  action="{:U('accountHandle')}" method="post">
+				<div class="find_Pwd_Form">
+					<div class="ui_input_text clearfix">
+						<span class="label">账号：</span>
+						<div class="item_info G_fl">
+							<input type="text"  name="user_name" id="user_name" class="login_name" placeholder="输入邮箱/手机号" autofocus="" autocomplete="off"
+							<if condition="$uname neq null">value="{$uname}"</if>
+							>
+							<div class="tips G_f14" id="J_fpwTips"><span class='G_prompt'><i class='icon_warn'></i>请填写您的账号</span></div>
+						</div>
+						
+					</div>
+					<div class="ui_input_btn G_mt60">
+						<input type="submit" id="J_Submit" class="submit_btn G_btn_a btn_54px" value="下一步" name="mobileCommit">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+	var submitStatus = false;
+	$('#user_name').blur(function(){
+		$('#J_fpwTips>span').html("<i class='icon_warn'></i>检查中...");			
+    	 var $val = $(this).val();
+    	    	 $.ajax({
+      	    	   type:'POST',
+      	    	   data:'tel='+$val,
+      	    	   dataType:'json',
+      	    	   error:function(){
+      	    		   alert('系统发生错误,请稍候刷新重试!');
+      	    	   },
+      	    	   success:function(data){
+					   if(data.status == -1){
+						  $('#J_fpwTips').html('<span class="G_succ"><i class="icon_warn"></i>账号可以使用</span>');
+						  submitStatus = true;
+					   }else if(data.status == -2){
+						  $('#J_fpwTips').html('<span class="G_wrong"><i class="icon_warn"></i>' + data.info + '</span>');
+						  submitStatus = false;
+					   }else{
+					   	  $('#J_fpwTips').html('<span class="G_wrong"><i class="icon_warn"></i>该用户未注册，不能找回密码。您可以<a style="color: #2e9900;" href="/index.php/Home/public/reg">立即注册</a></span>');
+						  submitStatus = false;
+					   }
+      	    	   },
+      	    	   url:"{:U('Public/userNameCheck')}"
+      	       });   	
+     });
+	 $("#J_Submit").on("click", function(e){
+		if(!submitStatus)return false;
+		$('#J_fpwForm').submit();
+	 });
+	 
+	});
+	</script>
+	
+</body>
+</html>

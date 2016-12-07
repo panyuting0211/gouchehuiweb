@@ -1,0 +1,62 @@
+<extend name="Public/base"/>
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">{$atitle}</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+<form action="{:U('carlife_add')}" class="form-horizontal" method="post">
+    	<fieldset>
+    	<div class="control-group">
+    		<label class="control-label" for="type_name">节点名称:</label>
+    		<div class="controls">
+    			<input id="name" type="text" name="type_name">
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	
+    	<div class="control-group">
+    		<label class="control-label" for="pid">父节点：</label>
+    		<div class="controls">
+    			<select name="pid">
+                       	<option value="0">无</option>
+                        <volist name="node" id="vo">
+                       	<option value="{$vo.id}">{$vo.type_name}</option>
+                        </volist>
+                </select>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+  		<div class="control-group">
+			<label class="control-label" for="tip">排序：</label>
+		
+			<div class="controls">
+		    	<input name="sort" type="text" value="" />
+				<p class="help-block"></p>
+			</div>
+  		</div>
+
+    	</fieldset>		
+    	<div class="form-actions">
+    		<button type="submit"  id="submit" class="btn btn-primary">确定</button>
+			<button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+    	</div>	
+    	</form>
+		<!-- Button to trigger modal -->
+
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+</block>

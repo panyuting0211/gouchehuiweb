@@ -1,0 +1,60 @@
+<script type="text/javascript">
+
+    var USER = {};
+    USER.tel= '{$userinfo.tel}';
+    USER.ID = '{$userinfo.id}';
+    USER.nick = '{$userinfo.nick}';
+    USER.face = '{$userinfo.head_url}';
+</script>
+
+<div id="site_nav">
+    <div id="sn_bd">
+        <div class="sn_container">
+
+            <if condition="$userinfo.id neq null">
+                <div class="sign_in" id="J_signIn">
+                    <div class="user">
+                        <span class="user_name" data-name="{$userinfo.user_name}">
+                            <if condition="$userinfo.user_name neq  null">
+                                {$userinfo.user_name}
+                                <else />
+                                {$userinfo.nick}
+                            </if>
+                        </span>
+                        <div class="arrow">
+                        </div>
+                    </div>
+                    <ul class="user_msg">
+                        <li><a href="{:MEMBER_URL}n_uc_index">个人中心</a></li>
+                      <!--  <li><a href="{:MEMBER_URL}uc_member_query">我的询价</a></li>
+                        <li><a href="{:MEMBER_URL}uc_member_msg">消息通知<span class="icon_num_yellow">{$userinfo.msg}</span></a></li>-->
+                        <li><a href="{:LOGIN_URL}loginout?callback={$callBackUrl}" class="sign_out">退出</a></li>
+                    </ul>
+                </div>
+
+                <else />
+                <ul class="sn_quick_menu">
+                    <li class="menu_item"><a href="{:LOGIN_URL}reg?callback={$callBackUrl}">注册</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item"><a href="{:LOGIN_URL}login?callback={$callBackUrl}">登录</a></li>
+                    <li class="sn_separator"></li>
+                    <li class="menu_item" style="display: none;"><a href="{:LOGIN_URL}login_test?callback={$callBackUrl}">登录测试4S</a></li>
+                </ul>
+            </if>
+
+
+        </div>
+    </div>
+</div>
+<div id="header">
+    <div class="headerLayout">
+        <div class="headerCon">
+            <h1 id="gchLogo">
+                <div id="J_FpLogo">
+                    <a href="{:U('Index/index')}" target="_self"> <img id="J_FpDoodle" class="fp-doodle" src="{$Think.const.IMG_URL}logo187X78.png" alt="购车惠"></a>
+                </div>
+            </h1>
+            <h2 class="sub-tit">结算页</h2>
+        </div>
+    </div>
+</div>

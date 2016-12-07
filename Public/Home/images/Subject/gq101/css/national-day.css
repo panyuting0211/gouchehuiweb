@@ -1,0 +1,1049 @@
+a{
+    text-decoration:none;
+}
+a:link{
+    text-decoration:none;
+}
+a:visited{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
+}
+a:active{
+    text-decoration:none;
+}
+.banner img{vertical-align:bottom; display:block;width:100%;height:214px;}
+.brand-choice img{vertical-align:bottom; display:block;width:100%;}
+.float-box{
+    background:url(../images/float-box.png);
+    height:448px;
+    width:168px;
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: -300px;
+    margin-left: 500px;
+    z-index:20;
+}
+.float-box ul{
+    margin-top:116px;
+}
+.float-box ul li a{
+    display:inline-block;
+    height:45px;
+    width:105px;
+    margin-left:32px;
+    margin-top:2px;
+}
+.float-box .add{
+    position:relative;
+}
+.float-box .add a{
+    display:block;
+    height:45px;
+    width:105px;
+    margin-left:32px;
+    margin-top:2px;
+}
+.float-box .add span{
+    display:block;
+    width:108px;
+    height:34px;
+    border-radius:19px;
+    color:#fff;
+    text-align:center;
+    line-height:34px;
+}
+.float-box .add .tel{
+    display:none;
+    position:absolute;
+    top:5px;
+    right:145px;
+    background:#920783;
+}
+.float-box .add .tel-box:hover .tel{
+    display:block;
+}
+.float-box .add .qq-box:hover .qq{
+    display:block;
+}
+.float-box .add .qq{
+    display:none;
+    position:absolute;
+    top:55px;
+    right:145px;
+    background:#1eb3db;
+}
+.float-box .add .click-top a{
+    display:block;
+    height:27px;
+    width:105px;
+    margin-left:32px;
+    margin-top:3px;
+}
+.advantage{
+    background: url(../images/advantage.png) no-repeat;
+    display:block;
+    height: 158px;
+    width: 1000px;
+    position: fixed;
+    left: 50%;
+    bottom: 15px;
+    margin-left: -500px;
+    background-size: 100%;
+    z-index:30;
+}
+.date{
+    height:650px;
+    background:url(../images/backpic.png) no-repeat;
+}
+.date .pic-box{
+    width:1002px;
+    margin:0 auto;
+}
+.date .act-left{
+    width:774px;
+    height:573px;
+}
+.date .git-right{
+    width: 223px;
+    height: 572px;
+    background:#444460;
+}
+.date .git-right p{
+    font-size:30px;
+    font-weight:bold;
+    color:#fff;
+    text-align: center;
+    line-height:52px;
+}
+.date .git-right .inner-box{
+    background:#fff;
+    width: 190px;
+    height: 492px;
+    margin-left:11px;
+}
+.date .git-right .inner-box img{
+    float:left;
+}
+.main .main-wrap{
+    width:1118px;
+    margin:0 auto;
+}
+.main .main-wrap{
+    width:1000px;
+    margin:0 auto;
+}
+.main .main-wrap-b{
+    width:962px;
+    margin:0 auto;
+}
+.main .active-date{
+    background:url(../images/backpic.png) repeat;
+}
+.main .active-date .brand-choice p{
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+    color:#fff;
+}
+.main .active-date .brand-choice li{
+    height:68px;
+    width:163px;
+    display:inline-block;
+    margin-bottom:-2px;
+}
+.main .active-date .process{
+    width:1053px;
+    height:65px;
+    margin:40px auto 0;
+    background:url(../images/process-box.png) no-repeat;
+}
+.group-buy{
+    background:url(../images/backpic.png) repeat;
+    padding-bottom:60px;
+}
+.group-buy .step_1{
+    height:200px;
+    background:url(../images/step_1.png) no-repeat;
+}
+.group-buy .j_carBox{
+    height:380px;
+    margin-top:10px;
+    background:url(../images/carboxback.png) no-repeat;
+}
+.group-buy .hotsell{
+    background:url(../images/hotsellicon.png);
+    height:60px;
+    width:94px;
+}
+.group-buy .logo-right{
+    position:relative;
+}
+.group-buy .logo-right .hotsell{
+    position:absolute;
+    top:0;
+    right:20px;
+}
+.group-buy .j_carBox .left-box{
+    margin-left:50px;
+    width:410px;
+}
+.group-buy .j_carBox .left-box h1{
+    font-size:55px;
+    font-weight:bold;
+    color:#ff3715;
+    letter-spacing: 5px;
+}
+.group-buy .j_carBox .left-box h1 p{
+    display:inline-block;
+    height:10px;
+    width:10px;
+    background-color:#ff3715;
+}
+.group-buy .left-box .line{
+    border-top:1px solid #0098ff;
+    width:320px;
+}
+.group-buy .left-box .j_carName{
+    font-size:24px;
+    color:#0098ff;
+}
+.group-buy .left-box .j_buyNow{
+    background:url(../images/buyicon.png) no-repeat;
+    display:inline-block;
+    width:174px;
+    height:74px;
+    font-size:32px;
+    font-weight:bold;
+    color:#a31e31;
+    line-height:66px;
+    vertical-align: middle;
+    padding-left:10px;
+    margin-top:20px;
+}
+.group-buy .left-box .buy-number{
+    font-size:18px;
+    color:#fe4f30;
+    font-weight:bold;
+    position:absolute;
+    top:290px;
+    left:280px;
+}
+.group-buy .honda .right-box{
+    background:url(../images/groupcar_1.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+.group-buy .skoda .right-box{
+    background:url(../images/groupcar_3.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+.group-buy .honda-2 .right-box{
+    background:url(../images/groupcar_5.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+
+
+.group-buy .logo-left{
+    position:relative;
+}
+.group-buy .logo-left .hotsell{
+    position:absolute;
+    top:0;
+    left:0;
+}
+.group-buy .j_carBox .box-b{
+    margin-right:50px;
+    width:420px;
+}
+.group-buy .j_carBox .box-b h1{
+    font-size:55px;
+    font-weight:bold;
+    color:#ff3715;
+    letter-spacing: 5px;
+}
+.group-buy .box-b .line{
+    border-top:1px solid #0098ff;
+    width:320px;
+}
+.group-buy .box-b .j_carName{
+    font-size:24px;
+    color:#0098ff;
+}
+.group-buy .box-b .j_buyNow{
+    background:url(../images/buyicon.png) no-repeat;
+    display:inline-block;
+    width:182px;
+    height:74px;
+    font-size:32px;
+    font-weight:bold;
+    color:#a31e31;
+    line-height:66px;
+    vertical-align: middle;
+    padding-left:10px;
+    margin-top:20px;
+}
+.group-buy .box-b .buy-number{
+    font-size:18px;
+    color:#fe4f30;
+    font-weight:bold;
+    position:absolute;
+    top:290px;
+    left:730px;
+}
+.group-buy .chevrolet  .box-a{
+    background:url(../images/groupcar_2.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+.group-buy .volkswagen  .box-a{
+    background:url(../images/groupcar_4.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+.group-buy .buick  .box-a{
+    background:url(../images/groupcar_6.png) no-repeat;
+    width:486px;
+    height:312px;
+    margin-top:60px;
+}
+
+/*品牌和团购*/
+.selling{
+    height:1370px;
+    background:url(../images/sell-back.png) no-repeat;
+    position:relative;
+}
+.ranking{
+    height:1382px;
+    background:url(../images/rank-back.png) no-repeat;
+    position:relative;
+}
+.fiery{
+    height:1344px;
+    background:url(../images/fiery-back.png) no-repeat;
+    position:relative;
+}
+.cheap{
+    height:1304px;
+    background:url(../images/cheap-back.png) no-repeat;
+    position:relative;
+}
+.content-wrap .content-box{
+    width:1000px;
+    height:972px;
+    background:#fff;
+    position:absolute;
+    top:23%;
+    margin-left:-500px;
+    left:50%;
+}
+.content-wrap .content-box .content-inner-box{
+    width:958px;
+    height:930px;
+    margin:18px;
+    border:3px solid #ff3715;
+    position:relative;
+}
+.content-wrap .content-box .hotsell-icon{
+    background:url(../images/hotsell-icon.png) ;
+    width:94px;
+    height:60px;
+    position:absolute;
+    right:16px;
+}
+.content-wrap .content-box .top-box{
+    height:416px;
+    border-bottom:3px solid #ff3715;
+}
+.content-wrap .content-box .top-box img{
+   width:550px;
+    height:320px;
+    padding-right:20px;
+}
+.content-wrap .content-box .top-box .box-1{
+    margin-left:45px;
+    margin-top:45px;
+}
+.content-wrap .content-box .top-box .box-1 .hot-name{
+   font-size:24px;
+    color:#583a03;
+    width:320px;
+    border-bottom:1px solid #0098ff;
+    letter-spacing: 10px;
+}
+.content-wrap .content-box .top-box .box-1 h1{
+    font-size:38px;
+    font-weight:bold;
+    color:#ff3715;
+    letter-spacing: 5px;
+    line-height:60px;
+}
+.content-wrap .content-box .top-box .box-1 .name{
+    font-size:24px;
+    color:#33adff;
+    height: 42px;
+    overflow: hidden;
+    border-bottom:1px solid #0098ff;
+}
+.content-wrap .content-box .top-box .box-1 .active-price{
+    width:146px;
+    border-top:1px solid #41a9d0;
+    margin-top:20px;
+    position:relative;
+}
+.content-wrap .content-box .top-box .box-1 .active-price .price{
+    width:116px;
+    height:80px;
+    margin:0 auto;
+    background-color:#41a9d0;
+    text-align:center;
+}
+.content-wrap  .box-1 .active-price .old-price{
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+  text-decoration:line-through;
+}
+.content-wrap  .box-1 .active-price .tip{
+    font-size:30px;
+    color:#f4fd93;
+    font-weight:bold;
+}
+.content-wrap .content-box .top-box .box-1 .active-price .money-icon{
+    font-size:28px;
+    color:#ff3715;
+    position:absolute;
+    left:153px;
+    top:0;
+}
+.content-wrap .content-box .top-box .box-1 .j_actPrice{
+    font-size:42px;
+    color:#ff3715;
+    position:absolute;
+    left:176px;
+    top:5px;
+    font-weight:bold;
+}
+.content-wrap .content-box .top-box .box-1 .j_buyNow{
+    display:inline-block;
+    background:url(../images/rob-buy.png);
+    width:188px;
+    height:46px;
+    margin-top:30px;
+}
+.content-wrap .content-box .top-box .box-1 .buy-num{
+    display:inline-block;
+    font-size:18px;
+    color:#fe4f30;
+    font-weight:bold;
+    vertical-align: 19px;
+    margin-left:10px;
+}
+.content-wrap .content-box .top-box .box-2{
+    position:relative;
+}
+.content-wrap .content-box .top-box .box-2 .discounts{
+    background:url(../images/fall.png);
+    width:174px;
+    height:92px;
+    top:27px;
+    left:112px;
+    position:relative;
+}
+.content-wrap .content-box .top-box .box-2 .discounts .fall-out-pr{
+    position: absolute;
+    top: 21px;
+    left: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    transform: rotate(344deg);
+    -ms-transform: rotate(344deg);
+    -webkit-transform: rotate(344deg);
+}
+.content-wrap .content-box .bottom-box li{
+    position:relative;
+}
+.content-wrap .content-box .bottom-box .discount{
+    background:url(../images/zhekou.png);
+    width:174px;
+    height:92px;
+    position:absolute;
+    top:10px;
+    left:-15px;
+}
+.content-wrap .content-box .bottom-box .discount-2{
+    background:url(../images/zhekou.png);
+    width:174px;
+    height:92px;
+    position:absolute;
+    top:10px;
+    left:-15px;
+}
+.content-wrap .content-box .bottom-box .discount-3{
+    background:url(../images/zhekou.png);
+    width:174px;
+    height:92px;
+    position:absolute;
+    top:10px;
+    left:-15px;
+}
+.content-wrap .content-box .bottom-box .first-car{
+    border-right:3px solid #ff3715;
+}
+.content-wrap .content-box .bottom-box li{
+    text-align:center;
+    width:314px;
+    height:514px;
+    display:inline-block;
+}
+.content-wrap .content-box .bottom-box li .car-pic{
+   margin-top:80px;
+    width:310px;
+    height:220px;
+}
+.content-wrap .content-box .bottom-box li .car-name{
+    font-size:30px;
+    font-weight:600;
+    color:#ff3715;
+    letter-spacing: 5px;
+    border-bottom:1px solid #444;
+}
+.content-wrap .content-box .bottom-box li .car-name-2{
+    font-size:18px;
+    color:#8d8d8d;
+}
+.content-wrap .content-box .bottom-box li .unknow-price{
+    position:relative;
+}
+.content-wrap .content-box .bottom-box li .unknow-price .money-logo{
+    font-size:28px;
+    color:#ff3715;
+    position:absolute;
+    top:-5px;
+    left:60px;
+}
+.content-wrap .content-box .bottom-box li .unknow-price .x-price{
+    font-size:42px;
+    color:#ff3715;
+    font-weight:bold;
+}
+.content-wrap .content-box .bottom-box li .gf-price{
+    text-decoration:line-through;
+    color:#666;
+    margin-left:40px;
+}
+.content-wrap .content-box .bottom-box li .enter-name{
+    margin-right:40px;
+}
+.content-wrap .content-box .bottom-box li .enter-name i{
+    display:inline-block;
+    background:url(../images/gift.png);
+    width:13px;
+    height:12px;
+    vertical-align: -2px;
+}
+.content-wrap .content-box .bottom-box li a{
+    font-size:26px;
+    color:#fff;
+    line-height:36px;
+    display:block;
+    width:170px;
+    height:36px;
+    margin:10px auto;
+    border-radius:20px;
+    background-color:#0098ff;
+}
+/*热销结束*/
+.footer .like{
+    background:url(../images/like-car.png)center center no-repeat;
+    height:380px;
+    position:relative;
+}
+
+.footer .likemes{
+    width:710px;
+    margin:0 auto 50px;
+    padding-top:188px;
+}
+.footer .likemes .carbrand{
+    display:inline-block;
+    margin-right:40px;
+}
+.footer .likemes .carbrand select{
+    width:200px;
+    height:40px;
+    background:#fff;
+}
+.footer .likemes .carmodel{
+    display:inline-block;
+    margin-right:50px;
+}
+.footer .likemes .carmodel select{
+    width:200px;
+    height:40px;
+    background:#fff;
+}
+.footer .likemes .carstyle{
+    display:inline-block;
+}
+.footer .likemes .carstyle select{
+    width:200px;
+    height:40px;
+    background:#fff;
+}
+.footer .click-on{
+    text-align:center;
+    margin-left: -25px;
+}
+.footer .click-on a{
+    display:block;
+    width:230px;
+    height:44px;
+    line-height:44px;
+    margin:0 auto;
+    font-size:18px;
+    color: #000;
+    background: #f8bc07;
+}
+.footer .weixin{
+    background:url(../images/weixin.png)center center no-repeat;
+    height:910px;
+}
+/*滚动条-begin*/
+.progress{
+    position: relative;
+    height: 11px;
+    background: linear-gradient(#d0d0d0, #eaeae2); /* 标准的语法 */
+    background: -webkit-linear-gradient(#d0d0d0, #eaeae2); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#d0d0d0, #eaeae2); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#d0d0d0, #eaeae2); /* Firefox 3.6 - 15 */
+    border-radius: 5px;
+    -moz-border-radius: 5px; /* Firefox */
+    -webkit-border-radius: 5px; /* Safari 和 Chrome */
+    margin:60px 0;
+}
+.progress .progress-bar{
+    width: 100%;
+}
+.progress .progress-surplus{
+    width: 0%;
+}
+.progress .cur-node{
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: -9px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: #d10942;
+    border-radius: 50%;
+    -moz-border-radius: 50%; /* Firefox */
+    -webkit-border-radius: 50%; /* Safari 和 Chrome */
+    box-shadow: 2px 1px 3px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 2px 1px 3px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 2px 1px 3px rgba(0, 0, 0, .5);
+    transition: all 1s;
+    -moz-transition: all 1s; /* Firefox 4 */
+    -webkit-transition: all 1s; /* Safari and Chrome */
+}
+.progress .cur-node .cur-node-txt{
+    display: none;
+    width: 55px;
+    height: 35px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAAjCAYAAAAwnJLLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTRBM0NFMjU3RUZFMTFFNjg2MTQ5OEJGN0Q3Nzc1MkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTRBM0NFMjY3RUZFMTFFNjg2MTQ5OEJGN0Q3Nzc1MkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFNEEzQ0UyMzdFRkUxMUU2ODYxNDk4QkY3RDc3NzUyQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNEEzQ0UyNDdFRkUxMUU2ODYxNDk4QkY3RDc3NzUyQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Prw4uqUAAAGMSURBVHja7Jm/L0NRFMfPeyjRhfixEGFrGCqRWCVoJMQiDCxWYjOZLP4FPxKxmBkMNkljxCSIdBCTgTI8Q/2M8D3teUlzw9B0cO/J/Saf9OalueknPT3vvtMgSg6SkSSYB5OgD7SDerIv7yAPrsAh2AWF8jcEhtwiWAMt5F6ewCrYii+EsSTYAZuOinFa5fNviw/VrCQ6SIyXSUcGRO6YyzKFxQWoIz35AmkuywVlYsWKBEssN0E6k2G5LqVynSyXUCrXEJLieDkv5+W8nJfzcl7Oy1mX71DmEBqTZ7mcUrkcy+0pldvnMUMjlcZjPYrE7kCKv7kXMCevGsIe06AQd8sTKg1hHxwXuxePU/NWkAVpsAHeHJN6BeugXzyKCX4Zp3OaQAb0gjb6n+lYM5gxrp2Bc1l/gkdwDY5AZG5Q+8fGkQVddNaQ41IbrqQ32HxCGSlb38hvqaKm54Ict/UxKUEVZ0u+53aDZzAObjUdnEfBB5gCl9qeCoakmWSr2ST+C8umBMJBtRv9CDAAPUpE2f7t2ZMAAAAASUVORK5CYII=);
+    position: absolute;
+    left: 50%;
+    top: -52px;
+    margin-left: -30px;
+    color: #f7f94e;
+    font-size: 12px;
+    text-align: center;
+    line-height: 27px;
+    transition: all 1s;
+    -moz-transition: all 1s; /* Firefox 4 */
+    -webkit-transition: all 1s; /* Safari and Chrome */
+}
+.progress .progress-loaded{
+    width: 0%;
+    height: 11px;
+    background: #d10942;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    transition: all 1s;
+    -moz-transition: all 1s; /* Firefox 4 */
+    -webkit-transition: all 1s; /* Safari and Chrome */
+}
+.progress .node{
+    display: block;
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    left: 100%;
+    top:50%;
+    margin-left: -3px;
+    margin-top:-4px;
+    background: #b3b3b3;
+    border-radius: 50%;
+    -moz-border-radius: 50%; /* Firefox */
+    -webkit-border-radius: 50%; /* Safari 和 Chrome */
+}
+.progress .node .txt{
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 15px;
+    color: #f00;
+    font-size: 13px;
+    width: 80px;
+    margin-left: -40px;
+    text-align: center;
+}
+.progress .interval-box{
+    position: absolute;
+    height: 20px;
+    top:-23px;
+    width: 100%;
+}
+.progress .interval-box span{
+    display: block;
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+}
+.progress .interval-box .spec-span{
+    margin-left:-27px;
+}
+.progress .node .txt em{
+    font-size: 12px;
+    font-style: normal;
+}
+.progress .node .defTxt{
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 15px;
+    color: #f00;
+    font-size: 13px;
+    width: 80px;
+    margin-left: -40px;
+    text-align: center;
+}
+/*滚动条-over*/
+
+.pop-qiang{
+    padding-top: 100px;
+    padding-left: 242px;
+    width: 374px;
+    height: 167px;
+    background: url(../images/pop-qiang.png) no-repeat center center;
+    position: relative;
+}
+.pop-qiang .close-btn{
+    width: 21px;
+    height: 21px;
+    line-height: 99em;
+    position: absolute;
+    right:70px;
+    top: 94px;
+    overflow: hidden;
+}
+.pop-qiang p{
+    color:#fff;
+    font-size: 16px;
+    font-family: '\5FAE\8F6F\96C5\9ED1', arial, "\5b8b\4f53";
+}
+.pop-qiang p .s{
+    color: #fcff00;
+}
+.pop-qiang .con{
+    margin-top: 8px;
+    position: relative;
+}
+.pop-qiang .con label.error{
+    position: absolute;
+    right: 192px;
+    top: 12px;
+    color: #f00;
+}
+.pop-qiang input, .pop-qiang button{
+    height: 42px;
+    line-height: 42px;
+    border: none;
+}
+.pop-qiang .code, .pop-qiang .telInp{
+    width: 169px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+.pop-qiang .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #fff;
+    color:#000;
+    cursor: pointer;
+}
+.pop-qiang .receive-btn{
+    width: 92px;
+    text-align: center;
+    color:#fff;
+    background: #ff563f;
+    cursor: pointer;
+}
+
+.poper-main{
+    padding: 10px 20px;
+    font-size: 14px;
+    background: #fff;
+    position: relative;
+}
+
+.poper-main .alert-pop{
+    padding: 20px 30px;
+    background: #fff2da;
+    margin-bottom: 15px;
+}
+.poper-main .alert-pop .alert-pop-hd{
+    margin-bottom: 10px;
+}
+.poper-main .alert-pop .entered{
+    font-size: 24px;
+    color:#666;
+}
+.poper-main .alert-pop .entered .total-number{
+    color:#ff4040;
+    margin: 0 5px;
+}
+.poper-main .alert-pop .ft dt{
+    line-height: 28px;
+}
+.poper-main .alert-pop .ft dd{
+    margin-left: 60px;
+    color:#ff4040;
+}
+.poper-main .alert-pop .ft .discount{
+    margin: 0 15px;
+}
+.poper-main .alert-pop .ft .discount i{
+    margin-right: 5px;
+}
+.poper-main .alert-pop .count-down s{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ff4040;
+    color: #fff;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.poper-main .alert{
+    padding: 8px 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 14px;
+    color:#333;
+}
+.poper-main .alert .user-info{
+    display: inline-block;
+    width: 500px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+    top: 5px;
+}
+.poper-main .alert .user-info ul{
+    position: absolute;
+}
+.poper-main .alert .user-info li{
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.poper-main .icon{
+    display: inline-block;
+    background: url(../images/icon-qixi-pop.png) no-repeat;
+    vertical-align: middle;
+}
+.poper-main .alert .total-number{
+    color:#ff3518;
+
+}
+.poper-main .alert .info{
+    color:#38a4ff;
+    font-weight: normal;
+}
+.poper-main .alert .icon-laba{
+    width: 20px;
+    height: 16px;
+    margin-right: 10px;
+}
+.poper-main .base-info{
+    margin-bottom: 20px;
+}
+.poper-main .base-info dl,.poper-main .base-info dt,.poper-main .base-info dd{
+    float: left;
+}
+.poper-main .base-info dl .price{
+    color:#ff5938;
+    font-size: 16px;
+}
+.poper-main .base-info dl .tips{
+    color:#ff9361;
+}
+.poper-main .base-info .mr{
+    margin-right: 50px;
+}
+.poper-main .jiegou{
+    overflow: hidden;
+}
+.poper-main .jiegou dt{
+    float: left;
+}
+.poper-main .jiegou dd{
+    margin-left: 75px;
+}
+.poper-main .car dd a{
+    display: inline-block;
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    border:1px solid #ccc;
+    background: #f5f5f5;
+    text-align: center;
+    margin-right: 40px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.poper-main .car dd a .icon-selected{
+    display: none;
+    width: 16px;
+    height: 16px;
+    background-position: -34px -34px;
+    position: absolute;
+    right:0;
+    bottom: 0;
+}
+.poper-main .car dd a:hover,.poper-main .car dd a.hover{
+    border:1px solid #ff3518;
+    text-decoration: none;
+    background: #fff;
+}
+.poper-main .car dd a.hover i{
+    display: block;
+}
+.poper-main .color dd a{
+    display: inline-block;
+    padding: 1px;
+    background: #fff;
+    border:2px solid #eee;
+    margin-right: 17px;
+}
+.poper-main .color dd a:hover,.poper-main .color dd a.hover{
+    border-color: #ff3518;
+}
+.poper-main .color dd a span{
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.poper-main .form-box dt{float: left;}
+.poper-main .form-box dl{
+    margin-bottom: 10px;
+}
+.poper-main .form-box dd{
+    margin-left: 75px;
+    position: relative;
+}
+.poper-main .form-box dl{
+    margin-right: 15px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.poper-main .form-box dd input{
+    padding-left: 10px;
+    width: 230px;
+    height: 28px;
+    line-height: 28px;
+}
+.poper-main .form-box dd .code{
+    width: 138px;
+}
+.poper-main .form-box dd .send-code-btn{
+    width: 92px;
+    text-align: center;
+    background: #007d9a;
+    color: #000;
+    height: 32px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+.poper-main .form-box dd .vercode-inp{
+    width: 240px;
+}
+.poper-main .form-box dd .pwd-send{
+    display: inline-block;
+    width: 90px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: #3AA2E4;
+    color: #fff;
+}
+.poper-main .form-box dd input.error{
+    background: #ffc3c3;
+    border: 1px solid #ff6767;
+}
+.poper-main .form-box dd label.error{
+    color: #f00;
+    position: absolute;
+    left: 350px;
+}
+.poper-main .submit-box{
+    padding: 20px 0;
+    color:#a1a1a2;
+}
+.poper-main .submit-box .btn-submit{
+    width: 320px;
+    height: 36px;
+    text-align: center;
+    background: #ff3518;
+    color:#fff;
+    font-size: 14px;
+    border:none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.poper-main .color{
+    margin-bottom: 10px;
+    overflow: hidden;
+}

@@ -1,0 +1,53 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">添加广告</a> </div>
+        <h1>{$atitle}</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <form action="{:U('Advers/adveraddHandle')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname"><span style="color:red;">* </span>广告名：</label>
+                            <div class="controls">
+                                <input id="webname" name="ad_name" type="text">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="name">广告链接：</label>
+                            <div class="controls">
+                                <input id="webname" name="adurl" type="text">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="name">排序：</label>
+                            <div class="controls">
+                                <input name="alif" type="text" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="title">广告图：</label>
+                            <div class="controls">
+                                <input name="imgurl" type="file" />
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">确定</button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+</block>

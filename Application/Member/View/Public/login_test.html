@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>用户登录  - 购车惠</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}login.css"/>
+</head>
+<body>
+<!--login header-->
+<div class="header">
+	<h1 class="RL_logo G_fl">
+		<a href="/index.php/Index/index.html" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+	</h1>
+	<div class="RL_returnHome G_fr">
+		<a href="/index.php/Index/index.html" title="返回购车惠首页" class="G_f14">返回购车惠首页</a>
+	</div>
+</div>
+
+<!--login content-->
+<div class="content">
+	<div class="login-newbg" style="background-image: url({$Think.const.IMG_URL}login_bg.png);"></div>
+	<div class="login-adlink">
+		<a href="" title=""></a>
+	</div>
+	<div class="login-layout">
+		<div class="login-con">
+			<div class="login-box">
+				<div class="login-form">
+					<div class="login-title"><a href="{:U('Public/reg')}" title="立即注册>>" class="G_f14">立即注册>></a>账户登录</div>
+					<form action="{:U('Public/dologin_test')}" method="post" enctype="multipart/form-data">
+						<!--错误信息提示-->
+						<div id="J_Message">
+							<!--<div class="login-msg">
+								<i class="login-icon G_fl"></i>
+								<p class="error G_f12">密码错误</p>
+							</div>-->
+					    </div>
+						<div class="item item-fore1">
+                            <label for="J_logname" class="login-label name-label"></label>
+                            <input id="J_logname" type="text" class="itxt" name="user_name" tabindex="1" autocomplete="off" placeholder="手机号">
+                            <span class="clear-btn"></span>
+                        </div>
+                        <div class="item item-fore2">
+                            <label class="login-label pwd-label" for="J_logpwd"></label>
+                            <input type="password" id="J_logpwd" name="password" class="itxt itxt-error" tabindex="2" autocomplete="off" placeholder="密码">
+                            <span class="clear-btn"></span>
+                        </div>
+                        <div class="item item-fore3">
+                        	<ul>
+                        		<li>
+                        			<input name="role" type="radio" checked="checked" value="1" id="J_role1">
+                        			<label for="J_role1">个人</label>
+                        		</li>
+                        		<li>
+                        			<input name="role" type="radio" value="2" id="J_role2">
+                        			<label for="J_role2">4S店</label>
+                        		</li>
+                        		<li>
+                        			<input name="role" type="radio" value="3" id="J_role3">
+                        			<label for="J_role3">经销商</label>
+                        		</li>
+                        		<li>
+                        			<input name="role" type="radio" value="4" id="J_role4">
+                        			<label for="J_role4">商家</label>
+                        		</li>
+                        	</ul>
+						</div>
+                        <div class="item item-fore4">
+                            <div class="autolog">
+                                <span>
+                                    <input id="autologin" name="autologin" type="checkbox" class="autologin" checked="checked">
+                                    <label for="autologin">自动登录</label>
+                                </span>
+                                <span class="forget-pw">
+                                    <a href="{:U('Public/findpw_verification')}" target="_blank">忘记密码</a>
+                                </span>
+                            </div>
+                        </div>
+						<div class="item item-fore5">
+							<button type="submit" class="login-btn G_f18" tabindex="5" id="J_Submit">登 录</button>
+						</div>
+						<div class="item item-fore6">
+							<ul>
+								<li><a href="loginsdk/type/qq" title="QQ登录"><img src="{$Think.const.IMG_URL}login_qq.jpg"/>QQ登录</a></li>
+								<li><a href="loginsdk/type/weixin" title="微信登录"><img src="{$Think.const.IMG_URL}login_wechat.jpg"/>微信登录</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<include file="Public/log_footer" />
+</body>
+</html>

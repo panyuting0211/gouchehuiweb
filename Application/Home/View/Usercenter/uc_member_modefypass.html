@@ -1,0 +1,38 @@
+<extend name="UC_base" />
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ZB_member.css"/>
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">修改密码</h2>
+            <div class="UC_main_r_content">
+                <div class="mofify_pass_wrap ftx05">
+                    <form action="{:U('do_modefyPass')}" method="post">
+                        <dl>
+                            <dt>原密码:</dt>
+                            <dd>
+                                <input type="password" name="oldpwd"  class="txt"/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>新密码:</dt>
+                            <dd><input type="password" name="newpwd"  class="txt"/></dd>
+                        </dl>
+                        <dl>
+                            <dt>确认密码:</dt>
+                            <dd><input type="password" name="confirmpwd" id="confirm_password" class="txt"/></dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>
+                                <input type="submit" class="submit_btn G_btn_a" value="确认"/>
+                            </dd>
+                        </dl>
+                        <input type="hidden" name="user_id" value="{$member_info.id}">		                    
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</block>

@@ -1,0 +1,328 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+
+        .search:after, .search:before {
+            display: table;
+            line-height: 0;
+            content: "";
+        }
+
+        .search:after {
+            clear: both;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+
+        #userTab {
+            width: 1000px;
+            margin-left: -500px;
+        }
+
+        #customer span.help-inline {
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        #myModalLabel ul {
+            margin-left: 86px;
+            display: inline;
+        }
+
+        #myModalLabel ul span {
+            color: red;
+        }
+
+        .form-horizontal input[type=text], .form-horizontal input[type=password], .form-horizontal textarea {
+            width: 206px;
+        }
+
+        #userAdd .form-horizontal .control-label {
+            width: auto;
+            margin-left: 120px;
+        }
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a>
+                    <a href="#" class="current">{$atitle}</a></div>
+            </div>
+            <p id='ajax_delete_id'
+               style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid">
+
+                <div class="row-fluid">
+                    <b>下单时间：</b>
+                    <input type="text" class="text_input_2" id='begin_time' name="begin_time"
+                           value="{$starttime|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                    <span style="color: #CCCCCC;">——</span>
+                    <input type="text" class="text_input_2" id='end_time' name="end_time"
+                           value="{$endtime|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                </div>
+                <div class="row-fluid">
+                    <b>订单状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="-1">未确认</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="1">已确认</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="2">已取消</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="3">无效</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="4">退货</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="order_status"
+                                                                                value="5">已分单</label>
+                </div>
+                <div class="row-fluid" style="margin-top:8px;">
+                    <b>付款状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status"
+                                                                                value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status"
+                                                                                value="-1">未付款</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status"
+                                                                                value="1">付款中</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="pay_status"
+                                                                                value="2">已付款</label>
+                </div>
+                <div class="row-fluid" style="margin-top:8px;">
+                    <b>配送状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="shipping_status" value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="shipping_status" value="-1">未发货</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="shipping_status" value="1">已发货</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="shipping_status" value="2">已收货</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="shipping_status" value="5">备货中</label>
+                </div>
+                <div class="row-fluid">
+                    <b>关键词：</b>
+                    <input type="text" class="input-xlarge" style="margin-top:8px;" name="keyword" id='keyword'
+                           placeholder="订单号">
+                    <button type="button" class="btn btn-primary"><i class="icon-search"></i> 搜索</button>
+
+                </div>
+
+                <div class="content" id="ajax_lists">
+                    <div class="widget-content nopadding newslist">
+                        <h4>总计：<span class="userdata badge"></span>个 </h4>
+                        <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>订单来源</th>
+                                <th>金额</th>
+                                <th>下单时间</th>
+                                <th>订单状态</th>
+                                <th>支付状态</th>
+                                <th>配送状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pager"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    <style>
+        .error {
+            margin-left: 10px;
+            color: #f00;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.css"/>
+    <script type="text/javascript" src="{$Think.const.ADMIN_JS_URL}jquery.confirm/jquery-confirm.min.js"></script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            function CurentTime() {
+                var now = new Date();
+
+                var year = now.getFullYear();       //年
+                var month = now.getMonth() + 1;     //月
+                var day = now.getDate();            //日
+
+                var clock = year + "-";
+
+                if (month < 10)
+                    clock += "0";
+
+                clock += month + "-";
+
+                if (day < 10)
+                    clock += "0";
+
+                clock += day;
+
+                return clock;
+            }
+
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            });
+            $('#end_time').val(CurentTime());
+
+            getPage(1);
+
+            $('.btn-primary').on('click', function (e) {
+                getPage(1);
+            });
+
+            function getPage(page) {
+                $("#ajax_lists thead").css('display', 'none');
+                $('#ajax_lists tbody').empty();
+                $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+                var begin_time = $('#begin_time').val();
+                var end_time = $('#end_time').val();
+                var order_status = $("input:radio[name='order_status']:checked").val();
+                var pay_status = $("input:radio[name='pay_status']:checked").val();
+                var shipping_status = $("input:radio[name='shipping_status']:checked").val();
+                var keyword = $('#keyword').val();
+
+                $.post("/admin.php/ajax/shoplist_ajax",
+                        {
+                            begin_time: begin_time,
+                            end_time: end_time,
+                            order_status: order_status,
+                            pay_status: pay_status,
+                            shipping_status: shipping_status,
+                            keyword: keyword,
+                            p: page
+                        },
+                        function (data, textStatus) {
+                            if (data.count == null) {
+                                $(".userdata").text("0");
+                            } else {
+                                $(".userdata").text(data.count);
+                            }
+                            $('#ajax_lists tbody').empty();
+                            $('#ajax_lists > .onload').remove();
+                            $("#ajax_lists thead").css('display', '');
+                            var pagelist = data[0];
+                            $('#ajax_lists .pager').html(pagelist);
+                            var info = data[1];
+                            var $tr = '';
+                            $.each(info, function (key, val) {
+                                var $orderstatus = '';
+                                switch (parseInt(val.order_status, 10)) {
+                                    case 0:
+                                        $orderstatus = "<font color='red'>未确认</font>";
+                                        break;
+                                    case 1:
+                                        $orderstatus = "<font color='green'>已确认</font>";
+                                        break;
+                                    case 2:
+                                        $orderstatus = "<font color='blue'>已取消</font>";
+                                        break;
+                                    case 3:
+                                        $orderstatus = "<font color='#ff1493'>无效</font>";
+                                        break;
+                                    case 4:
+                                        $orderstatus = "<font color='#ff1493'>退货</font>";
+                                        break;
+                                    case 5:
+                                        $orderstatus = "<font color='#ff1493'>已分单</font>";
+                                        break;
+                                }
+                                var $psystatus = '';
+                                switch (parseInt(val.pay_status, 10)) {
+                                    case 0:
+                                        $psystatus = "<font color='red'>未付款</font>";
+                                        break;
+                                    case 1:
+                                        $psystatus = "<font color='green'>付款中</font>";
+                                        break;
+                                    case 2:
+                                        $psystatus = "<font color='blue'>已付款</font>";
+                                        break;
+                                }
+                                var $shipstatus = '';
+                                switch (parseInt(val.shipping_status, 10)) {
+                                    case 0:
+                                        $shipstatus = "<font color='red'>未发货</font>";
+                                        break;
+                                    case 1:
+                                        $shipstatus = "<font color='green'>已发货</font>";
+                                        break;
+                                    case 2:
+                                        $shipstatus = "<font color='blue'>已收货</font>";
+                                        break;
+                                    case 5:
+                                        $shipstatus = "<font color='#ff1493'>配货中</font>";
+                                        break;
+                                }
+
+                                $tr += '<tr data-id="' + val.id
+                                        + '">' +
+                                        '<td>' + val.order_sn + '</td>' +
+                                        '<td>WEB端</td>' +
+                                        '<td>' + val.money + '</td>' +
+                                        '<td>' + val.add_time + '</td>' +
+                                        '<td>' + $orderstatus + '</td>' +
+                                        '<td>' + $psystatus + '</td>' +
+                                        '<td>' + $shipstatus + '</td>' +
+                                        '<td>' +
+                                        '<a class="btn btn-info" title="详情" value="' + val.id + '" href="/admin.php/Pay/shopdetails?id=' + val.order_id + '">详情</a>' +
+                                        '</td>' +
+                                        '</tr>';
+                            });
+                            $('#ajax_lists tbody').append($tr);
+
+                        },
+                        "json");
+            }
+
+        });
+    </script>
+
+</block>

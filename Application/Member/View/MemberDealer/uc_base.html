@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购车惠--会员中心</title>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}Css.css">
+    <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}ZZ_four.css">
+    <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}ZB_member.css">
+    <script type="text/javascript" src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body class="A_page">
+<div class="RL_header">
+    <div class="main_container clearfix">
+        <h1 class="RL_logo">
+            <a href="http://server.gouchehui.local" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+        </h1>
+        <div class="RL_gradient_line G_fl"></div>
+        <h2 class="RL_ftitle G_fl G_f22">
+            会员中心
+        </h2>
+        <div class="RL_returnHome G_fr">
+            <a href="http://server.gouchehui.local" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+        </div>
+    </div>
+</div>
+<div class="GB_frame">
+    <div class="UC_main_l">
+        <ul class="UC_nav">
+            <!--普通会员-->
+            <if condition="$member_info.role eq 1">
+                <li  class="<if condition="(ACTION_NAME eq uc_member_accinfo)">cur</if>" ><a href="{:U(uc_member_accinfo)}">账号资料</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_modefypass)">cur</if>"><a href="{:U(uc_member_modefypass)}">修改密码</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_order)">cur</if>"><a href="{:U(uc_order)}" >我的订单</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_attention)">cur</if>"><a href="{:U(uc_attention)}">我的关注</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_query)">cur</if>"><a href="{:U(uc_member_query)}">我的询价</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_msg)">cur</if>"><a href="{:U(uc_member_msg)}"><span class="icon_num_yellow">{$msg_count}</span>消息通知</a></li>
+            </if>
+            <!--4s店会员-->
+            <if condition="$member_info.role eq 2">
+                <li class="<if condition="(ACTION_NAME eq fs_member_accinfo)">cur</if>"><a href="{:U(fs_member_accinfo)}">账号资料</a></li>
+            <li class="<if condition="(ACTION_NAME eq fs_scorerela)">cur</if>"><a href="{:U(fs_scorerela)}">积分相关</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_modefypass)">cur</if>"><a href="{:U(uc_member_modefypass)}">修改密码</a></li>
+            <li class="<if condition="(ACTION_NAME eq fs_quotation) OR (ACTION_NAME eq fs_quotation_history)">cur</if>"><a href="{:U(fs_quotation)}" >报价管理</a></li>
+            <li class="<if condition="(ACTION_NAME eq fs_especial) OR (ACTION_NAME eq fs_especial_editor)">cur</if>"><a href="{:U(fs_especial)}">特价车</a></li>
+            <li class="<if condition="(ACTION_NAME eq fs_ordercar)">cur</if>"><a href="{:U(fs_ordercar)}">定车订单</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_order)">cur</if>"><a href="{:U(uc_order)}">我的订单</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_attention)">cur</if>"><a href="{:U(uc_attention)}">我的关注</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_query)">cur</if>"><a href="{:U(uc_member_query)}">我的询价</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_msg)">cur</if>"><a href="{:U(uc_member_msg)}">消息通知<span class="icon_num_yellow">{$msg_count}</span></a></li>
+            </if>
+            <!--经销商会员-->
+            <if condition="$member_info.role eq 3">
+                <li  class="<if condition="(ACTION_NAME eq dr_member_accinfo)">cur</if>"><a href="{:U(dr_member_accinfo)}">账号资料</a></li>
+            <li class="<if condition="(ACTION_NAME eq uc_member_modefypass)">cur</if>"><a href="{:U(uc_member_modefypass)}">修改密码</a></li>
+            <li  class="<if condition="(ACTION_NAME eq dr_quotation)">cur</if>"><a href="{:U(dr_quotation)}">查看报价</a></li>
+            </if>
+        </ul>
+    </div>
+    <!-- <div id="uc_main"> -->
+    <script type="text/javascript" src="{$Think.const.js_URL}citiesJSON.js"></script>
+    <script type="text/javascript" src="{$Think.const.js_URL}user_pic_up.js"></script>
+
+    <block name="body"></block>
+    <!-- </div> -->
+</div>
+<div class="footer_uc_h"></div>
+<div class="footwrap footer_uc">
+    <div class="copyright_info">
+        <p>CopyRight @2015-2016 gouchehui.com All rights reserved 版权所有南京易橙汇网络科技有限公司</p>
+		<p>备案号:苏ICP备13031090号-3</p>
+    </div>
+</div>
+</body>
+</html>

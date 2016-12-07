@@ -1,0 +1,77 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">资产中心  >  积分</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li ><a href="n_uc_get_points.html" title="">获取积分方式</a></li>
+                <li class="cur"><a href="n_uc_get_points_mx.html" title="">积分明细</a></li>
+            </ul>
+            <div class="uc_get_points_wrapper ohd" id="J_OrderListMain">
+
+                <div class="">
+                    <div class="hd spec-style" id="J_pointer">
+
+                    </div>
+                    <p class="go-buy intrduce-content">立即前往
+                        <a href="http://shop.gouchehui.com/">购车惠商城</a>
+                        消费
+                    </p>
+                </div>
+                <p class="intrduce-content">现已将购车惠商城积分统一放置购车惠个人中心积分下，积分可以在购车惠商城购物抵扣商品实物金额（运费除外）。</p>
+                <p  class="intrduce-content">目前积分最主要的获取方式是在购车惠商城购买商品成功后所赠送的积分</p>
+
+                <div class="table">
+                    <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col class="o-status">
+                            <col class="o-name">
+                            <col class="o-deposit">
+
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th class="o-status">积分获取时间</th>
+                            <th class="state-column">交易详情</th>
+                            <th class="o-deposit">积分明细</th>
+                        </tr>
+                        </thead>
+                        <tbody class="j_list">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="G_pager j_pager"></div>
+            </div>
+        </div>
+    </div>
+
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        <tr>
+            <td class="get-time">{{value.createtime}}</td>
+            <td class="transaction-details">{{value.info}}</td>
+            {{if value.score > 0}}
+            <td class="get-integral add">+{{value.score}}</td>
+            {{else}}
+            <td class="get-integral minus">{{value.score}}</td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </script>
+
+    <script src="{$Think.const.JS_URL}app.js"></script>
+    <script>
+        $('#J_OrderListMain').AjaxListerContainer({
+            pageSize: 10,
+            loader: '<tr><td colspan="3" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+            nuller: '<tr><td colspan="3" class="null_list">您暂无任何积分兑换信息！快去 <a href="/index.php/car/product_search" target="_blank">购买</a>你喜欢的车吧！</td></tr>',
+            ajaxUrl: '/member.php/MemberGeneral/scoredetails_list'
+        });
+        $.post("/member.php/MemberGeneral/member_accinfo", function(db){
+            $("#J_pointer").html('<p>用户'+db.user_name+'你好，您的当前积分是 <i>'+ db.total_jifen +'</i> ，等级为 <i>V'+ db.grade +'</i></p>');
+        });
+
+    </script>
+
+</block>

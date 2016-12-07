@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>找回密码  - 购车惠</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}login.css"/>
+</head>
+<body>
+<!--login header-->
+<div class="header">
+	<h1 class="RL_logo G_fl G_f20">
+		<a href="/index.php/Index/index.html" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>找回密码 
+	</h1>
+	<div class="RL_returnHome G_fr">
+		<ul class="header-link">
+			<li><a href="{:U('Public/register')}" title="注册">注册</a><b>|</b></li>
+			<li><a href="{:U('Public/log')}" title="登录">登录</a><b>|</b></li>
+			<li><a href="/index.php/Index/index.html" title="购车惠首页">购车惠首页</a></li>
+		</ul>
+	</div>
+</div>
+
+<!--login content-->
+<div class="content findPwd">
+	<div class="find-con">
+		<!--找回密码状态-->
+		<div class="pwd-state">
+			<ul>
+				<li class="done">
+					<dl>
+						<dt>1</dt>
+						<dd>身份验证</dd>
+					</dl>
+				</li>
+				<li class="doing">
+					<dl>
+						<dt>2</dt>
+						<dd>重置登录密码</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>3</dt>
+						<dd>完成</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--找回密码操作-->
+		<div class="pwd-action pwd-sure">
+			<form action="{:U('resetPwdHandle')}" method="post" id="form1">
+				<input name="user_name" type="hidden" value="{$user_name}">
+				<div class="ui_input_text pwd-action-tel clearfix">
+					<span class="pwd-splab G_f16">新密码：</span>
+					<div class="item_info G_fl">
+						<input type="password"  name="password" id="password" class="login_name pwd-inp-text" placeholder="输入新密码" autofocus="" autocomplete="off" value="">
+						<div class="input-tip G_f12" id="password-tip">
+                            <div class="input-tip-inner">
+                            </div>
+                        </div>
+						<div id="password-state" class="password-state hide">
+                            <div class="input-tip-inner">
+                                <span class="reg_mes mes_pass_in"></span>
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<div class="ui_input_text pwd-action-tel clearfix">
+					<span class="pwd-splab G_f16">确认新密码：</span>
+					<div class="item_info G_fl">
+						<input type="password"  name="repassword" id="repassword" class="login_name pwd-inp-text" placeholder="再输一遍新密码" autofocus="" autocomplete="off" value="">
+						<div class="input-tip" id="repassword-tip">
+                            <div class="input-tip-inner">
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<div class="pwd-action-tel clearfix">
+					<input type="submit" class="submit_btn pwd-inp-next pwd-tj G_f18" id="J_Submit" value="提交" name="commit">
+				</div>
+			</form>	
+			
+			
+			<!--<div class="pwd-action-tel clearfix">
+				<span class="G_f16">新密码</span>
+				<input type="password" name="" id="" value="" class="pwd-inp-text" placeholder="请输入新密码" />
+				<p class="pwd-warn G_fr G_f14">（6-16个英文字母、数字或符号）</p>
+			</div>
+			<div class="pwd-action-tel clearfix">
+				<span class="G_f16">确认新密码</span>
+				<input type="password" name="" id="" value="" class="pwd-inp-text" placeholder="请再次输入新密码" />
+			</div>
+			<div class="pwd-action-tel clearfix">
+				<button class="pwd-inp-next G_f18">确认</button>
+			</div>-->
+		</div>
+	</div>
+</div>
+
+<include file="Public/log_footer" />
+<script type="text/javascript" src="{$Think.const.js_URL}resetpw.js"></script>
+</body>
+</html>

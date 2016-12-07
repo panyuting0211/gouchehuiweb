@@ -1,0 +1,860 @@
+<extend name="uc_base" />
+<block name="body">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZZ_four.css" />
+	<link rel="stylesheet" href="{$Think.const.JS_URL}app/jquery.datetimepicker.css" />
+	<link rel="stylesheet" href="{$Think.const.JS_URL}app/skin/layer.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	<div id="uc_main">
+		<div class="UC_main_r">
+			<h2 class="UC_main_r_tit">特价车</h2>
+			<div class="UC_main_r_especial clearfix"><span class="G_fl">主营品牌：<span class="j_brandName" data-bid="{$info.id}">{$info.brand_name}</span> </span><button class="G_btn_a G_fr" id="J_AddSpecialCar">新增特价车</button></div>
+			<div class="status-bar clearfix">
+				<p class="G_fr">共：<span class="all-nums j_allNums">0</span>条数据</p>
+				<div class="simplePager G_fr">
+					<i></i>
+					<p><span class="j_curPage">-</span>/<span class="j_allPage">-</span></p>
+					<i></i>
+				</div>
+				<dl>
+					<dt>状态：</dt>
+					<dd class="status-bar-container j_statusOpera">
+						<a href="#" class="cur" data-val=""><span><i></i></span>全部</a>
+						<a href="#" data-val="1"><span><i></i></span>审核中</a>
+						<a href="#"  data-val="2"><span><i></i></span>未开始</a>
+						<a href="#"  data-val="3"><span><i></i></span>在售</a>
+						<a href="#"  data-val="4"><span><i></i></span>停售</a>
+						<a href="#"  data-val="5"><span><i></i></span>过期</a>
+						<a href="#"  data-val="6"><span><i></i></span>审核失败</a>
+						<!--<button>筛选</button>-->
+					</dd>
+				</dl>
+			</div>
+			<div class="UC_main_r_content">
+				<table class="grid_bundle table_fontsize">
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col class="order_especial_td">
+						<col>
+						<col>
+						<col>
+						<col class="order_especial_td">
+					</colgroup>
+					<thead>
+					<tr class="col_name">
+						<th>车型</th>
+						<th>车款</th>
+						<th>外观颜色</th>
+						<th>内饰颜色</th>
+						<th>市场价(元)</th>
+						<th>特价（元）</th>
+						<th>活动日期</th>
+						<th>活动数量(辆)</th>
+						<th>销售区域</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody id="J_SpecialCarList">
+					</tbody>
+				</table>
+				<div class="fsq-pager pager" id="J_uiOfferPager"></div>
+			</div>
+
+		</div>
+	</div>
+
+	<script id="tplSpecialCarList" type="text/html">
+		{{each list as value index}}
+		<tr>
+			<td>{{value.car_model_name}}</td>
+			<td>{{value.car_name}}</td>
+			<td>{{value.exterior_color_name}}</td>
+			<td>{{value.interior_color_name}}</td>
+			<td>{{value.auth_price}}</td>
+			<td>{{value.special_price}}</td>
+			<td class="order_especial_td">{{value.start_date}}至{{value.end_date}}</td>
+			<td>{{value.number}}</td>
+			<td>
+				{{each value.area as city}}
+				<span>{{city.sales_area_name}}</span>
+				{{/each}}
+			</td>
+			<td>
+				{{if value.status == 1}}
+				审核中
+				{{else if value.status == 2}}
+				未开始
+				{{else if value.status == 3}}
+				在售
+				{{else if value.status == 4}}
+				停售
+				{{else if value.status == 5}}
+				过期
+				{{else if value.status == 6}}
+				审核失败
+				{{/if}}
+			</td>
+			<td>
+				{{if value.status == 1}}
+				{{else if value.status == 2}}
+				<a href="javascript:;" data-type="edit" data-url="/member4s/fs_special_details" data-id="{{value.id}}" class="G_btn_b j_btnModify">修改</a>
+				<a href="javascript:;" data-type="del" data-url="/member4s/fs_delete_especial" data-id="{{value.id}}"  class="G_btn_e j_btnDel j_btnOpera">删除</a>
+				{{else if value.status == 3}}
+				<a href="javascript:;"  data-type="opera"  data-url="/member4s/fs_changestatus" data-id="{{value.id}}" data-val="4" class="G_btn_a j_btnHaltSales j_btnOpera">停售</a>
+				{{else if value.status == 4}}
+				<a href="javascript:;"  data-type="opera" data-url="/member4s/fs_changestatus" data-id="{{value.id}}" data-val="3" class="G_btn_a j_btnInSale j_btnOpera">在售</a>
+				<a href="javascript:;" data-type="edit" data-url="/member4s/fs_special_details" data-id="{{value.id}}" class="G_btn_b j_btnModify">修改</a>
+				{{else if value.status == 5}}
+				<a href="javascript:;" data-type="del" data-url="/member4s/fs_delete_especial" data-id="{{value.id}}" class="G_btn_e j_btnDel j_btnOpera">删除</a>
+				{{else if value.status == 6}}
+				<a href="javascript:;" data-type="edit" data-url="/member4s/fs_special_details" data-id="{{value.id}}" class="G_btn_b j_btnModify">修改</a>
+				{{/if}}
+			</td>
+		</tr>
+		{{/each}}
+	</script>
+
+	<script src="{$Think.const.JS_URL}app/tpl.js"></script>
+	<script src="{$Think.const.JS_URL}app/jquery.datetimepicker.js"></script>
+	<script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+	<script src="{$Think.const.JS_URL}app/jquery.pager.js"></script>
+	<script src="{$Think.const.JS_URL}app/layer.js"></script>
+	<script src="{$Think.const.JS_URL}app/jquery.validate.js"></script>
+
+	<script>
+		;(function($,window,document,undefined){
+			// 插件名：
+			var pluginName = "scarPlugin";
+
+			//默认参数
+			var defaults = {
+				popConName: '#J_AddSpecialPopCon',
+				urlPrefix:'/member.php',
+				urls:{getModelUrl:'/public/Gcar_model', getColorUrl: '/public/Gcolor', getCarUrl: '/public/Gcar', addNewScar: '/member4s/fs_add_special', editGcar: '/member4s/fs_especial_editor'},
+				title: '新增特价车',
+				brandId : $('.j_brandName').data('bid'),
+				area: [980, 715]
+			};
+
+			//定义SCarPop的构造函数
+			function SCarPop(element, options) {
+				this.element = element;
+				this.settings = $.extend({}, defaults, options);
+				this._defaults = defaults;
+				this._name = pluginName;
+				this.version = 'v1.0.0';
+				this.init();
+			}
+			//定义SCarPop的方法
+			SCarPop.prototype = {
+				init: function() {
+					var that = this;
+
+					//create the overlay container each time the mouse enters
+					$(this.element).off('click').on('click', function(event) {
+						var $element = $(this),
+								$overlayContainer = that.createContainer($element);
+					});
+
+				},
+				createContainer: function($element) {
+					var $source = this.getContainer($element);
+
+					if(HUI && HUI.PopOut && HUI.PopOut.alert){
+						HUI.PopOut.alert([this.settings.title, $source ,""], 3);
+					}else{
+						console.error("请加载app.js");
+						return false;
+					}
+
+					return $source;
+				},
+				getContainer: function($element){
+					var that = this,
+							defaultfModelId = "",
+							defaultfCarId = "",
+							defaultfExColorId = "",
+							defaultfInColorId = "",
+							defaultfAuthPrice = "",
+							defaultfSpecialPricee = "",
+							defaultfStartDataTime = "",
+							defaultfEndDataTime = "",
+							defaultfNumber = "",
+							defaultCities = [],
+							defaultImage = "",
+							defaultDescription = "",
+							imger = "",
+							imgUrl ="",
+							isImgFalg = '<input name="imgFlag" type="text" value="" />',
+							carId = "",
+							formUrl = that.settings.urlPrefix + that.settings.urls.addNewScar,
+							btnType = $element.data('type'),
+							btnId = $element.data('id'),
+							btnUrl = $element.data('url');
+
+					if(btnType !== undefined && btnUrl !== undefined){
+						formUrl = that.settings.urlPrefix + that.settings.urls.editGcar;
+						carId = '<input name="special_car_id" type="hidden" value="'+ btnId +'"/>';
+						$.ajax({url: that.settings.urlPrefix + btnUrl,
+							data:{special_id: btnId},
+							type: "POST",
+							async: false,
+							success: function(data){
+								if(data){
+									defaultfModelId = data.car_model_id;
+									defaultfCarId = data.car_id;
+									defaultfExColorId = data.exterior_color_id;
+									defaultfInColorId = data.interior_color_id;
+									defaultfAuthPrice = data.auth_price;
+									defaultfSpecialPricee = data.special_price;
+									defaultfStartDataTime = data.start_date;
+									defaultfEndDataTime = data.end_date;
+									imgUrl = data.car_image,
+									isImgFalg = data.car_image && '<input name="imgFlag" type="text" value="1" />';
+									imger = '<img class="imghead" style="width:150px;height:100px;" src="'+ data.car_image  +'">';
+									defaultfNumber = data.number;
+									defaultCities = data.cities || [];
+									defaultImage = "";
+									defaultDescription = data.description;
+								}
+							}
+						});
+					}
+					var $source = $('<form action="'+ formUrl +'" id="" class="j_addSCarForm" method="POST" enctype="multipart/form-data"><ul class="addSpecialPopCon" id="J_AddSpecialPopCon"> ' +
+							carId +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">车型：</dt> ' +
+							'<dd class="con"><select class="autoSeler" name="model" id=""><option value="">请选择车型</option></select></dd> ' +
+							'</dl> ' +
+							'<dl> ' +
+							'<dt class="tit">车款：</dt> ' +
+							'<dd class="con"><select class="autoSeler" name="car_id" id=""><option value="">请选择车款</option></select></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl class="col-6"> ' +
+							'<dt class="tit">外观：</dt> ' +
+							'<dd class="con"><select class="seler" name="exterior_color_id" id=""><option value="">请选择外观颜色</option></select></dd> ' +
+							'</dl> ' +
+							'<dl class="col-6"> ' +
+							'<dt class="tit">内饰：</dt> ' +
+							'<dd class="con"><select class="seler" name="interior_color_id" id=""><option value="">请选择内饰颜色</option></select></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl class="col-6"> ' +
+							'<dt class="tit">市场价：</dt> ' +
+							'<dd class="con"><input class="inpper" name="price" value="'+ defaultfAuthPrice +'" />元</dd> ' +
+							'</dl> ' +
+							'<dl class="col-6"> ' +
+							'<dt class="tit">特价：</dt> ' +
+							'<dd class="con"><input class="inpper" name="special_price" value="'+ defaultfSpecialPricee  +'" <i class="icon-prop">元</i></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">活动日期：</dt> ' +
+							'<dd class="con calendar-box"><input class="inpper" name="start_date" placeholder="年/月/日" /><i class="icon-calendar"></i></dd> ' +
+							'<dd class="con calendar-box">——</dd>' +
+							'<dd class="con calendar-box"><input class="inpper" name="end_date" placeholder="年/月/日" /><i class="icon-calendar"></i></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">活动数量：</dt> ' +
+							'<dd class="con"><input class="inpper" name="number" placeholder="请填写参加活动车数量" value="'+ defaultfNumber +'" <i class="icon-prop">辆</i></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">销售区域：</dt> ' +
+							'<dd class="con">' +
+							'<div class="j_beoCities beoCities"></div>' +
+							'<div><input type="button" name="addArea" class="item G_btn_b btn_34px j_batchEditOfferArea" value="添加区域"  /></div></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">活动图片：</dt> ' +
+							'<dd class="con"><div class="fileInner">' +
+							'<a class="ui_button_primary" href="javascript:;" id="J_uploadPositiveBtn"><u><i></i>上传文件</u>'+ isImgFalg
+							+'<input type="file" hidefocus="true" class="j_validateInp" name="car_image"> </a>' +
+							'<div class="imgbox">'+ imger +'</div></div><span class="tip">* （建议图片长*高为570*380）</span></div></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li>' +
+							'<dl> ' +
+							'<dt class="tit">活动说明：</dt> ' +
+							'<dd class="con"><textarea name="description" id="" placeholder="请填写本次活动的说明！">'+ defaultDescription +'</textarea><p class="s">（以上字段均为必填项）</p></dd> ' +
+							'</dl> ' +
+							'</li>' +
+							'<li class="G_tc">' +
+							'<input type="submit" class="item G_btn_b btn_34px" value="确定" />'+
+							'</li>' +
+							'</ul></form>');
+
+					$.ajax({
+						url: that.settings.urlPrefix + that.settings.urls.getModelUrl,
+						data:{brand: that.settings.brandId},
+						type: "POST",
+						success: function(data){
+							var $modelSel = $source.find('select[name=model]'),
+									curSelected = "",
+									newOpt = '<option value="">请选择车型</option>';
+
+							if(data.length > 0){
+								$.each(data, function(i, carItem){
+									carItem.value == defaultfModelId ? curSelected = 'selected="selected"' : curSelected = "";
+									newOpt += '<option '+ curSelected +' value="'+ carItem.value +'">'+ carItem.name +'</option>';
+								});
+								$modelSel.html(newOpt);
+								$modelSel.on('change', function(e){
+									var $this = $(this);
+									defaultfModelId = $this.val();
+									that.getCarSel($source, defaultfModelId, defaultfCarId, defaultfExColorId, defaultfInColorId);
+								});
+								that.getCarSel($source, defaultfModelId, defaultfCarId, defaultfExColorId, defaultfInColorId);
+							}else{
+								HUI && (HUI.PopOut.alert('<div class="G_wrong"><i class="icon_warn"></i>获取内容失败，请重试！</div>'), $({}).delay(2e3).queue(function(){HUI.PopOut.closeMask()}));
+							}
+						}
+					});
+
+					$source.find('input[name=start_date]').datetimepicker({
+						lang:"ch",
+						timepicker:true,
+						value: defaultfStartDataTime,
+						format:'Y-m-d H:i:s',
+						//maxDate: '+0' //当前时间以后的不能选中
+						minDate:'-1970/01/01'  //当前时间以前的不能选中
+					});
+
+					$source.find('input[name=end_date]').datetimepicker({
+						lang:"ch",
+						timepicker:true,
+						value: defaultfEndDataTime,
+						format:'Y-m-d H:i:s',
+						//maxDate: '+0' //当前时间以后的不能选中
+						minDate:'-1970/01/01'  //当前时间以前的不能选中
+					});
+
+
+					defaultCities.length && ($.each(defaultCities, function(i, v){
+						$source.find('.j_beoCities').append('<span data-name="'+ v.area +'" data-lvl="'+ v.lvl +'" class="city j_delCity" title="'+ v.area +'">'+ v.area +'</span>');
+						$source.find('.j_beoCities').append('<input type="hidden" name="cities['+ i +'][name]" value="'+ v.area +'"><input type="hidden" name="cities['+ i +'][lvl]" value="'+ v.lvl +'">');
+					}));
+
+					$source.find('.j_batchEditOfferArea ').on('click', function(){
+						that.beoBuildSalesArea(that.settings.title, $source, ".j_beoCities");
+					});
+
+					$source.find('[name=car_image]').change(function(){
+						var $this = $(this), $btn = $this.closest('.ui_button_primary'), imgFlag = $btn.find('[name=imgFlag]');
+						imgFlag.val(1);
+						that.previewImage($(this).get(0));
+					});
+					$.validator.addMethod("compare", function(value, element, param) {
+						var target = $(param),
+								val = target.val();
+
+						return  parseInt(value) < parseInt(val);
+					}, $.validator.format("特价不能大于市场价"));
+
+					$.validator.addMethod("datacompare", function(value, element, param) {
+						var target = $(param),
+								val = target.val();
+						return ((new Date(value.replace(/-/g,"\/"))) > (new Date(val.replace(/-/g,"\/"))));
+					}, $.validator.format("结束时间不能小于开始时间"));
+
+					$source.validate({
+						debug: false, //调试模式取消submit的默认提交功能
+						rules:{
+							model:{
+								required:true
+							},
+							car_id:{
+								required:true
+							},
+							exterior_color_id:{
+								required:true
+							},
+							interior_color_id:{
+								required:true
+							},
+							special_price:{
+								required: true,
+								digits: true,
+								compare: '[name=price]'
+							},
+							start_date:{
+								required:true
+							},
+							end_date:{
+								required:true,
+								datacompare: '[name=start_date]'
+							},
+							number:{
+								required:true,
+								min:1,
+								digits: true
+							},
+							description:{
+								required:true
+							},
+							imgFlag:{
+								required: true
+							}
+						},
+						messages:{
+							model:{
+								required:"请选择车型"
+							},
+							car_id:{
+								required:"请选择车款"
+							},
+							exterior_color_id:{
+								required:"请选择外观颜色"
+							},
+							interior_color_id:{
+								required:"请选择内饰颜色"
+							},
+							special_price:{
+								required: "请填写活动特价",
+								digits: "只能输入整数"
+							},
+							start_date:{
+								required:"请选择活动开始时间"
+							},
+							end_date:{
+								required:"请选择活动结束时间"
+							},
+							number:{
+								required:"请填写参加活动车数量",
+								min: "活动数量不能小于 1",
+								digits: "只能输入整数"
+							},
+							description:{
+								required:"请填写活动说明"
+							},
+							imgFlag:{
+								required: "请上传活动车图片"
+							}
+						},submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form
+							form.submit();
+						}
+					});
+					return $source;
+				},
+				getCarSel: function($ele, id, carId, exId, inId){
+					var that = this;
+									$.ajax({url: this.settings.urlPrefix + this.settings.urls.getCarUrl,
+										data:{model: id},
+										type: "POST",
+										success: function(data) {
+											var curSelected = "", newOpt = '<option value="">请选择车款</option>';
+											if (data && data.length > 0) {
+												$.each(data, function (i, carItem) {
+													carItem.value == carId ? curSelected = 'selected="selected"' : curSelected = "";
+													newOpt += '<option '+ curSelected +' value="' + carItem.value + '">' + carItem.name + '</option>';
+												});
+												$ele.find('select[name=car_id]').html(newOpt);
+												$ele.find('select[name=car_id]').on('change', function(e){
+													var $this = $(this);
+													carId = $this.val();
+													that.getColorSel($ele, carId, exId, inId);
+												});
+
+												that.getColorSel($ele, carId, exId, inId);
+											}
+										}
+									});
+				},
+				getColorSel: function($ele, carId, exId, inId){
+					$.ajax({url: this.settings.urlPrefix + this.settings.urls.getColorUrl,
+						data:{car_id: carId},
+						type: "POST",
+						success: function(data){
+							var curExSelected = "",
+									curInSelected = "",
+									exOpt = '<option value="">请选择外观颜色</option>',
+									inOpt = '<option value="">请选择内饰颜色</option>';
+							if(data){
+								data.auth_price && ($ele.find('input[name=price]').attr("value", data.auth_price));
+								//, $ele.find('input[name=price]').attr("disabled",true)
+								data.exterior_color && data.exterior_color.length && ($.each(data.exterior_color, function (i, carItem) {
+									carItem.value == exId ? curExSelected = 'selected="selected"' : curExSelected = "";
+									exOpt += '<option '+ curExSelected +' value="' + carItem.value + '">' + carItem.name + '</option>';
+								}));
+								data.interior_color && data.interior_color.length && ($.each(data.interior_color, function (i, carItem) {
+									carItem.value == inId ? curInSelected = 'selected="selected"' : curInSelected = "";
+									inOpt += '<option '+ curInSelected +' value="' + carItem.value + '">' + carItem.name + '</option>';
+								}));
+							}
+
+							$ele.find('select[name=exterior_color_id]').html(exOpt);
+							$ele.find('select[name=interior_color_id]').html(inOpt);
+						}
+					});
+				},
+				beoBuildSalesArea: function (title, source, newcities) {
+					/*
+					 * 作用：创建批量区域弹窗的销售区域
+					 * */
+					var provinceList = "",
+							_newCitiesArr = [],
+							J_allArea = '',
+							overly = $(".BEO_area_popOverly"),
+							overlyArrow = $(".BEO_area_popArrow"),
+							salesArea = $(".BEO_area_pop"),
+							allAreaBox = '';
+					HUI.PopOut.closeMask();
+					provinceList = '<select name="province" class="province_list j_beoProvince"><option value="\u8bf7\u9009\u62e9\u7701\u4efd" data-id="0" >\u8bf7\u9009\u62e9\u7701\u4efd</option>';
+					province && $.each(province, function(j, p){
+						provinceList += '<option value="'+ p.name +'" data-id="'+ p.id +'" >'+ p.letter +' '+ p.name +'</option>';
+						allAreaBox += '<div class="hide j_beoArea'+ p.id +'">';
+						allAreaBox += '<a href="javascript:;" id="j_c'+ p.id +'" class="yes_select" data-pid="1" data-id="'+ p.id +'" data-name="'+ p.name +'" title="选择'+ p.name +'">'+ p.name +'<i class="ui_icon ui_icon_16 ui_icon_wb_suc_16"></i></a>';
+						p.city && $.each(p.city, function(k, c){
+							allAreaBox += '<a href="javascript:;" id="j_c'+ c.id +'" class="yes_select" data-pid="'+ p.id +'" data-id="'+ c.id +'" data-name="'+ c.name +'" title="选择'+ c.name +'">'+ c.name +'<i class="ui_icon ui_icon_16 ui_icon_wb_suc_16"></i></a>';
+						});
+						allAreaBox += '</div>';
+					});
+					provinceList += '</select>';
+
+
+					if(salesArea.length && overly.length && overlyArrow.length){
+						salesArea.animate({left:"50%"}, 500);
+						overlyArrow.animate({left:"50%"}, 500);
+						overly.show();
+					}else{
+						salesArea = $("<div class=\"BEO_area_pop\">"+
+								"<div class=\"sales_area\">"+
+								"<dl class=\"selected_area clearfix\">"+
+								"<dt>已选区域：</dt>"+
+								"<dd class=\"j_selectedAreas\">" +
+
+								"</dd>" +
+								"</dl>" +
+								"<dl class=\"all_area clearfix\">" +
+								"<dt>全国区域：</dt>" +
+								"<dd class=\"all_area_province j_nationwide\"><a href=\"javascript:;\" title=\"选择全国\" class=\"yes_select\">全国<i class=\"ui_icon ui_icon_16 ui_icon_wb_suc_16\"></i></a></dd>"  +
+								"</dl>" +
+								"<dl class=\"all_area clearfix\">" +
+								"<dt>销售区域：</dt>" +
+								"<dd class=\"all_area_province\">" +
+								provinceList +
+								"<span><b class=\"ftx08\">友情提示：</b>省份包括了该省所有城市！</span></dd>"	+
+
+								"<dd class=\"all_area_city j_curAllArea\">" + allAreaBox + "</dd>" +
+								"</dl>" +
+								"<div class=\"btn_box\">" +
+								"<a href=\"javascript:;\" class=\"G_btn_b btn_34px j_saveAreas\">保存</a>" +
+								"</div>"+
+								"</div>" +
+								"</div>");
+						overly = $("<div class=\"BEO_area_popOverly\"></div>");
+						overlyArrow = $("<div class=\"BEO_area_popArrow\"><i class=\"icon_left\"></i></div>");
+						$("body").append(salesArea);
+						$("body").append(overlyArrow);
+						$("body").append(overly);
+						salesArea.animate({left:"50%"},500);
+						overlyArrow.animate({left:"50%"},500);
+						overly.show();
+						overlyArrow.find(".icon_left").on("click", function(){
+							salesArea.animate({left:"-335px"},500);
+							overlyArrow.animate({left:"100%"},500);
+							overly.hide();
+							HUI.PopOut.alert([title, source ,""], 3);
+						});
+						salesArea.find(".j_beoProvince").change(function(e){
+							var _this = $(this),
+									changeCurAllArea,
+									curOpt = _this.find("option:selected"),
+									curID = $.trim(curOpt.data('id'));
+							changeCurAllArea = '.j_beoArea' + curID;
+							$(changeCurAllArea).siblings().hide();
+							$(changeCurAllArea).show();
+
+						});
+						salesArea.find('.j_nationwide').on('click','a', function(e){
+							e.stopPropagation();
+							e.preventDefault();
+							var _this = $(this),
+									selectArea = salesArea.find('.j_selectedAreas'),
+									selectAreaArr = selectArea.find('a');
+							_this.attr("class","selected");
+							selectAreaArr.remove();
+							var newArea = $('<a href="javascript:void(0);" title="\u5168\u56fd" data-lvl="1" data-name="\u5168\u56fd"  data-id="1">\u5168\u56fd<i title="\u5220\u9664\u5168\u56fd" class="ui_icon ui_icon_16 ui_icon_wb_err_16"></i></a>');
+							selectArea.prepend(newArea);
+							salesArea.find('.j_curAllArea').find('a').attr("class","no_select");
+						});
+						salesArea.find('.j_selectedAreas').on('click', 'a', function(e){
+							var _this = $(this),
+									allArea = $('.j_curAllArea'),
+									allAreaObjs = allArea.find('a'),
+									_thisId = _this.data('id'),
+									_thisPid = _this.data('pid'),
+									_thisAllArea = '.j_beoArea' + _thisId,
+									_thisArea = '#j_c' + _thisId;
+							e.preventDefault();
+							_this.remove();
+							if(_thisId == 1){
+								$('.all_area_province a').attr("class","yes_select");
+								allAreaObjs.attr("class","yes_select");
+							}else if(_thisPid == 1){
+								$(_thisAllArea).find('a').attr("class","yes_select");
+							}else{
+								$(_thisArea).attr("class","yes_select");
+							}
+						});
+
+						salesArea.find('.j_curAllArea').on('click','.yes_select', function(e){
+							var _this = $(this),
+									selectArea = $('.j_selectedAreas'),
+									selectAreaArr = selectArea.find('a'),
+									pid = _this.data('pid'),
+									mid = _this.data('id'),
+									_flag = true,
+									_p,
+									_id,
+									_lvl = 0,
+									areaName = _this.data('name'),
+									newArea = '';
+							e.stopPropagation();
+							e.preventDefault();
+							if(pid == 1){
+								_this.attr("class","selected");
+								_this.siblings().attr("class","no_select");
+								$.each(selectAreaArr, function(i, o){
+									if($(o).data('pid') == mid){
+										$(o).remove();
+									}
+								});
+								_lvl = 2;
+							}else{
+								_this.attr("class","selected");
+								_lvl = 3;
+							}
+							$.each(_this.closest("div").find("a:gt(0)"), function(i, o){
+								_flag = _flag && $(o).hasClass("selected");
+							});
+							if(_flag){
+								_p = _this.closest("div").find("a:first");
+								_id = _this.closest("div").find("a:first").data("id");
+								_p.attr("class","selected");
+								_p.siblings().attr("class","no_select");
+								$.each(selectAreaArr, function(i, o){
+									if($(o).data('pid') == _id){
+										$(o).remove();
+									}
+								});
+								_lvl = 2;
+								areaName = _p.data('name');
+								pid = _p.data('pid');
+								mid = _id;
+							}
+
+							newArea = $('<a href="javascript:void(0);" title="'+ areaName +'" data-lvl="'+ _lvl +'"  data-name="'+ areaName +'" data-pid="'+ pid +'" data-id="'+ mid +'"><abbr>'+ areaName +'<abbr><i title="\u5220\u9664' + areaName + '" class="ui_icon ui_icon_16 ui_icon_wb_err_16"></i></a>');
+
+							selectArea.prepend(newArea);
+						});
+						salesArea.find('.j_saveAreas').on('click', function(){
+							var newCity = "", $sleAreas = salesArea.find(".j_selectedAreas").find("a");
+
+							$.each($sleAreas, function(i, m){
+								_newCitiesArr[i] = {};
+								_newCitiesArr[i]["lvl"] = $(m).data('lvl');
+								_newCitiesArr[i]["name"] = $(m).data('name');
+								newCity += '<span data-name="'+ $(m).data('name') +'" data-lvl="' + $(m).data('lvl') + '" class="city j_delCity" title="'+ $(m).data('name') +'">'+ $(m).data('name') +'</span><input type="hidden" name="cities[' + i + '][name]" value="' + $(m).data('name') + '"/><input type="hidden" name="cities[' + i + '][lvl]" value="' + $(m).data('lvl') + '"/>';
+							});
+
+							salesArea.animate({left:"-335px"},500);
+							overlyArrow.animate({left:"100%"},500);
+							overly.hide();
+							HUI.PopOut.alert([title, source ,""], 3);
+							source.find(newcities).html(newCity);
+
+						});
+
+					}
+
+				},
+				previewImage: function(file)
+				{
+					var that = this;
+					var MAXWIDTH  = 150;
+					var MAXHEIGHT = 100;
+					var imgBox = $(file).closest('.fileInner').find('.imgbox');
+
+					if (file.files && file.files[0])
+					{
+						var img;
+						if(imgBox.find('.imghead').length){
+							img = imgBox.find('.imghead').get(0);
+						}else{
+							imgBox.html('<img class="imghead">');
+							img = imgBox.find('.imghead').get(0);
+						}
+
+						img.onload = function(){
+						var rect = that.clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+						img.width  =  rect.width;
+						img.height =  rect.height;
+
+						img.style.marginTop = rect.top+'px';
+						}
+						var reader = new FileReader();
+						reader.onload = function(evt){img.src = evt.target.result;}
+						reader.readAsDataURL(file.files[0]);
+					}
+					else
+					{
+						var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+						file.select();
+						var src = document.selection.createRange().text;
+						div.innerHTML = '<img id=imghead>';
+						var img = document.getElementById('imghead');
+						img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+						var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+						status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+						div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+					}
+				},
+				clacImgZoomParam: function( maxWidth, maxHeight, width, height ){
+				var param = {top:0, left:0, width:width, height:height};
+				if( width>maxWidth || height>maxHeight )
+				{
+					rateWidth = width / maxWidth;
+					rateHeight = height / maxHeight;
+
+					if( rateWidth > rateHeight )
+					{
+						param.width =  maxWidth;
+						param.height = Math.round(height / rateWidth);
+					}else
+					{
+						param.width = Math.round(width / rateHeight);
+						param.height = maxHeight;
+					}
+				}
+
+				param.left = Math.round((maxWidth - param.width) / 2);
+				param.top = Math.round((maxHeight - param.height) / 2);
+				return param;
+			}
+			}
+			$.fn[pluginName]  = function(options) {
+				this.each(function() {
+					if (!$.data(this, "plugin_" + pluginName)) {
+						$.data(this, "plugin_" + pluginName, new SCarPop(this, options));
+					}
+				});
+
+				// chain jQuery functions
+				return this;
+			}
+		})(jQuery,window,document);
+
+		$(function(){
+
+			$('#J_AddSpecialCar').scarPlugin();
+
+
+			;(function () {
+				function getPage (postDb) {
+					var urlPrefix = '/member.php';
+					$lister.html(loader);
+					$allNumer.html(0);
+					$.post(interfaceUrl, postDb, function (db) {
+						if(db.count == 0){
+							html = $null;
+						}else{
+							html = template(tplName, db);
+						}
+
+						$lister.html(html);
+						$pageContainer.html(db.pagelist);
+						$curPager.html(postDb.p);
+						$allPager.html(Math.ceil(db.count/postDb.pagesize));
+						$allNumer.html(db.count);
+						$lister.find('.j_btnModify').scarPlugin();
+
+						$lister.find('.j_btnOpera').on('click', function(e){
+							var $this = $(this),
+									db = {},
+									dbUrl = $this.data('url'),
+									dbSta = $this.data('val'),
+									dbId = $this.data('id');
+							db.car_special_id = dbId;
+							if(dbSta){
+								db.status = dbSta;
+							}
+							layer.msg('是否确定此操作？', {
+								time: 0 //不自动关闭
+								,btn: ['确定', '取消']
+								,yes: function(index){
+									layer.close(index);
+									$.ajax({url: urlPrefix + dbUrl,
+										data: db,
+										type: "POST",
+										success: function(data){
+											if(data && data.status == 1){
+												layer.msg(data.msg);
+												$({}).delay(2e3).queue(function() {
+													window.location.reload();
+												});
+											}else{
+												layer.msg(data.msg);
+											}
+										}
+									});
+								}
+							});
+
+						});
+					});
+				}
+
+				var interfaceUrl = "/member.php/Member4s/fs_special",
+						$allNumer = $('.j_allNums'),
+						$pageContainer = $('#J_uiOfferPager'),
+						$curPager = $('.j_curPage'),
+						$allPager = $('.j_allPage'),
+						$null = '<tr><td colspan="11" class="null-list">抱歉，您暂未添加特价车信息。如有需要，请新增特价车信息。</td></tr>',
+						loader = '<tr><td colspan="11"><div class="onload"><img src="/public/admin/images/loading.gif" alt=""/>数据加载中...</div></td></tr>',
+						$lister = $('#J_SpecialCarList'),
+						tplName = 'tplSpecialCarList',
+						postDb = {p:1, status: "", pagesize:2},
+						urlPrefix = '/member.php';
+
+				getPage(postDb);
+
+
+				$('.j_statusOpera').find('a').on('click', function (e) {
+					e.stopPropagation();
+					e.preventDefault();
+					var $this = $(this),
+							status = $this.data('val');
+					$(this).siblings().removeClass('cur');
+					$(this).addClass('cur');
+					postDb.status = status;
+					getPage(postDb);
+
+				});
+
+				$("#J_uiOfferPager").on("click", "a", function(e) {
+					postDb.p = $(e.target).data("page");
+					getPage(postDb);
+				});
+
+			})();
+
+		});
+	</script>
+
+</block>

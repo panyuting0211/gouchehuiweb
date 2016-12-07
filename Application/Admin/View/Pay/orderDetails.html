@@ -1,0 +1,495 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {padding:0px 10px 0 10px;color:#4e4e4e;}
+        .next{color:#4e4e4e;}
+        .prev{color:#4e4e4e;}
+        .num:hover,.next:hover,.prev:hover{color:green;}
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#" class="current">订车订单</a><a href="#" class="current">订单详情</a> </div>
+                <h1>{$atitle}</h1>
+            </div>
+            <div class="container-fluid" id="J_OrderInfo" data-id="{$info.id}" data-url="__CONTROLLER__/changestatus">
+                <!--  后台订单详情-未支付 begin -->
+                <div class="flowstep">
+                    <ol class="detail-stepbar flowstep-5">
+                        <li class="step-first">
+                            <div class="step-done">
+                                <div class="step-name">填写并提交订单信息</div>
+                                <div class="step-no"></div>
+                                <div class="step-time">
+                                    <div class="step-time-wraper">{$info.createtime}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <switch name="info.status" >
+                                <case value="0|1|3|5"><div class="step-cur"></case>
+                                <case value="2"><div class="step-fail"></case>
+                                <default /><div class="step-done">
+                            </switch>
+                            <div class="step-name">预付定金到购车惠</div>
+                            <div class="step-no">2</div>
+                            <div class="step-time">
+                                <notempty name="info.updatetime"><div class="step-time-wraper">{$info.updatetime|date="Y-m-d H:i:s",###}</div><else />{$info.createtime}</notempty>
+                            </div>
+                </div>
+                </li>
+                <li>
+                    <switch name="info.status" >
+                        <case value="4|6"><div class="step-cur"></case>
+                        <case value="7|8"><div class="step-done"></case>
+                        <default /><div>
+                    </switch>
+                    <div class="step-name">4s店出库中</div>
+                    <div class="step-no">3</div>
+                    <div class="step-time">
+                        <if condition="$info.status eq 4">
+                            <button data-status="6" class="j_statusOpera btn btn-primary">操作</button>
+                        </if>
+                        <notempty name="info.updatetime_3"><div class="step-time-wraper">{$info.updatetime_3|date="Y-m-d H:i:s",###}</div></notempty>
+                         <div>操作人：{$info.updateuser_3}</div>
+                        <!--<button data-status="4" class="j_statusOpera btn">撤回操作</button> 已经改第三次了 pan-->
+                    </div>
+            </div>
+            </li>
+            <li>
+                <if condition="$info.status eq 7">
+                    <div class="step-cur">
+                        <elseif condition="$info.status eq 8" />
+                        <div class="step-done">
+                            <else/>
+                            <div>
+                </if>
+                <div class="step-name">到店看车付款提车</div>
+                <div class="step-no">4</div>
+                <div class="step-time">
+                    <if condition="$info.status eq 6">
+                        <button data-status="7" class="j_statusOpera btn btn-primary">操作</button>
+                    </if>
+                    <notempty name="info.updatetime_4"><div class="step-time-wraper">{$info.updatetime_4|date="Y-m-d H:i:s",###}</div></notempty>
+                     <div>操作人：{$info.updateuser_4}</div>
+                    <!--<button data-status="6" class="j_statusOpera btn">撤回操作</button> -->
+                </div>
+        </div>
+        </li>
+        <li class="step-last">
+            <if condition="$info.status eq 8">
+                <div class="step-done">
+                    <else/>
+                    <div>
+            </if>
+            <div class="step-name">订单完成</div>
+            <div class="step-no">5</div>
+            <div class="step-time">
+                <if condition="$info.status eq 7">
+                    <button data-status="8" class="j_statusOpera btn btn-primary">操作</button>
+                </if>
+                <notempty name="info.updatetime_5"><div class="step-time-wraper">{$info.updatetime_5|date="Y-m-d H:i:s",###}</div></notempty>
+                <div>操作人：{$info.updateuser_5}</div>
+            </div>
+    </div>
+    </li>
+    </ol>
+
+    </div>
+    <div class="flowstep-tip step-2">
+        <i class="icon-top-arrow"></i>
+        <switch name="info.status" >
+            <case value="0">
+                <p class="o-err-color">
+                    <i class="icon-tips"></i>
+                    订单未支付!
+                </p>
+            </case>
+            <case value="1">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    订单已支付,完善身份证!
+                </p>
+            </case>
+            <case value="2">
+                <p class="o-err-color">
+                    <i class="icon-tips"></i>
+                    订单已失效！
+                </p>
+            </case>
+            <case value="3">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    订单审核中!
+                </p>
+            </case>
+            <case value="4">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    资料审核成功!
+                </p>
+            </case>
+            <case value="5">
+                <p class="o-err-color">
+                    <i class="icon-tips"></i>
+                    资料审核失败，请重新上传身份证信息！
+                </p>
+            </case>
+            <case value="6">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    4s店目前已在备货中!
+                </p>
+            </case>
+            <case value="7">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    车已经出库!
+                </p>
+            </case>
+            <case value="8">
+                <p class="o-suc-color">
+                    <i class="icon-tips"></i>
+                    订单已完成!
+                </p>
+            </case>
+        </switch>
+    </div>
+    <div class="uc_order_info">
+        <div class="order_title_bar">
+            <div class="order_title"><span>商品信息</span></div>
+        </div>
+        <div class="order_content">
+            <table>
+                <colgroup>
+                    <col width="260">
+                    <col width="110">
+                    <!-- 宝贝 -->
+                    <col class="col1">
+                    <!-- 交易状态 -->
+                    <col class="col2">
+                    <!-- 单价（元） -->
+                    <col class="col3">
+                    <!-- 数量 -->
+                    <col class="col4">
+                    <!-- 优惠 -->
+                    <col class="col5">
+                    <!-- 合计（元） -->
+                    <col class="col6">
+                    <!-- 运费（元） -->
+                    <!-- 买/卖家信息 -->
+                </colgroup>
+                <tbody class="base-info">
+                <tr>
+                    <td>
+                        <span class="label">订单编号：</span>
+                        <span class="order-num">{$info.out_trade_no}</span>
+                    </td>
+                    <td colspan="3">
+
+                    </td>
+                    <td colspan="4"> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="label">成交时间：</span>
+                        <span class="trade-time">{$info.createtime}</span>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody class="goods-order">
+                <tr class="order-hd">
+                    <th class="item">商品名称</th>
+                    <th class="excolor">外观颜色</th>
+                    <th class="incolor">内饰颜色</th>
+                    <th class="price">底价(元)</th>
+                    <th class="upcitycard">上牌地</th>
+                    <th class="deposit">定金(元)</th>
+                    <th class="status">订单状态</th>
+                </tr>
+                <tr class="order-item">
+                    <td class="item">
+                        <div class="pic-info">
+                            <span class="pic"><img alt="{$info.carstyle}" src="{$info.exterior_img}"></span>
+                        </div>
+                        <div class="txt-info">
+                            <div class="desc">
+                             <span class="name">
+                               {$info.carstyle}
+                             </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="excolor">
+                        {$info.exterior_color_name}
+                    </td>
+                    <td class="incolor">
+                        {$info.interior_color_name}
+                    </td>
+
+                    <td class="price">{$info.low_price}
+                        <span class="city">({$info.low_price_city_name})</span>
+                    </td>
+                    <td class="upcitycard">
+                        {$info.card_place}
+                    </td>
+                    <td class="deposit">
+                        {$info.money}
+                    </td>
+                    <switch name="info.status" >
+                        <case value="0">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i>未支付</span>
+                            </td>
+                        </case>
+                        <case value="1">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i>订单已支付,完善身份证!</span>
+                            </td>
+                        </case>
+                        <case value="2">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i>订单已失效！</span>
+                            </td>
+                        </case>
+                        <case value="3">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i> 订单审核中!</span>
+                            </td>
+                        </case>
+                        <case value="4">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i> 资料审核成功!</span>
+                            </td>
+                        </case>
+                        <case value="5">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i> 资料审核失败，请重新上传身份证信息！</span>
+                            </td>
+                        </case>
+                        <case value="6">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i>4s店目前已在备货中!</span>
+                            </td>
+                        </case>
+                        <case value="7">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i> 车已经出库!</span>
+                            </td>
+                        </case>
+                        <case value="8">
+                            <td class="status">
+                                <span class="pay-status nopay"><i></i> 订单已完成!</span>
+                            </td>
+                        </case>
+                    </switch>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="uc_order_info">
+        <div class="order_title_bar">
+            <div class="order_title"><span>订车人信息</span></div>
+        </div>
+        <div class="order_content">
+            <table>
+                <colgroup>
+                    <col width="260">
+                    <col width="110">
+                    <!-- 宝贝 -->
+                    <col class="col1">
+                    <!-- 交易状态 -->
+                    <col class="col2">
+                    <!-- 单价（元） -->
+                    <col class="col3">
+                    <!-- 数量 -->
+                    <col class="col4">
+                    <!-- 优惠 -->
+                    <col class="col5">
+                    <!-- 合计（元） -->
+                    <col class="col6">
+                    <!-- 运费（元） -->
+                    <col class="col7">
+                    <!-- 买/卖家信息 -->
+                </colgroup>
+
+                <tbody class="goods-order">
+                <tr class="order-hd">
+                    <th class="item">订单人姓名</th>
+                    <th class="excolor">订单人电话</th>
+                    <th class="incolor">身份证</th>
+                    <th class="price">提车时间</th>
+                    <th class="upcitycard">购车方式</th>
+                    <th class="deposit">付款方式</th>
+                    <th class="status">购买保险</th>
+                    <th class="status">车险大礼包</th>
+                </tr>
+                <tr class="order-item">
+                    <td class="item">
+                        {$info.buyer_name}
+                    </td>
+                    <td class="excolor">
+                        {$info.buyer_tel}                            </td>
+                    <td class="incolor">
+                        <div class="inp_box">
+                            <if condition="($info.id_imgurl1 eq '') and ($info.id_imgurl2 eq '')">
+                                <!-- 未上传图片 begin -->
+                                <div class="uploadbox">
+                                    <div class="box j_tipsWrapper">
+                                        <div class="filebox">
+                                            <div class="imgbox">
+                                                <img src="/Public/Home/images/idcard_03.jpg" alt="身份证正面">
+
+                                            </div>
+                                            <a class="ui_button_primary ui_button_disable" href="javascript:;" id="J_uploadPositiveBtn"><u><i></i>身份证正面(未上传)</u>
+                                            </a>
+                                        </div>
+
+                                        <div class="filebox">
+                                            <div class="imgbox">
+                                                <img src="/Public/Home/images/idcard2_06.jpg" alt="身份证反面">
+                                            </div>
+                                            <a class="ui_button_primary ui_button_disable" href="javascript:;" id="J_uploadInverse Btn"><u><i></i>身份证反面（未上传）</u>
+                                            </a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- 未上传图片 end -->
+                                <else />
+                                <!-- 已上传图片 begin -->
+                                <div class="uploadbox">
+                                    <div class="box j_tipsWrapper">
+                                        <div class="filebox">
+                                            <div class="imgbox">
+                                                <if condition="$info.id_imgurl1 eq ''">
+                                                    <img src="/Public/Home/images/idcard_03.jpg" alt="身份证正面">
+
+                                                    <else />
+                                                    <a href="#cardFrontModal" role="button" data-toggle="modal"><img src="{$Think.const.OSS}{$info.id_imgurl1}" alt="身份证正面"></a>
+                                                    <div id="cardFrontModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h3 id="cardFrontModalLabel">身份证正面</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p><img src="{$Think.const.OSS}{$info.id_imgurl1}" alt="身份证正面"></p>
+                                                        </div>
+
+                                                    </div>
+                                                </if>
+                                            </div>
+                                            <a class="ui_button_primary" href="javascript:;" ><u><i></i>身份证正面</u>
+                                            </a>
+                                        </div>
+
+                                        <div class="filebox">
+                                            <div class="imgbox">
+                                                <if condition="$info.id_imgurl1 eq ''">
+                                                    <img src="/Public/Home/images/idcard2_06.jpg" alt="身份证面">
+                                                    <else />
+                                                    <a href="#cardInverseModal" role="button" data-toggle="modal"><img src="{$Think.const.OSS}{$info.id_imgurl2}" alt="身份证反面"></a>
+                                                    <div id="cardInverseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h3 id="cardInverseModalLabel">身份证反面</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p><img src="{$Think.const.OSS}{$info.id_imgurl2}" alt="身份证反面"></p>
+                                                        </div>
+
+                                                    </div>
+                                                </if>
+                                            </div>
+                                            <a class="ui_button_primary" href="javascript:;" ><u><i></i>身份证反面</u>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 已上传图片 end -->
+                            </if>
+                            <if condition="$info.status eq 3 or $info.status eq 5">
+                                <div class="opera-review">
+                                    请审核用户上传的身份证：<button data-status="4" class="j_statusImgOpera btn btn-primary">通过</button><button data-status="5" class="j_statusImgOpera btn btn-danger">不通过</button>
+                                </div>
+                            </if>
+                        </div>
+                    </td>
+
+                    <td class="price">{$info.buy_time}</td>
+                    <td class="upcitycard">{$info.car_mode}</td>
+                    <td class="deposit">{$info.buy_way} </td>
+                    <td class="status">{$info.insurance}</td>
+                    <td class="status">{$info.description}</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <!--  后台订单详情-未支付 end -->
+    </div>
+    </div>
+
+    </div>
+<!--    <script src="/Public/Admin/js/date/WdatePicker.js"></script>-->
+    <script src="/Public/Admin/js/confirm.js"></script>
+    <script>
+        $(function(){
+            var $orderInfo = $('#J_OrderInfo'), _url = $orderInfo.data('url'), _id = $orderInfo.data('id');
+
+            $orderInfo.on('click', '.j_statusImgOpera', function(e) {
+                var _status = $(this).data('status');
+                e.preventDefault();
+                $.ajax({
+                    url: _url,
+                    data: {id: _id, status: _status},
+                    success: function(a) {
+                        location.reload();
+                    },
+                    error: function() {
+                        this.errormsg()
+                    }
+                });
+            });
+            $orderInfo.on('click', '.j_statusOpera', function(e) {
+                e.preventDefault();
+                var _status = $(this).data('status');
+                Confirm.show('状态操作', '你确认操作订单状态吗？', {
+                    '确定': {
+                        'primary': true,
+                        'callback': function() {
+
+                            $.ajax({
+                                url: _url,
+                                data: {id: _id, status: _status},
+                                success: function(a) {
+                                    //console.log(a);
+                                    //debugger;
+                                    location.reload();
+                                },
+                                error: function() {
+                                    this.errormsg()
+                                }
+                            });
+                        }
+                    },
+                    '取消': {
+                        'primary': false,
+                        'callback': function() {
+                            Confirm.hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</block>

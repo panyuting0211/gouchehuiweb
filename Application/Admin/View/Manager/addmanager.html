@@ -1,0 +1,96 @@
+<extend name="Public/base"/>
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">添加账号</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+<form action="{:U('Manager/addManagerHandle')}" class="form-horizontal" method="post">
+    	<fieldset>
+	    	<div class="control-group">
+	    		<label class="control-label" for="title">用户名：</label>
+	    		<div class="controls">
+	    			<input id="account" type="text" name="admin_name">
+	    			<p class="help-block">6-22字母或数字</p>
+	    		</div>
+	    	</div>	
+			<div class="control-group">
+				<label class="control-label" for="sort">密码：</label>
+				<div class="controls">
+			    			<input id="sort" type="password" name="password" />
+			    			<p class="help-block">用户密码不能少于6位</p>
+			    		</div>
+			  </div>
+			<div class="control-group">
+				<label class="control-label" for="url">确认密码:</label>
+				<div class="controls">
+			    			<input id="url" type="password" name="repassword" />
+			    			<p class="help-block">用户密码不能少于6位</p>
+			    		</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="url">姓名:</label>
+				<div class="controls">
+			    			<input id="url" type="text" name="name" />
+			    			<!-- <p class="help-block">用户密码不能少于6位</p> -->
+			    		</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="url">手机号:</label>
+				<div class="controls">
+					<input type="text" name="tel" />
+					<!-- <p class="help-block">用户密码不能少于6位</p> -->
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="url">选择角色:</label>
+				<div class="controls">
+			    			<select name="role_id">
+		                       	<volist name="group" id="vo">
+			                       	<option value="{$vo.id}">{$vo.name}</option>
+			                    </volist>   	
+                       		</select>
+                       		<p class="help-block"></p>
+			    		</div>
+			</div>
+			<div class="control-group">
+
+    		<label class="control-label" for="title">账号状态：</label>
+    		<div class="controls">
+    		 <label class="radio inline">
+    			<input type="radio"  name="status" value="1" checked="checked">启用</label>
+    			 <label class="radio inline">
+                <input type="radio"  name="status" value="0">禁用</label>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>	
+		    <!-- <div class="control-group">
+		    		<label class="control-label" for="group">邮箱：</label>
+		    		<div class="controls">
+		    			<input id="group" type="text" name="email" />
+						<p class="help-block">用户邮箱，用于找回密码等安全操作</p>				
+		    		</div>
+		   	</div>		 	 -->	
+    	</fieldset>		
+    	<div class="form-actions">
+    		<button type="submit"  id="submit" class="btn btn-primary">确定</button>
+			<button class="btn btn-primary" onClick="window.location.href='__CONTROLLER__/managerlist';return false;">返回</button>
+    	</div>	
+    	</form>
+		<!-- Button to trigger modal -->
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</block>

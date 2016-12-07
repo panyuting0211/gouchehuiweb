@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>会员注册 - 购车惠</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	<script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+	<div class="RL_header">
+		<div class="main_container clearfix">
+			<h1 class="RL_logo">
+				<a href="/" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+			</h1>
+			<div class="RL_gradient_line G_fl"></div>
+			<h2 class="RL_ftitle G_fl G_f22">
+				注册
+			</h2>
+			<div class="RL_returnHome G_fr">
+				<a href="/" title="返回购车惠首页" class="G_f20">返回购车惠首页</a>
+			</div>
+		</div>
+	</div>
+	<div class="main_container">
+		<div class="reg_form">
+			<ul class="reg_hd G_f24 clearfix" id="tabs">
+				<li class="ui-switchable-item cur" data-regmode="tel" data-modename="请输入手机号">手机注册<i class="icon_down_arrow"></i></li>
+				<li class="" data-regmode="email" data-modename="请输入常用邮箱" style="background:#EFEFEF;color:#E2E2E2;cursor:default;">邮箱注册<i class="icon_down_arrow"></i></li>
+			</ul>
+			<div class="reg_bd">
+			<form id="form1" action="/index.php/Home/Public/doReg.html" method="post">
+				<div class="ui-switchable-panel">
+					<div class="ui_input_text">
+					<input type="text" name="tel" id="tel" class="J_loginName inp"  placeholder="请输入手机号" autocomplete="off" value="">
+					 <div class="input-tip" id="loginName-tip">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+					</div>
+						<div class="ui_input_text" id="J_code">
+							<input type="text" id="code" name="code" placeholder="输入验证码" class="code inp"  autocomplete="off" value="">
+							<a href="javascript:;" id="J_CreateMobileCode" class="G_btn_b btn_42px">
+							获取验证码
+							</a>
+							<div class="input-tip" id="codeTip" style="display:none;">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+							</div>
+						<div class="ui_input_text hide" id="J_identifyInner">
+							<input type="text" id="identify" name="identify" placeholder="输入验证码" class="G_fl code inp"  autocomplete="off" value="">
+							<img src="/index.php/Home/Public/verify.html" alt="如验证码无法辨别，点击即可刷新。"  onclick='this.src=this.src+"?"+Math.random()' style="cursor:pointer;"/>
+							<div class="input-tip" id="codeTip1">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+							</div>	
+						<div class="ui_input_text">
+							<input type="password" class="inp" id="password" name="password" placeholder="密码：6-12位数字字母组合"  autocomplete="off" value="">
+							 <div class="input-tip" id="password-tip">
+                                    <div class="input-tip-inner">
+                                    </div>
+                                </div>
+							<div id="password-state" class="password-state hide">
+                                <div class="input-tip-inner">
+                                    <span class="reg_mes mes_pass_in"></span>
+                                </div>
+                            </div>
+							</div>
+						<!-- <div class="ui_input_text">
+							<input type="text" id="invite_code" name="invite_code" placeholder="邀请码（非必填）" class="invitation_code"  autocomplete="off" value=""><a href="#" class="G_f16 ftx01">（了解邀请码活动详情）</a></div> -->
+						<div class="ui_input_text ui_agreement">
+							<input id="J_agreementChk" checked="checked" name="cbxAgree" type="checkbox" value=""><span id="agreement" class="agreement G_f16 ftx02">我已阅读条款并接受<a class="ftx_01" href="javascript:;" id="J_Protocol">《购车惠服务协议》</a></span>
+						</div>
+						<div class="ui_input_btn">
+							<input type="submit" class="submit_btn G_btn_a btn_54px G_btn_disabled" disabled="disabled" value="注册" name="commit" id="J_Submit" style="width: 100%;">
+						</div>
+
+						<div class="ui_input_text G_tc G_f16">
+							已有账号？ <a href="{:U('login')}" class="ftx01">立即登录</a>
+					</div>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="{$Think.const.js_URL}/jquery-1.8.1.min.js"></script>
+	<script type="text/javascript" src="{$Think.const.js_URL}app.js"></script>
+	<script type="text/javascript" src="{$Think.const.js_URL}register_tn.js"></script>
+</body>
+</html>

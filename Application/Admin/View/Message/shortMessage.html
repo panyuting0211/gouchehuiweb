@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>购车惠后台管理系统</title>
+    <link rel="stylesheet" href="http://www.gouchehui.com/Public/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://www.gouchehui.com/Public/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="http://www.gouchehui.com/Public/Admin/css/matrix-media.css" />
+    <link rel="stylesheet" href="http://www.gouchehui.com/Public/Admin/css/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="http://www.gouchehui.com/Public/Admin/css/Css.css" />
+    <script src="http://www.gouchehui.com/Public/Admin/js/jquery.min.js"></script>
+    <script src="http://www.gouchehui.com/Public/Admin/js/jquery.ui.custom.js"></script>
+    <script src="http://www.gouchehui.com/Public/Admin/js/jquery-1.7.2.min.js"></script>
+    <script src="http://www.gouchehui.com/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="http://www.gouchehui.com/Public/Admin/js/matrix.js"></script>
+    <script src="http://www.gouchehui.com/Public/Admin/js/jquery.kkPages.js"></script>
+    
+	<style type="text/css">
+		#shortMes .shortMes-h3{
+			padding: 0 10px;
+			margin-top: 20px;
+			height: 35px;
+			line-height: 35px;
+			border-bottom: 1px solid #ccc;
+		}
+		#shortMes .row-fluid [class*="span"]{
+			margin-left: 0;
+		}
+		#shortMes ul{
+			margin-top: 20px;
+		}
+		#shortMes input[type=checkbox]{
+			margin: -2px 8px 0 0;
+		}
+	</style>  
+</head>
+	<body>
+		<div id="content">
+			<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+				<button class="close fixed" style="margin-top: 4px;">×</button>
+				<div class="alert-content">返回内容！</div>
+			</div>
+			
+			<div id="content-wrap">
+				<div id="content-header">
+			        <div id="breadcrumb">
+			           <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>互动管理</a>
+			           <a href="#" title="Go to Home" class="tip-bottom">短信发送</a>
+			        </div>
+			    </div>
+			    
+			    <div class="container-fluid" id="shortMes">
+			    	<h3 class="shortMes-h3">
+			    		<label name="name" value="">
+							<input name="" value="14"  type="checkbox"/><span>全选</span>
+						</label>
+			    	</h3>
+			    	<ul class="row-fluid">
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    		<li class="span2">
+			    			<label name="name" value="">
+								<input name="" value="14"  type="checkbox"/>139123408759
+							</label>
+			    		</li>
+			    	</ul>
+			    	<p>
+					  <button class="btn btn-primary" type="button">点击发送</button>
+					</p>
+			    </div>
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+			$(function(){
+				$(".shortMes-h3 label input").click(function(){
+					var liinput=$(this).parents("h3").siblings("ul").find("li input[type=checkbox]");
+					if($(this).is(":checked")){
+						liinput.attr("checked",true);
+						$(this).next("span").text("全不选");
+					}else{
+						$(this).attr("checked",false)
+						liinput.attr("checked",false);
+						$(this).next("span").text("全选");
+					}
+				})
+			})
+			
+			getMes();
+	
+			function getMes(){
+				$("#shortMes h3").css('display','none');
+				$("#shortMes ul").css('display','none');
+				$("#shortMes p").css('display','none');
+				$("#shortMes ul").empty();
+				$("#inter_lists").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+				
+				var telval=$('#brand').find('input:checked').val();
+				
+				$.post(
+					"",
+					{},
+					function(data,textStatus){
+						
+					}
+				)
+			}
+		  
+//		  var url_ajax = "/index.php/subject/activesList";
+//          
+//	        $("#inter_lists").delegate(".page a", "click", function() {
+//	            var page = $(this).attr("data-page");
+//	            getPage(page);
+//	        })
+//	        getPage(1);
+//
+//          
+//          
+//          function getPage(page) {
+//              $("#inter_lists h4").css('display','none');
+//              $("thead").css('display','none');
+//              $('tbody').empty();
+//              $("#inter_lists").prepend("<div class='onload' style='text-align:center'><img src='/public/admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+//              var brand  =$('#brand').find('option:selected').val();
+//              var model  =$('#model').find('option:selected').val();
+//              var car    =$('#car').find('option:selected').val();
+//
+//           
+//              $.post( "/index.php/subject/activesList",
+//                  {brand:brand,model:model,car:car,p:page},
+//                  function(data,textStatus){
+//                      $('tbody').empty();
+//                      $('#inter_lists > .onload').remove();
+//              		$("#inter_lists h4").css('display','');
+//                      $("thead").css('display','');
+//                      var pagelist=data[0];          
+//                      $('#inter_lists .page').html(pagelist);
+//                      var info=data.list;
+//                      $.each(info,function(key,val){
+//                          $('tbody').append("<tr><td>"+val.brand_name+"</td><td>"+val.car_model_name+"</td><td>"+val.car_name+"</td><td>"+val.click_num+"</td><td>"+val.ip_click+"</td></tr>")
+//                      });
+//
+//                  },
+//                  "json");
+//          }
+//		});
+
+	</script>
+	</body>
+</html>

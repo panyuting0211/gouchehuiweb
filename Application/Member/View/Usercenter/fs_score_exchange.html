@@ -1,0 +1,127 @@
+<extend name="UC_base" />
+<block name="body">
+    <div id="uc_main">
+        <div class="UC_main_r">
+            <h2 class="UC_main_r_tit">积分礼品中心
+                <if condition="$role eq 1">
+                    <a href="UC_member_accInfo.html"><i></i>返回上一页</a>
+                    <elseif condition="$role eq 2"/>
+                    <a href="FS_member_accInfo.html"><i></i>返回上一页</a>
+                </if>
+            </h2>
+            <div class="UC_main_r_id">
+                <div class="J_giftWrap" id="J_giftWrap">
+                    <div class="title">
+                        尊敬的4s店用户你好！您的当前4S店积分为<span data-userscore="{$score}" class="score">{$score}</span>
+                    </div>
+                    <ul>
+                        <li class="giftbox" data-id="g001" data-name="ZIPPO打火机" data-score="400">
+                            <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (3).jpg" alt="ZIPPO"></div>
+                            <div class="giftinfo">
+                                <div class="name">ZIPPO打火机（1个）<span class="gift_score">400积分</span></div>
+                                <p class="des">名称：ZIPPO锻纱；工艺：表面镀铬/喷射打磨；产地：美国宾夕法尼亚；外壳：纯铜；内胆：白钢；产品尺寸：55*35*12mm；火机克重55g</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 400">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="500元苏果超市购物卡" data-id="g002" data-score="500">
+                            <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (6).jpg" alt="苏果卡"></div>
+                            <div class="giftinfo">
+                                <div class="name">500元苏果超市购物卡（1个）<span class="gift_score">500积分</span></div>
+                                <p class="des">以收到的商品实物为主。本卡仅限在苏果超市直营店使用。本卡可分次使用，不能充值，不找零，不提取现金，金额使用完后，由苏果超市回收。本卡不记名、不挂失、遗失不补。5.购卡时苏果超市已向购卡人开具了发票，使用本卡时不再重复提供发票。</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 500">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="500元大润发超市购物卡" data-id="g003" data-score="500">
+                        <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (4).jpg" alt="大润发"></div>
+                            <div class="giftinfo">
+                                <div class="name">500元大润发超市购物卡（1张）<span class="gift_score">500积分</span></div>
+                                <p class="des">本卡使用范围以购卡的章程或协议为准。本卡可分次使用，卡内金额用完后，此卡回收。本卡不挂失、不提取现金、不计息、丢失不补。有效期三年（自发卡之日起）。如过期，可到开卡门店服务台办理延期手续。本卡需妥善保管，请勿接触手机等磁性物质，并保持卡面清洁。持卡人应依据由本公司制定的法律许可范围内的使用规则进行使用。本公司对本卡的使用程序和要求拥有法律许可范围内的解释权。</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 500">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="古驰(GUCCI)花之舞香水 75ML" data-id="g004" data-score="1500">
+                        <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (1).jpg" alt="香水"></div>
+                            <div class="giftinfo">
+                                <div class="name">古驰(GUCCI)花之舞香水 75ML（1瓶）<span class="gift_score">1500积分</span></div>
+                                <p class="des">商品名称：古驰(GUCCI)花之舞香水 商品规格：75ML；类型：EDP淡香精；产地：法国；包装：正装香水有外盒，有塑封；保 质 期:5年；香调：花香调；前调：橘子、牡丹；中调：玫瑰、桂花；后调：广藿香、檀香</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 1500">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="2000元金鹰购物卡" data-id="g005" data-score="2000">
+                            <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (7).jpg" alt="金鹰卡"></div>
+                            <div class="giftinfo">
+                                <div class="name">2000元金鹰购物卡（1个）：<span class="gift_score">2000积分</span></div>
+                                <p class="des">以收到的商品实物为主。金鹰贵宾积分卡可在全国金鹰连锁店使用。金鹰贵宾积分卡可分次使用，不可兑换现金。金鹰贵宾积分卡不记名，不挂失，丢失后不予办理补卡，请持卡人妥善保管。新版金鹰贵宾积分卡购物时不再享受VIP积分。新版金鹰贵宾积分卡有效期为三年，过期可至客服中心提供延期服务</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 2000">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="iPad  Air 2" data-id="g007" data-score="3800">
+                        <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (8).jpg" alt="iPad"></div>
+                            <div class="giftinfo">
+                                <div class="name">Apple iPad  Air 2 金色 64G WLAN版 9.7英寸平板电脑（1台）<span class="gift_score">3800积分</span></div>
+                                <p class="des">【屏幕描述】 高分辨率 Retina 显示屏，多点触摸，采用防油渍防指纹涂层 全层压显示屏 抗反射涂层,264 ppi；【摄像头】iSight 摄像头：800 万像素自动对焦；FaceTime 摄像头：120 万像素照片；720p HD 高清视频；【续航时间】 使用无线网络浏览网页，或观看视频，或聆听音乐，使用时间长达 10 小时，具体时间视使用环境而定</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 3800">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="iphone 6s 16G 金色" data-id="g008" data-score="6500">
+                            <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (2).jpg" alt="iphone"></div>
+                            <div class="giftinfo">
+                                <div class="name">iphone 6s 16G 金色（1台）<span class="gift_score">6500积分</span></div>
+                                <p class="des">【颜色】玫瑰金色；【网络】2G、3G、4G全网通；【存储】 机身内存16GB ROM(全新状态 可用存储空间11.2GB)；支持广阔视角的双域像素；正面采用防油渍防指纹涂层；支持多种语言文字同时显示</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 6500">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                        <li class="giftbox" data-name="古驰GUCCI女士玫瑰色PVC双G单肩手提包353440 KGDHZ 9777" data-id="g006" data-score="7000">
+                            <div class="imgbox"><img src="{$Think.const.IMG_URL}gift (5).jpg" alt="古驰GUCCI女士包"></div>
+                            <div class="giftinfo">
+                                <div class="name">古驰GUCCI女士玫瑰色PVC双G单肩手提包353440 KGDHZ 9777（1个)<span class="gift_score">7000积分</span></div>
+                                <p class="des">Gucci在皮鞋制作上有着自己的见解，每款产品都融汇了悠久的历史和高标准的制作工艺。Gucci做工考究，整体手工车缝走线，平整均匀，大方优雅同时不失现代美感。独特的风格、优质的材质，贴合剪裁及细密的针脚精致耐用，彰显品牌制作工艺。喜爱古驰不仅仅是因为它在时尚界的名声显赫，更多是因为它拥有精致的细节处理。每一道镶边工序都需花费数小时手工完成，并且通过加工提高其可塑性。</p>
+                                <div class="numberbox"><span class="num">库存充足</span><span class="usable"></span><div class="mask"></div></div>
+                                <if condition="$score EGT 2500">
+                                    <input type="submit" class="exchange usable G_btn_a" value="可兑换"><!--usable表示积分充足 unable 表示积分不足 用于JS判断 勿遗漏-->
+                                    <else/>
+                                    <input type="submit" class="exchange unable G_btn_a" value="积分不足">
+                                </if>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

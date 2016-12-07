@@ -1,0 +1,102 @@
+<extend name="Public/base"/>
+<block name="body">
+<div id="content">
+<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+<div id="content-wrap">
+ <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a href="#" class="current">{$atitle}</a> </div>
+    <h1>{$atitle}</h1>
+  </div>
+  <div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+
+<form action="{:U('Manager/addNodeHandle')}" class="form-horizontal" method="post">
+    	<fieldset>
+    	<div class="control-group">
+    		<label class="control-label" for="title">英文名称:</label>
+    		<div class="controls">
+    			<input id="name" type="text" name="name">
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="title">中文名称:</label>
+    		<div class="controls">
+    			<input id="name" type="text" name="title">
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="title">是否显示：</label>
+    		<div class="controls">
+         <label class="radio inline">
+    			<input type="radio"  name="display" value="1" checked="checked"/>显示</label>
+           <label class="radio inline">
+                <input type="radio"  name="display" value="0"/>不显示</label>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="title">类型：</label>
+    		<div class="controls">
+    			<select name="level">
+                       	<option value="1">项目</option>
+                       	<option value="2">模块</option>
+                       	<option value="3">操作</option>
+                </select>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="title">父节点：</label>
+    		<div class="controls">
+    			<select name="pid">
+                       	<option value="0">根节点</option>
+                       	<volist name="node" id="vo">
+                       		<if condition="$vo.level eq 1">
+                       		<option value="{$vo.id}">{$vo.title}</option>
+                       		<else />
+                       		<option value="{$vo.id}">　| {$vo.title}</option>
+                       		</if>
+                       	</volist>
+                </select>
+    			<p class="help-block"></p>
+    		</div>
+    	</div>	
+		<div class="control-group">
+			<label class="control-label" for="tip">描述：</label>
+		
+			<div class="controls">
+		    <textarea class="form-control" id="tip" name="remark" rows="7"></textarea>
+				<p class="help-block"></p>
+			</div>
+  		</div>
+  		
+  		<div class="control-group">
+			<label class="control-label" for="tip">排序：</label>
+		
+			<div class="controls">
+		    	<input name="sort" type="text" value="" />
+				<p class="help-block"></p>
+			</div>
+  		</div>
+
+    	</fieldset>		
+    	<div class="form-actions">
+    		<button type="submit"  id="submit" class="btn btn-primary">确定</button>
+			<button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+    	</div>	
+    	</form>
+		<!-- Button to trigger modal -->
+
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+</block>

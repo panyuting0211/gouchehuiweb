@@ -1,0 +1,629 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">账号资料</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="n_uc_base_info.html" title="">基本资料</a></li>
+                <li class="cur"><a href="n_uc_base_info_address.html" title="">地址管理</a></li>
+                <li><a href="n_uc_base_info_pic.html" title="">头像修改</a></li>
+                <li><a href="n_uc_base_info_modefypsw.html" title="">修改密码</a></li>
+            </ul>
+            <div class="address_magment ohd" id="J_address_magment">
+                <ul class="address_listbox">
+                    <!--<li class="address_info">-->
+                    <!--<p class="add_new_btn G_f16">新增地址</p>-->
+                    <!--</li>-->
+                    <!--<li class="address_info G_f14 default" data-default="true" data-name="张三" data-telephone="13010100101" data-provice="江苏省" data-city="南京市" data-area="玄武区" data-address="徐庄软件园3栋">-->
+                    <!--<div class="l-address">-->
+                    <!--<h2 class="title">默认地址<i class="write_btn"></i></h2>-->
+                    <!--<div class="user_info">-->
+                    <!--张三<span class="telephone">13010100101</span>-->
+                    <!--</div>-->
+                    <!--<p class="address_slt">-->
+                    <!--<span class="provice_txt">江苏省</span>-->
+                    <!--<span class="city_txt">南京市</span>-->
+                    <!--<span class="area_txt">玄武区</span>-->
+                    <!--</p>-->
+                    <!--<div class="address_specific">徐庄软件园3栋</div>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="{$Think.const.JS_URL}app.js"></script>
+    <script src="{$Think.const.JS_URL}citiesJSON.js"></script>
+    <script>
+        $(function(){
+            var qianzhui = "/member.php";
+            var addressList = $("#J_address_magment .address_listbox");
+            var noaddress = $('<li class="address_info noaddress"><p class="add_new_btn G_f16">新增地址</p></li>');
+            $.ajax({
+                url: qianzhui + "/MemberGeneral/receipt_address_list",
+                type:"post",
+                dataType: "json",
+                success:function(db){
+
+                    if(db.status == 0){
+                        //没有地址
+                        addressList.html(noaddress);
+                    }else{
+
+                        var listr = '';
+                        for(var i =0; i<db.list.length; i++){
+                            if(db.list[i].status == 1){
+                                //默认地址
+                                var o = db.list[i];
+
+                                var li = $('<li class="address_info G_f14 default" data-addressid="'+ o.id +'" data-default="true" data-name="'+ o.receiver +'" data-telephone="'+ o.telphone +'" data-provinceid="'+ o.province_id +'" data-provice="'+ o.receipt_province +'" data-cityid="'+ o.city_id +'" data-city="'+ o.receipt_city +'" data-quarterid="'+ o.quarter_id +'" data-area="'+ o.receipt_quarter +'" data-address="'+ o.receipt_address +'">'+
+                                        '<div class="l-address">'+
+                                        '<h2 class="title">默认地址<i class="write_btn"></i></h2>'+
+                                        '<div class="user_info">'+
+                                        ''+ o.receiver +'<span class="telephone">'+ o.telphone +'</span>'+
+                                        '</div>'+
+                                        '<p class="address_slt">'+
+                                        '<span class="provice_txt">'+ o.receipt_province +'</span>'+
+                                        '<span class="city_txt">'+ o.receipt_city +'</span>'+
+                                        '<span class="area_txt">'+ o.receipt_quarter +'</span>'+
+                                        '</p>'+
+                                        '<div class="address_specific">'+ o.receipt_address +'</div>'+
+                                        '</div>'+
+                                        '</li>');
+                            }else{
+
+                                listr += '<li class="address_info G_f14 " data-addressid="'+ db.list[i].id +'" data-default="true" data-name="'+ db.list[i].receiver +'" data-telephone="'+ db.list[i].telphone +'" data-provinceid="'+ db.list[i].province_id +'" data-provice="'+ db.list[i].receipt_province +'" data-cityid="'+ db.list[i].city_id +'" data-city="'+ db.list[i].receipt_city +'" data-quarterid="'+ db.list[i].quarter_id +'" data-area="'+ db.list[i].receipt_quarter +'" data-address="'+ db.list[i].receipt_address +'">'+
+                                        '<div class="l-address">'+
+                                        '<h2 class="title">地址信息<i class="write_btn"></i></h2>'+
+                                        '<div class="user_info">'+
+                                        ''+ db.list[i].receiver +'<span class="telephone">'+ db.list[i].telphone +'</span>'+
+                                        '</div>'+
+                                        '<p class="address_slt">'+
+                                        '<span class="provice_txt">'+ db.list[i].receipt_province +'</span>'+
+                                        '<span class="city_txt">'+ db.list[i].receipt_city +'</span>'+
+                                        '<span class="area_txt">'+ db.list[i].receipt_quarter +'</span>'+
+                                        '</p>'+
+                                        '<div class="address_specific">'+ db.list[i].receipt_address +'</div>'+
+                                        '</div>'+
+                                        '</li>'
+                            }
+                        };
+//                      var li = $('<li class="address_info G_f14 default" data-default="true" data-name="'+  +'" data-telephone="13010100101" //data-provice="江苏省" data-city="南京市" data-area="玄武区" data-address="徐庄软件园3栋">'+
+//                                '<div class="l-address">'+
+//                                '<h2 class="title">默认地址<i class="write_btn"></i></h2>'+
+//                                '<div class="user_info">'+
+//                                '张三<span class="telephone">13010100101</span>'+
+//                                '</div>'+
+//                                '<p class="address_slt">'+
+//                                '<span class="provice_txt">江苏省</span>'+
+//                                '<span class="city_txt">南京市</span>'+
+//                                '<span class="area_txt">玄武区</span>'+
+//                                '</p>'+
+//                                '<div class="address_specific">徐庄软件园3栋</div>'+
+//                                '</div>'+
+//                                '</li>');
+                        addressList.append(li);
+                        addressList.append(listr);
+                        addressList.append(noaddress);
+                    };
+
+
+                    /*
+                     * 地址管理
+                     * */
+                    //新增地址
+                    addressList.find(".address_info").on("click",".add_new_btn",function (e) {
+                        /*
+                         * 给当前li添加标识
+                         * */
+                        e.stopPropagation();
+                        e.preventDefault();
+                        $(this).closest("li").addClass("edit");
+
+                        var source = $(".add_new");
+
+                        source.length || (source = $('<div class="add_new addre">' +
+                                '<div class="titbox G_f16">' +
+                                '<h2 class="tit">新增地址<span>( <i class="icon_star"></i>星号为必填项 )</span></h2>' +
+                                '</div>' +
+                                '<dl>' +
+                                '<dt class="star">收&nbsp;&nbsp;货&nbsp;&nbsp;人&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<input type="text" class="receiver">' +
+                                '<div class="tips"><p class=""></p></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt class="star">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<select class="provice" name="proveice" data-lvl="0">' +
+                                '</select>' +
+                                '<select class="city" name="city" data-lvl="1">' +
+                                '<option value="0">选择市</option>' +
+                                '</select>' +
+                                '<select class="area" name="district" data-lvl="2">' +
+                                '<option value="0">选择区</option>' +
+                                '</select>' +
+                                '<input type="text" class="address" placeholder="请输入详细地址">' +
+                                '<div class="tips"></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt class="star">手机号码&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<input type="text" class="telephone">' +
+                                '<div class="tips"></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt></dt>' +
+                                '<dd>' +
+                                '<input type="checkbox" class="default" id="default" checked><label for="default" class="default_txt">设为默认地址</label>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt></dt>' +
+                                '<dd>' +
+                                '<input type="submit" class="submit G_btn_a" value="保存">' +
+                                '<input type="submit" class="cancel G_btn_c" value="取消">' +
+                                '</dd>' +
+                                '</dl>' +
+                                '</div>'));
+
+                        /*
+                         * 默认添加省份
+                         * */
+                        /*省*/
+                        $.ajax({
+                            url:qianzhui + "/MemberGeneral/province",
+                            success:function(db){
+                                var provinceStr='';
+                                for(var i =0;i<db.length ;i++){
+                                    provinceStr+='<option value="'+ db[i].value +'">'+ db[i].name  +'</option>'
+                                }
+                                source.find("[name=proveice]").html(provinceStr);
+                            }
+                        });
+                        /*市*/
+                        source.find("[name=proveice]").on("change",function(){
+                            var data= {
+                                province:source.find("[name=proveice]").find("option:selected").val()
+                            };
+                            $.ajax({
+                                url:qianzhui + "/MemberGeneral/city",
+                                data:data,
+                                success:function(db){
+                                    var citesStr='<option value="">请选择市</option>';
+                                    for(var k =0;k<db.length ;k++){
+                                        citesStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                    }
+                                    source.find("[name=city]").html(citesStr);
+                                }
+                            });
+                        });
+                        /*区*/
+                        source.find("[name=city]").on("change",function(){
+                            var data= {
+                                city:source.find("[name=city]").find("option:selected").val()
+                            };
+
+                            $.ajax({
+                                url:qianzhui + "/MemberGeneral/district",
+                                data:data,
+                                success:function(db){
+
+                                    var districtStr='<option value="">请选择区/县</option>';
+                                    for(var k =0;k<db.length ;k++){
+                                        districtStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                    }
+                                    source.find("[name=district]").html(districtStr);
+                                }
+                            });
+                        })
+
+                        $('#J_address_magment').append(source);
+
+                        /*地址保存*/
+                        $('#J_address_magment .addre').on("click", ".submit", function (e) {
+                            var $this = $(this);
+                            var $receiver = $(".add_new .receiver");
+                            var $address = $(".add_new .address");
+                            var $telephone = $(".add_new .telephone");
+                            var data = {
+                                receiver: $receiver.val(),
+                                receipt_province: $(".add_new").find("select[name=proveice] option:selected").text(),
+                                receipt_city: $(".add_new").find("select[name=city] option:selected").text(),
+                                receipt_quarter: $(".add_new").find("select[name=district] option:selected").text(),
+                                receipt_address: $(".add_new").find(".address").val(),
+                                province_id: $(".add_new").find("select[name=proveice] option:selected").val(),
+                                city_id: $(".add_new").find("select[name=city] option:selected").val(),
+                                quarter_id: $(".add_new").find("select[name=district] option:selected").val(),
+                                address: $(".add_new").find(".address").val(),
+                                telphone: $(".add_new").find(".telephone").val(),
+                                status: checkbox(),
+                            };
+
+                            function checkbox(){
+                                if($("#default").is(":checked")){
+                                    return 1;
+                                }
+                                else {
+                                    return 0;
+                                }
+                            }
+                            var r = receiverChk($receiver);
+                            var m = mobileChk($telephone);
+                            var a = addressChk($address);
+
+                            if (r && m && a) {
+                                $.ajax({
+                                    url: qianzhui + '/MemberGeneral/receipt_address_add',
+                                    type: "POST",
+                                    data: data,
+                                    beforeSend:function(){
+                                        $this.val('提交中').attr('disabled',true);//改变提交按钮上的文字并将按钮设置为不可点击
+                                    },
+                                    success: function (db) {
+                                        if(db.status == 2){
+                                            //成功
+                                            HUI && (HUI.PopOut.alert([db.msg,, ""], "m"), $({}).delay(2e3).queue(function() {
+                                                HUI.PopOut.closeMask()}));
+                                            $("#J_address_magment").find(".add_new ").remove();//删除地址框
+                                            location.reload();
+                                        }else{
+                                            HUI && (HUI.PopOut.alert([db.msg,, ""], "m"), $({}).delay(2e3).queue(function() {
+                                                HUI.PopOut.closeMask()}));
+                                        }
+                                    },
+                                    complete:function(){
+                                        $this.val('提交').attr('disabled',false);//改变提交按钮上的文字并将按钮设置为可以点击
+                                    }
+                                })
+                            }
+                        });
+
+                    });
+
+                    /*地址判断*/
+                    function addressChk(o) {
+                        var dd = o.closest("dd"),
+                                provice = dd.find("select[name=proveice] option:selected").text(),
+                                city = dd.find("select[name=city] option:selected").text(),
+                                area = dd.find("select[name=area] option:selected").text(),
+                                address = dd.find(".address").val();
+
+                        if (provice == "选择省" || city == "选择市" || area == "选择区" || address == "") {
+                            dd.find(".tips").html("<p class='error'><i class='ui_icon_20 icon_warn icon_warn_err'></i>您的输入有误！</p>");
+                            return false;
+                        } else {
+                            dd.find(".tips").html("<p class='suc'><i class='ui_icon_20 icon_warn icon_warn_suc'></i>正确！</p>");
+                            return true;
+                        }
+                    }
+
+
+                    /*收货人判断*/
+                    function receiverChk(o) {
+                        if (o.val() == "") {
+                            o.closest("dd").find('.tips').html("<p class='error'><i class='ui_icon_20 icon_warn icon_warn_err'></i>您输入的收货人姓名有误！</p>");
+                            return false;
+                        } else {
+                            o.closest("dd").find('.tips').html("<p class='suc'><i class='ui_icon_20 icon_warn icon_warn_suc'></i>正确！</p>");
+                            return true;
+
+                        }
+                    };
+
+
+
+                    /*手机号判断*/
+                    function mobileChk(o) {
+                        var mobile = /^((1[0-9][0-9]{1})|159|153)+\d{8}$/;
+                        if (o.val() == "" || !o.val().match(mobile)) {
+                            o.closest("dd").find(".tips").html("<p class='error'><i class='ui_icon_20 icon_warn icon_warn_err'></i>请输入正确的手机号！</p>");
+                            return false;
+                        } else {
+                            o.closest("dd").find('.tips').html("<p class='suc'><i class='ui_icon_20 icon_warn icon_warn_suc'></i>正确！</p>");
+                            return true;
+                        }
+                        ;
+                    }
+
+                    /*姓名判断（判断中英文）*/
+                    function nameCHK(o) {
+                        var name = /^([\u4e00-\u9fa5]|[A-Za-z])$/;
+                        if (o.val() == "" || !o.val().match(name)) {
+                            o.closest("dd").find(".tips").html("<p class='error'><i class='ui_icon_20 icon_warn icon_warn_err'></i>您的输入不正确！</p>");
+                            return false;
+                        } else {
+                            o.closest("dd").find('.tips').html("<p class='suc'><i class='ui_icon_20 icon_warn icon_warn_suc'></i>您的输入正确！</p>");
+                            return true;
+                        }
+                        ;
+                    }
+
+                    /*地址修改*/
+                    $("#J_address_magment").find(".write_btn").on("click", function (e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var _li = $(this).closest("li");
+                        _li.addClass("edit");
+                        var data = {
+                            id:_li.data("addressid"),
+                            receipt_province:_li.data("provice"),
+                            receipt_city:_li.data("city"),
+                            receipt_quarter:_li.data("area"),
+                            province_id:_li.data("provinceid"),
+                            city_id:_li.data("cityid"),
+                            quarter_id:_li.data("quarterid"),
+                            default: _li.data("default"),
+                            name: _li.data("name"),
+                            telephone: _li.data("telephone"),
+                            address:_li.data("address"),
+                        };
+
+
+                        var source = $(".add_new");
+
+                        source.length || (source = $('<div class="add_new modadd">' +
+                                '<div class="titbox G_f16">' +
+                                '<h2 class="tit">修改地址<span>( <i class="icon_star"></i>星号为必填项 )</span></h2>' +
+                                '</div>' +
+                                '<dl>' +
+                                '<dt class="star">收&nbsp;&nbsp;货&nbsp;&nbsp;人&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<input type="text" class="receiver" value="' + data.name + '">' +
+                                '<div class="tips"><p class=""></p></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt class="star">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<select class="provice" name="proveice" data-lvl="0">' +
+                                '</select>' +
+                                '<select class="city" name="city" data-lvl="1">' +
+                                '<option value="0">选择市</option>' +
+                                '</select>' +
+                                '<select class="area" name="district" data-lvl="2">' +
+                                '<option value="0">选择区</option>' +
+                                '</select>' +
+                                '<input type="text" class="address" placeholder="请输入详细地址" value="' + data.address + '">' +
+                                '<div class="tips"></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt class="star">手机号码&nbsp;:</dt>' +
+                                '<dd>' +
+                                '<input type="text" class="telephone" value="' + data.telephone + '">' +
+                                '<div class="tips"></div>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt></dt>' +
+                                '<dd>' +
+                                '<input type="checkbox" class="default" id="default" checked><label for="default" class="default_txt">设为默认地址</label>' +
+                                '</dd>' +
+                                '</dl>' +
+                                '<dl>' +
+                                '<dt></dt>' +
+                                '<dd>' +
+                                '<input type="submit" class="submit G_btn_a" value="保存">' +
+                                '<input type="submit" class="cancel G_btn_c" value="取消">' +
+                                '</dd>' +
+                                '</dl>' +
+                                '</div>'));
+
+                        /*
+                         * 默认添加省份
+                         * */
+                        /*省*/
+                        $.ajax({
+                            url:qianzhui + "/MemberGeneral/province",
+                            success:function(db){
+                                var provinceStr='';
+                                for(var i =0;i<db.length ;i++){
+                                    provinceStr+='<option value="'+ db[i].value +'">'+ db[i].name  +'</option>'
+                                }
+                                source.find("[name=proveice]").html(provinceStr);
+                                source.find("[name=proveice]").val(data.province_id);
+                            }
+                        });
+
+                        /*设置默认城市*/
+                        $.ajax({
+                            url:qianzhui+"/MemberGeneral/city",
+                            data:{province:data.province_id},
+                            success:function(db){
+
+                                var citesStr='<option value="">请选择市</option>';
+                                for(var k =0;k<db.length ;k++){
+                                    citesStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                }
+                                source.find("[name=city]").html(citesStr);
+                                source.find("[name=city]").val(data.city_id);
+                            }
+                        });
+                        /*设置默认区*/
+
+                        $.ajax({
+                            url: qianzhui+"/MemberGeneral/district",
+                            data:{city:data.city_id},
+                            success: function (db) {
+                                var districtStr='<option value="">请选择区/县</option>';
+                                for (var k = 0; k < db.length; k++) {
+                                    districtStr += '<option value="' + db[k].value + '">' + db[k].name + '</option>'
+                                }
+                                source.find("[name=district]").html(districtStr);
+                                source.find("[name=district]").val(data.quarter_id);
+                            }
+                        });
+
+                        /*市*/
+                        source.find("[name=proveice]").on("change",function(){
+                            var data= {
+                                province:source.find("[name=proveice]").find("option:selected").val()
+                            };
+
+                            $.ajax({
+                                url:qianzhui + "/MemberGeneral/city",
+                                data:data,
+                                success:function(db){
+                                    var citesStr='<option value="">请选择市</option>';
+                                    for(var k =0;k<db.length ;k++){
+                                        citesStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                    }
+                                    source.find("[name=city]").html(citesStr);
+                                }
+                            });
+                        });
+                        /*区*/
+                        source.find("[name=city]").on("change",function(){
+                            var data= {
+                                city:source.find("[name=city]").find("option:selected").val()
+                            };
+
+                            $.ajax({
+                                url:qianzhui + "/MemberGeneral/district",
+                                data:data,
+                                success:function(db){
+
+                                    var districtStr='<option value="">请选择区/县</option>';
+                                    for(var k =0;k<db.length ;k++){
+                                        districtStr+='<option value="'+ db[k].value +'">'+ db[k].name  +'</option>'
+                                    }
+                                    source.find("[name=district]").html(districtStr);
+                                }
+                            });
+                        });
+
+                        function checkbox(){
+                            if($("#default").is(":checked")){
+                                return 1;
+                            }
+                            else {
+                                return 0;
+                            }
+                        }
+
+                        $('#J_address_magment').append(source);
+                        /*地址保存*/
+                        $('#J_address_magment .modadd').on("click", ".submit", function (e) {
+                            var $this = $(this);
+                            var $receiver = $(".add_new .receiver");
+                            var $address = $(".add_new .address");
+                            var $telephone = $(".add_new .telephone");
+                            var data = {
+                                id:_li.data("addressid"),
+                                receiver: $receiver.val(),
+                                receipt_province: $(".add_new").find("select[name=proveice] option:selected").text(),
+                                receipt_city: $(".add_new").find("select[name=city] option:selected").text(),
+                                receipt_quarter: $(".add_new").find("select[name=district] option:selected").text(),
+                                receipt_address: $(".add_new").find(".address").val(),
+                                telphone: $(".add_new").find(".telephone").val(),
+                                status: checkbox(),
+                            };
+
+                            var r = receiverChk($receiver);
+                            var m = mobileChk($telephone);
+                            var a = addressChk($address);
+                            if (r && m && a) {
+                                $.ajax({
+                                    url: qianzhui + '/MemberGeneral/receipt_address_save',
+                                    type: "POST",
+                                    data: data,
+                                    beforeSend:function(){
+                                        $this.val('提交中').attr('disabled',true);//改变提交按钮上的文字并将按钮设置为不可点击
+                                    },
+                                    success: function (db) {
+
+                                        if (db.status == 2) {
+                                            //成功
+                                            HUI && (HUI.PopOut.alert([db.msg, , ""], "m"), $({}).delay(2e3).queue(function () {
+                                                HUI.PopOut.closeMask()
+                                            }));
+                                            $("#J_address_magment").find(".add_new ").remove();//删除地址框
+                                            location.reload();
+                                        } else {
+                                            HUI && (HUI.PopOut.alert([db.msg, , ""], "m"), $({}).delay(2e3).queue(function () {
+                                                HUI.PopOut.closeMask()
+                                            }));
+                                        }
+                                    },
+                                    complete:function(){
+                                        $this.val('提交').attr('disabled',false);//改变提交按钮上的文字并将按钮设置为可以点击
+                                    }
+                                })
+                            }
+                        });
+                    });
+
+                    $("#J_address_magment").on("blur", ".receiver", function () {
+                        receiverChk($(this));
+                    });
+                    $("#J_address_magment").on("blur", ".telephone", function () {
+                        mobileChk($(this));
+                    });
+                    $("#J_address_magment").on("blur", " .address", function () {
+                        addressChk($(this));
+                    });
+
+                    /*取消*/
+                    $("#J_address_magment").on("click", ".cancel ", function (e) {
+                        e.preventDefault();
+                        $("#J_address_magment").find(".add_new").remove();
+                    });
+
+
+                    //切换默认地址功能
+                    $("#J_address_magment").find(".address_listbox").on("click",".address_info",function(){
+                        var _this = $(this);
+                        var lock = true;
+                        if(_this.hasClass("defalut")){
+                            //已经是默认地址啦
+                        }else if(_this.hasClass("moaddress")){
+                            //添加地址
+                        }else{
+                            //将不是默认地址的设置为默认地址
+                            //对lock进行判断，避免重复提交
+                            if(lock){
+                                $.ajax({
+                                    url: qianzhui + '/MemberGeneral/receipt_address_save',
+                                    type: "POST",
+                                    data: {
+                                        id:_this.data("addressid"),
+                                        status: 1,
+                                    },
+                                    success: function (db) {
+                                        if (db.status == 2) {
+                                            //成功
+                                            HUI && (HUI.PopOut.alert(["默认地址保存成功", ""], "m"), $({}).delay(2e3).queue(function () {
+                                                HUI.PopOut.closeMask()
+                                            }));
+                                            //成功后讲本li设置为默认地址，去掉其他的默认地址
+                                            _this.siblings().removeClass("default");
+                                            _this.addClass("default");
+                                            lock = false;
+                                            // location.reload();
+                                        } else {
+                                            HUI && (HUI.PopOut.alert([db.msg, , ""], "m"), $({}).delay(2e3).queue(function () {
+                                                HUI.PopOut.closeMask()
+                                            }));
+                                        }
+                                    }
+                                })
+                            }
+
+                        }
+
+
+                    });
+
+                }
+
+
+            });
+
+
+        });
+    </script>
+</block>

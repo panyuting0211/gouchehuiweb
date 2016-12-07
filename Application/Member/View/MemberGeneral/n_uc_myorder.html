@@ -1,0 +1,134 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">我的订单</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li class="cur"><a href="{:U('n_uc_myorder')}" title="">购车订单</a></li>
+                <li><a href="{:U('n_uc_myinquiry')}" title="">询价订单</a></li>
+                <!--<li><a href="{:U('n_uc_credits')}" title="">车币订单</a></li>-->
+                <li><a href="{:U('n_uc_shop_order_list')}" title="">商城订单</a></li>
+                <li><a href="{:U('n_uc_active_list')}" title="">活动订单</a></li>
+            </ul>
+            <div class="uc_myorder ohd" id="J_OrderListMain">
+                <div class="table">
+                    <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col class="">
+                            <col>
+                            <col class="o-name">
+                            <col>
+                            <col class="o-deposit">
+                            <col class="o-status">
+                            <col class="o-operation">
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th class="state-column"></th>
+                            <th>订单号</th>
+                            <th>商品名称</th>
+                            <th>底价 - <span class="o-unit">元</span></th>
+                            <th class="o-deposit">定金 - <span class="o-unit">元</span></th>
+                            <th class="o-status">订单状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="j_list">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="G_pager j_pager"></div>
+            </div>
+        </div>
+    </div>
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        
+        {{if value.isread == 1}}
+        <tr class="isRead">
+        {{else}}
+        <tr>
+        {{/if}}
+        <td class="state-column">
+        {{if value.isread == 1}}
+        <span class="state-unread ng-scope">●</span>
+        {{else}}
+        <!--isread=2-->
+        {{/if}}
+        </td>
+        
+            <td><a href="{{value.paydetail}}" class="seemore">{{value.out_trade_no}}</a></td>
+            <td>{{value.carstyle}}</td>
+            <td>{{value.low_price_city_name}}底价：<span class="o-unit"><span class="bk-cny">¥</span>{{value.low_price}}</span></td>
+            <td><span class="o-unit"><span class="bk-cny">¥</span>{{value.order_money}}</span></td>
+            {{if value.status == 0}}
+            <td>未支付</td>
+            <td>
+                <a href="{{value.payurl}}" target="_blank" class="G_btn_a pay_btn">立即支付</a>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 1}}
+            <td>去完善</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">去完善</a>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 2}}
+            <td>已失效</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 3}}
+            <td>审核中</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 4}}
+            <td>已审核</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 5}}
+            <td>审核失败</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">去完善</a>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 6}}
+            <td>出库中</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 7}}
+            <td>提车中</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else if value.status == 8}}
+            <td>已完成</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{else}}
+            <td>已支付</td>
+            <td>
+                <a href="{{value.paydetail}}" class="seemore">查看详情</a>
+            </td>
+            {{/if}}
+
+
+        </tr>
+        {{/each}}
+    </script>
+    <script>
+        $(function(){
+            $('#J_OrderListMain').AjaxListerContainer({
+                pageSize: 10,
+                loader: '<tr><td colspan="7" class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</td></tr>',
+                nuller: '<tr><td colspan="7" class="null_list">您暂无任何购车订单！快去 <a href="/index.php/car/product_search" target="_blank">购买</a>你喜欢的车吧！</td></tr>',
+                ajaxUrl: '/member.php/MemberGeneral/orderlist'
+            });
+        });
+    </script>
+</block>

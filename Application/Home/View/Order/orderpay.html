@@ -1,0 +1,172 @@
+<extend name="Base/Common" />
+<block name="body">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+  //    var titleli = $('.pay-style-title span'),
+  //       i = 0;
+  //  $('.pay-style ul').hide();
+  // $('.pay-style ul').eq(0).show();
+  //     titleli.click(function(e) {
+  //       e.stopPropagation();
+  //       e.preventDefault();
+  //       i = titleli.index($(this));
+  //       $(this).addClass("choose").siblings().removeClass("choose");  
+  //       $('.pay-style ul').hide();
+  //       $('.pay-style ul').eq(i).show();
+  //     });
+
+
+    $(document).ready(function(){
+        $("#J-pay-style-ul1").show();
+        $("#pay-style-title-1").click(function(){
+            $("#pay-style-title-2").removeClass("choose");
+            $(this).addClass("choose");
+            $("#J-pay-style-ul1").show();
+            $("#J-pay-style-ul2").hide();
+        })
+
+        $("#pay-style-title-2").click(function(){
+            $("#pay-style-title-1").removeClass("choose");
+            $(this).addClass("choose");
+            $("#J-pay-style-ul2").show();
+            $("#J-pay-style-ul1").hide();
+        })
+ 
+    })
+</script>
+<div id="cont">
+	<div class="cont">
+    	<div class="user-location">
+        	<p>位置:<a href="####">购车惠></a><a href="####">我要买车></a><a href="####">详情></a><a href="####">订单</a></p>
+        </div>
+        <div class="content">
+        <form action="{:U('Pay/index')}" method="post">
+            <div class="user-pay-way-2">
+                <div class="pay-steps">
+                    <p class="pay-steps-p">1.填写并核对订单信息</p>
+                    <p class="pay-steps-p">2.选择支付方式</p>
+                </div>
+                <div class="pay-succeed">
+                   订单提交成功，请尽快付款！支付金额:<em style="color:red;">{$res.money}</em>  
+                </div>         
+            </div>
+            <div class="pay-style">      
+              <div class="pay-style-title">
+                <span class="choose" id="pay-style-title-1">支付宝支付</span>
+                <span id="pay-style-title-2">银行卡支付</span>           
+              </div>
+            <ul id="J-pay-style-ul1">
+              <li>
+                <input type="radio" id="alipay" checked value="alipay" name="paytype" class="alipay">
+                <label for="zhifubao">
+                  <img src="{$Think.const.IMG_URL}icon-zfb.jpg" alt="支付宝支付">
+                </label>
+              </li>
+<!--               <li>
+                <input type="radio" id="kuaiqian" value="快钱" name="paytype">
+                <label for="kuaiqian">
+                  <img src="{$Think.const.IMG_URL}icon-kq.jpg" alt="快钱支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="weixin" value="微信" name="paytype">
+                <label for="weixin">
+                  <img src="{$Think.const.IMG_URL}icon-wx.jpg" alt="微信支付">
+                </label>
+              </li> -->
+            </ul>
+            <ul id="J-pay-style-ul2">
+              <li>
+                <input type="radio" id="gonghang" value="ICBCB2C" name="defaultbank">
+                <label for="gonghang">
+                  <img src="{$Think.const.IMG_URL}banklogo/1.png" alt="工行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="nonghang" value="ABC" name="defaultbank">
+                <label for="nonghang">
+                  <img src="{$Think.const.IMG_URL}banklogo/2.png" alt="农行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="jianhang" value="CCB" name="defaultbank">
+                <label for="jianhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/3.png" alt="建行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="shanghaipudongfazhan" value="SPDB" name="defaultbank">
+                <label for="shanghaipudongfazhan">
+                  <img src="{$Think.const.IMG_URL}banklogo/4.png" alt="浦东发展银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="zhonghang" value="BOCB2C" name="defaultbank">
+                <label for="zhonghang">
+                  <img src="{$Think.const.IMG_URL}banklogo/5.png" alt="中行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="zhaohang" value="CMB" name="defaultbank">
+                <label for="zhaohang">
+                  <img src="{$Think.const.IMG_URL}banklogo/6.png" alt="招行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="xingyeyinhang" value="CIB" name="defaultbank">
+                <label for="xingyeyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/7.png" alt="兴业银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="guangfayinghang" value="GDB" name="defaultbank">
+                <label for="guangfayinghang">
+                  <img src="{$Think.const.IMG_URL}banklogo/8.png" alt="广发银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="hangzhouyinhang" value="HZCBB2C" name="defaultbank">
+                <label for="hangzhouyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/9.png" alt="杭州银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="fudianyinhang" value="FDB" name="defaultbank">
+                <label for="fudianyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/10.png" alt="富滇银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="shanghaiyinhang" value="SHBANK" name="defaultbank">
+                <label for="shanghaiyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/11.png" alt="上海银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="ningboyinhang" value="NBBANK" name="defaultbank">
+                <label for="ningboyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/12.png" alt="宁波银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="pinganyinhang" value="SPABANK" name="defaultbank">
+                <label for="pinganyinhang">
+                  <img src="{$Think.const.IMG_URL}banklogo/13.png" alt="平安银行支付">
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="zhongguoyouzhen" value="POSTGC" name="defaultbank">
+                <label for="zhongguoyouzhen">
+                  <img src="{$Think.const.IMG_URL}banklogo/14.png" alt="中国邮政支付">
+                </label>
+              </li>
+            </ul>
+          </div>
+                <input name="id" id="id-value" type="hidden" value="{$res.id}">
+              <input name="submit" type="submit" class="pay-style-btn-xunjia" value="立即支付">   
+     </form>                  
+        </div>
+    </div>
+</div>
+</block>

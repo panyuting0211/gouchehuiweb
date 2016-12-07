@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>找回密码  - 购车惠</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}login.css"/>
+</head>
+<body>
+<!--login header-->
+<div class="headwrap">
+	<div class="header">
+		<h1 class="RL_logo G_fl G_f20">
+			<a href="/index.php/Index/index.html" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>找回密码 
+		</h1>
+		<div class="RL_returnHome G_fr">
+			<ul class="header-link">
+				<li><a href="{:U('Public/reg')}" title="注册">注册</a><b>|</b></li>
+				<li><a href="{:U('Public/login')}" title="登录">登录</a><b>|</b></li>
+				<li><a href="/index.php/Index/index.html" title="购车惠首页">购车惠首页</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--login content-->
+<div class="content findPwd">
+	<div class="find-con">
+		<!--找回密码状态-->
+		<div class="pwd-state">
+			<ul>
+				<li class="done">
+					<dl>
+						<dt>1</dt>
+						<dd>身份验证</dd>
+					</dl>
+				</li>
+				<li class="done">
+					<dl>
+						<dt>2</dt>
+						<dd>重置登录密码</dd>
+					</dl>
+				</li>
+				<li class="doing">
+					<dl>
+						<dt>3</dt>
+						<dd>完成</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--找回密码操作-->
+		<div class="pwd-action pwd-finish">
+			<h3 class="G_f22"><img src="{$Think.const.IMG_URL}findpwd_su.gif"/>修改密码成功，请用新的密码登录。</h3>
+			<h4 class="G_f22">进入<a href="/index.php/Index/index.html" title="购车惠首页>>">购车惠首页>></a></h4>
+		</div>
+	</div>
+</div>
+
+<include file="Public/log_footer" />
+</body>
+</html>

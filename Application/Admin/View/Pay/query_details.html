@@ -1,0 +1,141 @@
+<extend name="Public/base"/>
+<block name="body">
+  <div id="content">
+
+    <div id="content-wrap">
+      <div id="content-header">
+        <div id="breadcrumb">
+          <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+            {$ctitle}
+          </a>
+          <a href="#" class="current">询价订单</a>
+          <a href="#" class="current">详情</a>
+        </div>
+
+      </div>
+      <div class="container-fluid">
+        <div class="row-fluid"><!-- 按钮触发模态框 -->
+          <a href="/admin.php/Pay/orderlist" class="btn btn-primary btn-lg active" role="button">返回上一页</a>
+        </div>
+        <div>
+          <h3>商品信息</h3>
+          <ul class="unstyled">
+            <li>
+              <dl class="dl-horizontal">
+                <dt>商品名称：</dt>
+                <dd>{$info.carstyle}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt> 外观颜色：</dt>
+                <dd>{$info.exterior_color_name}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt>内饰颜色：</dt>
+                <dd>{$info.interior_color_name}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt> 上牌地：</dt>
+                <dd>
+                  <volist name="info['low_info']" id="vo">
+                    {$vo.area_name}
+                  </volist>
+                </dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>支付信息</h3>
+          <ul class="unstyled">
+            <li>
+              <dl class="dl-horizontal">
+                <dt>底价：</dt>
+                <dd>
+                  <volist name="info['low_info']" id="vo">
+                    {$vo.pay_low_price}
+                  </volist>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt> 支付状态：</dt>
+                <dd>
+                  <switch name="info.status">
+                    <case value="0">未支付</case>
+                    <default />已支付
+                  </switch>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt>支付方式：</dt>
+                <dd> {$info.pay_way}</dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>询价信息</h3>
+          <ul class="unstyled">
+            <li>
+              <dl class="dl-horizontal">
+                <dt>询价费：</dt>
+                <dd>{$info.money}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt>询价日期：</dt>
+                <dd>{$info.updatetime|date="Y-m-d H:i:s",###}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt> 到期日期：</dt>
+                <dd>{$info.expire|date="Y-m-d H:i:s",###}</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="dl-horizontal">
+                <dt> 询价状态：</dt>
+                <dd>
+                  <switch name="info.status">
+                    <case value="0">无效</case>
+                    <case value="1">有效</case>
+                    <case value="2">失效</case>
+                  </switch>
+                </dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>商户信息</h3>
+          <ul class="unstyled">
+            <li>
+              <dl class="dl-horizontal">
+                <dt>会员:</dt>
+                <dd>
+                  <volist name="info['low_info']" id="vo">
+                    {$vo.name_4s}
+                  </volist>
+                </dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <input type="hidden" id="id" value="{$info.id}">
+    </div>
+  </div>
+
+</block>

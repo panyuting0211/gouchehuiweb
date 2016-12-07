@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>购车惠后台管理系统</title>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_CSS_URL}bootstrap.min.css"/>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_CSS_URL}matrix-style.css"/>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_CSS_URL}matrix-media.css"/>
+    <link href="{$Think.const.ADMIN_CSS_URL}font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{$Think.const.ADMIN_CSS_URL}Css.css"/>
+    <style type="text/css">
+        .citysite {
+            background: #00ff00;
+            padding: 3px;
+        }
+    </style>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.ui.custom.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}bootstrap.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}matrix.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery-1.7.2.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.kkPages.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.pjax.js"></script>
+</head>
+<body>
+
+<!-- header -->
+<!--Header-part-->
+<div id="header">
+    <h1><a href="{:U('Index/index')}">购车惠后台管理系统</a></h1>
+    <ul class="header-nav">
+    </ul>
+</div>
+<!--close-Header-part-->
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+    <ul class="nav">
+        <li class="dropdown" id="profile-messages"><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i> Welcome <span class="text">{$Think.session.admin_name}</span><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{:U('Index/index')}"><i class="icon-home"></i>返回首页</a></li>
+                <li class="divider"></li>
+                <li><a href="__ROOT__/index.php"><i class="icon-road"></i>返回前台</a></li>
+                <li class="divider"></li>
+                <li><a href="{:U('Password/editPassWord')}"><i class="icon-check"></i>修改密码</a></li>
+            </ul>
+        </li>
+        <li class="" onclick="if(confirm('确定退出?')) return true; else return false;"><a title="" href="{:U('Public/logout')}"><i class="icon icon-off"></i> <span class="text">退出</span></a></li>
+    </ul>
+</div>
+<!-- / header -->
+
+<!-- left -->
+<div id="left">
+    <div id="sidebar">
+
+        <ul>
+            <volist name="commonNode" id="vo">
+                <li <if condition="strtolower($vo['name']) eq $cname"> class="submenu open" <else/> class="submenu" </if>>
+                <a href="#"><i class="icon icon-list"></i> <span>{$vo.title}</span> <i class="icon icon-new-style  icon-chevron-right iext"></i></a>
+                <ul>
+                    <volist name="vo['node']" id="sub">
+                        <li><a class="" href="__MODULE__/{$vo.name}/{$sub.name|strtolower}">{$sub.title}</a></li>
+                    </volist>
+                </ul>
+                </li>
+            </volist>
+        </ul>
+
+    </div>
+</div>
+<!-- / left-->
+
+<div id="content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">返回内容！</div>
+    </div>
+    <div id="content-wrap">
+        <block name="body">
+
+        </block>
+    </div>
+    <!--Footer-part-->
+    <div class="row-fluid">
+        <div id="footer" class="span12">Copyright@2015-2016 Gouchehui.com.cn All rights reserved. 版权所有 南京易橙汇网络科技有限公司<br/>
+            Powered by Jiangsu ERUN 备案号：苏ICP备13031090号-2
+        </div>
+    </div>
+    <!--end-Footer-part-->
+</div>
+<script type="text/javascript">
+    (function () {
+        var ThinkPHP = window.Think = {
+            "ROOT": "__ROOT__", //当前网站地址
+            "APP": "__APP__", //当前项目地址
+            "PUBLIC": "__PUBLIC__", //项目公共目录地址
+            "DEEP": "{:C('URL_PATHINFO_DEPR')}", //PATHINFO分割符
+            "MODEL": ["{:C('URL_MODEL')}", "{:C('URL_CASE_INSENSITIVE')}", "{:C('URL_HTML_SUFFIX')}"],
+            "VAR": ["{:C('VAR_MODULE')}", "{:C('VAR_CONTROLLER')}", "{:C('VAR_ACTION')}"]
+        }
+    })();
+</script>
+<block name="script"></block>
+
+</body>
+</html>

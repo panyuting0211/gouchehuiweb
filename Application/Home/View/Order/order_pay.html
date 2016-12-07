@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>订单</title>
+</head>
+<body>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+        <!--用户位置 开始-->
+        <div class="US_position G_f16 ftx02">
+            位置：
+            <a href="#">购车惠> </a>
+            <a href="">支付 </a>
+            <a href=""><strong></strong></a>
+        </div>
+        <!--用户位置 结束-->
+
+        <!--oeder start-->
+        <div class="orderbox">
+            <form action="{:U('Pay/index')}" method="post">
+                <div class="orderwrap">
+                    <!--步骤 start-->
+                    <div class="flowstep">
+                        <ol class="detail-stepbar flowstep-5">
+                            <li class="step-first">
+                                <div class="step-done">
+                                    <div class="step-name">填写并提交订单信息</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$order_info.createtime}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <switch name="order_info.status" >
+                                <case value="0|1|3|5"><div class="step-cur"></case>
+                                <case value="2"><div class="step-fail"></case>
+                                <default /><div class="step-done">
+                                </switch>                            
+                                    <div class="step-name">预付定金到购车惠</div>
+                                    <div class="step-no">2</div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <switch name="order_info.status" >
+                        <case value="4|6"><div class="step-cur"></case>
+                        <case value="7|8"><div class="step-done"></case>
+                        <default /><div>
+                        </switch>                            <div class="step-name">4s店出库中</div>
+                                    <div class="step-no">3</div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <if condition="$order_info.status eq 7">
+                        <div class="step-cur">
+                        <elseif condition="$order_info.status eq 8" />
+                        <div class="step-done">
+                        <else/>
+                        <div>
+                        </if>                            <div class="step-name">到店看车付款提车</div>
+                                    <div class="step-no">4</div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step-last">
+                                <if condition="$order_info.status eq 8">
+                        <div class="step-done">
+                        <else/>
+                        <div>
+                        </if>                            <div class="step-name">订单完成</div>
+                                    <div class="step-no">5</div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+
+                    </div>
+                    <!--步骤 end-->
+                    <!-- tips -->
+                    <if condition="$order_info.status eq 0">
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            到店看车前，您需要支付<a href="javascript:void(0);">¥{$order_info.money}元</a>定金到购车惠。请在2天内支付，超过2天未支付，订单作废。
+                        </p>
+                        <p class="G_tl G_f20"><i class="ui_icon ui_icon_32 ui_icon_wb_notice_32"></i>购车惠提醒：</p>
+                        <p class="G_tl G_f18">1、预付订车定金后，商家才认为您有明确的买车意向；</p>
+                        <p class="G_tl G_f18">  2、订车定金先预付到购车惠账户，再由购车惠账户转给4s店。买车时，订车定金可抵用车款。</p>
+                    </div>
+                    <elseif condition="$order_info.status eq 2" />
+                        <div class="flowstep-tip step-2">
+                            <i class="icon-top-arrow"></i>
+                            <p class="G_f20 G_fb">
+                                <i class="icon-tips icon-tips-fail"></i>
+                                敬的用户您好，您的订单已失效！
+                            </p>
+                            <p class="G_f16">了解更多关于此订单信息，请联系购车惠公关人员，咨询服务热线：<a href="javascript:;">400-138-0808</a></p>
+                        </div>
+                    </if>
+
+                    <div class="order_info">
+                        <div class="title G_f22 ftx02">
+                            <h3>订单信息</h3>
+                        </div>
+                        <div class="bd">
+                            <p><span class="t">订单号：</span>{$order_info.out_trade_no}</p>
+
+                            <p><span class="t">订单金额：</span><span class="s"><b class="G_f28">{$order_info.money}</b>元</span>（定金可抵用车款）</p>
+                        </div>
+                    </div>
+                    <!--pay_style start-->
+                    <if condition="$order_info.status eq 0">
+                    <div class="pay_style" id="J_payOrder">
+                        <div class="title G_f22 ftx02">
+                            <h3>移动支付</h3>
+                        </div>
+                        <div class="paystylebox j_payItem" data-paynumber="1">
+                            <div class="paybox">
+                                <label class="j_defaultBankBtn selected" data-val="alipay"><img src="{$Think.const.IMG_URL}zhifubao.jpg" alt="支付宝支付"/><i></i></label>
+                            </div>
+                            <div class="paybox">
+                                <label class="j_defaultBankBtn" data-val="weixin"><img src="{$Think.const.IMG_URL}icon_wechat.jpg" alt="微信支付"/><i></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--pay_style end-->
+                    <input type="hidden" name="pay_id" value="{$order_info.id}">
+                    <input type="hidden" name="pay_number" value="1">
+                    <input type="hidden" name="defaultbank" value="alipay" /> <!-- alipay -->
+                    <!--zhifu start-->
+                    <div class="pay">
+                        <input type="submit" class="G_btn_a" value="立即支付"/>
+                    </div>
+                    </if>
+                    <!--zhifu end-->
+                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+<script>
+    $(function(){
+       var $payCon = $('#J_payOrder'),
+           $defaultBankBtn = $(".j_defaultBankBtn");
+        $defaultBankBtn.on("click", function(){
+            var $this = $(this),
+                    $defaultBankInp = $("input[name=defaultbank]"),
+                _val = $this.data('val');
+            $defaultBankBtn.removeClass("selected");
+            $this.addClass("selected");
+            $defaultBankInp.val(_val);
+        });
+    });
+</script>
+</body>
+</html>

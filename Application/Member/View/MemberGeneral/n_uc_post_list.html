@@ -1,0 +1,144 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <link rel="stylesheet" href="{$Think.const.JS_URL}app/jquery.datetimepicker.css">
+    
+        <!-- main-content begin -->
+        <div class="uc_main GB_main_r">
+            <div class="uc_main_wrapper">
+                <ul class="uc_sub_nav clearfix">
+                    <li><a href="n_uc_post.html" title="">发车主秀</a></li>
+                    <li class="cur"><a href="n_uc_post_list.html" title="">我的车主秀</a></li>
+                </ul>
+                <div class="uc_post_list">
+                    <div class="filter clearfix">
+                        <div class="filter-sel-box G_fl" id="J_carSelector">
+                            <select  data-required="false" data-first-title="全部" data-first-value="" data-url="/member.php/MemberGeneral/post_type" name="type_id" id="type_id" class="type_id">
+                            </select>
+                        </div>
+                        <div class="all-pagesize G_fr">共：<span class="j_allNum">－</span> 条</div>
+                    </div>
+                    <ul class="post-list" id="J_PostList">
+
+                    </ul>
+                    <div class="G_pager" id="J_Pager"></div>
+                </div>
+            </div>
+        </div>
+        <!-- main-content end -->
+    </div>
+</div>
+
+<script id="tplLi" type="text/html">
+{{each list as value index}}
+<li data-id="{{value.id}}" {{if value.check == 1}}class="not"{{else if value.check == 3}}class="err"{{/if}}>
+    <div class="hd clearfix">
+        <h2 class="G_fl">{{value.title}}</h2>
+        <span class="date G_fl">发布于{{value.createtime}}</span>
+        <div class="opera-box G_fr">
+            <a href="{{if value.check == 1}}javascript:;{{else}}{{value.url}}{{/if}}" class="j_editBtn">修改</a>
+            <a href="javascript:;" class="{{if value.check == 1}}{{else}}j_delBtn{{/if}}">删除</a>
+        </div>
+    </div>
+    <div class="bd clearfix">
+        <div class="img-box">
+            <img src="{{value.image}}"  alt=""/>
+        </div>
+        <div class="con">
+            <p>{{value.summary}}</p>
+        </div>
+
+    </div>
+    <div class="ft">
+        <span><i class="icon-new "></i>阅读量 {{value.click_amount}}</span><span><i class="icon-new"></i>评论数 {{value.comment_amount}}</span><span>赞 <i  class="icon-new "></i>{{value.thumbs_amount}}</span>
+        {{if value.check == 1}}<span class="review-tip"><i class="ui_icon_16 icon_warn icon_warn_exc"></i>审核中，请耐心等待...</span>{{else if value.check == 3}}<span class="review-tip"><i class="ui_icon_16 icon_warn icon_warn_err"></i>审核未通过!</span>{{/if}}
+    </div>
+</li>
+        {{/each}}
+</script>
+<script src="{$Think.const.JS_URL}app/jquery.cxselect.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function getDb(){
+                var $loader = $('<div class="uc_loading"><i></i>数据加载中...</div>');
+//              var typeId = $('#type_id').find('option:selected').val();
+                $.ajax({
+                    type: "post",
+                    url: '/member.php/MemberGeneral/post_list',
+                    data: {typeid: typeId, p:pageNum, pageNum:pageSize},
+                    beforeSend: function () {
+                        $('#J_PostList').html($loader);
+                    },
+                    success: function(db){
+                        if(db.list.length > 0){
+                            var html = template('tplLi', db);
+                            $('.j_allNum').html(db.count);
+                            $('#J_PostList').html(html);
+
+                            $('#J_PostList').on('click', '.j_delBtn', function(e){
+                                e.stopPropagation();
+                                e.preventDefault();
+                                var $this = $(this),
+                                        dbId = $this.closest('li').data('id');
+                                layer.confirm('是否确定删除！', {
+                                    btn: ['是','否'] //按钮
+                                }, function(){
+                                    $.post('/member.php/MemberGeneral/post_delete', {id:dbId}, function(db){
+                                        if(db.status == 1){
+                                            layer.msg(db.msg, {icon: 1}, function(){
+                                                $this.closest('li').remove();
+                                                if($this.closest('ul').find('li').length <= 0){
+                                                    $this.closest('ul').html('<li class="null_list">您暂无任何车主秀！快去 <a href="n_uc_post.html">添加</a>吧</li>');
+                                                }
+                                            });
+                                        }else{
+                                            layer.msg(db.msg, {icon: 2});
+                                        }
+                                    });
+
+
+                                }, function(){
+                                    layer.closeAll();
+                                });
+
+
+                            });
+                            $('#J_Pager').html(db.pagelist);
+
+                            $('#J_Pager').off().on('click', function(e){
+                                e.stopPropagation();
+                                e.preventDefault();
+                                pageNum = $this.data('page');
+                                getDb();
+                            });
+                        }else{
+                            $('#J_PostList').html('<li class="null_list">您暂无任何车主秀！快去 <a href="n_uc_post.html">添加</a>吧</li>');
+                        }
+
+                    },
+                    complete: function () {
+                        $loader.remove();
+                    },
+                    error: function() {
+                        this.errormsg()
+                    }
+                });
+            }
+
+            var typeId = '', pageSize = 20, pageNum = 1;
+            getDb();
+            $('#J_carSelector').cxSelect({
+                selects: ['type_id'],
+                parentSeletor: 'li',
+                jsonName: 'name',
+                jsonValue: 'value'
+            });
+            $('#J_carSelector').find('select').on('change', function(){
+                typeId = $(this).val();
+                getDb();
+            });
+
+
+        });
+    </script>
+
+</block>

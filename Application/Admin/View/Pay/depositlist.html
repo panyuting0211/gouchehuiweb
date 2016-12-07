@@ -1,0 +1,235 @@
+<extend name="Public/base"/>
+<block name="body">
+    <style type="text/css">
+        .num {
+            padding: 0px 10px 0 10px;
+            color: #4e4e4e;
+        }
+
+        .next {
+            color: #4e4e4e;
+        }
+
+        .prev {
+            color: #4e4e4e;
+        }
+
+        .num:hover, .next:hover, .prev:hover {
+            color: green;
+        }
+
+        .pager {
+            text-align: center;
+        }
+
+        .pager a {
+            padding: 3px 8px;
+            margin-left: 3px;
+            line-height: 20px;
+            background: #f9f9f9;
+            border: 1px solid #DBDBDB;
+            text-decoration: none
+        }
+
+        .pager a:hover,
+        .pager a.current {
+            background-color: #7CD5B1;
+            color: #fff;
+            border: 1px solid #7CD5B1;
+            cursor: pointer;
+        }
+    </style>
+    <div id="content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">×</button>
+            <div class="alert-content">返回内容！</div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-header">
+                <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a><a
+                        href="#" class="current">{$atitle}</a></div>
+            </div>
+            <p id='ajax_delete_id'
+               style="text-align:center;color:#51A726;font-size:16px;line-height:30px;display:none;background-color:#D9EFE0"></p>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <b>下单时间：</b>
+                    <input type="text" class="text_input_2" name="begin_time" id="begin_time" value="{$starttime|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                    <span style="color: #CCCCCC;">——</span>
+                    <input type="text" class="text_input_2" name="end_time" id="end_time" value="{$endtime|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                </div>
+                <div class="row-fluid">
+                    <b>提车时间：</b>
+                    <input type="text" class="text_input_2" name="buy_time_begin" id='buy_time_begin' value="{$buy_time_begin|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                    <span style="color: #CCCCCC;">——</span>
+                    <input type="text" class="text_input_2" name="buy_time_end" id='buy_time_end' value="{$buy_time_end|date=" Y-m-d",###}" onClick="WdatePicker()" >
+                </div>
+                <div class="row-fluid" style="margin-top:8px;">
+                    <b>订单状态：</b>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="" checked>全部</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="-1">未支付</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="1">未完善</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="2">已失效</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="3">审核中</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="4">通过审核</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="5">未通过审核</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="6">出库中</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="7">提车中</label>
+                    <label class="radio inline" style="margin-top:-8px;"><input type="radio" name="status" value="8">已完成</label>
+                </div>
+                <div class="row-fluid">
+                    <b>关键字:&nbsp;&nbsp;&nbsp;</b>
+                    <input type="text" class="input-xlarge" style="margin-top:8px;" name="keyword" id='keyword' placeholder="订单号/商品名称">
+                    <button type="submit" class="btn btn-primary" url="" onclick="getPage(1)"><i class="icon-search"></i> 搜索</button>
+                </div>
+
+                <div class="content" id="ajax_lists">
+                    <div class="widget-content nopadding newslist">
+                        <h4>总计：<span class="userdata badge"></span>个 </h4>
+                        <table class="table table-bordered table-striped with-check" id="Yu-db-backup">
+                            <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>订单来源</th>
+                                <th>用户名</th>
+                                <th>商品名称</th>
+                                <th>定金</th>
+                                <th>下单时间</th>
+                                <th>订单状态</th>
+                                <th>提车时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pager"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#ajax_lists").delegate(".pager a", "click", function () {
+                var page = $(this).attr("data-page");
+                getPage(page);
+            })
+            getPage(1);
+
+        });
+        function getPage(page) {
+            $("thead").css('display', 'none');
+            $('tbody').empty();
+            $("#ajax_lists").prepend("<div class='onload' style='text-align:center'><img src='/Public/Admin/images/loading.gif' alt='loading'>数据加载中....</div>");
+            var begin_time = $('#begin_time').val();
+            var end_time = $('#end_time').val();
+            var buy_time_begin = $('#buy_time_begin').val();
+            var buy_time_end = $('#buy_time_end').val();
+            var status = $("input[type='radio']:checked").val();
+            var keyword = $('#keyword').val();
+            $.post("__MODULE__/Ajax/depositList_ajax",
+                    {
+                        begin_time: begin_time,
+                        end_time: end_time,
+                        buy_time_begin: buy_time_begin,
+                        buy_time_end: buy_time_end,
+                        status: status,
+                        keyword: keyword,
+                        p: page
+                    },
+                    function (data, textStatus) {
+                        if (data.count == null) {
+                            $(".userdata").text("0");
+                        } else {
+                            $(".userdata").text(data.count);
+                        }
+                        $('tbody').empty();
+                        $('#ajax_lists > .onload').remove();
+                        $("thead").css('display', '');
+                        var pagelist = data[0];
+                        $('#ajax_lists .pager').html(pagelist);
+                        var info = data[1];
+                        $.each(info, function (key, val) {
+                            var td1 = "<td>" + val.out_trade_no + "</td>";
+                            var td2 = "<td>" + val.from_order + "</td>";
+                            var td3 = "<td>" + val.user_name + "</td>";
+                            var td4 = "<td>" + val.carstyle + '&nbsp;' + val.car_name + "</td>";
+                            var td5 = "<td>" + val.money + "</td>";
+                            var td6 = "<td>" + val.createtime + "</td>";
+                            var td8 = "<td>" + val.buy_time + "</td>";
+                            var td7 = "";
+                            switch (parseInt(val.status, 10)) {
+                                case 0:
+                                    td7 = "<td><font color='red'>未支付</font></td>";
+                                    break;
+                                case 1:
+                                    td7 = "<td><font color='red'>已支付(未完善)</font></td>";
+                                    break;
+                                case 2:
+                                    td7 = "<td><font color='red'>已失效</font></td>";
+                                    break;
+                                case 3:
+                                    td7 = "<td><font color='red'>审核中</font></td>";
+                                    break;
+                                case 4:
+                                    td7 = "<td><font color='red'>通过审核</font></td>";
+                                    break;
+                                case 5:
+                                    td7 = "<td><font color='red'>未通过审核</font></td>";
+                                    break;
+                                case 6:
+                                    td7 = "<td><font color='red'>出库中</font></td>";
+                                    break;
+                                case 7:
+                                    td7 = "<td><font color='red'>提车中</font></td>";
+                                    break;
+                                case 8:
+                                    td7 = "<td><font color='red'>已完成</font></td>";
+                                    break;
+                                case 9:
+                                    td7 = "<td><font color='red'>支付中</font></td>";
+                                    break;
+                                case 10:
+                                    td7 = "<td><font color='red'>支付失败</font></td>";
+                                    break;
+                            }
+
+                            var td9 = "<td class='center'><a class='btn btn-info' href='__CONTROLLER__/distribute/id/" + val.id + "'>4s店</a>" +
+                                    "<a title='编辑' class='confirm ajax-get btn btn-info' href='__CONTROLLER__/orderDetails/id/" + val.id + "'>详情</a></td>";
+
+                            $('tbody').append("<tr>" + td1 + td2 + td3 + td4 + td5 + td6 + td7 + td8 + td9 + "</tr>");
+                        });
+
+                    },
+                    "json");
+        }
+
+        function ajax_delete(aa) {
+            var id = $(aa).attr("value");
+            if (confirm('确定要删除吗？')) {
+                $.post("__CONTROLLER__/ajax_delete",
+                        {id: id},
+                        function (data, textStatus) {
+                            if (data) {
+                                $(aa).parent().parent().remove();
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除成功');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            } else {
+                                $('#ajax_delete_id').css('display', 'block');
+                                $('#ajax_delete_id').html('删除失败');
+                                window.setTimeout("$('#ajax_delete_id').css('display','none')", 1200);
+                            }
+                        }
+                );
+            }
+        }
+
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+</block>

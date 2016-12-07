@@ -1,0 +1,52 @@
+ <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                {$ctitle}
+            </a>
+            <a href="#" class="current">{$atitle}</a>
+        </div>
+        <h1>添加热门车款</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('AddHotBrand')}" class="form-horizontal" method="post">
+                    <fieldset>
+
+                        <div class="control-group">
+                            <label class="control-label">客户端：</label>
+                            <div class="controls">
+                                <select name="client">
+                                    <option value="1" <if condition="$info['client'] eq 1">selected</if>>手机web端</option>
+                                    <option value="2" <if condition="$info['client'] eq 2">selected</if>>APP</option>
+                                    <option value="3" <if condition="$info['client'] eq 3">selected</if>>PC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >品牌：</label>
+                            <div class="controls">
+                                <select name="brand_id">
+                                    <option value="">请选择品牌</option>
+                                    <volist name="infobrand" id="vo">
+                                        <option value="{$vo.id}" <if condition="$vo.id eq $info['brand_id']">selected</if>>{$vo.brand_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" >排序：</label>
+                            <div class="controls">
+                                <input value="{$info.order}" name="order" type="text" >
+                            </div>
+                        </div>
+                        <input value="{$info.id}" name="id" type="hidden">
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

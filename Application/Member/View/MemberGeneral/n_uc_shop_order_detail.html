@@ -1,0 +1,631 @@
+<extend name="n_uc_base" />
+<block name="body">
+    <div class="uc_main GB_main_r">
+        <h2 class="uc_middle_title">我的订单</h2>
+        <ul class="uc_sub_nav clearfix">
+            <li><a href="n_uc_myorder.html" title="">我的订单</a></li>
+            <li><a href="n_uc_myinquiry.html" title="">我的询价</a></li>
+            <!--<li><a href="n_uc_credits.html" title="">车币订单</a></li>-->
+            <li class="cur"><a href="n_uc_shop_order_list.html" title="">商城订单</a></li>
+        </ul>
+        <div class="uc_main_wrapper">
+            <div class="uc_shop_order_detail ohd" id="J_OrderInfoList">
+                <!--<ul>
+                    <h3 class="tit">订单信息</h3>
+                    <li class="info_txt">
+                        <dl>
+                            <dt>订单号:</dt>
+                            <dd>154123133</dd>
+                        </dl>
+                        <dl>
+                            <dt>订单状态:</dt>
+                            <dd>已支付</dd>
+                        </dl>
+                        <dl>
+                            <dt>下单时间:</dt>
+                            <dd>2015-11-16   12：30</dd>
+                        </dl>
+                    </li>
+                </ul>
+                <ul>
+                    <h3 class="tit">商品信息</h3>
+                    <li class="ui_txt">
+                        <div class="table">
+                            <table class="grid_bundle table_fontsize" style="margin-bottom:20px;">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr class="col_name">
+                                    <th>商品图片</th>
+                                    <th>商品名称</th>
+                                    <th>价格</th>
+                                    <th>优惠</th>
+                                </tr>
+                                </thead>
+                                <tbody class="">
+                                <tr>
+                                    <td><img src="images/carimg_16.jpg" alt="" class="car_pic"></td>
+                                    <td>正品德国Repose排气 宝马116 118 F20 1.6T改装尾段双出排气管</td>
+                                    <td>7840.00</td>
+                                    <td>2960.00</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <h3 class="tit">邮费信息</h3>
+                    <li class="ui_txt">
+                        <dl>
+                            <dt>邮    费:</dt>
+                            <dd>10.00元</dd>
+                        </dl>
+                    </li>
+                </ul>
+                <ul>
+                    <h3 class="tit">订车人信息</h3>
+                    <li class="ui_txt">
+                        <dl>
+                            <dt>订&nbsp;&nbsp;单&nbsp;&nbsp;人&nbsp;&nbsp;姓&nbsp;名&nbsp;:</dt>
+                            <dd>张三</dd>
+                        </dl>
+                    </li>
+                    <li class="ui_txt">
+                        <dl>
+                            <dt>订单人联系方式&nbsp;:</dt>
+                            <dd>13012345678</dd>
+                        </dl>
+                    </li>
+                    <li class="ui_txt">
+                        <dl>
+                            <dt>订单人收货地址&nbsp;:</dt>
+                            <dd>江苏省南京市玄武区仙鹤门街道徐庄软件园F幢</dd>
+                        </dl>
+                    </li>
+                    <li class="ui_txt">
+                        <dl>
+                            <dt>付&nbsp;&nbsp;&nbsp;款&nbsp;&nbsp;&nbsp;&nbsp;方&nbsp;&nbsp;&nbsp;式&nbsp;:</dt>
+                            <dd>支付宝</dd>
+                        </dl>
+                    </li>
+                </ul>
+                <div class="order_total">
+                    <div class="tit">订单总计:</div>
+                    <div class="total">
+                        <div class="total_bd">
+                            <p>订单价格 <span>7480.00元</span></p>
+                            <p>运费价格 <span>10.00元</span></p>
+                        </div>
+                        <div class="total_hd">
+                            <p>合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计<i>7490.00元</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            
+            <div class="detail_table">
+            	<div class="detail_table_thead">订单状态</div>
+        		<!--订单信息-->
+        		<table border="1" id="J_OrderInfo">
+					<tr>
+						<td class="G_f12 detail_table_td1">订单信息</td>
+						<td rowspan="2">
+							<div class="detail_table_td2">
+								<!--<dl class="trade-detail-imfor">	
+								    <dt class="imfor-icon">
+								    	<img src="{$Think.const.IMG_URL}orderstatus_01.png">
+								    </dt>
+								    <dd class="imfor-title">
+				                    	<h3>订单号：已确认</h3>
+			                        </dd>
+								</dl>
+								<ul class="trade-detail-prompt">
+							    	<li> 
+			            				<div class="trade-detail-logistic package-main" data-company-name="中通速递">
+			            					<span class="package-detail">配送方式：</span>
+			            					<span class="package-detail">中通速递</span>
+			            					<span class="package-detail">运单号:</span>
+			            					<span class="package-detail"></span>
+						 				</div>
+							        </li>
+								</ul>
+								<dl class="trade-detail-operate trade-detail-pay">
+									<dt>付款状态：</dt>
+									<dd><span>(已付款)</span><span>付款于 2016-04-06 15:44:21</span></dd>
+								</dl>-->
+								
+								<!--<dl class="trade-detail-operate">
+									<dt>您可以</dt>
+									<dd>  
+										<a href="http://mall.aichego.com/user.php?act=message_list&amp;order_id=155" class="f6">[发送/查看商家留言]</a>
+									</dd>
+								</dl>-->
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="detail_table_td">
+								<!--<div class="detail_table_left">
+									<div class="detail_table_le G_fl">收货地址：</div>
+									<div class="detail_table_rg G_fl">南京市玄武区徐庄软件园研发三区F栋7号楼 </div>
+								</div>
+								<div class="detail_table_left">
+									<div class="detail_table_le G_fl">卖家留言：</div>
+									<div class="detail_table_rg G_fl">南京市F栋7号楼</div>
+								</div>
+								<div class="detail_table_left">
+									<div class="detail_table_le G_fl">订单编号：</div>
+									<div class="detail_table_rg G_fl">2016040613097</div>
+								</div>-->
+							</div>
+						</td>
+					</tr>
+				</table>
+            	<!--商品详细信息-->
+        		<table class="detail-order-info" id="J_GoodsInfo">
+            		<tr>
+            			<th>商品</th>
+            			<th>单价（元）</th>
+            			<th>数量</th>
+            			<th>金额（元）</th>
+            			<th>优惠（元）</th>
+            			<!--<th>操作</th>-->
+            			<!--<th>运费</th>-->
+            		</tr>
+            	</table>
+            	<!--商城订单结算-->
+            	<div class="total-count-wrapper" id="J_AccountInfo">
+            		<table class="total-count-detail G_fr">
+	                    <tbody>
+							<!--<tr>
+								<td class="count-title">商品总价：</td>
+	                            <td class="count-num"><span class="ui-price-icon">￥276.00元</span></td>
+	                        </tr>
+	            			<tr>
+	            				<td class="count-title">配送费用：</td>
+	                            <td class="count-num">+<span class="ui-price-icon">￥15.00元</span></td>
+	                        </tr>
+							<tr>
+								<td class="count-title">使用余额：</td>
+	                            <td class="count-num">-<span class="ui-price-icon">￥291.00元</span></td>
+	                        </tr>-->
+						</tbody>
+	                </table>
+            	</div>
+            	<div class="total-count-wrapper" id="J_PayInfo">
+                    <div class="total-count-pay-result G_fr">
+                        <!--<div class="count-title-pay">实付款：</div>
+                        <div class="total-count-num">
+                            <strong>
+                                <span class="ui-price-icon">￥0.00元</span>
+                            </strong>
+						</div>-->
+                    </div>
+                </div>
+            	
+            	<!--支付方式-->
+            	<div class="detail_table_thead detail_tit">支付方式</div>
+            	<table width="100%" class="order-pay-method" id="J_PayMethod">
+                    <tbody>
+                      <!--<tr>
+			            <td>所选支付方式:<span>支付宝</span>。应付款金额:<i>￥0.00元</i></td>
+			          </tr>-->
+			        </tbody>
+            	</table>
+            	
+            	<!--其它信息-->
+            	<div class="detail_table_thead detail_tit">其它信息</div>
+            	<table width="100%" border="1" class="order-other-info" id="J_OtherInfo">
+                    <tbody>
+                      <!--<tr>
+			            <td class="td1">配送方式：</td>
+			            <td>中通速递</td>
+			          </tr>
+			          
+			          <tr>
+			            <td class="td1">支付方式：</td>
+			            <td><span>支付宝</span></td>
+			          </tr>
+			                                                                                                              
+			          <tr>
+			            <td class="td1">缺货处理：</td>
+			            <td>等待所有商品备齐后再发</td>
+			          </tr>-->
+			        </tbody>
+            	</table>
+            	
+            </div>
+        </div>
+    </div>
+	
+    <script>
+//      jquery获取url参数
+    	(function ($) {
+		  $.getUrlParam = function (name) {
+		   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		   var r = window.location.search.substr(1).match(reg);
+		   if (r != null) return unescape(r[2]); return null;
+		  }
+		})(jQuery);
+		var order_id = $.getUrlParam('order_id');
+    	
+        $(function(){
+            var $orderList = $('#J_OrderInfoList'),
+            	$orderinfo = $('#J_OrderInfo'),
+            	$goodinfo = $('#J_GoodsInfo'),
+            	$accountinfo = $('#J_AccountInfo'),
+            	$payinfo = $('#J_PayInfo'),
+            	$paymethod = $('#J_PayMethod'),
+            	$otherinfo = $('#J_OtherInfo'),
+            	
+                $loader = $('<div style="width:600px;margin:0 auto;" class="uc_loading"><i></i>数据加载中...</div>');
+            $.ajax({
+                type: "post",
+                url: '/member.php/MemberGeneral/shopdetails',
+                data: {order_id:order_id},
+                beforeSend: function() {
+                    $orderList.append($loader);
+                },
+                success: function(db) {
+		        	var $orderstatus = '';
+                    switch(parseInt(db.order_status, 10)) {
+                        case 0:
+                            $orderstatus = "未确认";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_02.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        case 1:
+                            $orderstatus = "已确认";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_01.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        case 2:
+                            $orderstatus = "已取消";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_02.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        case 3:
+                            $orderstatus = "无效";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_02.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        case 4:
+                            $orderstatus = "退货";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_02.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        default:
+                            $orderstatus = "已分单";
+                            $OrderInfodl1 = '<dl class="trade-detail-imfor">' + 
+		                					'<dt class="imfor-icon">' +
+		                					'<img src="{$Think.const.IMG_URL}orderstatus_01.png">' +
+		                					'</dt>' +
+		                					'<dd class="imfor-title">' +
+		                					'<h3>订单状态：' +
+		                					$orderstatus +
+		                					'</h3>'+
+		                					'</dd>' +
+		                					'</dl>';
+                    }
+                    
+                    var $paystatus = '';
+                    switch(parseInt(db.pay_status, 10)) {
+                        case 2:
+                            $paystatus = "已付款";
+                            $OrderInfodl2 = '<dl class="trade-detail-operate trade-detail-pay">' + 
+		                					'<dt>付款状态：</dt>' +
+		                					'<dd>' +
+		                					'<span>' +
+		                					$paystatus +
+		                					'</span>' +
+//		                					'<span>付款于:' +
+//		                					db.pay_time +
+//		                					'</span>'+
+		                					'</dd>' +
+		                					'</dl>';
+                            break;
+                        default:
+                            $paystatus = "未付款";
+                            $OrderInfodl2 = '<dl class="trade-detail-operate trade-detail-pay">' + 
+		                					'<dt>付款状态：</dt>' +
+		                					'<dd>' +
+		                					'<span>' +
+		                					$paystatus +
+		                					'</span>' +
+		                					'</dd>' +
+		                					'</dl>';
+                    }
+                    
+                    var $shippingstatus = '';
+                    switch(parseInt(db.shipping_status, 10)) {
+                        case 1:
+                            $shippingstatus = "已发货";
+                            $OrderInfoul1 = '<ul class="trade-detail-prompt">' + 
+                					'<li>' +
+                					'<div class="trade-detail-logistic package-main">' +
+                					'<span class="package-detail">配送方式：</span>' +
+                					'<span class="package-detail">' +
+                					db.shipping_name +
+                					'</span>' +
+                					'<span class="package-detail">运单号:</span>'+
+                					'<span class="package-detail">' +
+                					db.invoice_no +
+                					'</span>' +
+                					'</li>' +
+                					'</ul>';
+                            break;
+                        case 2:
+                            $shippingstatus = "已收货";
+                            $OrderInfoul1 = '<ul class="trade-detail-prompt">' + 
+                					'<li>' +
+                					'<div class="trade-detail-logistic package-main">' +
+                					'<span class="package-detail">配送方式：</span>' +
+                					'<span class="package-detail">' +
+                					db.shipping_name +
+                					'</span>' +
+                					'<span class="package-detail">运单号:</span>'+
+                					'<span class="package-detail">' +
+                					db.invoice_no +
+                					'</span>' +
+                					'</li>' +
+                					'</ul>';
+                            break;
+                        default:
+                            $OrderInfoul1 = '<ul class="trade-detail-prompt">' + 
+                					'<li>' +
+                					'<div class="trade-detail-logistic package-main">' +
+                					'<span class="package-detail">配送方式：</span>' +
+                					'<span class="package-detail">' +
+                					db.shipping_name +
+                					'</span>' +
+                					'</li>' +
+                					'</ul>';
+                    }
+
+					if(db.province_name==db.city_name){
+						$OrderInfodiv1 ='<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">收货地址：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					(db.city_name == null ? '':db.city_name) +
+                					(db.district_name == null ? '':db.district_name) +
+                					(db.address == null ? '':db.address) +
+                					'</div>' +
+                					'</div>' +
+                					'<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">下单时间：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					db.add_time +
+                					'</div>' +
+                					'</div>' +
+                					'<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">订单编号：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					db.order_sn +
+                					'</div>' +
+                					'</div>';
+					}else{
+						$OrderInfodiv1 ='<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">收货地址：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					(db.province_name == null ? '':db.province_name) +
+                					(db.city_name == null ? '':db.city_name) +
+                					(db.district_name == null ? '':db.district_name) +
+                					(db.address == null ? '':db.address) +
+                					'</div>' +
+                					'</div>' +
+                					'<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">下单时间：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					db.add_time +
+                					'</div>' +
+                					'</div>' +
+                					'<div class="detail_table_left">' + 
+                					'<div class="detail_table_le G_fl">订单编号：</div>' +
+                					'<div class="detail_table_rg G_fl">' +
+                					db.order_sn +
+                					'</div>' +
+                					'</div>';
+					}
+//              	var goodsinfo = db.goods[0],
+                	var goodsinfo = db.goods,
+                		$goodsOrderFee = 0; //商品运费 
+                		
+                	
+                	
+//              	$goodinfotr1 =  '<tr>' + 
+//              					'<td>' +
+//              					goodsinfo.goods_name +
+//              					'</td>' +
+//              					'<td>' +
+//              					goodsinfo.goods_price +
+//              					'</td>' +
+//              					'<td>' +
+//              					goodsinfo.goods_number +
+//              					'</td>' +
+//              					'<td>' +
+//              					$goodsPrivilege +
+//              					'.00</td>' +
+//              					'<td>' +
+//              					$goodsOrderFee +
+//              					'</td>';
+                	
+                	$.each(goodsinfo,function(key,val){
+                		$goodsPrice = val.goods_price, //商品单价
+                		$marketPrice = val.market_price, //商品市场价
+                		$goodsNumber = val.goods_number,  //商品数量
+                		$goodsSigPrice = $goodsPrice*$goodsNumber, //每样商品总价
+                		$goodsAllPrice = 0,
+                		$goodsPrivilege = ($marketPrice - $goodsPrice)*$goodsNumber; //商品优惠
+                		
+						$goodinfo.find("tbody").append(
+							'<tr data-price='+$goodsSigPrice+'>' + 
+                					'<td>' +
+                					val.goods_name +
+                					'</td>' +
+                					'<td>' +
+                					val.goods_price +
+                					'</td>' +
+                					'<td>' +
+                					val.goods_number +
+                					'</td>' +
+                					'<td>' +
+                					$goodsSigPrice +
+                					'.00</td>' +
+                					'<td>' +
+                					$goodsPrivilege +
+                					'.00</td>'
+						);
+                		
+                	});
+                	
+//              	$goodinfotr1 =  '<tr>' + 
+//              					'<td>' +
+//              					goodsinfo.goods_name +
+//              					'</td>' +
+//              					'<td>' +
+//              					goodsinfo.goods_price +
+//              					'</td>' +
+//              					'<td>' +
+//              					goodsinfo.goods_number +
+//              					'</td>' +
+//              					'<td>' +
+//              					$goodsPrivilege +
+//              					'.00</td>';
+                	
+//		            $accountinfotr ='<tr>' + 
+//              					'<td class="count-title">商品总价：</td>' +
+//              					'<td class="count-num"><span class="ui-price-icon">￥' +
+//              					$goodsAllPrice +
+//              					'元</tr>' +
+//              					'<tr>' +
+//              					'<td class="count-title">配送费用：</td>' +
+//              					'<td class="count-num">+<span class="ui-price-icon">￥' +
+//              					$goodsOrderFee +
+//              					'元</span></td>' +
+//              					'</tr>';
+					var goIn = $("#J_GoodsInfo tbody tr:not(:first)");
+					for (var i = 0; i < goIn.length; i++){
+					  	$goodsAllPrice;  //列表商品总和
+					  	var sigPre = goIn.eq(i).attr('data-price');
+						$goodsAllPrice = $goodsAllPrice + parseInt(sigPre);
+//						console.log(parseInt(sigPre));
+//						console.log($goodsAllPrice);
+					}
+					$goodsPay = parseInt($goodsAllPrice) + parseInt($goodsOrderFee); //商品实付款
+					
+					$accountinfotr ='<tr>' + 
+                					'<td class="count-title">商品总价：</td>' +
+                					'<td class="count-num"><span class="ui-price-icon">￥' +
+                					$goodsAllPrice +
+                					'元</tr>' +
+                					'<tr>';
+                					
+					$payinfodiv ='<div class="count-title-pay">实付款：</div>' + 
+                					'<div class="total-count-num">' +
+                					'<strong><span class="ui-price-icon">￥' +
+                					$goodsPay +
+                					'元</span></strong>' +
+                					'</div>';
+                					
+                	$paymethodtr =  '<tr>' + 
+                					'<td>所选支付方式:' +
+                					db.pay_name +
+                					'。应付款金额:<i>￥' +
+                					$goodsPay +
+                					'元。</i></td>' +
+                					'</tr>' + 
+                					'<td>积分抵扣:' +
+                					'<font color="#FF0000">' +
+                					(db.integral_money=='0.00'?'0':db.integral_money) +
+                					'</font>'+
+                					'元</i></td>' +
+                					'</tr>';
+		            
+		            $otherinfotr =  '<tr>' + 
+                					'<td class="td1">配送方式：</td>' +
+                					'<td>' +
+                					db.shipping_name +
+                					'</td>' +
+                					'</tr>' +
+                					'<tr>' + 
+                					'<td class="td1">支付方式：</td>' +
+                					'<td>' +
+                					db.pay_name +
+                					'</td>' +
+                					'</tr>' +
+                					'<tr>' + 
+                					'<td class="td1">缺货处理：</td>' +
+                					'<td>' +
+                					db.how_oos +
+                					'</td>' +
+                					'</tr>';
+		            
+                    $orderinfo.find(".detail_table_td2").append($OrderInfodl1);
+                    $orderinfo.find(".detail_table_td2").append($OrderInfoul1);
+                    $orderinfo.find(".detail_table_td2").append($OrderInfodl2);
+					$orderinfo.find(".detail_table_td").append($OrderInfodiv1);
+					
+//					$goodinfo.find("tbody").append($goodinfotr1);
+					$accountinfo.find("tbody").append($accountinfotr);
+					$payinfo.find(".total-count-pay-result").append($payinfodiv);
+					
+					$paymethod.find("tbody").append($paymethodtr);
+					$otherinfo.find("tbody").append($otherinfotr);
+                    
+                },
+                complete: function() {
+                    $loader.remove();
+                },
+                error: function() {
+                    this.errormsg()
+                }
+            });
+        });
+    </script>
+</block>

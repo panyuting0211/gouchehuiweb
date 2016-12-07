@@ -1,0 +1,389 @@
+<extend name="n_uc_base" />
+<block name="body">
+	<style type="text/css">
+		.uc_shop_order_list  .ts-list1{
+		    width: 280px;
+		}
+		.uc_shop_order_list  .ts-list2{
+		    width: 280px;
+		}
+		.uc_shop_order_list  .ts-list3{
+		    width: 130px;
+		}
+		.uc_shop_order_list  .ts-list4{
+		    width: 130px;
+		}
+        .uc_shop_order_list{
+            position:relative;
+        }
+        .uc_shop_order_list .total-mes{
+            position:absolute;
+            right:15px;
+            top:10px;
+        }
+        .uc_shop_order_list .total-mes .total-mes-col{
+            color:#fe802c;
+            margin:auto 5px;
+        }
+        .uc_shop_order_list .grid_bundle{
+            margin-top:40px;
+            width:869px;
+        }
+        .uc_shop_order_list .grid_bundle thead{
+            border:1px solid #ddd;
+        }
+        .uc_shop_order_list .grid_bundle thead th{
+            border:none;
+        }
+        .order-mes-wrap .time-and-num{
+            background:#f5f5f5;
+            border:1px solid #e5e5e5;
+        }
+        .order-mes-wrap .time-and-num p{
+            display:inline-block;
+            margin-left:15px;
+            color:#888;
+            height:30px;
+            line-height:30px;
+        }
+        .order-mes-wrap tr td{
+            border:1px solid #e5e5e5;
+            height:90px;
+            text-align:center;
+        }
+        .order-mes-wrap tr td ul li{
+            text-align:left;
+            padding-left:20px;
+         }
+        .order-mes-wrap .ts-lista, .order-mes-wrap .ts-listb{
+            width:315px;
+        }
+        .order-mes-wrap .ts-listc{
+            width:125px;
+        }
+        .order-mes-wrap .ts-listd{
+            width:115px;
+        }
+        .order-mes-wrap .order-mes-box .link-here{
+            display: block;
+            color:#fe802c;
+        }
+        .order-mes-wrap .use_margin{
+            margin-top:20px;
+        }
+        .detail-info{
+            padding: 15px;
+        }
+        .detail-info h2{
+            color: #000;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .detail-info dl{
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        .detail-info .item dl{
+            width: 50%;
+        }
+        .detail-info dt{
+            width: 80px;
+            text-align: right;
+        }
+        .detail-info dd{
+            margin-left: 95px;
+        }
+        .detail-info .img-box{
+            width: 200px;
+            height: 110px;
+            overflow: hidden;
+            border: 3px dashed #808080;
+        }
+
+	</style>
+    <div class="uc_main GB_main_r">
+        <div class="uc_main_wrapper">
+            <h2 class="uc_middle_title">我的订单</h2>
+            <ul class="uc_sub_nav clearfix">
+                <li><a href="{:U('n_uc_myorder')}" title="">购车订单</a></li>
+                <li><a href="{:U('n_uc_myinquiry')}" title="">询价订单</a></li>
+                <!--<li><a href="{:U('n_uc_credits')}" title="">车币订单</a></li>-->
+                <li><a href="{:U('n_uc_shop_order_list')}" title="">商城订单</a></li>
+                <li class="cur"><a href="{:U('n_uc_active_list')}" title="">活动订单</a></li>
+            </ul>
+            
+			<div class="uc_shop_order_list ohd" id="J_OrderListMain">
+                <div class="table">
+                    <div class="total-mes">共<span class="total-mes-col j_allRecord">-</span>条</div>
+                    <table class="grid_bundle table_fontsize table-shoplist grid_bundle_table" style="margin-bottom:20px;">
+                        <colgroup>
+                            <col class="ts-list1">
+                            <col class="ts-list2">
+                            <col class="ts-list3">
+                            <col class="ts-list4">
+                        </colgroup>
+                        <thead>
+                        <tr class="col_name">
+                            <th>订单信息</th>
+                            <th>活动信息</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="order-mes-wrap">
+                    <ul class="j_list">
+
+                    </ul>
+                </div>
+                <!--分页-->
+            	<div class="G_pager j_pager"></div>
+            </div>
+
+            </div>
+
+    </div>
+
+    <script id="tplItem" type="text/html">
+        {{each list as value index}}
+        <li class="use_margin">
+            <table class="order-mes-box" border=1  bordercolordark="#000000" bordercolorlight="#ffffff">
+                <div class="time-and-num">
+                    <p>下单时间：<span>{{value.createtime}}</span></p>
+                    <p>订单号：<span>{{value.out_trade_no}}</span></p>
+                </div>
+                <tr>
+                    <td class="ts-lista"><ul>
+                        <li><span>{{value.carstyle}}</span></li>
+                        <li>订单金额：<span>1元</span></li>
+                    </ul></td>
+                    <td class="ts-listb">
+                        <ul>
+                            <li>名称：<span>{{value.activity_name}}</span></li>
+
+                            <li>来源：<span>{{value.from_order}}</span></li>
+                            {{if value.from_activityid == 27}}<li>截止时间：<span>{{value.endtime}}</span></li>{{/if}}
+                        </ul>
+                    </td>
+                    <td class="ts-listc">
+                        <ul>
+                            <li><span>
+                                {{if value.status == 0}}
+                                未支付
+                                {{else if value.status == 1}}
+                                已支付 {{if value.from_activityid == 27}}（未完善）{{/if}}
+                                {{else if value.status == 4}}
+                                已支付{{if value.from_activityid == 27}}（已完善）{{/if}}
+                                {{else}}
+                                已完成
+                                {{/if}}</span>
+                            </li>
+                            {{if value.from_activityid == 27}}
+                            <li>
+                                活动状态：
+                                <span>
+                                {{if value.actstatus == 1}}
+                                未开始
+                                {{else if value.actstatus == 2}}
+                                有效
+                                {{else}}
+                                失效
+                                {{/if}}
+                            </span>
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </td>
+                    <td class="ts-listd">
+                        <ul>
+                            <li>
+                                {{if value.status == 0}}
+                                <a href="/index.php/order/order_active_pay?pay_id={{value.id}}" class="link-here">去支付</a>
+                                <a href="#" data-id="{{value.id}}" class="link-here j_del">删除</a>
+                                {{else if value.status == 1}}
+                                {{if value.from_activityid == 27}}<a href="/index.php/Order/order_active_perfectinfo?pay_id={{value.id}}" class="link-here">去完善</a>{{/if}}
+                                <a href="#" data-id="{{value.id}}" class="link-here j_del">删除</a>
+                                {{else if value.status == 4}}
+                                {{if value.from_activityid == 27}}<a href="#" data-id="{{value.id}}" class="link-here j_details">查看详情</a>{{/if}}
+                                {{else}}
+                                {{if value.from_activityid == 27}}<a href="#" data-id="{{value.id}}" class="link-here j_details">查看详情</a>{{/if}}
+                                <a href="#" data-id="{{value.id}}" class="link-here j_del">删除</a>
+                                {{/if}}
+
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        {{/each}}
+    </script>
+
+    <script>
+        $(function(){
+            $('#J_OrderListMain').AjaxListerContainer({
+                loader: '<li class="onload"><img src="/Public/Home/images/common/5-121204193R7.gif" alt=""/>数据加载中...</li>',
+                nuller: '<li class="null_list">您暂无任何活动车辆订单！</li>',
+                ajaxUrl: '/member.php/MemberGeneral/activitylist'
+            });
+            //绑定取消订单按钮
+            $('#J_OrderListMain').on('click', '.j_del', function(e){
+                var $this = $(this), u = $this.closest('.use_margin');
+
+                layer.confirm('确定取消该订单吗？', {
+                    title: '提示',
+                    btn: ['确定', '取消'] //按钮
+                }, function (index) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/member.php/MemberGeneral/activitycancel",
+                        dataType: "json",
+                        data: {
+                            pay_id: $this.data('id')
+                        },
+                        success:function(data) {
+                            if(data.status == 1){
+                                layer.closeAll();
+                                layer.msg("删除成功！");
+                                $('.j_allRecord').text(parseInt($('.j_allRecord').text(), 10) - 1);
+                                u.remove();
+                            }else{
+                                layer.msg("删除失败，请重试！");
+                            }
+                        }
+                    });
+
+                }, function () {
+                });
+
+
+            });
+            //绑定查看详情按钮
+            $('#J_OrderListMain').on('click', '.j_details', function(e){
+                var $this = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: "/member.php/MemberGeneral/activitydetails",
+                    dataType: "json",
+                    data: {
+                        pay_id: $this.data('id')
+                    },
+                    success:function(data) {
+                        var payStatus = "",
+                                actStatus = "";
+
+                        if (data.status == 0){
+                            payStatus = "未支付";
+                        }
+                        else if (data.status == 1){
+                            payStatus = "已支付（未完善）";
+                        }
+                        else if (data.status == 4){
+                            payStatus = "已支付（已完善）";
+                        }else{
+                            payStatus = "已完成";
+                        }
+
+                        if (data.actstatus == 1){
+                            actStatus = "未开始";
+                        }else if(data.actstatus == 2){
+                            actStatus = "有效";
+                        }else{
+                            actStatus = "失效";
+                        }
+                        var popCon = '<div class="detail-info"> ' +
+                                '<h2>订单信息：</h2> ' +
+                                '<div class="order-info"> ' +
+                                '<dl class="clearfix"> ' +
+                                '<dt class="G_fl">车款名称：</dt> ' +
+                                '<dd>'+ data.carstyle +'</dd> ' +
+                                '</dl> ' +
+                                '<div class="item clearfix"> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">订单时间：</dt> ' +
+                                '<dd>'+ data.createtime +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt  class="G_fl">订单号：</dt> ' +
+                                '<dd>'+ data.out_trade_no +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">金额：</dt> ' +
+                                '<dd>1元</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">状态：</dt> ' +
+                                '<dd>'+ payStatus +'</dd> ' +
+                                '</dl> ' +
+                                '</div> ' +
+                                '</div> ' +
+                                '<h2>活动信息：</h2> ' +
+                                '<div class="activity-info">' +
+                                '<div class="item clearfix">' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">活动名称：</dt> ' +
+                                '<dd>'+ data.activity_name +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">活动来源：</dt> ' +
+                                '<dd>PC端</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">活动状态：</dt> ' +
+                                '<dd>'+ actStatus +'</dd> ' +
+                                '</dl> ' +
+                                '</div>' +
+                                '</div> ' +
+                                '<h2>用户填写信息：</h2> ' +
+                                '<div class="user-info"> ' +
+                                '<div class="item clearfix"> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">4S店名：</dt> ' +
+                                '<dd>'+ data.name_4s +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">裸车价：</dt> ' +
+                                '<dd>'+ data.low_price +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">手续费：</dt> ' +
+                                '<dd>'+ data.credit_fee +'</dd> ' +
+                                '</dl> ' +
+                                '<dl class="G_fl"> ' +
+                                '<dt class="G_fl">上牌费等：</dt> ' +
+                                '<dd>'+ data.licensing_fees +'</dd> ' +
+                                '</dl> ' +
+                                '</div> ' +
+                                '<dl class="clearfix"> ' +
+                                '<dt  class="G_fl">上传照片：</dt> ' +
+                                '<dd><div class="img-box"><img src="'+ data.exterior_img +'"/></div></dd> ' +
+                                '</dl> ' +
+                                '<dl class="clearfix"> ' +
+                                '<dt  class="G_fl">备注：</dt> ' +
+                                '<dd>'+ data.user_remark +'</dd> ' +
+                                '</dl> ' +
+                                '</div> ' +
+                                '</div>';
+                        //生成添加到预购车库弹窗
+                        layer.open({
+                            type: 1,
+                            zIndex: 9996,
+                            title: "查看详情",
+                            area: '600px',
+                            closeBtn: 1,
+                            move: false,
+                            shadeClose: true,
+                            content: popCon,
+                            success: function($layer, index) {
+                            }
+                        });
+                    }
+                    });
+
+
+                    });
+        });
+    </script>
+</block>

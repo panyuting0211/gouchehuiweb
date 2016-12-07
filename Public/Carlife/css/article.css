@@ -1,0 +1,190 @@
+.crumbs{
+    height: 64px;
+    line-height: 60px;
+    color: #777;
+}
+
+.cont{
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.cont .maincont{
+    width: 868px;
+    border: 1px solid #eee;
+    float: left;
+    background-color: #fff;
+    padding: 10px;
+}
+.cont .sblider{
+    margin-left: 920px;
+    border:1px solid #eee;
+    background-color: #fff;
+}
+
+
+.p-pages{
+    padding: 0 20px 20px;
+}
+
+
+.p-pages .p-title{
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    border-bottom:1px solid #eee;
+}
+
+.p-pages .p-details{
+    width: 570px;
+    margin:0 auto;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+}
+
+.p-pages .day,.p-pages .time{
+    display: inline-block;
+    float: left;
+    width: 25%;
+    text-align: center;
+    color: #666;
+}
+
+.p-pages .likebox{
+    width: 50%;
+    float: left;
+}
+
+.likebox{
+    width: 100%;
+    display: flex;
+}
+
+.likebox a{
+    flex: 1;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 0;
+    background: url("../images/like_button.png") no-repeat;
+}
+.likebox a span{
+    display: inline-block;
+    line-height: 20px;
+    margin-left: 25px;
+}
+
+.likebox .comments{
+    background-position:0px -75px;
+}
+.likebox .likes{
+    background-position: 0 -39px ;
+}
+
+
+.p-pages .p-articleCon{
+    line-height: 30px;
+    color: #666;
+    font-size: 14px;
+}
+
+.p-pages .p-articleCon p{
+    text-indent: 2rem;
+    padding-bottom: 15px;
+}
+
+
+.p-pages .p-articleCon img{
+    width: 100%;
+}
+
+.p-pages #J_commentbox {
+    display: block;
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 10px;
+    padding-bottom: 40px;
+}
+
+#J_commentbox .arrowup{
+    position: absolute;
+    display: block;
+    width:0;
+    height:0;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-bottom:8px solid #f4f4f4;
+    right: 72px;
+    top: -8px;
+}
+
+#J_commentbox #J_comment_des{
+    width: 100%;
+    height: 100px;
+    border:none;
+}
+
+#J_commentbox .button{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.newsbox .news{
+    display: block;
+    padding:10px;
+    font-size: 14px;
+    border-bottom:1px dashed #eee;
+    cursor: pointer;
+}
+
+.newsbox .news:hover,.newsbox .hover{
+    text-decoration: none;
+    background-color: #fff8ee;
+}
+.newsbox .news:hover .newsdet,.newsbox .hover .newsdet{
+    display: block;
+}
+.news dl {
+    overflow: hidden;
+    position: relative;
+}
+.news dl dt{
+    position: absolute;
+    display: inline-block;
+    color: #fa8c35;
+    width: 30px;
+    text-align: center;
+}
+.news dl dd{
+    margin-left: 35px;
+}
+
+.news dl dd p{
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.news .newsdet{
+    display: none;
+    height: 43px;
+    line-height: 43px;
+    padding: 10px 20px;
+}
+
+.news .newsdet img{
+    display: inline-block;
+    float: left;
+    width: 60px;
+    height: 43px;
+
+}
+.news .newsdet .num{
+    line-height: 43px;
+    margin-left: 10px;
+}

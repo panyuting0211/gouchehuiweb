@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>:: 完善信息 :: 活动订车订单 —— 南京底价购车_汽车价格_汽车团购_汽车用品_汽车保养_购车惠</title>
+</head>
+<body>
+{~W('Cate/header_order')}
+<div class="C_page">
+    <div class="main_container perfect-info">
+        <h2 class="G_f16 title">填写订单页 <i class="ui_icon ui_icon_16 ui_icon_wb_exc_16"></i></h2>
+        <div class="perfect-info-box">
+            <div class="order-baseinfo">
+                <h3 class="hd">订单信息</h3>
+                <div class="bd clearfix">
+                    <dl class="G_fl">
+                        <dt class="G_fl">订单号为：</dt>
+                        <dd class="j_trade_no">{$info.out_trade_no}</dd>
+                    </dl>
+                    <dl class="G_fl">
+                        <dt class="G_fl">订单金额：</dt>
+                        <dd>￥ {$info.money} （指定品牌车款上牌费）</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="perfect-orderinfo">
+                <h3 class="hd">用户填写</h3>
+                <div class="bd">
+                    <form action="#" id="J_FormCon">
+                    <div class="item clearfix">
+                        <dl class="G_fl">
+                            <dt class="G_fl">品       牌：</dt>
+                            <dd>{$info.brand_name}</dd>
+                        </dl>
+                        <dl class="G_fl">
+                            <dt class="G_fl">车型：</dt>
+                            <dd>{$info.car_model_name}</dd>
+                        </dl>
+                    </div>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>选择车款：</dt>
+                        <dd>
+                            <select name="car" id="J_Car">
+                                <option value="">请选择车款</option>
+                                <volist name="car_info" id="vo">
+                                <option value="{$vo.id}">{$vo.car_name}</option>
+                                </volist>
+                            </select>
+
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>4S 店名：</dt>
+                        <dd>
+                            <input type="text" class="inpTxt" name="name_4s" placeholder="请输入您咨询的4S店名称 " />
+
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>裸车价：</dt>
+                        <dd>
+                            <input type="text" maxlength="9" class="w120 inpTxt" name="price" />
+                            <span class="yan">元</span>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>手续费：</dt>
+                        <dd>
+                            <input type="text" maxlength="9" class="w120 inpTxt" name="counterFee" />
+                            <span class="yan">元</span>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>上牌费等：</dt>
+                        <dd>
+                            <input type="text" maxlength="9" class="w120 inpTxt" name="licensingFees" />
+                            <span class="yan">元</span>
+                           </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl"><span>*</span>上传照片：</dt>
+                        <dd class="clearfix">
+                            <div class="upload-pic G_fl">
+                                <input id="J_UploadImg" type="file" name="myPhoto" class="my-photo" />
+                                <span class="add">+</span>
+                                <div class="photo-box">
+                                    <div class="productImg"></div>
+                                </div>
+                            </div>
+                        </dd>
+                        <dd>
+                            仅支持 jpg/jpeg/png，且图片尺寸不小于264*160px
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt class="G_fl">备注：</dt>
+                        <dd>
+                            <textarea name="remarks" class="ce" id="" placeholder="......" cols="30" rows="10"></textarea>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix item">
+                        <dt></dt>
+                        <dd>
+                            <input type="submit" class="G_btn_a w120 btn_32px" value="提交"/>
+                        </dd>
+                    </dl>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app/jquery.validate.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+<script>
+    $(function(){
+        var javaInterfaceUrlPrefix = "https://www.woodche.com/YchLrestServer/api",
+                phpInterfaceUrlPrefix = "http://www.gouchehui.com";
+
+        //自定义图片格式验证
+        jQuery.validator.addMethod("isFlagFormat", function(value, element) {
+            var file = element.files[0],
+                    typeArrs = ['jpg', 'jpeg', 'png'],
+                    fileType = file.type,
+                    specifiedIndex = fileType.indexOf('/');
+
+            fileType = fileType.substring(specifiedIndex + 1);
+            return $.inArray(fileType, typeArrs) > -1 ? true : false;
+        }, "仅支持 jpg/jpeg/png");
+        //自定义图片大小验证
+        jQuery.validator.addMethod("isFlagVolume", function(value, element) {
+            var file = element.files[0],
+                    fileSize = Math.floor(file.size / 1024);
+            return fileSize < 2000 ? true : false;
+        }, "图片大小不能大于2M");
+
+        $("#J_FormCon").validate({
+            debug: true, //调试模式取消submit的默认提交功能
+            rules:{
+                car: {
+                    required:true
+                },
+                name_4s: {
+                    required:true
+                },
+                price: {
+                    required:true,
+                    digits: true,
+                    min: 1
+                },
+                counterFee: {
+                    required:true,
+                    digits: true,
+                    min: 1
+                },
+//                licensingFees: {
+//                    required:true,
+//                    digits: true,
+//                    min: 1
+//                },
+                myPhoto: {
+                    isFlagFormat: true,
+                    isFlagVolume: true
+                }
+            },
+            messages:{
+                car: {
+                    required: "请选择车款"
+                },
+                name_4s: {
+                    required: "请输入4S店名"
+                },
+                price: {
+                    required: "请输入裸车价",
+                    digits: "裸车价必须为正整数",
+                    min: "裸车价必须大于0"
+                },
+                counterFee: {
+                    required: "请输入手续费",
+                    digits: "手续费必须为正整数",
+                    min: "手续费必须大于0"
+                },
+//                licensingFees: {
+//                    required: "请输入上牌费",
+//                    digits: "上牌费必须为正整数",
+//                    min: "上牌费必须大于0"
+//                },
+//                myPhoto: {
+//                    required: "请上传照片"
+//                }
+            }, submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form
+                var $form = $(form),
+                        dbUploadImgUrl = "";
+                var fd = new FormData(); //实例化表单，提交数据使用
+                fd.append('img', $('#J_UploadImg')[0].files[0]); //将img追加进去
+                //开始ajax请求，后台用的tp
+                $.ajax({
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    url: phpInterfaceUrlPrefix + "/index.php/api/upload_file",
+                    data: fd,
+                    success: function(data) {
+                        if(data.code==0){
+                            dbUploadImgUrl = data.img_url;
+                            $.ajax({
+                                type: "POST",
+                                url: phpInterfaceUrlPrefix + "/index.php/api/perfectOrder",
+                                dataType: "json",
+                                data: {
+                                    out_trade_no: $('.j_trade_no').text(),
+                                    car_id: $form.find("[name=car]").val(),
+                                    car_name: $form.find("[name=car]").find("option:selected").text(),
+                                    name_4s: $form.find("[name=name_4s]").val(),
+                                    low_price: $form.find("[name=price]").val(),
+                                    credit_fee: $form.find("[name=counterFee]").val(),
+                                    licensing_fees: $form.find("[name=licensingFees]").val(),
+                                    exterior_img: dbUploadImgUrl,
+                                    user_remark: $form.find("[name=remarks]").val()
+                                },
+                                success:function(data){
+                                    if(data.code == 0){
+                                        layer.msg("完善信息成功");
+                                        setTimeout(function(){
+                                            window.location.href = data.url;
+                                        }, 1000)
+
+                                    }else{
+                                        layer.msg("完成信息有误，请重试！");
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        //html5 图片上传
+            $('#J_UploadImg').on('change', function(e){
+            var file = $('#J_UploadImg')[0].files[0],
+                    uploadWrapper = $(this).closest('.upload-pic'),
+                    uploadWrapperImgbox = uploadWrapper.find('.productImg'),
+                    imgEle = null;
+
+                if(file !== null && file !== undefined){
+                    if (window.URL) {
+                        imgEle = window.URL.createObjectURL(file);
+                    } else if (window.webkitURL) {
+                        imgEle = window.webkitURL.createObjectURL(file);
+                    }
+                    uploadWrapperImgbox.html("<img class=\"photo\" src=\"" + imgEle + "\"/>");
+                }else{
+                    uploadWrapperImgbox.html("");
+                }
+            });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}details.css">
+    <title>{$info.brand_name}_{$info.car_model_name}_{$info.car_name}_{$info.exterior_color_name}_底价购车_购车惠</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+<a href="/index.php/subject/double_eleven" id="J_topAdv" style="display:block;width:100%;height:80px;background: url(/Public/Home/images/Subject/double11/images/double_tit_ele.gif) center center no-repeat" target="_blank" title="双十一狂欢，限量抢1元上牌费"></a>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+        <!--用户位置 开始-->
+        <div class="US_position G_f16 ftx02">
+            位置：
+            <a href="{:U('Index/index')}">购车惠> </a>
+            <a href="{:U('Car/special_price_car')}">特价车> </a>
+            <a href=""><strong>{$info.brand_name} {$info.car_model_name}</strong></a>
+        </div>
+        <!--用户位置 结束-->
+
+        <!--详情开始-->
+        <div class="car_details_box clearfix">
+            <!--汽车展示图-->
+            <div class="cheapcar_picbox">
+                <div class="cheapcat_pic">
+                    <div class="productImg">
+                        <img src="{:OSS}{$info.imgurl}" alt="{$info.car_name}">
+                    </div>
+                </div>
+                <!--<a href="" class="G_f24">{$info.brand_name} {$info.car_model_name}</a>-->
+                <!--分享 开始-->
+                <div class="detail-share-box G_fl G_f14">
+                    <a href="#" class="a-btn j_shareBtn">
+                        <i class="ui_icon ui_icon_share"></i>
+                        <span>分享</span>
+                    </a>
+                    <div class="detail-share-content j_shareBox">
+                        <i class="ui_icon ui_icon_16 ui_icon_detail arrow"></i>
+                        <div class="bdsharebuttonbox" data-tag="share"  data="{'pic':'{:OSS}{$info.imgurl}'}">
+                            <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                            <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                            <a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                        </div>
+                    </div>
+                    <if condition="isset($attention['id']) and $attention['id'] neq null">
+                        <a href="#" class="a-btn j_attention selected" data-attention="{id:100, likeid:20}">
+                            <i class="ui_icon ui_icon_atten"></i>
+                            <span class="s">已关注</span>
+                            <!--，可在<span class="s">会员中心</span> &gt; <span class="s">我的关注</span> 第一时间查看该车相关最新动态-->
+                        </a>
+                        <else />
+                        <a href="#" class="a-btn j_attention" data-attention="{id:100, likeid:20}">
+                            <i class="ui_icon ui_icon_gz"></i>
+                            <span>点击关注</span>
+                        </a>
+                    </if>
+
+                </div>
+                <!--分享 结束-->
+            </div>
+            <div class="carinfobox">
+
+                <div class="carinfo_wrap G_f14 ftx02" id="J_carDetail" data-mid="1" data-id="{$info.id}">
+					<h2 class="car_title1">{$info.car_name}</h2>
+                    <dl class="item ite1">
+                        <dt>活动日期</dt>
+                        <dd>{$info.start|date="Y年m月d日",###} - {$info.end|date="Y年m月d日",###}</dd>
+                    </dl>
+                    <dl class="item ite1" data-type="incolor">
+                        <dt>活动数量</dt>
+                        <dd data-num="{$info.number}">{$info.number}辆</dd>
+                    </dl>
+                    <dl class="item ite1">
+                        <dt>颜色配置</dt>
+                        <dd>
+                            依厂家统一配置为准
+                        </dd>
+                    </dl>
+                    <dl class="item ite1 color j_carColor j_excolor" data-type="excolor">
+                        <dt>外观颜色</dt>
+                        <dd>
+                            <a href="javascript:;" title="{$info.exterior_color_name}" data-color="{$info.exterior_color_id}" style="background-color:{$info.exterior_color_value}" class="active"><i></i></a>
+                            <!--<span>已选择：<em>{$info.exterior_color_name}</em></span>-->
+                        </dd>
+                    </dl>
+                    <dl class="item ite1 color j_carColor j_incolor" data-type="incolor">
+                        <dt>内饰颜色</dt>
+                        <dd>
+                           <!--  <a href="javascript:;" title="{$info.interior_color_name}" data-color="{$info.interior_color_id}" style="background-color:{$info.interior_color_value}" class="active"><i></i></a><span>已选择：<em>{$info.interior_color_name}</em></span> -->
+                            <a href="javascript:;" title="{$info.interior_color_name}" data-color="{$info.interior_color_id}" class="active"><i></i>
+                                <volist name="info.interior_color_value" id="vo2">
+                                    <span class="one-half" style="background-color:{$vo2};"></span>
+                                </volist>
+                            </a>
+                            <!--<span>已选择：<em>{$info.interior_color_name}</em></span>-->
+                        </dd>
+                    </dl>
+                    <div class="car_pre">
+                    	<dl class="gf-price car-dl car-dl1">
+	                        <dt class="G_fl G_f14">官方价格</dt>
+	                        <dd class="official_price car-dd1 G_fl G_f20">
+	                            <if condition="$info['auth_price'] neq null">
+	                                {$info['auth_price']}万
+	                                <else />
+	                                价格正在上传中...
+	                            </if>
+	                        </dd>
+	                    </dl>
+	                    <dl class="cost car-dl car-dl2" style="margin-top: 16px;">
+	                        <dt class="G_fl G_f24 car-dt2">购车惠特价</dt>
+	                        <dd class="G_fl car-dd2">
+	                            <span class="sprice" data-cheapprice="{$info.special_price}">
+	                                <em class="price" id="J_inquiryFee">{$info.special_price}</em>
+	                                <em class="yen">万</em>
+	                            </span>
+	                        </dd>
+	                    </dl>
+                    </div>
+                    
+                    <!--<dl class="item ite1 gf-price">
+                        <dt>官方价格</dt>
+                        <dd class="official_price">
+                            <if condition="$info['auth_price'] neq null">
+                                {$info['auth_price']}元
+                                <else />
+                                价格正在上传中...
+                            </if>
+                        </dd>
+                    </dl>-->
+                    
+                    <!--<dl class="item color j_carColor j_excolor" data-type="excolor">
+                        <dt>官方指导价</dt>
+                        <dd class="official_price">
+                            <if condition="$info['auth_price'] neq null">
+                                {$info['auth_price']}元
+                                <else />
+                                价格正在上传中...
+                            </if>
+                        </dd>
+                    </dl>
+                    
+                    <div class="line"></div>-->
+                   
+                    
+                    
+                <!--<div class="price_div">
+                    <dl class="item">
+                        <dt>市&nbsp;&nbsp;场&nbsp;&nbsp;价</dt>
+                        <dd>
+                            <s class="G_f16">{$info.price}元</s>
+                        </dd>
+                    </dl>
+                    
+                </div>-->
+                    <dl class="item upCardCity">
+                        <dt class="title">上牌地区</dt>
+                        <dd>
+                            <select name="shangpai">
+                                <option value="0">不限</option>
+                                <volist name="array" id="vol">
+                                    <option value="{$vol}">{$vol}</option>
+                                </volist>
+                            </select>
+							<a href="{:U('Guide/problem_license')}" class="aLinker"><i class="ui_icon ui_icon_16 ui_icon_wb_exc_16"></i>上牌地相关问题?</a>
+                        </dd>
+                    </dl>
+                    <dl class="item">
+                        <dt>支付定金</dt>
+                        <dd>
+                        	<span class="deposit"><i>¥</i><b>{$info.deposit}</b>元</span>
+                        </dd>
+                        <div class="carbtn G_f14">
+	                        <if condition="$nowtime LT $info['start']">
+	                        <a href="#" class="car_btn G_btn_a G_btn_disabled j_inquiryBtn">活动时间还没开始</a>
+	                        <elseif condition="$info['number'] elt 0" /><a href="#" class="car_btn G_btn_a G_btn_disabled j_inquiryBtn">活动数量已售完</a>
+	                        <elseif condition="$info['end'] LT $nowtime" /><a href="#" class="car_btn G_btn_a G_btn_disabled j_inquiryBtn">活动时间已过</a>
+	                        <else /> 
+	                        <a href="{:U('order/order_info?special_price_id='.$info['id'])}" class="car_btn G_btn_a j_inquiryBtn">立即定车</a>
+	                        </if>                    
+	                    </div>
+                    </dl>
+                    
+                    <!--承诺 开始-->
+	                <div class="shareCon">
+	                    <div class="shareSure G_f12">
+	                    	<div class="shareSure-left G_fl">
+	                    		服务承诺
+	                    	</div>
+	                    	<div class="shareSure-right G_fl">
+	                    		<ul>
+                    			<li>
+                    				<a href="javascript:void(0);" class="popup-wrapper">
+                    					<dl>
+	                    					<dt class="dt1">底</dt>
+	                    					<dd>全网底价</dd>
+	                    				</dl>
+	                    				<div class="popup-content">
+		                                    <i class="arrow"></i>承诺成交价不高于底价凭证上的价格。
+		                                </div>
+                    				</a>
+                    			</li>
+                    			<li>
+                    				<a href="javascript:void(0);" class="popup-wrapper">
+                    					<dl>
+	                    					<dt class="dt2">全</dt>
+	                    					<dd>全程服务</dd>
+	                    				</dl>
+	                    				<div class="popup-content">
+		                                    <i class="arrow"></i>一对一专属服务，全程为您提供买车优质服务。
+		                                </div>
+                    				</a>
+                    			</li>
+                    			<li>
+                    				<a href="javascript:void(0);" class="popup-wrapper">
+                    					<dl>
+	                    					<dt class="dt3">抵</dt>
+	                    					<dd>定金抵车款</dd>
+	                    				</dl>
+	                    				<div class="popup-content">
+		                                    <i class="arrow"></i>提车成功后，在购车惠平台支付的定金可抵用车款。
+		                                </div>
+                    				</a>
+                    			</li>
+                    		</ul>
+	                    	</div>
+	                    </div>
+	                </div>
+	                <!--承诺  结束-->
+                </div>
+            </div>
+
+            <!--汽车信息 结束-->
+        </div>
+        <!--详情结束-->
+    </div>
+    <!--<div class="packagebox main_container">
+        <div class="package_wrap">
+            <div class="title">
+                <h3 class="G_f22 ftx07">购买车险即送豪华大礼包</h3>
+                <div class="tips G_f16 ftx02">
+                    价值：<span>￥{$package.price}元</span>
+                </div>
+            </div>
+            <div class="package_picbox">
+                <img src="{:OSS}{$package.imgurl}" alt="超值大礼包"/>
+            </div>
+        </div>
+    </div>-->
+    <!--车的各种信息开始-->
+
+        <div class="carbox main_container" id="J_detail_pos">
+        	<!--carbox的左侧 strat-->
+                <div class="carbox-le G_fl" id="hotList">
+                	<!--<h3 class="carbox-le-tit G_f14">活动热卖</h3>
+                	<div class="carbox-le-con carbox-ac">
+                		<ul class="carbox-ul">
+                		</ul>
+                	</div>-->
+                	
+                	<h3 class="carbox-le-tit G_f14">热门推荐</h3>
+                	<div class="carbox-le-con carbox-hot">
+                		<ul class="carbox-ul">
+                		</ul>
+                	</div>
+                </div>
+                <!--carbox的左侧 end-->
+                <!--carbox的右侧 strat-->
+                <div class="carbox-rg G_fr">
+                	<!--中部导航栏 start-->
+                <div class="center_nav G_f20 ftx02 j_switchNav">
+                    <ul class="center_nav_tab j_switchNav_tab">
+                        <!--<li data-name="priceted">价格走势</li>-->
+                        <li data-name="typepic" class="active" style="display: none;">车型图片</li>
+                        <li data-name="buyProcess" class="active">购车流程</li>
+                        <li data-name="buyInfo">购车需知</li>
+                        <li data-name="askIssue">问题咨询</li>
+                    </ul>
+                </div>
+                <!--中部导航栏 end-->
+
+                <div class="detail-box">
+                <div class="detail-box-bd">    
+
+                <!--价格趋势 start-->
+
+                <!--<div class="price_trendsbox detail-info-item"  id="J_priceted">
+                    <div class="title">
+                        <p class="carbox-rtit G_f16">价格趋势</p>
+                    </div>
+                    <div class="price_trends">
+                        <div class="legend">
+                            <ul>
+                                <li>
+                                    <div class="linebox color_y">
+                                        <i></i>
+                                        <em></em>
+                                        <i></i>
+                                    </div>
+                                    <span>市场价</span></li>
+                                <li>
+                                    <div class="linebox color_b">
+                                        <i></i>
+                                        <em></em>
+                                        <i></i>
+                                    </div>
+                                    <span>最低价</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <canvas id="myChart" style="width:100%; height: 400px"></canvas>
+                    </div>
+                </div>-->
+                <!--价格趋势 end-->
+
+				<!--车型图片 strat-->
+				<div class="car_model_pic_box detail-info-item" id="J_typepic" style="display: none;">
+					<div class="title">
+                        <p class="carbox-rtit G_f16">车型图片</p>
+                    </div>
+                    <div class="carimg">
+                    	<div class="carimg-left G_fl">
+                    		<ul id="J_f1">
+                    			<volist name="car_color_image_0" id="vol">
+				                  <li>
+				                    <img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}外观"/>
+				                  </li>
+				                </volist>
+                    		</ul>
+                    		<ul id="J_f2">
+                    			<volist name="car_color_image_1" id="vol">
+				                  <li>
+				                    <img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}内饰"/>
+				                  </li>
+				                </volist>
+                    		</ul>
+                    		<ul id="J_f3">
+                    			<volist name="car_color_image_2" id="vol">
+				                  <li>
+				                    <img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}空间"/>
+				                  </li>
+				                </volist>
+                    		</ul>
+                    		<ul id="J_f4">
+                    			<volist name="car_color_image_3" id="vol">
+				                  <li>
+				                    <img src="{:OSS}{$vol.imgurl}" alt="{$info.brand_name} {$info.car_model_name}细节"/>
+				                  </li>
+				                </volist>
+                    		</ul>
+                    	</div>
+                    	<div class="carimg-right G_fr G_f14">
+                			<a href="f1" class="a1 j_pos active">外观</a>
+                			<a href="f2" class="a2 j_pos">内饰</a>
+                			<a href="f3" class="a3 j_pos">空间</a>
+                			<a href="f4" class="a4 j_pos">细节</a>
+                    	</div>
+                    </div>
+				</div>
+				<!--车型图片 end-->
+				
+				
+                <!--购车流程 start-->
+                <div class="processbox detail-info-item"  id="J_buyProcess">
+                    <div class="title">
+                        <p class="carbox-rtit G_f16">购车流程</p>
+                    </div>
+                    <div class="process ftx02">
+                        <ul>
+                            <li>
+                            	<dl>
+                            		<dt>咨询</dt>
+                            		<dd>足不出户获得心仪汽车底价、可持底价凭证直接到店看车提车</dd>
+                            	</dl>
+                            </li>
+                            <li>
+                            	<dl>
+                            		<dt>选车</dt>
+                            		<dd>与多家4S店合作、多款新车任您选择不用到店就能了解汽车的最新信息、掌握汽车的新动态</dd>
+                            	</dl>
+                            </li>
+                            <li>
+                            	<dl>
+                            		<dt>定金</dt>
+                            		<dd>买车时定金直抵车款、买不到自己心仪的车款定金随时退</dd>
+                            	</dl>
+                            </li>
+                            <li>
+                            	<dl>
+                            		<dt>付款交车</dt>
+                            		<dd>专人购车顾问全程为您提供购车、保险、装饰保养等咨询服务、知道您把新车开回家</dd>
+                            	</dl>
+                            </li>
+                            <li>
+                            	<dl>
+                            		<dt>专家验车</dt>
+                            		<dd>专业验车专家帮您验车、让您买到最优惠、最放心的汽车</dd>
+                            	</dl>
+                            </li>
+                            <li>
+                            	<dl>
+                            		<dt>看车</dt>
+                            		<dd>专属买车顾问将全程陪同您到店看车提车、帮您消除后顾之忧</dd>
+                            	</dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--购车流程 end-->
+
+                <!--购车需知 start-->
+                <div class="tipsbox detail-info-item"  id="J_buyInfo">
+                    <div class="title">
+                        <p class="carbox-rtit G_f16">购车需知</p>
+                    </div>
+                    <div class="tipsbox_inner">
+                        <div class="exampleboxTop">
+                            <ul>
+                            	<li>
+                            		<img src="{$Think.const.IMG_URL}gc_xz_01.gif"/>
+                            		下单支付
+                            	</li>
+                            	<li>
+                            		<img src="{$Think.const.IMG_URL}gc_xz_02.gif"/>
+                            		客服确认
+                            	</li>
+                            	<li>
+                            		<img src="{$Think.const.IMG_URL}gc_xz_03.gif"/>
+                            		提车通知
+                            	</li>
+                            	<li>
+                            		<img src="{$Think.const.IMG_URL}gc_xz_04.gif"/>
+                            		到店提车
+                            	</li>
+                            </ul>
+                        </div>
+                        <div class="exampleboxBot">
+                        	<ul class="G_f14 ftx02">
+                        		<li>
+                        			<dl>
+                        				<dt>1、</dt>
+                        				<dd>您须确认自身具备相应车辆购买资格。</dd>
+                        			</dl>
+                        		</li>
+                        		<li>
+                        			<dl>
+                        				<dt>2、</dt>
+                        				<dd>你在支付询价费获得底价之后，询价费和定金将在您购车成功时抵扣您的车款费用。</dd>
+                        			</dl>
+                        		</li>
+                        		<li>
+                        			<dl>
+                        				<dt>3、</dt>
+                        				<dd>您在完成车款的选择并成功在线支付购车定金后，购车惠客服将致电联系您以确认下单成功，该定金为车辆出售方授权购车惠代车辆 出售方收取。</dd>
+                        			</dl>
+                        		</li>
+                        		<li>
+                        			<dl>
+                        				<dt>4、</dt>
+                        				<dd>下单成功仅代表您具备享有优惠购车的初步资格，并不作为最终购得车辆的凭证。</dd>
+                        			</dl>
+                        		</li>
+                        		<li>
+                        			<dl>
+                        				<dt>5、</dt>
+                        				<dd>下单后因平台原因和售车方原因无法购买车辆的，定金将全额返还。如因您个人原因导致购买失败，定金则不返还。</dd>
+                        			</dl>
+                        		</li>
+                        		<li>
+                        			<dl>
+                        				<dt>6、</dt>
+                        				<dd>车辆出售方在购车惠展现的车辆价格仅限我方平台有效。</dd>
+                        			</dl>
+                        		</li>
+	                        </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--购车需知 end-->
+
+                <!--问题咨询 start -->
+                <div class="advisorybox detail-info-item" id="J_askIssue">
+                    <div class="title">
+                        <p class="carbox-rtit G_f16">问题咨询</p>
+                    </div>
+                    <div class="question G_f14 ftx02">
+                        <div class="questionbox" id="J_detailQuestion" data-carid="1" data-brandid="{$info.brand_id}" data-modelid="{$info.car_model_id}">
+                            <div class="question_cont">
+                                <div class="btnbox">
+                                    <ul>
+                                        <li data-id="1" class="active">
+                                            <div class="outer bg_yellow">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>商品咨询</span>
+                                        </li>
+                                        <li data-id="2">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>支付相关</span>
+                                        </li>
+                                        <li data-id="3">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>发票问题</span>
+                                        </li>
+                                        <li data-id="4">
+                                            <div class="outer bg_gray">
+                                                <div class="inner"></div>
+                                            </div>
+                                            <span>其他问题</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="txtbox"><textarea class="j_inpArea">精准的的描述有利于我们更好地回复问题，切勿提交违法，违禁词汇，广告以及其他与购车无关内容，否则购车惠将依法追究相关法律责任
+                                </textarea>
+                                <div class="inpWordLmt j_inpWordLmt"><span class="curWordsNum"></span>/<span class="allWordsNum"></span></div></div>
+                            </div>
+                            <div class="question_subbox">
+                            	<input type="submit" class="btn_22px G_f22 G_btn_a j_saveBtn" value="提问"/>
+                            	<div class="tips G_f12 G_fl">友情提示：如果您对于询价或购车等存在任何问题，可以选择直接拨打免费客服热线：400-138-0808（周一至 周五，9：00-17：30 ），也可选择将您的问题留言，我们有专职人员进行回复。 <a href="{:U('Guide/problem_license')}" title="常见问题">常见问题</a></div>
+                            </div>
+                        </div>
+                        <div class="question_listbox" id="J_commentContainer" data-carid="1">
+                            <div class="ques_title">
+                                <h2 class="G_f14">问题列表</h2>
+                                <div class="selectbox">
+                                    <select name="question_type" class="j_commentFilter">
+                                        <option value="0" selected> 所有问题({$all_count})</option>
+                                        <volist name="question_type" id="vol">
+                                                <option value="{$vol.question_type}">
+                                                <switch name="vol['question_type']">                                              
+                                                    <case value="1">商品咨询({$vol.count})</case>
+                                                    <case value="2">支付相关({$vol.count})</case>
+                                                    <case value="3">发票问题({$vol.count})</case>
+                                                    <case value="4">其他问题({$vol.count})</case>    
+                                                </switch>                 
+                                                </option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="commentCon j_commentCon">
+                                <script id="J_commentConTpl" type="text/html">
+                                    <ul>
+                                        {{each list as value index}}
+                                        <li>
+                                            <div class="userinfobox">
+                                                <div class="userface">
+                                                    <img src="{{value.head_url}}" alt="{{value.user_name}}"/>
+                                                </div>
+                                                <!--<span class="ftx07">{{value.user_name}}</span>-->
+                                            </div>
+                                            <div class="questioninfo G_f14">
+                                                <!--<div class="theme ">问题类型：{{type}}</div>-->
+                                                <div class="q">
+                                                	<span class="G_fr">{{value.createtime}}</span>
+                                                	<dl>
+                                                		<dt class="G_fl">{{value.user_name}}:</dt>
+                                                		<dd>{{value.question}}</dd>
+                                                	</dl>
+                                                </div>
+                                                <div class="a">
+                                                    <dl>
+                                                    	<span class="G_fr">{{value.reply_time}}</span>
+                                                    	<dt class="G_fl">购车惠回复：</dt>
+	                                                    <dd>{{value.reply}}</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </script>
+
+                            </div>
+                            <div class="pager j_commentPager"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--问题咨询 end -->
+            </div>
+            </div>
+                </div>
+                <!--carbox的右侧 end-->
+               
+        	 </div>
+        <!--车的各种信息 end-->
+
+        <input type="hidden" id="car_id" value="{$car_info.car_id}">
+</div>
+{~W('Cate/footer')}
+<script>
+    window._bd_share_config = {
+        common : {
+            bdText : '我在购车惠底价购置了{$info.brand_name} {$info.car_model_name}，真的好便宜哦！~你也来看看 。',
+            bdDesc : '购车惠是新型网络购车平台，各大汽车品牌全是最低的价钱。',
+            bdUrl : window.location.href,
+//          bdPic : '<img src="{:OSS}{$info.imgurl}" alt="{$info.car_name}">'
+        },
+        share : [{
+            "tag" : "share",
+            "bdSize" : 32
+        }]
+    }
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<script src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.JS_URL}app.js"></script>
+<script src="{$Think.const.js_URL}xss.min.js"></script>
+<script src="{$Think.const.js_URL}Chart.min.js"></script>
+<script src="{$Think.const.js_URL}details.js"></script>
+<script src="{$Think.const.JS_URL}spc_info.js"></script>
+
+</body>
+</html>

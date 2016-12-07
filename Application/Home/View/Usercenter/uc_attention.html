@@ -1,0 +1,40 @@
+<extend name="UC_base" />
+<block name="body">
+		<div id="uc_main">
+			<div class="UC_main_r">
+				<h2 class="UC_main_r_tit">我的关注</h2>
+				<div class="UC_main_r_content">
+					<table class="grid_bundle table_fontsize">
+						<colgroup>
+						 <col>
+						 <col>
+						 <col>
+						 <col>						
+						</colgroup>
+						<thead>
+						  <tr class="col_name">
+						  <th>品牌</th>
+						  <th>车型</th>
+						  <th>关注日期</th>						 
+						  <th>操作</th>
+						  </tr>
+						</thead>
+						<tbody>
+						<volist name="attention_info" id="vo">
+							<tr class="G_f14">
+								<td>{$vo.car_brand}</td>
+								<td>{$vo.car_model}</td>
+								<td>{$vo.createtime}</td>							
+								<td class="table_font_focus"><a class="table_input_focus" href="UC_dynamic?car_model_id={$vo.car_model_id}">查看动态</a>
+								<p class="table_p"><a href="cancel_attention?attention_id={$vo.id}">取消关注</a></p></td>
+							</tr>
+						</volist>							
+						</tbody>
+					</table>
+					<div class="viciao">{$pagelist}</div>
+				</div>
+				
+			</div>
+		</div>
+	
+</block>

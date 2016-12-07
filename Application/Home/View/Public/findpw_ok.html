@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}reg.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?d54eca841141d8a4565de0cc62ccdb42";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+	<div class="RL_header">
+		<div class="main_container clearfix">
+			<h1 class="RL_logo">
+				<a href="{:U('Index/index')}" title="购车惠"><img src="{$Think.const.IMG_URL}logo_145X75.png" alt="购车惠"></a>
+			</h1>
+			<div class="RL_gradient_line G_fl"></div>
+			<h2 class="RL_ftitle G_fl G_f22">
+				找回密码
+			</h2>
+			<div class="RL_returnHome G_fr">
+				<a href="{:U('Index/index')}" title="返回购车惠首页" class="G_f20">返回购车惠登录</a>
+			</div>
+		</div>
+	</div>
+	<div class="main_container">
+		<div class="find_pw_frame">
+			<ul class="step step_arrow nav_pills clearfix">
+				<li class="cur"><a><i class="icon_num_white">1</i>填写账号</a></li>
+				<li class="cur"><a><i class="icon_num_white">2</i>验证身份</a></li>
+				<li class="cur"><a><i class="icon_num_white">3</i>重置密码</a></li>
+				<li class="cur"><a><i class="icon_num_white">4</i>重置密码成功</a></li>
+			</ul>
+			<div class="find_Pwd_Form">
+				<div class="find_Pwd_State">
+					<i class="ui_icon_status ui_icon_status_32 ui_icon_status_suc"></i>
+					<div class="state_txt G_f20">恭喜您！密码重置成功！</div>
+					<div class="return_home "><a href="{:U('login')}" class="ftx_04" title="登录">登录</a></div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+</body>
+</html>

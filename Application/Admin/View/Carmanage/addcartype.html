@@ -1,0 +1,40 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"> <i class="icon-home"></i>
+                汽车管理
+            </a>
+            <a href="#" class="current">车型分类</a>
+        </div>
+        <h1>添加分类</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:U('addcartype')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="webname">分类名称：</label>
+                            <div class="controls">
+                                <input id="webname" name="typename" type="text"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="title">上传图片：</label>
+                            <div class="controls">
+                                <input   type="file" name="logo"  id="file_0" value="" >                        
+                            </div>
+
+                        </div>
+                      
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit"  id="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</block>

@@ -1,0 +1,88 @@
+<extend name="UC_base" />
+<block name="body">
+	<link rel="stylesheet" href="{$Think.const.CSS_URL}ZZ_four.css">
+	<script src="{$Think.const.JS_URL}jquery-1.8.1.min.js"></script>
+	<script src="{$Think.const.JS_URL}linkage.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+	<div id="uc_main">
+		<div class="UC_main_r">
+			<h2 class="UC_main_r_tit">特价车</h2>
+			<div class="UC_main_r_especial">主营品牌：{$brand_name}</div>
+			<div class="Order_especial">
+				<form action="FS_add_especial" method="post">
+					<select class="order_select" id="model" name="car_model_id">
+						<option value="">车型</option>
+						<volist name="car_model" id="vo">
+							<option value="{$vo.id}">{$vo.car_model_name}</option>
+						</volist>
+					</select>
+					<select class="order_select" id="style" name="car_id"><option value="">请选择车款<option></select>
+					<select class="order_select" id="exterior_color" name="exterior_color_id"><option value="">请选择外观颜色<option></select>
+					<select class="order_select" id="interior_color" name="interior_color_id"><option value="">请选择内饰颜色<option></select>
+
+					<input type="submit" value="添加" class="G_btn_a">
+				</form>
+			</div>
+			<div class="UC_main_r_content">
+				<table class="grid_bundle table_fontsize">
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col class="order_especial_td">
+						<col>
+						<col>
+						<col class="order_especial_td">
+					</colgroup>
+					<thead>
+					<tr class="col_name">
+						<th>车型</th>
+						<th>车款</th>
+						<th>外观颜色</th>
+						<th>内饰颜色</th>
+						<th>市场价(元)</th>
+						<th>特价（元）</th>
+						<th>活动日期</th>
+						<th>活动数量(辆)</th>
+						<th>销售区域</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody class="">
+					<volist name="info" id="vo">
+						<tr>
+							<td>{$vo.car_model_name}</td>
+							<td>{$vo.car_name}</td>
+							<td>{$vo.exterior_color_name}</td>
+							<td>{$vo.interior_color_name}</td>
+							<td>{$vo.price}</td>
+							<td>{$vo.special_price}</td>
+							<td class="order_especial_td">{$vo.start_date}至{$vo.end_date}</td>
+							<td>{$vo.number}</td>
+							<td>
+								<volist name="area" id="vv">
+									<if condition="$vv['car_special_id'] eq $vo['id']">
+										{$vv.sales_area_name}；
+									</if>
+								</volist>
+							</td>
+							<td>
+								<a class="order_a G_btn_a btn_26px" href="FS_especial_editor/special_id/{$vo.id}">编辑</a>
+								<a href="FS_delete_especial/special_id/{$vo.id}" class="order_a G_btn_e btn_26px">删除</a></td>
+
+						</tr>
+					</volist>
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</block>

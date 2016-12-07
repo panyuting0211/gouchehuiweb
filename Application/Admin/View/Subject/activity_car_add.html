@@ -1,0 +1,298 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>{$ctitle}</a> <a href="#"
+                                                                                                        class="current">添加活动车款</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="__SELF__" id="commentForm" class="form-horizontal" method="post"
+                      enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="activity_id">活动名称：</label>
+                            <div class="controls">
+                                <select name="activity_id" id="activity_id">
+                                    <volist name="act" id="vo">
+                                        <option value="{$vo.id}">{$vo.activity_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="group_name">分组名称：</label>
+                            <div class="controls">
+                                <input name="group_name" id="group_name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="group_id">分组标识：</label>
+                            <div class="controls">
+                                <input name="group_id" id="group_id" type="text" required>
+                                <p>建议使用分组名称的缩写，例如：zt01_qrj</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="buyer_count">购买人数：</label>
+                            <div class="controls">
+                                <input name="buyer_count" id="buyer_count" type="text" required>
+                                <p>请填写数字</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="sort">排序：</label>
+                            <div class="controls">
+                                <input name="sort" id="sort" type="text" value="0" required>
+                                <p>请填写数字</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="type">车款类型：</label>
+                            <div class="controls">
+                                <select name="type" id="type" class="{required:true}">
+                                    <option value="">请选择车款类型</option>
+                                    <option value="1">立即购买</option>
+                                    <option value="2">马上抢</option>
+                                    <option value="3">直降</option>
+                                    <option value="4">打折</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="brand">品牌：</label>
+                            <div class="controls">
+                                <select name="brand_id" id="brand" class="{required:true}">
+                                    <option value="">请选择品牌</option>
+                                    <volist name="brand" id="vo">
+                                        <option value="{$vo.brand_id}">{$vo.brand_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="car_model">车型：</label>
+                            <div class="controls">
+                                <select name="car_model_id" id="car_model" class="{required:true}">
+                                    <option value="">请选择车型</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="car">车款：</label>
+                            <div class="controls">
+                                <select name="car_id" id="car" class="{required:true}">
+                                    <option value="">请选择车款</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="exterior_color">外观颜色：</label>
+                            <div class="controls">
+                                <select name="exterior_color_id" id="exterior_color" class="{required:true}">
+                                    <option value="">请选择外观颜色</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="interior_color">内饰颜色：</label>
+                            <div class="controls">
+                                <select name="interior_color_id" id="interior_color" class="{required:true}">
+                                    <option value="">请选择内饰颜色</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group" id="low_price">
+                            <!-- <label class="control-label" for="low_price">最低价：</label>
+                             <div class="controls">
+                                <label></label>
+                             </div>-->
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" id="submit" class="btn btn-primary" onSubmit="return submitOnce(this)">
+                            确定
+                        </button>
+                        <button class="btn btn-primary" onClick="javascript:history.back(-1);return false;">返回</button>
+                    </div>
+                </form>
+                <!-- Button to trigger modal -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script type="text/javascript">
+        var submitcount = 0;
+        function submitOnce(form) {
+            if (submitcount == 0) {
+                submitcount++;
+                return true;
+            } else {
+                alert("正在操作，请不要重复提交，谢谢！");
+                return false;
+            }
+        }
+    </script>
+    <script src="/Public/Admin/js/date/WdatePicker.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}jquery.validate.min.js"></script>
+    <script src="{$Think.const.ADMIN_JS_URL}messages_zh.js"></script>
+    <script>
+        $().ready(function () {
+            $("#commentForm").validate(
+                    {
+                        rules: {
+                            buyer_count: {
+                                required: true,
+                                number: true
+                            },
+                            sort: {
+                                required: true,
+                                number: true
+                            },
+                            group_id: {
+                                required: true,
+                                rangelength: [5, 15]
+                            },
+                            type: {
+                                required: true
+                            },
+                            brand_id: {
+                                required: true
+                            },
+                            car_model_id: {
+                                required: true
+                            }/*,
+                             car_id: {
+                             required: true
+                             },
+                             exterior_color_id: {
+                             required: true
+                             },
+                             interior_color_id: {
+                             required: true
+                             }*/
+                        },
+                        messages: {
+                            buyer_count: {
+                                required: "这是必填字段",
+                                number: "请输入数字"
+                            },
+                            sort: {
+                                required: "这是必填字段",
+                                number: "请输入数字"
+                            },
+                            group_id: {
+                                required: '这是必填字段',
+                                rangelength: '请输入5-15之间的字符串'
+                            },
+                            type: {
+                                required: '这是必选字段'
+                            },
+                            brand_id: {
+                                required: '这是必选字段'
+                            },
+                            car_model_id: {
+                                required: '这是必选字段'
+                            }/*,
+                            car_id: {
+                                required: '这是必选字段'
+                            },
+                            exterior_color_id: {
+                                required: '这是必选字段'
+                            },
+                            interior_color_id: {
+                                required: '这是必选字段'
+                            }*/
+                        }
+                    }
+            );
+        });
+    </script>
+    <style>
+        .error {
+            color: red;
+        }
+
+        #interior_color span.icon-ok {
+            opacity: 0;
+            padding: 18px;
+        }
+
+        #interior_color.active span.icon-ok {
+            opacity: 1;
+
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#brand").change(function () {
+                var $obj = $('#brand').find('option:selected');
+                $("#car_model").empty();
+                $("#car_model").append("<option value=''>请选择车型</option>");
+
+                $.post("__MODULE__/Ajax/baojia_car_model",
+                        {brand_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data, function (key, val) {
+                                $("#car_model").append("<option value='" + val.car_model_id + "'>" + val.car_model_name + "</option>");
+                            });
+
+                        },
+                        "json");
+            });
+
+            $("#car_model").change(function () {
+                var $obj = $('#car_model').find('option:selected');
+                $("#car").empty();
+                $("#car").append("<option value=''>请选择车款</option>");
+
+                $.post("__MODULE__/Ajax/baojia_car",
+                        {car_model_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data, function (key, val) {
+                                $("#car").append("<option value='" + val.car_id + "'>" + val.car_name + "</option>");
+                            });
+
+                        },
+                        "json");
+            });
+
+            $("#car").change(function () {
+                var $obj = $('#car').find('option:selected');
+                $("#exterior_color").empty();
+                $("#exterior_color").append("<option value=''>请选择外观颜色</option>");
+                $("#interior_color").empty();
+                $("#interior_color").append("<option value=''>请选择内饰颜色</option>");
+                $.post("__MODULE__/Ajax/baojia_color",
+                        {car_id: $obj.val()},
+                        function (data, textStatus) {
+                            $.each(data.exterior, function (key, val) {
+                                $("#exterior_color").append("<option value='" + val.exterior_color_id + "'>" + val.exterior_color_name + "</option>");
+                            });
+                            $.each(data.interior, function (key, val) {
+                                $("#interior_color").append("<option value='" + val.interior_color_id + "'>" + val.interior_color_name + "</option>");
+                            });
+
+                        },
+                        "json");
+            });
+
+            $("#interior_color").change(function () {
+                var $obj1 = $('#exterior_color').find('option:selected');
+                var $obj2 = $('#interior_color').find('option:selected');
+
+                $.post("__MODULE__/Ajax/baojia_low_price",
+                        {exterior_color_id: $obj1.val(), interior_color_id: $obj2.val()},
+                        function (data, textStatus) {
+                            $("#low_price").empty();
+                            $("#low_price").prepend("<label class='control-label' for='low_price'>最低价：</label><div class='controls'><h5>" + data + "元</h5></div>");
+                        },
+                        "json");
+            })
+
+        });
+    </script>
+</block>

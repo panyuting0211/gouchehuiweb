@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}base.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}order.css">
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery.datetimepicker.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>订单</title>
+</head>
+<body>
+{~W('Cate/header')}
+<div class="C_page">
+    <div class="main_container">
+                    <!-- tips -->
+                    <div class="flowstep-tip step-2">
+                        <i class="icon-top-arrow"></i>
+                        <p class="G_f20 G_fb">
+                            <i class="icon-tips icon-tips-ok"></i>您已通过{$info.pay_way}成功支付<span class="s">¥{$info.money}</span>到购车惠
+                        </p>
+                        <p class="G_tc G_f18">请进入订单页面完善身份证资料信息，<a href="{$info.next}">查看订单</a>。</p>
+                    </div>
+
+                    <!-- tips end -->
+                    <div class="ewm-box">
+                        <span><img src="/Public/Home/images/app-ewm.png" alt=""/></span>
+                        <span><img src="/Public/Home/images/weixin-ewm.png" alt=""/></span>
+                    </div>
+        </div>
+</div>
+<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+<script src="{$Think.const.js_URL}app.js"></script>
+
+</body>
+</html>

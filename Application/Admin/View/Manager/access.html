@@ -1,0 +1,60 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+	<script src="{$Think.const.ADMIN_JS_URL}access.js"></script>
+
+	<div id="content">
+		<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+			<button class="close fixed" style="margin-top: 4px;">×</button>
+			<div class="alert-content">返回内容！</div>
+		</div>
+
+		<div id="content-wrap">
+			<div class="container-fluid">
+				<form action="{:U('Manager/saveAccess')}" method="post" class="form-horizontal">
+					<span style="font-size: 14px;">你目前所在的用户组：<B>{$name}</B> 分配权限</span>
+					<hr />
+					<div>
+						<ul id="qxid">
+							<volist name="node" id="vo">
+								<if condition="$vo.level eq 2">
+								<li class="row-fluid">
+									<div class="span3 <if condition="$vo.sort eq 1-0-0"> active</if>">
+										<a href="javascript:;">
+											<label name="name" value="">
+												<input name="node_id_2[]" value="{$vo.id}" type="checkbox" <if condition="$vo.access eq 1">checked</if>/>{$vo.title}
+											</label>
+										</a>
+									</div>
+									<div class="span9">
+										<ul class="row-fluid">
+											<volist name="node" id="vv">
+												<if condition="$vv.pid eq $vo['id']">
+													<li class="checkbox span4">
+														<label name="name" value="">
+															<input name="node_id_3[]" value="{$vv.id}"  type="checkbox" <if condition="$vv.access eq 1">checked</if>/>{$vv.title}({$vv.name})
+														</label>
+													</li>
+												</if>
+											</volist>
+										</ul>
+									</div>
+								</li>
+								</if>
+							</volist>
+						</ul>
+					<input type="hidden" name="role_id" value="{$role_id}">
+						<div class="row-fluid" style="margin: 20px 0;">
+							<div class="span4"></div>
+							<div class="span8">
+								<input type="submit" value="保存修改" class="btn btn-primary" >
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</block>

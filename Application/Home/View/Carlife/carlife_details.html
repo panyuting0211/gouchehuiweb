@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$info.title}</title>
+	<title>{$info.title} - 南京底价购车_汽车价格_汽车团购_汽车用品_汽车保养_购车惠</title>
+	<meta name="keywords" content="南京汽车,南京汽车底价,汽车团购,汽车用品,汽车最低价格,汽车保养,购车惠" />
+	<meta name="description" content="购车惠是一家汽车4S店实时在线报底价的平台，提供汽车底价购买服务，保证上架车型所售底价均是正规4S店报价，且价格低于市场价格。购车惠提供全程购车服务，让客户买车更加方便快捷。" />
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}base.css"/>
+	<link rel="stylesheet" type="text/css" href="{$Think.const.CSS_URL}carlife.css"/>
+</head>
+<body>
+
+{~W('Cate/header')}
+{~W('Cate/carlife_banner')}
+	<!--车知识 strat-->
+	<div class="wrap">
+		<div class="main_container">
+			<div class="US_position G_f14 ftx02">
+		                位置：
+		        <a href="{:U('Index/index')}">购车惠</a><i>></i>
+		        <a href="{:U('Carlife/carknowledge')}">车生活</a><i>></i>
+		        <span>{$info.title}</span>
+		    </div>
+			<!--车知识列表 strat-->
+			<div class="life-con">
+				<div class="life-con-bd">
+					<!--文章列表和知识排行 strat-->
+						<div class="life-list clearfix G_f14">
+							<!--文章内容 strat-->
+							<div class="life-acon G_fl">
+								<h3>{$info.title}</h3>
+								<div class="life-acon-tit">
+									<ul>
+										<!--<li>
+											<dl>
+												<dt><img src="{$Think.const.IMG_URL}life_acon_tit_01.jpg"/></dt>
+												<dd>Michonne</dd>
+											</dl>
+										</li>-->
+										<li>
+											<dl>
+												<dt></dt>
+												<dd>{$info.createtime}</dd>
+											</dl>
+										</li>
+										<li>
+											<dl>
+												<dt>分类：</dt>
+												<dd>{$info.type_name}</dd>
+											</dl>
+										</li>
+										<li>
+											<dl>
+												<dt>车辆信息: </dt>
+												<dd>{$info.brand_name}{$info.car_model_name}{$info.car_name}</dd>
+											</dl>
+										</li>
+									</ul>
+								</div>
+								<!--文章主体 strat-->
+								<div class="life-acon-body">
+									<div class="life-acon-art">
+										{$info.contents}
+									</div>
+									<!--评论头部 strat-->
+									<div class="life-acon-comment clearfix">
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_gz.png"/></dt>
+											<dd>{$info.click_amount}</dd>
+										</dl>
+										<dl>
+											<dt><img src="{$Think.const.IMG_URL}life_reading_pl.png"/></dt>
+											<dd class="j_commentNumber">{$info.comment_amount}</dd>
+										</dl>
+										<dl class="dllast j_bbsZan <if condition='$info.thumbs_status eq 1'>isZan</if>" data-id="{$info.id}">
+											<dt><img src="{$Think.const.IMG_URL}life_reading_dz.png"/></dt>
+											<dd class="num">{$info.thumbs_amount}</dd>
+										</dl>
+										<div class="bdsharebuttonbox carlife-share G_fr" data-tag="share">
+											<div class="ok">分享到：</div>
+											<a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+											<a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+											<a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+										</div>
+									</div>
+									<!--评论头部 end-->
+									<!--评论主体 strat-->
+									<div class="life-acon-report" id="J_commentBd">
+										<!--评论框 strat-->
+										<div data-bbsid="{$info.id}" class="comments-box comments-text comments-box-text clearfix j_commentBox">
+											<div class="input">
+												<textarea name="" rows="" cols="" placeholder="发表评论..."></textarea>
+												<div class="send_succpic" node-type="successTip"><span class="W_icon icon_succB"></span><span class="txt">发布成功</span></div>
+											</div>
+											<div class="clearfix">
+												<button class="G_btn_a j_commentBtn G_fr" style="display: none;">发表</button>
+											</div>
+
+										</div>
+										<!--评论框 end-->
+										<!--评论框 strat-->
+											<div class="comments-list j_commentList" data-bbsid="{$info.id}">
+											<ul>
+
+											</ul>
+											<!--分页 strat-->
+											<div class="G_pager j_pager">
+											</div>
+											<!--分页 end-->
+										</div>
+										<!--评论框 end-->
+									</div>
+									<!--评论主体 end-->
+								</div>
+								<!--文章主体 end-->
+							</div>
+							<!--文章内容 end-->
+							<!--知识排行 strat-->
+							<div class="life-know G_fr">
+								<h3><span>热门排行</span></h3>
+								<ul>
+									<volist name="hot_all_click" id="vo">
+									<li>
+										<span class="G_fl">【{$vo.type_name}】</span>
+										<a href="{:U('carlife_details',array('id'=>$vo['id']))}" title="{$vo.title}">{$vo.title}</a>
+									</li>
+									<if condition="$i gt 0  AND $i%5 eq 0 ">
+										<div class="life-empty"></div>
+									</if>
+									</volist>
+								</ul>
+							</div>
+							<!--知识排行 strat-->
+						</div>
+						<!--文章列表和知识排行 end-->
+						
+					<!--全部的文章列表 end-->
+				</div>
+			</div>
+			<!--车知识列表 end-->
+		</div>
+	</div>
+	<!--车知识 end-->
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '{$info.title}',
+			bdDesc : '购车惠是新型网络购车平台，各大汽车品牌全是最低的价钱。',
+			bdUrl : window.location.href
+		},
+		share : [{
+			"tag" : "share",
+			"bdSize" : 32,
+			"bdCustomStyle": '{$Think.const.CSS_URL}details.css'
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+	<script src="{$Think.const.js_URL}jquery-1.8.1.min.js"></script>
+    <script src="{$Think.const.js_URL}app.js"></script>
+    <script src="{$Think.const.js_URL}carlife.js"></script>
+
+	
+{~W('Cate/footer')}
+</body>
+</html>
